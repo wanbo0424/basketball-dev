@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:29:19
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-07 17:52:53
+ * @LastEditTime: 2021-01-08 17:09:32
  * @FilePath: \basketball-service\app\model\player.js
  */
 'use strict';
@@ -23,6 +23,17 @@ module.exports = app => {
     console.log(attributes);
     await Player.create(attributes);
     return attributes.uuid;
+  };
+
+  Player.List = async ({ pageSize = 10, pageCurrent = 1 }) => {
+    const limit = pageSize;
+    const condition = {
+      offset: (pageCurrent - 1) * limit,
+      limit,
+    };
+    const { count, rows } = await Player.findAndCountAll(condition);
+    console.log(count, rows);
+    return { pageCurrent, count, rows };
   };
 
   return Player;

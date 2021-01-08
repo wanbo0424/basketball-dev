@@ -25,7 +25,7 @@
   </Sider>
 </template>
 <script lang="ts">
-  import { computed, defineComponent, ref, unref, CSSProperties } from 'vue';
+  import { computed, defineComponent, ref, unref, CSSProperties,  } from 'vue';
 
   import { Layout } from 'ant-design-vue';
   import LayoutMenu from '../menu';
@@ -43,6 +43,7 @@
     name: 'LayoutSideBar',
     components: { Sider: Layout.Sider, LayoutMenu, DragBar, LayoutTrigger },
     setup() {
+
       const dragBarRef = ref<ElRef>(null);
       const sideRef = ref<ElRef>(null);
 
