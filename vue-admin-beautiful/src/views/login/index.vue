@@ -47,7 +47,7 @@
 </template>
 <script>
   import { dependencies, devDependencies } from '*/package.json'
-  import { mapActions, mapGetters } from 'vuex'
+  import { mapGetters } from 'vuex'
   import { UserOutlined, LockOutlined } from '@ant-design/icons-vue'
 
   export default {
@@ -89,17 +89,18 @@
       }, 3000) */
     },
     methods: {
-      ...mapActions({
-        login: 'user/login',
-      }),
+      // ...mapActions({
+      //   login: 'user/login',
+      // }),
       handleRoute() {
         return this.redirect === '/404' || this.redirect === '/403'
           ? '/'
           : this.redirect
       },
       async handleSubmit() {
-        await this.login(this.form)
-        await this.$router.push(this.handleRoute())
+        // await this.login(this.form)
+        // await this.$router.push(this.handleRoute())
+        await this.$router.push('/')
       },
     },
   }

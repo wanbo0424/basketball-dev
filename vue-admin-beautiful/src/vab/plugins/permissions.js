@@ -63,9 +63,17 @@ router.beforeEach(async (to, from, next) => {
     if (routesWhiteList.indexOf(to.path) !== -1) {
       next()
     } else {
-      if (recordRoute)
-        next({ path: '/login', query: { redirect: to.path }, replace: true })
-      else next({ path: '/login', replace: true })
+      if (recordRoute) {
+        next()
+        let accessRoutes = await store.dispatch('routes/setRoutes')
+        accessRoutes.forEach((item) => {
+          router.addRoute(item)
+        })
+        // next({ path: '/login', query: { redirect: to.path }, replace: true })
+      } else {
+        next()
+        // else next({ path: '/login', replace: true })
+      }
     }
   }
 })
