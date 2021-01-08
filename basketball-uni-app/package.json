@@ -1,0 +1,21 @@
+{
+  "name": "basketball-demo",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "node-sass": "^5.0.0",
+    "sass-loader": "^10.1.0"
+  },
+  "dependencies": {
+    "js-cookie": "^2.2.1",
+    "luch-request": "^3.0.4",
+    "uview-ui": "^1.8.3"
+  },
+  "keywords": [],
+  "description": ""
+}
