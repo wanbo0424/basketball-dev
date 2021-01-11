@@ -11,5 +11,6 @@ module.exports = app => {
 
 
   // 管理平台
-  router.post('/api/pc/playerList', controller.player.List);
+  router.get('/api/admin/playerList', controller.player.List);
+  router.post('/api/admin/gameAdd', controller.game.add);
 };

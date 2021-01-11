@@ -13,12 +13,9 @@ const setting = {
   //进行编译的依赖
   transpileDependencies: ['vue-echarts', 'resize-detector'],
   //默认的接口地址 如果是开发环境和生产环境走vab-mock-server，当然你也可以选择自己配置成需要的接口地址
-  baseURL:
-    process.env.NODE_ENV === 'development'
-      ? 'http://10.100.14.167:7001/api'
-      : 'mock-server',
+  baseURL: process.env.NODE_ENV === 'development' ? '/' : 'mock-server',
   //标题 （包括初次加载雪花屏的标题 页面的标题 浏览器的标题）
-  title: 'vue-admin-beautiful-antdv',
+  title: '篮球社',
   //标题分隔符
   titleSeparator: ' - ',
   //标题是否反转 如果为false:"page - title"，如果为ture:"title - page"

@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:34:06
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-08 17:01:58
+ * @LastEditTime: 2021-01-11 15:02:45
  * @FilePath: \basketball-service\app\controller\player.js
  */
 'use strict';
@@ -25,7 +25,7 @@ class PlayerController extends Controller {
 
   async List() {
     const { ctx } = this;
-    const playerData = await ctx.service.player.query(ctx.request.body);
+    const playerData = await ctx.service.player.query(ctx.query);
     this.success(playerData);
   }
 }

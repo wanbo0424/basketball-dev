@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:29:19
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-08 17:09:32
+ * @LastEditTime: 2021-01-11 15:11:09
  * @FilePath: \basketball-service\app\model\player.js
  */
 'use strict';
@@ -25,15 +25,20 @@ module.exports = app => {
     return attributes.uuid;
   };
 
-  Player.List = async ({ pageSize = 10, pageCurrent = 1 }) => {
-    const limit = pageSize;
+
+  /**
+   * @description: // 运动员列表
+   * @param {*}  查询条件
+   * @return {*}
+   */
+  Player.query = async ({ pageSize = 10, current = 1 }) => {
+    const limit = Number(pageSize);
     const condition = {
-      offset: (pageCurrent - 1) * limit,
+      offset: (Number(current) - 1) * limit,
       limit,
     };
     const { count, rows } = await Player.findAndCountAll(condition);
-    console.log(count, rows);
-    return { pageCurrent, count, rows };
+    return { current: Number(current), count: Number(count), rows };
   };
 
   return Player;

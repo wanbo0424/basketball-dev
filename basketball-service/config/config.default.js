@@ -16,7 +16,7 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1610002671985_9747';
 
   // add your middleware config here
-  config.middleware = [];
+  config.middleware = [ 'response' ];
   // 小程序只能存storage，关闭csrf
   config.security = {
     csrf: {
@@ -31,6 +31,16 @@ module.exports = appInfo => {
     password: 'ywb123456',
     database: 'basketball-dev',
   };
+
+  config.mongoose = {
+    client: {
+      url: 'mongodb://127.0.0.1/example',
+      options: {},
+      // mongoose global plugins, expected a function or an array of function and options
+      // plugins: [ createdPlugin, [ updatedPlugin, pluginOptions ]],
+    },
+  };
+
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',

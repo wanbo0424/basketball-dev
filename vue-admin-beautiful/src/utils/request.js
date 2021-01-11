@@ -54,17 +54,18 @@ const instance = axios.create({
  */
 instance.interceptors.request.use(
   (config) => {
-    if (store.getters['user/accessToken'])
-      config.headers[tokenName] = store.getters['user/accessToken']
-    if (
-      config.data &&
-      config.headers['Content-Type'] ===
-        'application/x-www-form-urlencoded;charset=UTF-8'
-    )
-      config.data = qs.stringify(config.data)
+    // if (store.getters['user/accessToken'])
+    //   config.headers[tokenName] = store.getters['user/accessToken']
+    // if (
+    //   config.data &&
+    //   config.headers['Content-Type'] ===
+    //     'application/x-www-form-urlencoded;charset=UTF-8'
+    // )
+    //   config.data = qs.stringify(config.data)
     if (debounce.some((item) => config.url.includes(item))) {
       //这里写加载动画
     }
+    debugger
     return config
   },
   (error) => {
