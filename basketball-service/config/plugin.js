@@ -6,14 +6,15 @@ module.exports = {
   // static: {
   //   enable: true,
   // }
-  sequelize: {
-    enable: true,
-    package: 'egg-sequelize',
-  },
-
-  // mongoose: {
+  // sequelize: {
   //   enable: true,
-  //   package: 'egg-mongoose',
+  //   package: 'egg-sequelize',
   // },
+
+  mongoose: {
+    enable: true,
+    package: 'egg-mongoose',
+
+  },
 
 };

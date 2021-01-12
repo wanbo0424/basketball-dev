@@ -1,17 +1,18 @@
 <template>
   <div class="vab-logo">
-    <vab-icon v-if="logo" :icon="logo"></vab-icon>
+    <!-- <vab-icon v-if="logo" :icon="logo"></vab-icon> -->
+    <image src="@/assets/login1.png"></image>
     <span class="anticon"></span>
     <span>{{ title }}</span>
   </div>
 </template>
 
 <script>
-  import VabIcon from '@/layout/vab-icon'
+  // import VabIcon from '@/layout/vab-icon'
   import { mapGetters } from 'vuex'
   export default {
     name: 'VabLogo',
-    components: { VabIcon },
+    // components: { VabIcon },
     computed: {
       ...mapGetters({
         logo: 'settings/logo',

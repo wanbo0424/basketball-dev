@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-11 17:42:14
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-11 18:50:08
+ * @LastEditTime: 2021-01-12 17:53:24
  * @FilePath: \vue-admin-beautiful\src\api\game.js
  */
 import request from '@/utils/request'
@@ -14,3 +14,17 @@ export const add = (data) => {
     data,
   })
 }
+export const update = (data) => {
+  return request({
+    url: '/admin/gameUpdate',
+    method: 'post',
+    data,
+  })
+}
+
+export const list = (params) =>
+  request({
+    url: '/admin/gameList',
+    method: 'get',
+    params,
+  })

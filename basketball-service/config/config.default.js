@@ -34,8 +34,10 @@ module.exports = appInfo => {
 
   config.mongoose = {
     client: {
-      url: 'mongodb://127.0.0.1/example',
-      options: {},
+      url: 'mongodb://127.0.0.1:27017/admin',
+      options: {
+        // useUnifiedTopology: true,
+      },
       // mongoose global plugins, expected a function or an array of function and options
       // plugins: [ createdPlugin, [ updatedPlugin, pluginOptions ]],
     },

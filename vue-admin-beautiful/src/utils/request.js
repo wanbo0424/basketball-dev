@@ -5,10 +5,10 @@ import {
   debounce,
   requestTimeout,
   successCode,
-  tokenName,
+  // tokenName,
 } from '@/config'
 import store from '@/store'
-import qs from 'qs'
+// import qs from 'qs'
 import router from '@/router'
 import { isArray } from '@/utils/validate'
 import { message } from 'ant-design-vue'
@@ -65,7 +65,6 @@ instance.interceptors.request.use(
     if (debounce.some((item) => config.url.includes(item))) {
       //这里写加载动画
     }
-    debugger
     return config
   },
   (error) => {

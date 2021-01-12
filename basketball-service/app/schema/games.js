@@ -2,8 +2,8 @@
  * @Description:
  * @Date: 2021-01-11 14:44:13
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-11 17:24:31
- * @FilePath: \basketball-service\app\schema\game.js
+ * @LastEditTime: 2021-01-12 09:57:04
+ * @FilePath: \basketball-service\app\schema\games.js
  */
 
 'use strict';
@@ -18,11 +18,11 @@ module.exports = app => {
       primaryKey: true,
       defaultValue: UUIDV1,
     },
-    gameAddress: {
+    game_address: {
       type: STRING,
       allowNull: false,
     },
-    gameDate: {
+    game_date: {
       type: STRING,
       allowNull: false,
     },

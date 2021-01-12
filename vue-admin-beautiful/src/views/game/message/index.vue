@@ -2,39 +2,49 @@
  * @Description: 比赛信息
  * @Date: 2021-01-11 15:27:06
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-11 17:15:18
+ * @LastEditTime: 2021-01-12 18:25:34
  * @FilePath: \vue-admin-beautiful\src\views\game\message\index.vue
 -->
 <template>
   <div>
-    <a-button type="primary" @click="add">添加比赛信息{{ visible }}</a-button>
+    <a-button type="primary" @click="add">添加比赛信息</a-button>
     <a-table
       :columns="columns"
       :data-source="data"
       :pagination="false"
       :loading="loading"
       @change="handleTableChange"
-    ></a-table>
+    >
+      <template #action="{ text }">
+        <span>
+          <a @click="edit(text)">修改</a>
+          <a-divider type="vertical" />
+          <a>删除</a>
+          <a-divider type="vertical" />
+        </span>
+      </template>
+    </a-table>
 
     <a-pagination
       v-model="pagination.current"
       :total="pagination.total"
       :pageSize="pagination.pageSize"
       @change="currentChange"
+      :show-total="(total) => `总共  ${total}  条数据`"
       show-less-items
     />
 
-    <Edit ref="editCarousel"></Edit>
+    <Edit ref="editCarousel" @refresh="loadData"></Edit>
   </div>
 </template>
 <script>
   import Edit from './Edit'
   import { ref, onMounted, reactive } from 'vue'
-  import { getList } from '@/api/player'
+  import { list } from '@/api/game'
   const columns = [
     {
-      title: 'uuid',
-      dataIndex: 'uuid',
+      title: 'id',
+      dataIndex: '_id',
     },
     {
       title: '比赛时间',
@@ -44,15 +54,21 @@
       title: '比赛地点',
       dataIndex: 'gameAddress',
     },
+    {
+      title: 'Action',
+      key: 'action',
+      slots: { customRender: 'action' },
+    },
   ]
   export default {
     components: { Edit },
+
     setup() {
-      const loadingRef = ref(false)
+      let loadingRef = ref(false)
       const data = ref([])
       const editCarousel = ref(null)
 
-      const pagination = reactive({
+      let pagination = reactive({
         pageSize: 5,
         current: 1,
         total: 0,
@@ -65,13 +81,19 @@
           ...pagination,
         }
         delete submit.total
-        getList(submit).then((res) => {
-          if (res.code === 0) {
-            data.value = res.data.rows
-            pagination.current = res.data.current
-            pagination.total = res.data.count
-          }
-        })
+        loadingRef = true
+        list(submit)
+          .then((res) => {
+            if (res.code === 0) {
+              data.value = res.data.docs
+              pagination.pageSize = res.data.pageInfo.pageSize
+              pagination.current = res.data.pageInfo.current
+              pagination.total = res.data.pageInfo.total
+            }
+          })
+          .finally(() => {
+            loadingRef = false
+          })
       }
 
       function currentChange(page) {
@@ -80,8 +102,11 @@
       }
 
       function add() {
-        // visible.value = true
         editCarousel.value.init()
+      }
+
+      function edit(text) {
+        editCarousel.value.init(text, 'edit')
       }
 
       onMounted(() => {
@@ -96,7 +121,9 @@
         handleTableChange,
         currentChange,
         add,
+        edit,
         editCarousel,
+        loadData,
       }
     },
   }

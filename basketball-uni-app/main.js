@@ -6,6 +6,7 @@ Vue.config.productionTip = false
 // @import 'uview-ui/theme.scss';
 App.mpType = 'app'
 
+
 const app = new Vue({
 	...App
 })
