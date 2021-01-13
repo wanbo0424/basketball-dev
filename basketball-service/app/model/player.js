@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:29:19
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-12 10:54:57
+ * @LastEditTime: 2021-01-13 17:53:20
  * @FilePath: \basketball-service\app\model\player.js
  */
 'use strict';

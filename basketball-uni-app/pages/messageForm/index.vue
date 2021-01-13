@@ -1,6 +1,10 @@
 <template>
 	<view class="form-content">
 		<u-form :model="form" ref="uForm" label-width="140">
+			<u-form-item label="比赛场地" prop="gameName">
+				<u-input v-model="plarerData.gameName" type="select" @click="showGameSelect = true" />
+				<u-select v-model="showGameSelect" :list="gameList" @confirm="gameSelected"></u-select>
+			</u-form-item>
 			<u-form-item label="性别" prop="sex">
 				<u-input v-model="form.sex" type="select" @click="showSexSelect = true" />
 				<u-select v-model="showSexSelect" :list="sexList" @confirm="sexSelected"></u-select>
@@ -23,16 +27,20 @@
 <script>
 	import http from '../../api/index.js'
 	import Cookies from 'js-cookie'
+	import { mapGetters } from 'vuex'
 	export default {
 		data() {
 			return {
 				showSexSelect: false,
 				showRoleSelect: false,
+				showGameSelect: false,
 				form: {
 					age: '',
 					sex: '',
 					role: '',
-					mobile: ''
+					mobile: '',
+					gameId: '',
+					gameName: ''
 				},
 				sexList: [{value: 0, label: '男'}, {value: 1, label: '女'}],
 				roleList: [
@@ -56,9 +64,22 @@
 							trigger: ['change','blur']
 						}
 					],
-				}
+				},
+				gameList: [],
+				plarerData: {}
 			}
 		},
+		mounted() {
+			this.getGameList()
+			this.plarerData = {
+				nickName: this.userInfo.nickName
+			}
+		},
+		computed: {
+			...mapGetters([
+			  'userInfo',
+			])
+		 },
 		methods: {
 			sexSelected(e) {
 				this.form.sex = e[0].label;
@@ -66,8 +87,23 @@
 			roleSelected(e) {
 				this.form.role = e[0].label;
 			},
+			gameSelected(e) {
+				this.plarerData.gameName = e[0].label
+				this.plarerData.gameId = e[0].value
+			},
+			getGameList() {
+				http.get('weapp/game/gameList').then(res => {
+					if(res.data.code === 0) {
+						this.gameList = res.data.data.map(item => ({
+							value: item._id,
+							label: `${item.gameAddress}-- ${item.gameDate}`
+						}))
+					}
+				})
+			},
+			// 提交报名信息
 			submit() {
-				http.post('api/players/apply', this.form).then(res => {
+				http.post('weapp/players/apply', this.form).then(res => {
 					debugger
 				})
 				// uni.showLoading({
@@ -96,6 +132,10 @@
 				// 	console.error(err)
 				// })
 			},
+			// 提交球员档案
+			submitPlayer(){
+				
+			}
 		},
 		onReady() {
 			this.$refs.uForm.setRules(this.rules)

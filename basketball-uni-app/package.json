@@ -14,7 +14,8 @@
   "dependencies": {
     "js-cookie": "^2.2.1",
     "luch-request": "^3.0.4",
-    "uview-ui": "^1.8.3"
+    "uview-ui": "^1.8.3",
+    "vuex": "^3.6.0"
   },
   "keywords": [],
   "description": ""

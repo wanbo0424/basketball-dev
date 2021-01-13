@@ -41,6 +41,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/user/authorize",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
