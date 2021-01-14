@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:29:19
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-13 17:53:20
+ * @LastEditTime: 2021-01-14 16:16:32
  * @FilePath: \basketball-service\app\model\player.js
  */
 'use strict';
@@ -58,6 +58,8 @@ module.exports = app => {
     },
     mobile: {
       type: String,
+      index: true,
+      unique: true, // 值是唯一的
     },
 
   });

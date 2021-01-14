@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-11 17:21:53
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-13 16:59:04
+ * @LastEditTime: 2021-01-14 18:16:07
  * @FilePath: \basketball-service\app\service\game.js
  */
 'use strict';
@@ -43,7 +43,10 @@ class GameService extends Service {
     //   pageInfo,
     // };
 
-    return await app.model.Game.find();
+    app.model.Game.find({}, (err, docs) => {
+      console.log(docs);
+    });
+    // return await app.model.Game.find();
   }
 }
 

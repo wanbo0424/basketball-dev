@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-13 17:53:17
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-13 18:04:27
+ * @LastEditTime: 2021-01-14 11:19:40
  * @FilePath: \basketball-service\app\model\playerCareer.js
  */
 'use strict';
@@ -16,8 +16,8 @@ module.exports = app => {
     UnionID: {
       type: String,
     },
-    // 生涯比赛记录[{date: '',  ATeamScore: '', BATeamScore: '', myTeam: 'A'}]
-    matchRecords: {
+    // 生涯比赛记录ids
+    gameIdList: {
       type: Array,
     },
 

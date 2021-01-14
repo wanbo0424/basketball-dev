@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-11 14:32:16
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-13 17:59:36
+ * @LastEditTime: 2021-01-14 11:24:39
  * @FilePath: \basketball-service\app\model\game.js
  */
 'use strict';
@@ -44,9 +44,11 @@ module.exports = app => {
     SFOverage: { type: String },
     SGOverage: { type: String },
     PGOverage: { type: String },
-    players: { type: Array }, // [{id:'', name:''}]
-    ATeam: { type: Object }, // {name:'A', players:[]}
-    BTeam: { type: Object }, // {name:'B', players:[]}
+    playerIds: { type: Array },
+    ATeamName: { type: String },
+    BTeamName: { type: String },
+    ATeamPlayerIds: { type: Number },
+    BTeamPlayerIds: { type: Number },
   });
 
   return mongoose.model('Game', GameSchema, 'games');
