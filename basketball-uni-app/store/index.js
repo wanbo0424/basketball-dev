@@ -17,11 +17,7 @@ const store = new Vuex.Store({
 			for(let key in info) {
 				state.userInfo[key] = info[key]
 			}
-			debugger
-		},
-        GET_USER(state, userInfo) {   
-            state.userInfo = userInfo;   
-        }
+		}
     },
 	actions: {
 		getUserInfo({commit}) {
@@ -33,7 +29,7 @@ const store = new Vuex.Store({
 					  withCredentials: false,
 					  success: ({ userInfo: info = {} }) => {
 						console.log(info)
-						commit('GET_USER', info)
+						commit('SET_USER_INFO', info)
 						// getApp().globalData.userInfo = info;
 						// resolve(info);
 					  },

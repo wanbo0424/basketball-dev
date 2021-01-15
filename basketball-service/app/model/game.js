@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-11 14:32:16
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-14 11:24:39
+ * @LastEditTime: 2021-01-15 14:44:26
  * @FilePath: \basketball-service\app\model\game.js
  */
 'use strict';
@@ -47,8 +47,13 @@ module.exports = app => {
     playerIds: { type: Array },
     ATeamName: { type: String },
     BTeamName: { type: String },
-    ATeamPlayerIds: { type: Number },
-    BTeamPlayerIds: { type: Number },
+    ATeamPlayerIds: { type: Array },
+    BTeamPlayerIds: { type: Array },
+    // 0:未举行 1：正在举行 2：已举行
+    gameStatus: {
+      type: Number,
+      default: 0,
+    },
   });
 
   return mongoose.model('Game', GameSchema, 'games');

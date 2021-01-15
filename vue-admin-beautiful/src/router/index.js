@@ -57,19 +57,19 @@ export const asyncRoutes = [
         name: 'Apply',
         component: () => import('@/views/player/apply'),
         meta: {
-          title: '报名球员',
+          title: '报名球员记录',
           icon: 'table-2',
         },
       },
-      // {
-      //   path: 'icon',
-      //   name: 'Icon',
-      //   component: () => import('@/views/game/message'),
-      //   meta: {
-      //     title: '比赛管理',
-      //     icon: 'remixicon-line',
-      //   },
-      // },
+      {
+        path: 'career',
+        name: 'Career',
+        component: () => import('@/views/player/career'),
+        meta: {
+          title: '球员生涯',
+          icon: 'table-2',
+        },
+      },
     ],
   },
   {
@@ -82,8 +82,8 @@ export const asyncRoutes = [
     },
     children: [
       {
-        path: 'apply',
-        name: 'Apply',
+        path: 'message',
+        name: 'Message',
         component: () => import('@/views/game/message'),
         meta: {
           title: '比赛信息',

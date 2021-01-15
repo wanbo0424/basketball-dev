@@ -16,7 +16,6 @@ http.interceptors.request.use((config) => { // 可使用async await 做异步操
 })
 
 http.interceptors.response.use((response) => { 
-  console.log(response)
   return response
 }, (response) => { /*  对响应错误做点什么 （statusCode !== 200）*/
   console.log(response)

@@ -62,7 +62,7 @@ module.exports = {
     // 注释掉的地方是前端配置代理访问后端的示例
     proxy: {
       ['/']: {
-        target: `http://127.0.0.1:7002/api`,
+        target: `http://127.0.0.1:7001/api`,
         ws: true,
         changeOrigin: true,
         pathRewrite: {

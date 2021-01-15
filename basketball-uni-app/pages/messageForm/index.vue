@@ -2,7 +2,7 @@
 	<view class="form-content">
 		<u-form :model="form" ref="uForm" label-width="140">
 			<u-form-item label="比赛场地" prop="gameName">
-				<u-input v-model="plarerData.gameName" type="select" @click="showGameSelect = true" />
+				<u-input v-model="form.gameName" type="select" @click="showGameSelect = true" />
 				<u-select v-model="showGameSelect" :list="gameList" @confirm="gameSelected"></u-select>
 			</u-form-item>
 			<u-form-item label="性别" prop="sex">
@@ -88,11 +88,11 @@
 				this.form.role = e[0].label;
 			},
 			gameSelected(e) {
-				this.plarerData.gameName = e[0].label
-				this.plarerData.gameId = e[0].value
+				this.form.gameName = e[0].label
+				this.form.gameId = e[0].value
 			},
 			getGameList() {
-				http.get('weapp/game/gameList').then(res => {
+				http.get('weapp/game/ToHeldGameList').then(res => {
 					if(res.data.code === 0) {
 						this.gameList = res.data.data.map(item => ({
 							value: item._id,
@@ -103,8 +103,9 @@
 			},
 			// 提交报名信息
 			submit() {
+				this.form.openId = this.userInfo.openId
+				debugger
 				http.post('weapp/players/apply', this.form).then(res => {
-					debugger
 				})
 				// uni.showLoading({
 				// 	title: '处理中...'

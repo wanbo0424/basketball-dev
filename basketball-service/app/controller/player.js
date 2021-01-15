@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:34:06
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-13 18:36:06
+ * @LastEditTime: 2021-01-15 17:10:45
  * @FilePath: \basketball-service\app\controller\player.js
  */
 'use strict';
@@ -25,7 +25,12 @@ class PlayerController extends Controller {
     this.success(playerData);
   }
 
-
+  // 根据openid分组（唯一标识）
+  async playerList() {
+    const { ctx } = this;
+    const playerList = await ctx.service.player.playerList(ctx.query);
+    this.success(playerList);
+  }
 }
 
 module.exports = PlayerController;

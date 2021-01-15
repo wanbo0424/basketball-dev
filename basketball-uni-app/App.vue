@@ -1,6 +1,7 @@
 
 <script>
 	import { mapMutations } from 'vuex'
+	import http from './api/index.js'
 	export default {
 		onLaunch: function() {
 			console.log('App Launch')
@@ -16,12 +17,14 @@
 			// 3e9c3da492abdbad0e1cee5a310646e9  AppSecret
 			// wx3bd5737539be2537  AppID
 			// 登录
+			const _this = this
 			uni.login({
 			  provider: 'weixin',
 			  success: async function (res) {
 			    console.log('code', res.code)
-				const { openid } = await uniAccountIns.code2Session(res.code)
-				this.setOpenId({openId: openid})
+				http.get('weapp/login', {params:{ code: res.code }}).then(res => {
+					_this.SET_USER_INFO({openId: res.data.data.openid})
+				})
 				}
 			})
 			// wx.login({
@@ -46,7 +49,7 @@
 		},
 		methods: {
 			...mapMutations([
-			  'setOpenId' // 将 `this.incrementBy(amount)` 映射为 `this.$store.commit('incrementBy', amount)`
+			  'SET_USER_INFO' // 将 `this.incrementBy(amount)` 映射为 `this.$store.commit('incrementBy', amount)`
 			]),
 		},
 	}

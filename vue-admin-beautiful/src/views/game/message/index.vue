@@ -2,7 +2,7 @@
  * @Description: 比赛信息
  * @Date: 2021-01-11 15:27:06
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-12 18:25:34
+ * @LastEditTime: 2021-01-15 10:19:46
  * @FilePath: \vue-admin-beautiful\src\views\game\message\index.vue
 -->
 <template>
@@ -15,6 +15,15 @@
       :loading="loading"
       @change="handleTableChange"
     >
+      <template #status="{ text: gameStatus }">
+        <a-badge v-if="gameStatus === 0" status="default" text="未举办" />
+        <a-badge
+          v-else-if="gameStatus === 1"
+          status="processing"
+          text="举行中"
+        />
+        <a-badge v-else status="default" text="已举行" />
+      </template>
       <template #action="{ text }">
         <span>
           <a @click="edit(text)">修改</a>
@@ -53,6 +62,11 @@
     {
       title: '比赛地点',
       dataIndex: 'gameAddress',
+    },
+    {
+      title: '比赛状态',
+      dataIndex: 'gameStatus',
+      slots: { customRender: 'status' },
     },
     {
       title: 'Action',

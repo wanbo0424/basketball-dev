@@ -93,10 +93,12 @@
     watch: {
       $route: {
         handler({ path, matched }) {
-          matched[0].children.length > 1
-            ? (this.selectedKeys = [path])
-            : (this.selectedKeys = [matched[0].path])
-          this.openKeys = [matched[0].path]
+          if (matched.length) {
+            matched[0].children.length > 1
+              ? (this.selectedKeys = [path])
+              : (this.selectedKeys = [matched[0].path])
+            this.openKeys = [matched[0].path]
+          }
         },
         immediate: true,
       },

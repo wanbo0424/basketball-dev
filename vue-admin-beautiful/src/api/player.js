@@ -8,6 +8,14 @@ export function getList(params) {
   })
 }
 
+export function getPlayerList(params) {
+  return request({
+    url: '/admin/playerGroupList',
+    method: 'get',
+    params,
+  })
+}
+
 export function doEdit(data) {
   return request({
     url: '/table/doEdit',

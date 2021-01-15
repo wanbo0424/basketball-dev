@@ -1,8 +1,15 @@
 <!--
+ * @Description: 球员生涯
+ * @Date: 2021-01-15 17:24:23
+ * @LastEditors: yinwb
+ * @LastEditTime: 2021-01-15 18:06:48
+ * @FilePath: \vue-admin-beautiful\src\views\player\career\index.vue
+-->
+<!--
  * @Description: 
  * @Date: 2021-01-08 17:59:51
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-15 18:36:51
+ * @LastEditTime: 2021-01-15 12:43:05
  * @FilePath: \vue-admin-beautiful\src\views\player\apply\index.vue
 -->
 <template>
@@ -27,7 +34,7 @@
 </template>
 <script>
   import { ref, onMounted, reactive } from 'vue'
-  import { getList } from '@/api/player'
+  import { getPlayerList } from '@/api/player'
   const columns = [
     {
       title: 'id',
@@ -68,7 +75,7 @@
           ...pagination,
         }
         delete submit.total
-        getList(submit).then((res) => {
+        getPlayerList(submit).then((res) => {
           if (res.code === 0) {
             data.value = res.data.docs
             pagination.current = res.data.pageInfo.current

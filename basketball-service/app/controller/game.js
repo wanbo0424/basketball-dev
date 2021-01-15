@@ -19,8 +19,14 @@ class GameController extends Controller {
 
   async List() {
     const { ctx } = this;
-    const playerData = await ctx.service.game.query(ctx.query);
-    this.success(playerData);
+    const data = await ctx.service.game.query(ctx.query);
+    this.success(data);
+  }
+
+  async ToHeldGameList() {
+    const { ctx } = this;
+    const data = await ctx.service.game.ToHeldGameList();
+    this.success(data);
   }
 }
 module.exports = GameController;

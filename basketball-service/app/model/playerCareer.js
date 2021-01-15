@@ -13,8 +13,9 @@ module.exports = app => {
 
   const PlayerCareerSchema = new Schema({
     // 用户唯一标识
-    UnionID: {
+    unionId: {
       type: String,
+      unique: true,
     },
     // 生涯比赛记录ids
     gameIdList: {
