@@ -70,11 +70,13 @@ module.exports = app => {
       // unique: true, // 值是唯一的
     },
     gameId: {
-      type: String,
+      type:  Schema.Types.ObjectId,
     },
-    // gameIdList: {
-    //   type: Array,
-    // },
+    // 0未支付 1预支付 2支付完成
+    payStatus: {
+      type: Number,
+      default: 0
+    }
 
   });
 

@@ -2,7 +2,7 @@ import Request from 'luch-request'
 
 
 const http = new Request({
-	baseURL: 'http://10.100.14.167:7001/'
+	baseURL: 'http://192.168.101.6:7001/'
 });
 
 http.interceptors.request.use((config) => { // 可使用async await 做异步操作

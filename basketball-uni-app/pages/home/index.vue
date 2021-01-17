@@ -16,15 +16,20 @@
 		</view> -->
 		
 		<!-- 介绍页 -->
-		<introduce></introduce>
-		<u-tabbar v-model="current" :list="list" ></u-tabbar>
+		<introduce v-if="current === 0"></introduce>
+		
+		<!-- 我的页 -->
+		<mine v-if="current === 1"></mine>
+		
+		<u-tabbar v-model="current" :list="list" @change="changeTab"></u-tabbar>
 	</view>
 </template>
 
 <script>
 	import Introduce from '../introduce/index'
+	import Mine from '../mine/index'
 	export default {
-		components:{Introduce},
+		components:{Introduce, Mine},
 		data() {
 			return {
 				show: false,
@@ -33,7 +38,7 @@
 					intro: '',
 					sex: ''
 				},
-				current: 'home',
+				current: 0,
 				list: [
 					{
 						iconPath: "home",
@@ -55,6 +60,13 @@
 		methods: {
 			doMessage() {
 				uni.navigateTo({url: '/pages/randomMatch/index'})
+			},
+			changeTab(index) {
+				// if(index === 1) {
+				// 	this.current = 'mine'
+				// }else{
+				// 	this.current = 'home'
+				// }
 			},
 			add() {
 				uni.showLoading({

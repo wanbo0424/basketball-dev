@@ -22,6 +22,7 @@ class PlayerService extends Service {
 
     return await app.model.Player.create(data);
   }
+  
   // 报名记录列表
   async query(params) {
     const { app } = this;
@@ -73,6 +74,25 @@ class PlayerService extends Service {
       docs,
       pageInfo,
     };
+  }
+
+  async getCareerList(query) {
+    const { app } = this;
+    const docs = await app.model.Player.aggregate([
+      {
+        $lookup: {
+          from: 'games',
+          localField: 'gameId',
+          foreignField: '_id',
+          as: 'gamesInfo'
+        }
+      },
+      {
+        $match: {openId: query.openId}
+      }
+    ]);
+    console.log(docs)
+    return docs
   }
 
 

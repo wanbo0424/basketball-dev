@@ -10,7 +10,10 @@ module.exports = app => {
   router.post('/weapp/players/apply', controller.player.apply);
   // 创建球员生涯（预支付后创建）
   router.post('/weapp/playerCareer/createCareer', controller.playerCareer.createCareer);
+  // 将要举行比赛列表
   router.get('/weapp/game/ToHeldGameList', controller.game.ToHeldGameList);
+// 球员个人生涯记录
+  router.get('/weapp/player/getCareerList', controller.player.getCareerList);
   router.get('/weapp/login', controller.weapp.login);
 
 
