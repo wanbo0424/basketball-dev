@@ -22,7 +22,7 @@ class PlayerService extends Service {
 
     return await app.model.Player.create(data);
   }
-  
+
   // 报名记录列表
   async query(params) {
     const { app } = this;
@@ -92,7 +92,7 @@ class PlayerService extends Service {
       }
     ]);
     console.log(docs)
-    return docs
+    return docs[0]
   }
 
 
