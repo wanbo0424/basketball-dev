@@ -30,7 +30,7 @@
 		methods: {
 			getCareer() {
 				http.get('weapp/player/getCareerList', {params: {openId: this.userInfo.openId}}).then(res => {
-					debugger
+
 				})
 			}
 		}

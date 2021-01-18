@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:39:52
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-15 18:34:54
+ * @LastEditTime: 2021-01-18 18:00:12
  * @FilePath: \basketball-service\app\service\player.js
  */
 'use strict';
@@ -12,7 +12,7 @@ const Service = require('egg').Service;
 class PlayerService extends Service {
   // 添加报名球员
   async addPlayer(data = {}) {
-    const { app } = this;
+    const { app, ctx } = this;
     // const findPalyer = await app.model.Player.find({ mobile: data.mobile });
     // if (findPalyer && findPalyer.length) {
     //   console.log('找到这个人了', findPalyer);
@@ -20,7 +20,10 @@ class PlayerService extends Service {
     // }
     // return app.model.Player.create(data, { $push: { gameIdList: data.gameId } });
 
-    return await app.model.Player.create(data);
+    // 在比赛中添加player
+    const result = await app.model.Player.create(data);
+    ctx.service.game.addPlayer(result);
+    return result._id;
   }
 
   // 报名记录列表
@@ -84,15 +87,15 @@ class PlayerService extends Service {
           from: 'games',
           localField: 'gameId',
           foreignField: '_id',
-          as: 'gamesInfo'
-        }
+          as: 'gamesInfo',
+        },
       },
       {
-        $match: {openId: query.openId}
-      }
+        $match: { openId: query.openId },
+      },
     ]);
-    console.log(docs)
-    return docs[0]
+    console.log(docs);
+    return docs[0];
   }
 
 

@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-11 17:21:53
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-15 11:30:05
+ * @LastEditTime: 2021-01-18 18:07:08
  * @FilePath: \basketball-service\app\service\game.js
  */
 'use strict';
@@ -46,6 +46,16 @@ class GameService extends Service {
     //   console.log(docs);
     // });
     // return await app.model.Game.find();
+  }
+
+  // 在比赛中添加player
+  async addPlayer(data) {
+    const { app } = this;
+    await app.model.Game.updateOne({ _id: data.gameId }, {
+      $push: { playerIds: data },
+    });
+
+    // return await app.model.Game.find({ gameStatus: 0 });
   }
 
 

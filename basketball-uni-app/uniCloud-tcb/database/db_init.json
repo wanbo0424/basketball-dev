@@ -3,5 +3,85 @@
 // 编写完毕后对本文件点右键，可按配置规则创建表和添加数据
 
 {
-	"unicloud-test": {}
+    "player_list": {
+        "index": [
+            {
+                "IndexName": "mobile",
+                "MgoKeySchema": {
+                    "MgoIndexKeys": [
+                        {
+                            "Name": "mobile",
+                            "Direction": "1"
+                        }
+                    ],
+                    "MgoIsUnique": false
+                }
+            }
+        ],
+        "schema": {
+            "bsonType": "object",
+            "required": [],
+            "properties": {
+                "_id": {
+                    "description": "存储文档 ID（用户 ID），系统自动生成"
+                },
+                "openId": {
+                    "bsonType": "string",
+                    "title": "openId",
+                    "description": "openId",
+                    "trim": "both"
+                },
+                "sex": {
+                    "bsonType": "string",
+                    "title": "性别",
+                    "description": "性别",
+                    "trim": "both"
+                },
+                "age": {
+                    "bsonType": "int",
+                    "title": "年龄",
+                    "description": "年龄",
+                    "trim": "both"
+                },
+                "role": {
+                    "bsonType": "string",
+                    "title": "擅长位置",
+                    "description": "擅长位置",
+                    "trim": "both"
+                },
+                "mobile": {
+                    "bsonType": "string",
+                    "title": "联系方式",
+                    "description": "联系方式",
+                    "trim": "both"
+                },
+                "gameId": {
+                    "bsonType": "string",
+                    "title": "联系方式",
+                    "description": "联系方式",
+                    "trim": "both"
+                },
+                "payStatus": {
+                    "bsonType": "int",
+                    "description": "支付状态：0 未支付 1 预支付 2 支付完成",
+                    "title": "支付状态",
+                    "defaultValue": 0,
+                    "enum": [
+                        {
+                            "text": "未支付",
+                            "value": 0
+                        },
+                        {
+                            "text": "预支付",
+                            "value": 1
+                        },
+                        {
+                            "text": "支付完成",
+                            "value": 2
+                        }
+                    ]
+                }
+            }
+        }
+    }
 }

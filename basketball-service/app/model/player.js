@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:29:19
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-15 17:57:54
+ * @LastEditTime: 2021-01-18 18:07:58
  * @FilePath: \basketball-service\app\model\player.js
  */
 'use strict';
@@ -47,6 +47,10 @@ module.exports = app => {
   const Schema = mongoose.Schema;
 
   const PlayerSchema = new Schema({
+    // 昵称
+    nickName: {
+      type: String,
+    },
     openId: {
       type: String,
       default: '2',
@@ -66,17 +70,17 @@ module.exports = app => {
     mobile: {
       type: String,
       required: true,
-      index: true,
+      // index: true,
       // unique: true, // 值是唯一的
     },
     gameId: {
-      type:  Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
     },
     // 0未支付 1预支付 2支付完成
     payStatus: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
 
   });
 

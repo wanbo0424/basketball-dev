@@ -2,7 +2,7 @@
  * @Description: 比赛信息
  * @Date: 2021-01-11 15:27:06
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-15 10:19:46
+ * @LastEditTime: 2021-01-18 18:45:05
  * @FilePath: \vue-admin-beautiful\src\views\game\message\index.vue
 -->
 <template>
@@ -24,11 +24,14 @@
         />
         <a-badge v-else status="default" text="已举行" />
       </template>
+      <template #player="{ text: playerIds }">
+        <span>{{ playerNick(playerIds) }}</span>
+      </template>
       <template #action="{ text }">
         <span>
           <a @click="edit(text)">修改</a>
           <a-divider type="vertical" />
-          <a>删除</a>
+          <a @click="group(text)">球员分组</a>
           <a-divider type="vertical" />
         </span>
       </template>
@@ -69,6 +72,11 @@
       slots: { customRender: 'status' },
     },
     {
+      title: '球员列表',
+      dataIndex: 'playerIds',
+      slots: { customRender: 'player' },
+    },
+    {
       title: 'Action',
       key: 'action',
       slots: { customRender: 'action' },
@@ -90,6 +98,16 @@
 
       function handleTableChange() {}
 
+      function playerNick(playerIds) {
+        if (playerIds && playerIds.length) {
+          let players = playerIds.map(
+            (item) => `${item.nickName}(${item.role})`
+          )
+          return players.join(',')
+        } else {
+          return ''
+        }
+      }
       function loadData() {
         let submit = {
           ...pagination,
@@ -123,6 +141,10 @@
         editCarousel.value.init(text, 'edit')
       }
 
+      function group(params) {
+        console.log(params)
+      }
+
       onMounted(() => {
         loadData()
       })
@@ -138,6 +160,8 @@
         edit,
         editCarousel,
         loadData,
+        playerNick,
+        group,
       }
     },
   }
