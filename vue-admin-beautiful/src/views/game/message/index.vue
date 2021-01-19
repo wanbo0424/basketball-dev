@@ -2,7 +2,7 @@
  * @Description: 比赛信息
  * @Date: 2021-01-11 15:27:06
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-18 18:45:05
+ * @LastEditTime: 2021-01-19 18:33:55
  * @FilePath: \vue-admin-beautiful\src\views\game\message\index.vue
 -->
 <template>
@@ -24,12 +24,21 @@
         />
         <a-badge v-else status="default" text="已举行" />
       </template>
+      <template #score="{ text }">
+        <span>
+          {{ text.ATeamName }}:{{ text.ATeamScore }} vs {{ text.BTeamName }}:{{
+            text.BTeamScore
+          }}
+        </span>
+      </template>
       <template #player="{ text: playerIds }">
         <span>{{ playerNick(playerIds) }}</span>
       </template>
       <template #action="{ text }">
         <span>
           <a @click="edit(text)">修改</a>
+          <a-divider type="vertical" />
+          <a @click="score(text)">比分</a>
           <a-divider type="vertical" />
           <a @click="group(text)">球员分组</a>
           <a-divider type="vertical" />
@@ -45,12 +54,18 @@
       :show-total="(total) => `总共  ${total}  条数据`"
       show-less-items
     />
-
+    <!-- 设置比分 -->
+    <score-setting ref="scoreSet"></score-setting>
+    <!-- 修改 -->
     <Edit ref="editCarousel" @refresh="loadData"></Edit>
+    <!-- 球员分组 -->
+    <player-group></player-group>
   </div>
 </template>
 <script>
   import Edit from './Edit'
+  import ScoreSetting from './ScoreSetting'
+  import PlayerGroup from './PlayerGroup'
   import { ref, onMounted, reactive } from 'vue'
   import { list } from '@/api/game'
   const columns = [
@@ -77,18 +92,24 @@
       slots: { customRender: 'player' },
     },
     {
+      title: '比分',
+      // dataIndex: 'playerIds',
+      slots: { customRender: 'score' },
+    },
+    {
       title: 'Action',
       key: 'action',
       slots: { customRender: 'action' },
     },
   ]
   export default {
-    components: { Edit },
+    components: { Edit, ScoreSetting, PlayerGroup },
 
     setup() {
       let loadingRef = ref(false)
       const data = ref([])
       const editCarousel = ref(null)
+      const scoreSet = ref(null)
 
       let pagination = reactive({
         pageSize: 5,
@@ -141,6 +162,10 @@
         editCarousel.value.init(text, 'edit')
       }
 
+      function score(text) {
+        scoreSet.value.init(text)
+      }
+
       function group(params) {
         console.log(params)
       }
@@ -162,6 +187,8 @@
         loadData,
         playerNick,
         group,
+        score,
+        scoreSet,
       }
     },
   }

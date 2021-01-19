@@ -22,5 +22,7 @@ module.exports = app => {
   router.get('/api/admin/playerGroupList', controller.player.playerList);
   router.post('/api/admin/gameAdd', controller.game.add);
   router.post('/api/admin/gameUpdate', controller.game.update);
+  // 比赛分数设置
+  router.post('/api/admin/gameScoreSet', controller.game.scoreSetting);
   router.get('/api/admin/gameList', controller.game.List);
 };

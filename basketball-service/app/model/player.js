@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:29:19
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-18 18:07:58
+ * @LastEditTime: 2021-01-19 17:31:12
  * @FilePath: \basketball-service\app\model\player.js
  */
 'use strict';
@@ -70,8 +70,8 @@ module.exports = app => {
     mobile: {
       type: String,
       required: true,
-      // index: true,
-      // unique: true, // 值是唯一的
+      index: true,
+      unique: false, // 值是唯一的
     },
     gameId: {
       type: Schema.Types.ObjectId,

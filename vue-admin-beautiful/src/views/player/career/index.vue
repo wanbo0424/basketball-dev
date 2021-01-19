@@ -5,13 +5,6 @@
  * @LastEditTime: 2021-01-15 18:06:48
  * @FilePath: \vue-admin-beautiful\src\views\player\career\index.vue
 -->
-<!--
- * @Description: 
- * @Date: 2021-01-08 17:59:51
- * @LastEditors: yinwb
- * @LastEditTime: 2021-01-15 12:43:05
- * @FilePath: \vue-admin-beautiful\src\views\player\apply\index.vue
--->
 <template>
   <div>
     <a-table

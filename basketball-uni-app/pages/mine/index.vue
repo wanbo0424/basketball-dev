@@ -29,9 +29,7 @@
 		 },
 		methods: {
 			getCareer() {
-				http.get('weapp/player/getCareerList', {params: {openId: this.userInfo.openId}}).then(res => {
-
-				})
+				uni.navigateTo({url: '/pages/match/index'})
 			}
 		}
 	}

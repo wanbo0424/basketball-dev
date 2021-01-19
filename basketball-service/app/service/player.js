@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:39:52
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-18 18:00:12
+ * @LastEditTime: 2021-01-19 18:11:38
  * @FilePath: \basketball-service\app\service\player.js
  */
 'use strict';
@@ -79,6 +79,7 @@ class PlayerService extends Service {
     };
   }
 
+  // 球员个人生涯列表
   async getCareerList(query) {
     const { app } = this;
     const docs = await app.model.Player.aggregate([
@@ -94,11 +95,14 @@ class PlayerService extends Service {
         $match: { openId: query.openId },
       },
     ]);
-    console.log(docs);
-    return docs[0];
+    const gamesInfo = [];
+    docs.forEach(item => {
+      if (item.gamesInfo && item.gamesInfo.length) {
+        gamesInfo.push(...item.gamesInfo);
+      }
+    });
+    return gamesInfo;
   }
-
-
 }
 
 module.exports = PlayerService;

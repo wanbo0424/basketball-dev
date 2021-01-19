@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-11 17:21:53
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-18 18:07:08
+ * @LastEditTime: 2021-01-19 16:28:32
  * @FilePath: \basketball-service\app\service\game.js
  */
 'use strict';
@@ -62,6 +62,15 @@ class GameService extends Service {
   async ToHeldGameList() {
     const { app } = this;
     return await app.model.Game.find({ gameStatus: 0 });
+  }
+
+  // 设置比赛比分
+  async scoreSetting(data) {
+    const { app } = this;
+    const { _id } = await app.model.Game.updateOne({ _id: data._id }, {
+      $set: data,
+    });
+    return _id;
   }
 }
 

@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-11 14:32:16
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-18 17:36:32
+ * @LastEditTime: 2021-01-19 15:51:49
  * @FilePath: \basketball-service\app\model\game.js
  */
 'use strict';
@@ -47,6 +47,8 @@ module.exports = app => {
     playerIds: { type: Array },
     ATeamName: { type: String },
     BTeamName: { type: String },
+    ATeamScore: { type: Number },
+    BTeamScore: { type: Number },
     ATeamPlayerIds: { type: Array },
     BTeamPlayerIds: { type: Array },
     // 0:未举行 1：正在举行 2：已举行
