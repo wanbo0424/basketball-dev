@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-11 17:21:53
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-19 16:28:32
+ * @LastEditTime: 2021-01-20 16:56:39
  * @FilePath: \basketball-service\app\service\game.js
  */
 'use strict';
@@ -69,6 +69,15 @@ class GameService extends Service {
     const { app } = this;
     const { _id } = await app.model.Game.updateOne({ _id: data._id }, {
       $set: data,
+    });
+    return _id;
+  }
+
+  // 球员分组
+  async buildTeam(data) {
+    const { app } = this;
+    const { _id } = await app.model.Game.updateOne({ _id: data._id }, {
+      $set: { ATeamPlayers: data.ATeamPlayers, BTeamPlayers: data.BTeamPlayers },
     });
     return _id;
   }

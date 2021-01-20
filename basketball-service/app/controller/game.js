@@ -34,5 +34,12 @@ class GameController extends Controller {
     const data = await ctx.service.game.scoreSetting(ctx.request.body);
     this.success(data);
   }
+
+  // 球员分组
+  async buildTeam() {
+    const { ctx } = this;
+    const data = await ctx.service.game.buildTeam(ctx.request.body);
+    this.success(data);
+  }
 }
 module.exports = GameController;

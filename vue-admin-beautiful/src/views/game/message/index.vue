@@ -2,7 +2,7 @@
  * @Description: 比赛信息
  * @Date: 2021-01-11 15:27:06
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-19 18:33:55
+ * @LastEditTime: 2021-01-20 15:48:09
  * @FilePath: \vue-admin-beautiful\src\views\game\message\index.vue
 -->
 <template>
@@ -59,7 +59,7 @@
     <!-- 修改 -->
     <Edit ref="editCarousel" @refresh="loadData"></Edit>
     <!-- 球员分组 -->
-    <player-group></player-group>
+    <player-group ref="groupRef"></player-group>
   </div>
 </template>
 <script>
@@ -110,6 +110,7 @@
       const data = ref([])
       const editCarousel = ref(null)
       const scoreSet = ref(null)
+      const groupRef = ref(null)
 
       let pagination = reactive({
         pageSize: 5,
@@ -166,8 +167,8 @@
         scoreSet.value.init(text)
       }
 
-      function group(params) {
-        console.log(params)
+      function group(row) {
+        groupRef.value.init(row)
       }
 
       onMounted(() => {
@@ -189,6 +190,7 @@
         group,
         score,
         scoreSet,
+        groupRef,
       }
     },
   }
