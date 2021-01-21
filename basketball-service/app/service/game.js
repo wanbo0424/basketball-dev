@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-11 17:21:53
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-20 16:56:39
+ * @LastEditTime: 2021-01-21 15:51:20
  * @FilePath: \basketball-service\app\service\game.js
  */
 'use strict';
@@ -24,14 +24,28 @@ class GameService extends Service {
     return _id;
   }
 
+  // 查询比赛列表
   async query(params) {
     const { app } = this;
     const query = JSON.parse(JSON.stringify(params));
     const { pageSize, current } = query;
     delete query.pageSize;
     delete query.current;
-    const docs = await app.model.Game.find(query).skip(pageSize * (current - 1)).limit(Number(pageSize));
-    // 分页信息
+
+    const docs = await app.model.Game.aggregate([
+      {
+        $lookup: {
+          from: 'players',
+          localField: '_id',
+          foreignField: 'gameId',
+          as: 'playerIds',
+        },
+      },
+      { $skip: pageSize * (current - 1) },
+      { $limit: Number(pageSize) },
+    ]);
+    // const docs = await app.model.Game.find(query).skip(pageSize * (current - 1)).limit(Number(pageSize));
+    // // 分页信息
     const pageInfo = {
       total: await app.model.Game.countDocuments(query).exec(),
       pageSize: Number(pageSize),
@@ -41,22 +55,15 @@ class GameService extends Service {
       docs,
       pageInfo,
     };
-
-    // app.model.Game.find({}, (err, docs) => {
-    //   console.log(docs);
-    // });
-    // return await app.model.Game.find();
   }
 
   // 在比赛中添加player
-  async addPlayer(data) {
-    const { app } = this;
-    await app.model.Game.updateOne({ _id: data.gameId }, {
-      $push: { playerIds: data },
-    });
-
-    // return await app.model.Game.find({ gameStatus: 0 });
-  }
+  // async addPlayer(data) {
+  //   const { app } = this;
+  //   await app.model.Game.updateOne({ _id: data.gameId }, {
+  //     $push: { playerIds: data },
+  //   });
+  // }
 
 
   async ToHeldGameList() {
@@ -81,6 +88,8 @@ class GameService extends Service {
     });
     return _id;
   }
+
+
 }
 
 module.exports = GameService;

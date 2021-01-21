@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:29:19
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-19 17:31:12
+ * @LastEditTime: 2021-01-21 18:40:09
  * @FilePath: \basketball-service\app\model\player.js
  */
 'use strict';
@@ -45,7 +45,6 @@ module.exports = app => {
 
   const mongoose = app.mongoose;
   const Schema = mongoose.Schema;
-
   const PlayerSchema = new Schema({
     // 昵称
     nickName: {
@@ -81,8 +80,15 @@ module.exports = app => {
       type: Number,
       default: 0,
     },
+    personScore: {
+      type: String,
+    },
 
+  }, {
+    versionKey: false,
+    timestamps: { createdAt: 'createTime', updatedAt: 'updateTime' },
   });
+
 
   return mongoose.model('Player', PlayerSchema, 'players');
 };

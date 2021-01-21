@@ -2,7 +2,7 @@
  * @Description: 比赛信息
  * @Date: 2021-01-11 15:27:06
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-20 15:48:09
+ * @LastEditTime: 2021-01-21 14:32:54
  * @FilePath: \vue-admin-beautiful\src\views\game\message\index.vue
 -->
 <template>
@@ -42,6 +42,7 @@
           <a-divider type="vertical" />
           <a @click="group(text)">球员分组</a>
           <a-divider type="vertical" />
+          <a @click="personalStatis(text)">个人统计</a>
         </span>
       </template>
     </a-table>
@@ -60,12 +61,17 @@
     <Edit ref="editCarousel" @refresh="loadData"></Edit>
     <!-- 球员分组 -->
     <player-group ref="groupRef"></player-group>
+    <!-- 个人技术统计 -->
+    <personal-technical-statis
+      ref="personalsStatisRef"
+    ></personal-technical-statis>
   </div>
 </template>
 <script>
   import Edit from './Edit'
   import ScoreSetting from './ScoreSetting'
   import PlayerGroup from './PlayerGroup'
+  import PersonalTechnicalStatis from './PersonalTechnicalStatis'
   import { ref, onMounted, reactive } from 'vue'
   import { list } from '@/api/game'
   const columns = [
@@ -97,13 +103,18 @@
       slots: { customRender: 'score' },
     },
     {
-      title: 'Action',
+      title: '操作',
       key: 'action',
       slots: { customRender: 'action' },
     },
   ]
   export default {
-    components: { Edit, ScoreSetting, PlayerGroup },
+    components: {
+      Edit,
+      ScoreSetting,
+      PlayerGroup,
+      PersonalTechnicalStatis,
+    },
 
     setup() {
       let loadingRef = ref(false)
@@ -111,6 +122,7 @@
       const editCarousel = ref(null)
       const scoreSet = ref(null)
       const groupRef = ref(null)
+      const personalsStatisRef = ref(null)
 
       let pagination = reactive({
         pageSize: 5,
@@ -171,6 +183,10 @@
         groupRef.value.init(row)
       }
 
+      function personalStatis(row) {
+        personalsStatisRef.value.init(row)
+      }
+
       onMounted(() => {
         loadData()
       })
@@ -191,6 +207,8 @@
         score,
         scoreSet,
         groupRef,
+        personalStatis,
+        personalsStatisRef,
       }
     },
   }
