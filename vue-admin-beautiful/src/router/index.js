@@ -92,6 +92,26 @@ export const asyncRoutes = [
       },
     ],
   },
+  {
+    path: '/sms',
+    component: Layout,
+    alwaysShow: true,
+    meta: {
+      title: '短信管理',
+      icon: 'apps-line',
+    },
+    children: [
+      {
+        path: 'SMSTemplate',
+        name: 'SMSTemplate',
+        component: () => import('@/views/sms/SMSTemplate'),
+        meta: {
+          title: '发送短信',
+          icon: 'table-2',
+        },
+      },
+    ],
+  },
   // {
   //   path: '/vab',
   //   component: Layout,

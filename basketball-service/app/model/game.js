@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-11 14:32:16
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-20 16:55:45
+ * @LastEditTime: 2021-01-22 10:04:12
  * @FilePath: \basketball-service\app\model\game.js
  */
 'use strict';
@@ -56,6 +56,9 @@ module.exports = app => {
       type: Number,
       default: 0,
     },
+  }, {
+    versionKey: false,
+    timestamps: { createdAt: 'createTime', updatedAt: 'updateTime' },
   });
 
   return mongoose.model('Game', GameSchema, 'games');

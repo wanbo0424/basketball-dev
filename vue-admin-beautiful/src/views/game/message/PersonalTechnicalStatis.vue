@@ -2,7 +2,7 @@
  * @Description: 个人技术统计
  * @Date: 2021-01-21 10:08:16
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-21 16:23:33
+ * @LastEditTime: 2021-01-22 10:13:31
  * @FilePath: \vue-admin-beautiful\src\views\game\message\PersonalTechnicalStatis.vue
 -->
 <template>
@@ -53,6 +53,7 @@
 <script>
   import { ref } from 'vue'
   import { setPersonalsStatis } from '@/api/game.js'
+
   const columns = [
     {
       title: '昵称',

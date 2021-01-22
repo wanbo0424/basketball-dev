@@ -9,6 +9,7 @@ module.exports = app => {
 
   require('./router/admin/player.js')(app);
   require('./router/admin/game.js')(app);
+  require('./router/admin/sms.js')(app);
   const { router, controller } = app;
   // router.get('/', controller.home.index);
   // // 微信小程序

@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-20 16:31:09
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-20 16:41:29
+ * @LastEditTime: 2021-01-22 14:19:00
  * @FilePath: \basketball-service\app\router\admin\player.js
  */
 'use strict';

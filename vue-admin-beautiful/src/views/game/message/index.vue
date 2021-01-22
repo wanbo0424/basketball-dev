@@ -2,7 +2,7 @@
  * @Description: 比赛信息
  * @Date: 2021-01-11 15:27:06
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-21 14:32:54
+ * @LastEditTime: 2021-01-22 18:49:43
  * @FilePath: \vue-admin-beautiful\src\views\game\message\index.vue
 -->
 <template>
@@ -34,6 +34,9 @@
       <template #player="{ text: playerIds }">
         <span>{{ playerNick(playerIds) }}</span>
       </template>
+      <template #createTime="{ text: createTime }">
+        <span>{{ moment(createTime).format('YYYY-MM-DD HH:mm:ss') }}</span>
+      </template>
       <template #action="{ text }">
         <span>
           <a @click="edit(text)">修改</a>
@@ -43,6 +46,8 @@
           <a @click="group(text)">球员分组</a>
           <a-divider type="vertical" />
           <a @click="personalStatis(text)">个人统计</a>
+          <a-divider type="vertical" />
+          <a @click="personalStatis(text)">发送短信</a>
         </span>
       </template>
     </a-table>
@@ -72,6 +77,7 @@
   import ScoreSetting from './ScoreSetting'
   import PlayerGroup from './PlayerGroup'
   import PersonalTechnicalStatis from './PersonalTechnicalStatis'
+  import moment from 'moment'
   import { ref, onMounted, reactive } from 'vue'
   import { list } from '@/api/game'
   const columns = [
@@ -101,6 +107,11 @@
       title: '比分',
       // dataIndex: 'playerIds',
       slots: { customRender: 'score' },
+    },
+    {
+      title: '创建时间',
+      dataIndex: 'createTime',
+      slots: { customRender: 'createTime' },
     },
     {
       title: '操作',
@@ -209,6 +220,7 @@
         groupRef,
         personalStatis,
         personalsStatisRef,
+        moment,
       }
     },
   }
