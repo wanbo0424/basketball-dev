@@ -4,13 +4,16 @@
  * @param {Egg.Application} app - egg application
  */
 module.exports = app => {
+  const { router, controller } = app;
   require('./router/weapp/game.js')(app);
   require('./router/weapp/player.js')(app);
+  require('./router/weapp/gameOrder.js')(app);
+
 
   require('./router/admin/player.js')(app);
   require('./router/admin/game.js')(app);
   require('./router/admin/sms.js')(app);
-  const { router, controller } = app;
+  require('./router/admin/gameOrder.js')(app);
   // router.get('/', controller.home.index);
   // // 微信小程序
   // router.post('/weapp/players/apply', controller.player.apply);

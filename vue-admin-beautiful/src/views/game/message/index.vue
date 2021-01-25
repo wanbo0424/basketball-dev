@@ -47,7 +47,7 @@
           <a-divider type="vertical" />
           <a @click="personalStatis(text)">个人统计</a>
           <a-divider type="vertical" />
-          <a @click="personalStatis(text)">发送短信</a>
+          <a @click="sendMessage(text)">发送短信</a>
         </span>
       </template>
     </a-table>

@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:39:52
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-21 15:38:30
+ * @LastEditTime: 2021-01-25 15:46:52
  * @FilePath: \basketball-service\app\service\player.js
  */
 'use strict';
@@ -12,7 +12,7 @@ const Service = require('egg').Service;
 class PlayerService extends Service {
   // 添加报名球员
   async addPlayer(data = {}) {
-    const { app } = this;
+    const { app, ctx } = this;
     // const findPalyer = await app.model.Player.find({ mobile: data.mobile });
     // if (findPalyer && findPalyer.length) {
     //   console.log('找到这个人了', findPalyer);
@@ -21,8 +21,15 @@ class PlayerService extends Service {
     // return app.model.Player.create(data, { $push: { gameIdList: data.gameId } });
 
     const result = await app.model.Player.create(data);
-    // 在比赛中添加player
-    // ctx.service.game.addPlayer(result);
+    // 创建订单
+    const orderData = {
+      orderId: ctx.helper.generateOrderNumber(),
+      openId: data.openId,
+      creatorName: data.nickName,
+      status: 0,
+    };
+    console.log(orderData, 'orderData');
+    await app.model.GameOrder.create(orderData);
     return result._id;
   }
 
@@ -98,6 +105,9 @@ class PlayerService extends Service {
     const gamesInfo = [];
     docs.forEach(item => {
       if (item.gamesInfo && item.gamesInfo.length) {
+        item.gamesInfo.forEach(ele => {
+          ele.personScore = item.personScore;
+        });
         gamesInfo.push(...item.gamesInfo);
       }
     });

@@ -66,6 +66,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/order/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	
 	// "tabBar": {

@@ -1,18 +1,17 @@
 <template>
 	<view style="height: 100%;">
 		<template v-for="(item, index) in matchList">
-			<u-card style="height: 60rpx;" margin="30rpx 20rpx" :title="item.gameAddress" :key="index">
+			<u-card style="height: 60rpx;" margin="30rpx 20rpx" :title="`比赛地点：${item.gameAddress}`" :sub-title="item.gameDate" :key="index">
 				<view class="" slot="body">
 					<view class="">
-						{{item.ATeamName}}:{{item.ATeamScore}}
+						{{item.ATeamName}}:{{item.ATeamScore}} vs  {{item.BTeamName}}:{{item.BTeamScore}}
 					</view>
 					<view class="">
-						{{item.BTeamName}}:{{item.BTeamScore}}
+						个人得分：{{item.personScore}}
 					</view>
 				</view>
 			</u-card>
 		</template>
-		
 	</view>
 </template>
 
