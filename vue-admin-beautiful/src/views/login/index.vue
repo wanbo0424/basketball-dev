@@ -98,9 +98,9 @@
           : this.redirect
       },
       async handleSubmit() {
-        // await this.login(this.form)
-        // await this.$router.push(this.handleRoute())
-        await this.$router.push('/')
+        await this.login(this.form)
+        await this.$router.push(this.handleRoute())
+        // await this.$router.push('/')
       },
     },
   }

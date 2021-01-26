@@ -71,6 +71,7 @@ const actions = {
   async login({ commit }, userInfo) {
     const { data } = await login(userInfo)
     const accessToken = data[tokenName]
+    // const accessToken = data[tokenName]
     if (accessToken) {
       commit('setAccessToken', accessToken)
       const hour = new Date().getHours()
