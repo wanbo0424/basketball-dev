@@ -2,11 +2,11 @@
  * @Description:
  * @Date: 2021-01-26 15:48:14
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-26 16:28:27
+ * @LastEditTime: 2021-01-29 17:28:00
  * @FilePath: \basketball-service\app\service\user\admin.js
  */
 'use strict';
-const md5 = require('md5');
+// const md5 = require('md5');
 const Service = require('egg').Service;
 
 class AdminService extends Service {
@@ -17,7 +17,7 @@ class AdminService extends Service {
    * @return {object|null} - 查找结果
    */
   async getAdminByLogin(userName, password) {
-    return await this.app.model.admin.find({ userName, password: md5(password) });
+    return await this.app.model.Admin.findOne({ userName, password });
   }
 }
 

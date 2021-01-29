@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-26 16:06:23
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-26 16:37:14
+ * @LastEditTime: 2021-01-29 17:41:32
  * @FilePath: \basketball-service\app\extend\context.js
  */
 'use strict';
@@ -12,18 +12,22 @@ module.exports = {
   NO_LOGIN_CODE: 100, // 未登录
   UNIQUE_CODE: 200, // 唯一性冲突
   ERROR_CODE: 500, // 失败
+  // 获取token
+  getAccessToken() {
+    return this.cookies.get('token', { signed: false });
+  },
 
   // 设置token
   setToken(data = {}) {
     const { app } = this;
-    const { userName, userId } = data;
+    const { userName, _id } = data;
 
-    const token = app.jwt.sign(data, app.config.jwt.secret, { expiresIn: '12h' });
+    const token = app.jwt.sign({ userName, id: _id }, app.config.jwt.secret, { expiresIn: '12h' });
     const cookieConfig = { maxAge: 1000 * 3600 * 24 * 7, httpOnly: false, overwrite: true, signed: false };
-
+    console.log(token, 'token');
     this.cookies.set('token', token, { ...cookieConfig, httpOnly: true });
     this.cookies.set('userName', userName, cookieConfig);
-    this.cookies.set('userType', userId, cookieConfig);
+    this.cookies.set('userId', _id, cookieConfig);
   },
 
 

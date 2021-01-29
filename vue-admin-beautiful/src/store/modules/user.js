@@ -10,6 +10,7 @@ import {
 } from '@/utils/accessToken'
 import { title, tokenName } from '@/config'
 import { message, notification } from 'ant-design-vue'
+import cookie from 'js-cookie'
 
 const state = () => ({
   accessToken: getAccessToken(),
@@ -68,12 +69,14 @@ const actions = {
    * @param {*} { commit }
    * @param {*} userInfo
    */
+  // eslint-disable-next-line no-unused-vars
   async login({ commit }, userInfo) {
-    const { data } = await login(userInfo)
-    const accessToken = data[tokenName]
+    // const { data } = await login(userInfo)
     // const accessToken = data[tokenName]
+    await login(userInfo)
+    const accessToken = cookie.get(tokenName)
     if (accessToken) {
-      commit('setAccessToken', accessToken)
+      // commit('setAccessToken', accessToken)
       const hour = new Date().getHours()
       const thisTime =
         hour < 8
