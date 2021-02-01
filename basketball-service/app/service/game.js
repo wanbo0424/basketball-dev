@@ -49,6 +49,7 @@ class GameService extends Service {
   }
 
 
+  // 将要举行比赛列表
   async ToHeldGameList() {
     const { app } = this;
     return await app.model.Game.find({ gameStatus: 0 });
