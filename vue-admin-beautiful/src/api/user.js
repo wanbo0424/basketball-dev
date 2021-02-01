@@ -30,8 +30,8 @@ export function getUserInfo(accessToken) {
 
 export function logout() {
   return request({
-    url: '/logout',
-    method: 'post',
+    url: '/admin/user/logout',
+    method: 'get',
   })
 }
 

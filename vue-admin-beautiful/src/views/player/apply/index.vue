@@ -2,7 +2,7 @@
  * @Description: 
  * @Date: 2021-01-08 17:59:51
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-22 10:23:03
+ * @LastEditTime: 2021-02-01 15:43:52
  * @FilePath: \vue-admin-beautiful\src\views\player\apply\index.vue
 -->
 <template>

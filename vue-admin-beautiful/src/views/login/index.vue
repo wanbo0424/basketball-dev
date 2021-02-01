@@ -99,6 +99,8 @@
       },
       async handleSubmit() {
         await this.login(this.form)
+        // let loginResult = await this.login(this.form)
+        console.log(this.handleRoute())
         await this.$router.push(this.handleRoute())
         // await this.$router.push('/')
       },

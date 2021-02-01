@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-26 15:36:18
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-29 17:30:05
+ * @LastEditTime: 2021-02-01 14:37:02
  * @FilePath: \basketball-service\app\controller\user\common.js
  */
 'use strict';
@@ -21,6 +21,14 @@ class UserCommonController extends Controller {
     const result = user;
     ctx.setToken(result);
     this.success(result);
+  }
+
+  /**
+   * 注销
+   */
+  async logout() {
+    this.ctx.removeToken();
+    this.success();
   }
 }
 

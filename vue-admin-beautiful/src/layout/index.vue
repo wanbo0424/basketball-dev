@@ -111,6 +111,7 @@
     },
     mounted() {
       this.handleLayouts()
+      this.$store.dispatch('routes/setRoutes')
     },
     methods: {
       ...mapActions({
