@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-11 17:42:14
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-12 17:53:24
+ * @LastEditTime: 2021-01-21 14:08:57
  * @FilePath: \vue-admin-beautiful\src\api\game.js
  */
 import request from '@/utils/request'
@@ -27,4 +27,25 @@ export const list = (params) =>
     url: '/admin/gameList',
     method: 'get',
     params,
+  })
+
+export const gameScoreSet = (data) =>
+  request({
+    url: '/admin/gameScoreSet',
+    method: 'post',
+    data,
+  })
+
+export const buildTeam = (data) =>
+  request({
+    url: '/admin/buildTeam',
+    method: 'post',
+    data,
+  })
+
+export const setPersonalsStatis = (data) =>
+  request({
+    url: '/admin/setPersonalsStatis',
+    method: 'post',
+    data,
   })

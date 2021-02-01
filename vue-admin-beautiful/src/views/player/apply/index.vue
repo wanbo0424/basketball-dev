@@ -2,7 +2,7 @@
  * @Description: 
  * @Date: 2021-01-08 17:59:51
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-15 18:36:51
+ * @LastEditTime: 2021-02-01 15:43:52
  * @FilePath: \vue-admin-beautiful\src\views\player\apply\index.vue
 -->
 <template>
@@ -13,7 +13,15 @@
       :pagination="false"
       :loading="loading"
       @change="handleTableChange"
-    ></a-table>
+    >
+      <template #createTime="{ text: createTime }">
+        <span>
+          {{
+            createTime ? moment(createTime).format('YYYY-MM-DD HH:mm:ss') : ''
+          }}
+        </span>
+      </template>
+    </a-table>
 
     <a-pagination
       v-model="pagination.current"
@@ -28,6 +36,7 @@
 <script>
   import { ref, onMounted, reactive } from 'vue'
   import { getList } from '@/api/player'
+  import moment from 'moment'
   const columns = [
     {
       title: 'id',
@@ -48,6 +57,11 @@
     {
       title: '联系方式',
       dataIndex: 'mobile',
+    },
+    {
+      title: '创建时间',
+      dataIndex: 'createTime',
+      slots: { customRender: 'createTime' },
     },
   ]
   export default {
@@ -93,6 +107,7 @@
         currentChange,
         data,
         pagination,
+        moment,
       }
     },
   }

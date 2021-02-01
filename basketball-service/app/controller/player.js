@@ -31,6 +31,7 @@ class PlayerController extends Controller {
     const playerList = await ctx.service.player.playerList(ctx.query);
     this.success(playerList);
   }
+
   // 球员个人生涯记录
   async getCareerList() {
     const { ctx } = this;

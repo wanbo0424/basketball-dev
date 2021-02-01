@@ -49,7 +49,7 @@ export const asyncRoutes = [
     alwaysShow: true,
     meta: {
       title: '球员管理',
-      icon: 'apps-line',
+      icon: 'user',
     },
     children: [
       {
@@ -58,7 +58,7 @@ export const asyncRoutes = [
         component: () => import('@/views/player/apply'),
         meta: {
           title: '报名球员记录',
-          icon: 'table-2',
+          icon: 'unordered-list',
         },
       },
       {
@@ -67,7 +67,7 @@ export const asyncRoutes = [
         component: () => import('@/views/player/career'),
         meta: {
           title: '球员生涯',
-          icon: 'table-2',
+          icon: 'solution',
         },
       },
     ],
@@ -87,6 +87,35 @@ export const asyncRoutes = [
         component: () => import('@/views/game/message'),
         meta: {
           title: '比赛信息',
+          icon: 'profile',
+        },
+      },
+    ],
+  },
+  {
+    path: '/sms',
+    component: Layout,
+    alwaysShow: true,
+    meta: {
+      title: '活动管理',
+      icon: 'apps-line',
+    },
+    children: [
+      {
+        path: 'SMSTemplate',
+        name: 'SMSTemplate',
+        component: () => import('@/views/activity/SMSTemplate'),
+        meta: {
+          title: '发送短信',
+          icon: 'table-2',
+        },
+      },
+      {
+        path: 'gameOrder',
+        name: 'GameOrder',
+        component: () => import('@/views/activity/gameOrder'),
+        meta: {
+          title: '订单',
           icon: 'table-2',
         },
       },

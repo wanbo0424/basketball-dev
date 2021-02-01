@@ -6,10 +6,12 @@ import { getUserInfo, login, logout } from '@/api/user'
 import {
   getAccessToken,
   removeAccessToken,
-  setAccessToken,
+  // setAccessToken,
 } from '@/utils/accessToken'
-import { title, tokenName } from '@/config'
-import { message, notification } from 'ant-design-vue'
+// import { title, tokenName } from '@/config'
+// import { message, notification } from 'ant-design-vue'
+import { message } from 'ant-design-vue'
+import Cookies from 'js-cookie'
 
 const state = () => ({
   accessToken: getAccessToken(),
@@ -30,7 +32,7 @@ const mutations = {
    */
   setAccessToken(state, accessToken) {
     state.accessToken = accessToken
-    setAccessToken(accessToken)
+    // setAccessToken(accessToken)
   },
   /**
    * @author chuzhixin 1204505056@qq.com
@@ -68,28 +70,32 @@ const actions = {
    * @param {*} { commit }
    * @param {*} userInfo
    */
+  // eslint-disable-next-line no-unused-vars
   async login({ commit }, userInfo) {
-    const { data } = await login(userInfo)
-    const accessToken = data[tokenName]
+    // const { data } = await login(userInfo)
+    // const accessToken = data[tokenName]
+    await login(userInfo)
+    let accessToken = Cookies.get('token')
     if (accessToken) {
       commit('setAccessToken', accessToken)
-      const hour = new Date().getHours()
-      const thisTime =
-        hour < 8
-          ? '早上好'
-          : hour <= 11
-          ? '上午好'
-          : hour <= 13
-          ? '中午好'
-          : hour < 18
-          ? '下午好'
-          : '晚上好'
-      notification.open({
-        message: `欢迎登录${title}`,
-        description: `${thisTime}！`,
-      })
+      //   const hour = new Date().getHours()
+      //   const thisTime =
+      //     hour < 8
+      //       ? '早上好'
+      //       : hour <= 11
+      //       ? '上午好'
+      //       : hour <= 13
+      //       ? '中午好'
+      //       : hour < 18
+      //       ? '下午好'
+      //       : '晚上好'
+      //   notification.open({
+      //     message: `欢迎登录${title}`,
+      //     description: `${thisTime}！`,
+      //   })
     } else {
-      message.error(`登录接口异常，未正确返回${tokenName}...`)
+      commit('setAccessToken', '')
+      message.error(`登录接口异常，未正确返回token...`)
     }
   },
   /**

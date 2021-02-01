@@ -4,11 +4,11 @@
       <a-row :gutter="20">
         <a-col :lg="12" :md="12" :sm="24" :xl="12" :xs="24">
           <div class="pic-error">
-            <img class="pic-error-parent" src="@/assets/error_images/404.png" />
-            <img
+            <!-- <img class="pic-error-parent" src="@/assets/error_images/404.png" /> -->
+            <!-- <img
               class="pic-error-child left"
               src="@/assets/error_images/cloud.png"
-            />
+            /> -->
           </div>
         </a-col>
 

@@ -3,7 +3,7 @@ import { tokenName } from '@/config'
 
 export async function login(data) {
   return request({
-    url: '/login',
+    url: '/admin/user/login',
     method: 'post',
     data,
   })
@@ -30,8 +30,8 @@ export function getUserInfo(accessToken) {
 
 export function logout() {
   return request({
-    url: '/logout',
-    method: 'post',
+    url: '/admin/user/logout',
+    method: 'get',
   })
 }
 

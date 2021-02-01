@@ -74,6 +74,29 @@
 			this.plarerData = {
 				nickName: this.userInfo.nickName
 			}
+			// 支付相关
+			// new Promise((resolve, reject) => {
+			// 	uni.getProvider({
+			// 		service: 'payment',
+			// 		success(res) {
+			// 			resolve(res.provider)
+			// 		},
+			// 		fail() {
+			// 			reject(new Error('获取支付方式失败'))
+			// 		}
+			// 	})
+			// }).then((provider) => {
+			// 	debugger
+			// 	return uniCloud.callFunction({
+			// 		name: 'pay',
+			// 		data: {
+			// 			provider,
+			// 			// outTradeNo: this.outTradeNo
+			// 		}
+			// 	})
+			// }).then(res => {
+				
+			// })
 		},
 		computed: {
 			...mapGetters([
@@ -104,15 +127,12 @@
 			// 提交报名信息
 			submit() {
 				this.form.openId = this.userInfo.openId
-				debugger
+				this.form.nickName = this.userInfo.nickName
 				http.post('weapp/players/apply', this.form).then(res => {
 				})
-				// uni.showLoading({
-				// 	title: '处理中...'
-				// })
-				// debugger
+				
 				// uniCloud.callFunction({
-				// 	name: 'add',
+				// 	name: 'create-player',
 				// 	data: this.form
 				// }).then((res) => {
 				// 	debugger
@@ -132,6 +152,8 @@
 				// 	})
 				// 	console.error(err)
 				// })
+				
+				
 			},
 			// 提交球员档案
 			submitPlayer(){

@@ -8,7 +8,7 @@
           <div class="login-container-title">欢迎来到 {{ title }}</div>
           <a-form :model="form" @submit="handleSubmit" @submit.prevent>
             <a-form-item>
-              <a-input v-model:value="form.username" placeholder="Username">
+              <a-input v-model:value="form.userName" placeholder="Username">
                 <template v-slot:prefix>
                   <UserOutlined style="color: rgba(0, 0, 0, 0.25)" />
                 </template>
@@ -29,7 +29,7 @@
               <a-button
                 type="primary"
                 html-type="submit"
-                :disabled="form.username === '' || form.password === ''"
+                :disabled="form.userName === '' || form.password === ''"
               >
                 登录
               </a-button>
@@ -38,16 +38,16 @@
         </div>
       </a-col>
     </a-row>
-    <div class="login-container-tips">
+    <!-- <div class="login-container-tips">
       基于vue{{ dependencies['vue'] }}
       + ant-design-vue
       {{ dependencies['ant-design-vue'] }}开发
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
-  import { dependencies, devDependencies } from '*/package.json'
-  import { mapGetters } from 'vuex'
+  // import { dependencies, devDependencies } from '*/package.json'
+  import { mapGetters, mapActions } from 'vuex'
   import { UserOutlined, LockOutlined } from '@ant-design/icons-vue'
 
   export default {
@@ -59,12 +59,12 @@
     data() {
       return {
         form: {
-          username: '',
+          userName: '',
           password: '',
         },
         redirect: undefined,
-        dependencies: dependencies,
-        devDependencies: devDependencies,
+        // dependencies: dependencies,
+        // devDependencies: devDependencies,
       }
     },
     computed: {
@@ -82,25 +82,27 @@
       },
     },
     mounted() {
-      this.form.username = 'admin'
+      this.form.userName = 'admin'
       this.form.password = '123456'
       /*  setTimeout(() => {
         this.handleSubmit()
       }, 3000) */
     },
     methods: {
-      // ...mapActions({
-      //   login: 'user/login',
-      // }),
+      ...mapActions({
+        login: 'user/login',
+      }),
       handleRoute() {
         return this.redirect === '/404' || this.redirect === '/403'
           ? '/'
           : this.redirect
       },
       async handleSubmit() {
-        // await this.login(this.form)
-        // await this.$router.push(this.handleRoute())
-        await this.$router.push('/')
+        await this.login(this.form)
+        // let loginResult = await this.login(this.form)
+        console.log(this.handleRoute())
+        await this.$router.push(this.handleRoute())
+        // await this.$router.push('/')
       },
     },
   }

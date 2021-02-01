@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:39:52
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-15 18:34:54
+ * @LastEditTime: 2021-01-25 15:46:52
  * @FilePath: \basketball-service\app\service\player.js
  */
 'use strict';
@@ -12,7 +12,7 @@ const Service = require('egg').Service;
 class PlayerService extends Service {
   // 添加报名球员
   async addPlayer(data = {}) {
-    const { app } = this;
+    const { app, ctx } = this;
     // const findPalyer = await app.model.Player.find({ mobile: data.mobile });
     // if (findPalyer && findPalyer.length) {
     //   console.log('找到这个人了', findPalyer);
@@ -20,7 +20,17 @@ class PlayerService extends Service {
     // }
     // return app.model.Player.create(data, { $push: { gameIdList: data.gameId } });
 
-    return await app.model.Player.create(data);
+    const result = await app.model.Player.create(data);
+    // 创建订单
+    const orderData = {
+      orderId: ctx.helper.generateOrderNumber(),
+      openId: data.openId,
+      creatorName: data.nickName,
+      status: 0,
+    };
+    console.log(orderData, 'orderData');
+    await app.model.GameOrder.create(orderData);
+    return result._id;
   }
 
   // 报名记录列表
@@ -76,6 +86,7 @@ class PlayerService extends Service {
     };
   }
 
+  // 球员个人生涯列表
   async getCareerList(query) {
     const { app } = this;
     const docs = await app.model.Player.aggregate([
@@ -84,18 +95,33 @@ class PlayerService extends Service {
           from: 'games',
           localField: 'gameId',
           foreignField: '_id',
-          as: 'gamesInfo'
-        }
+          as: 'gamesInfo',
+        },
       },
       {
-        $match: {openId: query.openId}
-      }
+        $match: { openId: query.openId },
+      },
     ]);
-    console.log(docs)
-    return docs[0]
+    const gamesInfo = [];
+    docs.forEach(item => {
+      if (item.gamesInfo && item.gamesInfo.length) {
+        item.gamesInfo.forEach(ele => {
+          ele.personScore = item.personScore;
+        });
+        gamesInfo.push(...item.gamesInfo);
+      }
+    });
+    return gamesInfo;
   }
 
-
+  // 设置职业生涯
+  async setPersonalsStatis(data) {
+    const { app } = this;
+    const { _id } = await app.model.Player.updateOne({ _id: data._id }, {
+      $set: { personScore: data.personScore },
+    });
+    return _id;
+  }
 }
 
 module.exports = PlayerService;

@@ -2,7 +2,7 @@
  * @Description: 比赛信息
  * @Date: 2021-01-11 15:27:06
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-15 10:19:46
+ * @LastEditTime: 2021-01-22 18:49:43
  * @FilePath: \vue-admin-beautiful\src\views\game\message\index.vue
 -->
 <template>
@@ -24,12 +24,30 @@
         />
         <a-badge v-else status="default" text="已举行" />
       </template>
+      <template #score="{ text }">
+        <span>
+          {{ text.ATeamName }}:{{ text.ATeamScore }} vs {{ text.BTeamName }}:{{
+            text.BTeamScore
+          }}
+        </span>
+      </template>
+      <template #player="{ text: playerIds }">
+        <span>{{ playerNick(playerIds) }}</span>
+      </template>
+      <template #createTime="{ text: createTime }">
+        <span>{{ moment(createTime).format('YYYY-MM-DD HH:mm:ss') }}</span>
+      </template>
       <template #action="{ text }">
         <span>
           <a @click="edit(text)">修改</a>
           <a-divider type="vertical" />
-          <a>删除</a>
+          <a @click="score(text)">比分</a>
           <a-divider type="vertical" />
+          <a @click="group(text)">球员分组</a>
+          <a-divider type="vertical" />
+          <a @click="personalStatis(text)">个人统计</a>
+          <a-divider type="vertical" />
+          <a @click="sendMessage(text)">发送短信</a>
         </span>
       </template>
     </a-table>
@@ -42,12 +60,24 @@
       :show-total="(total) => `总共  ${total}  条数据`"
       show-less-items
     />
-
+    <!-- 设置比分 -->
+    <score-setting ref="scoreSet"></score-setting>
+    <!-- 修改 -->
     <Edit ref="editCarousel" @refresh="loadData"></Edit>
+    <!-- 球员分组 -->
+    <player-group ref="groupRef"></player-group>
+    <!-- 个人技术统计 -->
+    <personal-technical-statis
+      ref="personalsStatisRef"
+    ></personal-technical-statis>
   </div>
 </template>
 <script>
   import Edit from './Edit'
+  import ScoreSetting from './ScoreSetting'
+  import PlayerGroup from './PlayerGroup'
+  import PersonalTechnicalStatis from './PersonalTechnicalStatis'
+  import moment from 'moment'
   import { ref, onMounted, reactive } from 'vue'
   import { list } from '@/api/game'
   const columns = [
@@ -69,18 +99,41 @@
       slots: { customRender: 'status' },
     },
     {
-      title: 'Action',
+      title: '球员列表',
+      dataIndex: 'playerIds',
+      slots: { customRender: 'player' },
+    },
+    {
+      title: '比分',
+      // dataIndex: 'playerIds',
+      slots: { customRender: 'score' },
+    },
+    {
+      title: '创建时间',
+      dataIndex: 'createTime',
+      slots: { customRender: 'createTime' },
+    },
+    {
+      title: '操作',
       key: 'action',
       slots: { customRender: 'action' },
     },
   ]
   export default {
-    components: { Edit },
+    components: {
+      Edit,
+      ScoreSetting,
+      PlayerGroup,
+      PersonalTechnicalStatis,
+    },
 
     setup() {
       let loadingRef = ref(false)
       const data = ref([])
       const editCarousel = ref(null)
+      const scoreSet = ref(null)
+      const groupRef = ref(null)
+      const personalsStatisRef = ref(null)
 
       let pagination = reactive({
         pageSize: 5,
@@ -90,6 +143,16 @@
 
       function handleTableChange() {}
 
+      function playerNick(playerIds) {
+        if (playerIds && playerIds.length) {
+          let players = playerIds.map(
+            (item) => `${item.nickName}(${item.role})`
+          )
+          return players.join(',')
+        } else {
+          return ''
+        }
+      }
       function loadData() {
         let submit = {
           ...pagination,
@@ -123,6 +186,18 @@
         editCarousel.value.init(text, 'edit')
       }
 
+      function score(text) {
+        scoreSet.value.init(text)
+      }
+
+      function group(row) {
+        groupRef.value.init(row)
+      }
+
+      function personalStatis(row) {
+        personalsStatisRef.value.init(row)
+      }
+
       onMounted(() => {
         loadData()
       })
@@ -138,6 +213,14 @@
         edit,
         editCarousel,
         loadData,
+        playerNick,
+        group,
+        score,
+        scoreSet,
+        groupRef,
+        personalStatis,
+        personalsStatisRef,
+        moment,
       }
     },
   }

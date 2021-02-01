@@ -43,6 +43,11 @@ module.exports = appInfo => {
     },
   };
 
+  config.jwt = {
+    secret: '123456',
+    // ignore: '/weapp',
+  };
+
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',

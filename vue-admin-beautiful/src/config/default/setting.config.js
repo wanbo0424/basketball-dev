@@ -3,7 +3,7 @@
  */
 const setting = {
   //开发以及部署时的URL，hash模式时在不确定二级目录名称的情况下建议使用""代表相对路径或者"/二级目录/"，history模式默认使用"/"或者"/二级目录/"
-  publicPath: '',
+  publicPath: '/',
   //生产环境构建文件的目录名
   outputDir: 'dist',
   //放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录。
@@ -13,7 +13,7 @@ const setting = {
   //进行编译的依赖
   transpileDependencies: ['vue-echarts', 'resize-detector'],
   //默认的接口地址 如果是开发环境和生产环境走vab-mock-server，当然你也可以选择自己配置成需要的接口地址
-  baseURL: process.env.NODE_ENV === 'development' ? '/' : 'mock-server',
+  baseURL: process.env.NODE_ENV === 'development' ? '/' : '/',
   //标题 （包括初次加载雪花屏的标题 页面的标题 浏览器的标题）
   title: '篮球社',
   //标题分隔符
@@ -37,13 +37,13 @@ const setting = {
   //加载时显示文字
   loadingText: '正在加载中...',
   //token名称
-  tokenName: 'accessToken',
+  tokenName: 'token',
   //token在localStorage、sessionStorage、cookie存储的key的名称
-  tokenTableName: 'accessToken',
+  tokenTableName: 'token',
   //token存储位置localStorage sessionStorage cookie
-  storage: 'localStorage',
+  storage: 'cookie',
   //token失效回退到登录页时是否记录本次的路由
-  recordRoute: true,
+  recordRoute: false,
   //是否显示logo，不显示时设置false，显示时请填写remixIcon图标名称，暂时只支持设置remixIcon
   logo: 'vuejs-fill',
   //语言类型zh、en

@@ -1,13 +1,18 @@
 <template>
 	<view class="content">
-		<!-- <image class="main-img" src="../../static/imgs/main-img.jpg" mode=""></image> -->
 		
-		<div class="propagate-text">
+		<!-- <div class="propagate-text">
 			<div>一起来打全场</div>
 			<div>This is for You</div>
-		</div>
-		
-		<div class="into-button" @click="toHome">开始组队</div>
+		</div> -->
+		<image style="height:100%;width: 100%;" src="../../static/imgs/home-bg.jpeg" mode=""></image>
+		<image 
+			style="transform: scale(0.5);position: absolute;bottom: -58rpx;" 
+			@click="toHome" 
+			src="../../static/imgs/button1.png" 
+			mode="">
+		</image>
+		<!-- <div class="into-button" @click="toHome">开始组队</div> -->
 	</view>
 </template>
 <script>
@@ -22,11 +27,12 @@
 <style lang="scss" scoped>
 	.content{
 		// background-color: black;
-		background: url('../../static/imgs/main-img.jpeg') no-repeat center;
+		// background: url('../../static/imgs/main-img.jpeg') no-repeat center;
+		position: absolute;
+		// background: url('../../static/imgs/home-bg.jpeg') no-repeat center;
 		background-size: cover;
 		height: 100vh;
 		width: 100vw;
-		position: absolute;
 		display: flex;
 		align-items: center;
 		justify-content: center;
