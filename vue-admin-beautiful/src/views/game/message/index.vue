@@ -2,7 +2,7 @@
  * @Description: 比赛信息
  * @Date: 2021-01-11 15:27:06
  * @LastEditors: yinwb
- * @LastEditTime: 2021-02-02 18:52:40
+ * @LastEditTime: 2021-02-02 18:58:15
  * @FilePath: \vue-admin-beautiful\src\views\game\message\index.vue
 -->
 <template>
@@ -205,7 +205,7 @@
           phone: '18602860432',
           templateId: '11108',
           data: {
-            player: playersPhone[0].nickName,
+            player: playersPhone[0],
             date: row.gameDate,
             gameAddress: row.gameAddress,
           },
