@@ -21,6 +21,8 @@
 			</u-form-item>
 		</u-form>
 		<u-button @click="submit">提交</u-button>
+		
+		<u-toast ref="uToast" />
 	</view>
 </template>
 
@@ -129,6 +131,13 @@
 				this.form.openId = this.userInfo.openId
 				this.form.nickName = this.userInfo.nickName
 				http.post('weapp/players/apply', this.form).then(res => {
+					if(res.code === 0) {
+						this.$refs.uToast.show({
+							title: '信息登记成功',
+							type: 'success',
+							url: '/pages/defray/index'
+						})
+					}
 				})
 				
 				// uniCloud.callFunction({
