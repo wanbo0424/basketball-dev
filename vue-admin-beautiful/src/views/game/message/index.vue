@@ -2,7 +2,7 @@
  * @Description: 比赛信息
  * @Date: 2021-01-11 15:27:06
  * @LastEditors: yinwb
- * @LastEditTime: 2021-02-02 18:58:15
+ * @LastEditTime: 2021-02-03 18:32:01
  * @FilePath: \vue-admin-beautiful\src\views\game\message\index.vue
 -->
 <template>
@@ -199,20 +199,18 @@
       }
 
       function sendMessage(row) {
-        console.log(row)
         let playersPhone = row.playerIds.map((v) => v.mobile)
-        sendSms({
-          phone: '18602860432',
-          templateId: '11108',
-          data: {
-            player: playersPhone[0],
-            date: row.gameDate,
-            gameAddress: row.gameAddress,
-          },
+        row.playerIds.forEach((item, index) => {
+          sendSms({
+            phone: playersPhone[index],
+            templateId: '11108',
+            data: {
+              player: item.nickName,
+              date: row.gameDate,
+              gameAddress: row.gameAddress,
+            },
+          })
         })
-        // playersPhone.forEach(item => {
-
-        // })
       }
 
       onMounted(() => {
