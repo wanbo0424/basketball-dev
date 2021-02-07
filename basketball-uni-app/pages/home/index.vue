@@ -106,7 +106,6 @@
 						content: res.result.msg,
 						showCancel: false
 					})
-					console.log(res)
 				}).catch((err) => {
 					uni.hideLoading()
 					uni.showModal({
@@ -133,7 +132,6 @@
 						content: res.result.msg,
 						showCancel: false
 					})
-					console.log(res)
 				}).catch((err) => {
 					uni.hideLoading()
 					uni.showModal({

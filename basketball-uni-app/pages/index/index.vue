@@ -16,12 +16,14 @@
 	</view>
 </template>
 <script>
+	import shareMixin from '../../mixins/share.js'
 	export default{
+		mixins:[shareMixin],
 		methods:{
 			toHome() {
 				uni.redirectTo({url: '/pages/home/index'})
 			}
-		}
+		},
 	}
 </script>
 <style lang="scss" scoped>

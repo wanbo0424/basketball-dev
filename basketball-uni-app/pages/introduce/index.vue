@@ -12,7 +12,7 @@
 
 <script>
 	import http from '../../api/index.js'
-	import { mapActions } from 'vuex'
+	// import { mapActions } from 'vuex'
 	export default {
 		data() {
 			return {
@@ -20,14 +20,13 @@
 			}
 		},
 		created() {
-			
-			this.getUserInfo()
+			// this.getUserInfo()
 		},
 		methods: {
 			// 获取用户信息
-			...mapActions([
-			  'getUserInfo', // 将 `this.increment()` 映射为 `this.$store.dispatch('increment')`
-			]),
+			// ...mapActions([
+			//   'getUserInfo', // 将 `this.increment()` 映射为 `this.$store.dispatch('increment')`
+			// ]),
 			toDoMessage() {
 				uni.navigateTo({url: '/pages/messageForm/index'})
 				// http.get('/').then(res => {
