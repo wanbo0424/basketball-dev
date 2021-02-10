@@ -3,8 +3,8 @@ export default {
 	data() {
 		return {
 			// 页面路由参数
-			routeParams: {
-				
+			shared: {
+				nickName: ''
 			}
 		}
 	},
@@ -13,10 +13,11 @@ export default {
 		  'userInfo',
 		])
 	},
-	// onLoad: function(params) {
-	// 	this.routeParams = params
-	// 	console.log(this.routeParams)
-	// },
+	onLoad: function(params) {
+		if(params.share) {
+			this.shared.nickName = params.nickName
+		}
+	},
 	// custom share data when user share.
 	onShareAppMessage: function(res) {
 		return {

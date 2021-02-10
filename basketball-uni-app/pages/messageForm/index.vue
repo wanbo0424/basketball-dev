@@ -30,7 +30,9 @@
 	import http from '../../api/index.js'
 	import Cookies from 'js-cookie'
 	import { mapGetters } from 'vuex'
+	import shareMixin from '../../mixins/share.js'
 	export default {
+		mixins:[shareMixin],
 		data() {
 			return {
 				showSexSelect: false,
@@ -130,6 +132,9 @@
 			submit() {
 				this.form.openId = this.userInfo.openId
 				this.form.nickName = this.userInfo.nickName
+				if(this.shared.nickName) {
+					this.form.sharedNickName = this.shared.nickName
+				}
 				http.post('weapp/players/apply', this.form).then(res => {
 					if(res.code === 0) {
 						this.$refs.uToast.show({

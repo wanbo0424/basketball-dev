@@ -88,7 +88,7 @@ module.exports = {
       ],
     }
   },
-  // chainWebpack(config) {
+  chainWebpack(config) {
   //   config.resolve.symlinks(true)
   //   config.module.rule('svg').exclude.add(resolve('src/icon/remixIcon')).end()
 
@@ -106,55 +106,55 @@ module.exports = {
   //     config.devtool('source-map')
   //   })
 
-  //   config.when(process.env.NODE_ENV !== 'development', (config) => {
-  //     config.performance.set('hints', false)
-  //     config.devtool('none')
-  //     config.optimization.splitChunks({
-  //       chunks: 'all',
-  //       cacheGroups: {
-  //         libs: {
-  //           name: 'vue-admin-beautiful-libs',
-  //           test: /[\\/]node_modules[\\/]/,
-  //           priority: 10,
-  //           chunks: 'initial',
-  //         },
-  //       },
-  //     })
-  //     config
-  //       .plugin('banner')
-  //       .use(Webpack.BannerPlugin, [`${webpackBanner}${time}`])
-  //       .end()
-  //     config.module
-  //       .rule('images')
-  //       .use('image-webpack-loader')
-  //       .loader('image-webpack-loader')
-  //       .options({
-  //         bypassOnDebug: true,
-  //       })
-  //       .end()
-  //   })
+    config.when(process.env.NODE_ENV !== 'development', (config) => {
+      config.performance.set('hints', false)
+      config.devtool('none')
+      config.optimization.splitChunks({
+        chunks: 'all',
+        cacheGroups: {
+          libs: {
+            name: 'vue-admin-beautiful-libs',
+            test: /[\\/]node_modules[\\/]/,
+            priority: 10,
+            chunks: 'initial',
+          },
+        },
+      })
+      config
+        .plugin('banner')
+        .use(Webpack.BannerPlugin, [`${webpackBanner}${time}`])
+        .end()
+      config.module
+        .rule('images')
+        .use('image-webpack-loader')
+        .loader('image-webpack-loader')
+        .options({
+          bypassOnDebug: true,
+        })
+        .end()
+    })
 
-  //   if (build7z) {
-  //     config.when(process.env.NODE_ENV === 'production', (config) => {
-  //       config
-  //         .plugin('fileManager')
-  //         .use(FileManagerPlugin, [
-  //           {
-  //             onEnd: {
-  //               delete: [`./${outputDir}/video`, `./${outputDir}/data`],
-  //               archive: [
-  //                 {
-  //                   source: `./${outputDir}`,
-  //                   destination: `./${outputDir}/${abbreviation}_${outputDir}_${date}.7z`,
-  //                 },
-  //               ],
-  //             },
-  //           },
-  //         ])
-  //         .end()
-  //     })
-  //   }
-  // },
+    if (build7z) {
+      config.when(process.env.NODE_ENV === 'production', (config) => {
+        config
+          .plugin('fileManager')
+          .use(FileManagerPlugin, [
+            {
+              onEnd: {
+                delete: [`./${outputDir}/video`, `./${outputDir}/data`],
+                archive: [
+                  {
+                    source: `./${outputDir}`,
+                    destination: `./${outputDir}/${abbreviation}_${outputDir}_${date}.7z`,
+                  },
+                ],
+              },
+            },
+          ])
+          .end()
+      })
+    }
+  },
   runtimeCompiler: true,
   productionSourceMap: false,
   css: {
