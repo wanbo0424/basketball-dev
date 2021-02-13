@@ -18,7 +18,6 @@ class WeappController extends Controller {
       {
         dataType: 'json',
       }) || {};
-    console.log('weappInfo', weappInfo.data);
     const { openid: openId, session_key } = weappInfo.data || {};
 
     if (openId) {

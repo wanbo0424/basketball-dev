@@ -2,7 +2,7 @@
  * @Description: 比赛信息
  * @Date: 2021-01-11 15:27:06
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-22 18:49:43
+ * @LastEditTime: 2021-02-03 18:32:01
  * @FilePath: \vue-admin-beautiful\src\views\game\message\index.vue
 -->
 <template>
@@ -79,7 +79,7 @@
   import PersonalTechnicalStatis from './PersonalTechnicalStatis'
   import moment from 'moment'
   import { ref, onMounted, reactive } from 'vue'
-  import { list } from '@/api/game'
+  import { list, sendSms } from '@/api/game'
   const columns = [
     {
       title: 'id',
@@ -198,6 +198,21 @@
         personalsStatisRef.value.init(row)
       }
 
+      function sendMessage(row) {
+        let playersPhone = row.playerIds.map((v) => v.mobile)
+        row.playerIds.forEach((item, index) => {
+          sendSms({
+            phone: playersPhone[index],
+            templateId: '11108',
+            data: {
+              player: item.nickName,
+              date: row.gameDate,
+              gameAddress: row.gameAddress,
+            },
+          })
+        })
+      }
+
       onMounted(() => {
         loadData()
       })
@@ -221,6 +236,7 @@
         personalStatis,
         personalsStatisRef,
         moment,
+        sendMessage,
       }
     },
   }

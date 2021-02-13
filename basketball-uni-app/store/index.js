@@ -28,7 +28,6 @@ const store = new Vuex.Store({
 					uni.getUserInfo({
 					  withCredentials: false,
 					  success: ({ userInfo: info = {} }) => {
-						console.log(info)
 						commit('SET_USER_INFO', info)
 						// getApp().globalData.userInfo = info;
 						// resolve(info);

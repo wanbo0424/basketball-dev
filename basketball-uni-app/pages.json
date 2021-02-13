@@ -75,6 +75,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/defray/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	
 	// "tabBar": {
