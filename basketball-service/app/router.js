@@ -8,6 +8,7 @@ module.exports = app => {
   require('./router/weapp/game.js')(app);
   require('./router/weapp/player.js')(app);
   require('./router/weapp/gameOrder.js')(app);
+  require('./router/weapp/pay.js')(app);
 
 
   require('./router/admin/player.js')(app);

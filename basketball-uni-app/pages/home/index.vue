@@ -27,9 +27,11 @@
 
 <script>
 	import Introduce from '../introduce/index'
+	import shareMixin from '../../mixins/share.js'
 	import Mine from '../mine/index'
 	export default {
 		components:{Introduce, Mine},
+		mixins:[shareMixin],
 		data() {
 			return {
 				show: false,
@@ -251,7 +253,9 @@
 </script>
 
 <style lang="scss" scoped>
-	// .content {
+	.content {
+		background-color: #F1F1F1;
+		height: 100vh;
 	// 	padding: 30rpx 40rpx;
 	// 	.game-card{
 	// 		height: 500rpx;
@@ -266,7 +270,7 @@
 	// 			background-size:100%;
 	// 		}
 	// 	}
-	// }
+	}
 
 	// .title {
 	// 	font-weight: bold;

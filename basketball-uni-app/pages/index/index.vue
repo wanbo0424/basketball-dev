@@ -5,23 +5,43 @@
 			<div>一起来打全场</div>
 			<div>This is for You</div>
 		</div> -->
+		<!-- <div class="into-button" @click="toHome">开始组队</div> -->
 		<image style="height:100%;width: 100%;" src="../../static/imgs/home-bg.jpeg" mode=""></image>
 		<image 
-			style="transform: scale(0.5);position: absolute;bottom: -58rpx;" 
+			style="transform: scale(0.5);position: absolute;bottom: -100rpx;" 
 			@click="toHome" 
 			src="../../static/imgs/button1.png" 
 			mode="">
 		</image>
-		<!-- <div class="into-button" @click="toHome">开始组队</div> -->
+		<u-checkbox 
+			style="position: absolute;bottom: 50rpx;"  
+			v-model="checked" 
+			:label-disabled="true" 
+			:disabled="false" 
+			@change="changeBox">
+				<span>我已阅读<a style="position: relative;display: inline-block;width: 200rpx;text-decoration: underline">组队比赛协议</a></span>
+		</u-checkbox>
 	</view>
 </template>
 <script>
 	import shareMixin from '../../mixins/share.js'
 	export default{
 		mixins:[shareMixin],
+		data() {
+			return {
+				checked:'',
+				canToHome: false
+			}
+		},
 		methods:{
 			toHome() {
+				if(!this.canToHome) {
+					return
+				}
 				uni.redirectTo({url: '/pages/home/index'})
+			},
+			changeBox(e) {
+				this.canToHome = e.value
 			}
 		},
 	}
@@ -30,7 +50,7 @@
 	.content{
 		// background-color: black;
 		// background: url('../../static/imgs/main-img.jpeg') no-repeat center;
-		position: absolute;
+		position: relative;
 		// background: url('../../static/imgs/home-bg.jpeg') no-repeat center;
 		background-size: cover;
 		height: 100vh;
@@ -39,6 +59,7 @@
 		align-items: center;
 		justify-content: center;
 		flex-direction: column;
+		background-color: #F1F1F1;
 		.main-img{
 			width: 100%;
 		}

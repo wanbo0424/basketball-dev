@@ -25,6 +25,7 @@
 			// })
 		},
 		onShow: function() {
+			
 			// 3e9c3da492abdbad0e1cee5a310646e9  AppSecret
 			// wx3bd5737539be2537  AppID
 			// 登录

@@ -47,7 +47,12 @@ module.exports = appInfo => {
     secret: '123456',
     // ignore: '/weapp',
   };
-
+  // config/config.default.js
+  // config.alinode = {
+  //   server: 'wss://agentserver.node.aliyun.com:8080',
+  //   appid: '87570',
+  //   secret: '88f179ab0c43dd547446a90f159b5a7be90efdfa',
+  // };
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',

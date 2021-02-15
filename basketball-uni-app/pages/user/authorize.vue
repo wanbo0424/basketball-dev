@@ -15,7 +15,6 @@
 			confirm-color="green" 
 			cancel-text="取消"
 			@cancel="" 
-			@confirm="bindGetUserInfo"
 		>
 			<view class="u-update-content">
 				<rich-text :nodes="content"></rich-text>
@@ -45,7 +44,7 @@
 		methods: {
 			bindGetUserInfo(e) {
 				// getApp().globalData.userInfo = e.detail.userInfo;
-				uni.reLaunch({ url: '/pages/introduce/index' });
+				uni.reLaunch({ url: '/pages/index/index' });
 			  },
 		}
 	}

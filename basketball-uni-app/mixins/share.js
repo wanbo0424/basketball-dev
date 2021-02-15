@@ -13,6 +13,10 @@ export default {
 		  'userInfo',
 		])
 	},
+	onShow: function() {
+		// 隐藏首页按钮
+		uni.hideHomeButton()
+	},
 	onLoad: function(params) {
 		if(params.share) {
 			this.shared.nickName = params.nickName
