@@ -2,7 +2,7 @@ import Request from 'luch-request'
 
 
 const http = new Request({
-	// baseURL: '/weapp' 
+	// baseURL: 'http://127.0.0.1:7001/' 
 	baseURL: 'http://39.101.161.231/' //生产环境
 });
 
@@ -18,9 +18,9 @@ http.interceptors.request.use((config) => { // 可使用async await 做异步操
 
 http.interceptors.response.use((response) => { 
   return response
-}, (response) => { /*  对响应错误做点什么 （statusCode !== 200）*/
-  console.log(response)
-  return Promise.reject(response)
+}, (err) => { /*  对响应错误做点什么 （statusCode !== 200）*/
+  console.log(err)
+  return Promise.reject(err)
 })
 
 export default http

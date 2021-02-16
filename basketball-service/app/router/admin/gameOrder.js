@@ -10,6 +10,6 @@
 
 module.exports = app => {
   const { router, controller } = app;
-  router.get('/api/admin/getOrderList', controller.gameOrder.getOrderList);
+  router.get('/api/admin/getOrderList', controller.pay.getOrderList);
 }
 ;

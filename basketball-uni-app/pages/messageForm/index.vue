@@ -31,6 +31,7 @@
 	import Cookies from 'js-cookie'
 	import { mapGetters } from 'vuex'
 	import shareMixin from '../../mixins/share.js'
+	import {generateOrderNumber} from '../../utils/payUtils.js'
 	export default {
 		mixins:[shareMixin],
 		data() {
@@ -117,6 +118,7 @@
 			gameSelected(e) {
 				this.form.gameName = e[0].label
 				this.form.gameId = e[0].value
+				this.gameDate = e[0].time
 			},
 			getGameList() {
 				http.get('weapp/game/ToHeldGameList').then(res => {
@@ -132,16 +134,20 @@
 			submit() {
 				this.form.openId = this.userInfo.openId
 				this.form.nickName = this.userInfo.nickName
+				this.form.out_trade_no = generateOrderNumber()
 				if(this.shared.nickName) {
 					this.form.sharedNickName = this.shared.nickName
 				}
 				http.post('weapp/players/apply', this.form).then(res => {
-					if(res.code === 0) {
-						this.$refs.uToast.show({
-							title: '信息登记成功',
-							type: 'success',
-							url: '/pages/defray/index'
+					if(res.data.code === 0) {
+						uni.navigateTo({
+							url:`/pages/defray/index?gameAddress=${this.form.gameName}&out_trade_no=${this.form.out_trade_no}`
 						})
+						// this.$refs.uToast.show({
+						// 	title: '信息登记成功',
+						// 	type: 'success',
+						// 	url: `/pages/defray/index?gameAddress=${this.form.gameName}&gameDate=${this.gameDate}`
+						// })
 					}
 				})
 				

@@ -23,13 +23,12 @@ class PlayerService extends Service {
     const result = await app.model.Player.create(data);
     // 创建订单
     const orderData = {
-      orderId: ctx.helper.generateOrderNumber(),
+      out_trade_no: data.out_trade_no,
       openId: data.openId,
       creatorName: data.nickName,
       status: 0,
     };
-    console.log(orderData, 'orderData');
-    await app.model.GameOrder.create(orderData);
+    await app.model.Order.create(orderData);
     return result._id;
   }
 
