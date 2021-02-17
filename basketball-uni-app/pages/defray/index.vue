@@ -41,7 +41,8 @@ import { mapGetters } from 'vuex'
 					gameAddress: '',
 					totalAmount: 100 ,//订单总金额
 					defray: 50 //预交金
-				}
+				},
+				isPaying: false
 			}
 		},
 		computed: {
@@ -49,17 +50,16 @@ import { mapGetters } from 'vuex'
 			  'userInfo',
 			])
 		},
-		mounted() {
-			console.log('支付结果')
-			http.get('weapp/getTrade_noDetail', {params: {out_trade_no: this.orderInfo.out_trade_no}}).then(res => {
-				console.log('支付结果', res)
-				if(res.data.status === 1) {
+		watch:{
+			isPaying(val) {
+				if(val) {
 					uni.navigateTo({
-						url: `/pages/paySuccess/index`
+						url: `/pages/payStatus/index?out_trade_no=${this.orderInfo.out_trade_no}`
 					})
 				}
-			})
+			}
 		},
+		
 		onLoad: function({gameDate, gameAddress, out_trade_no}){
 			this.orderInfo.gameDate = gameDate
 			this.orderInfo.gameAddress = gameAddress
@@ -94,10 +94,12 @@ import { mapGetters } from 'vuex'
 					success: r => {
 					  console.log('跳转到 xunhupay 小程序成功', r)
 					  // 成功跳转：标记支付中状态
+					  this.isPaying = true
 					},
 					fail: e => {
 					  // 跳转失败：弹出提示组件引导用户跳转
 					  console.log('跳转到 xunhupay 小程序失败 - 准备弹窗提醒跳转', e)
+					  this.isPaying = false
 					}
 				})
 			}

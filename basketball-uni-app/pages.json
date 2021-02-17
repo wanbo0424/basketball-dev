@@ -91,7 +91,7 @@
 		    }
 		}
 		,{
-		    "path" : "pages/paySuccess/index",
+		    "path" : "pages/payStatus/index",
 		    "style" :                                                                                    
 		    {
 		        "navigationBarTitleText": "支付结果",
