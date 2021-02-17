@@ -17,8 +17,8 @@
 				showPayModal: false,
 				out_trade_no: ''
 			}
-		},	
-		onLoad: function({out_trade_no}) {
+		},
+		onLoad: function({out_trade_no, toPaied}) {
 			this.out_trade_no = out_trade_no
 		},
 		methods:{ 
@@ -44,7 +44,6 @@
 					success: r => {
 					  console.log('跳转到 xunhupay 小程序成功', r)
 					  // 成功跳转：标记支付中状态
-					  this.setPaying(true)
 					},
 					fail: e => {
 					  // 跳转失败：弹出提示组件引导用户跳转

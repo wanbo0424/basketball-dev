@@ -27,7 +27,6 @@
 				去支付
 			</view>
 		</view>
-		<!-- <button type="default" @click="bindPay">去支付</button> -->
 	</view>
 </template>
 <script>
@@ -50,6 +49,17 @@ import { mapGetters } from 'vuex'
 			  'userInfo',
 			])
 		},
+		mounted() {
+			console.log('支付结果')
+			http.get('weapp/getTrade_noDetail', {params: {out_trade_no: this.orderInfo.out_trade_no}}).then(res => {
+				console.log('支付结果', res)
+				if(res.data.status === 1) {
+					uni.navigateTo({
+						url: `/pages/paySuccess/index`
+					})
+				}
+			})
+		},
 		onLoad: function({gameDate, gameAddress, out_trade_no}){
 			this.orderInfo.gameDate = gameDate
 			this.orderInfo.gameAddress = gameAddress
@@ -57,37 +67,39 @@ import { mapGetters } from 'vuex'
 		},
 		methods: {
 			bindPay() { 
-				uni.navigateTo({
-					url: `/pages/pay/index?out_trade_no=${this.orderInfo.out_trade_no}`
+				// uni.navigateTo({
+				// 	url: `/pages/pay/index?out_trade_no=${this.orderInfo.out_trade_no}&toPaied=true`
+				// })
+				this.confirmGator()
+			},
+			confirmGator() {
+				// this.showPayModal = true
+				let orderData = {
+					mchid: '6c651e680f7b4eda9050259dc38ffe48',
+					total_fee: 1,
+					out_trade_no: this.orderInfo.out_trade_no,
+					body: '报名预交金',
+					notify_url: 'http://39.101.161.231/weapp/prepaidCb',
+					nonce_str: getRandomNumber(),
+				}
+				let orderParams = {
+					...orderData,
+					sign: getSign(orderData)
+				}
+				uni.navigateToMiniProgram({
+					appId: 'wx2574b5c5ee8da56b',
+					path: 'pages/cashier/cashier',
+					extraData: orderParams,
+					// envVersion: '',
+					success: r => {
+					  console.log('跳转到 xunhupay 小程序成功', r)
+					  // 成功跳转：标记支付中状态
+					},
+					fail: e => {
+					  // 跳转失败：弹出提示组件引导用户跳转
+					  console.log('跳转到 xunhupay 小程序失败 - 准备弹窗提醒跳转', e)
+					}
 				})
-				// let orderData = {
-				// 	mchid: '6c651e680f7b4eda9050259dc38ffe48',
-				// 	total_fee: 10,
-				// 	out_trade_no: generateOrderNumber(),
-				// 	body: '报名预交金',
-				// 	notify_url: 'http://39.101.161.231/weapp/prepaidCb',
-				// 	nonce_str: getRandomNumber(),
-				// }
-				// let orderParams = {
-				// 	...orderData,
-				// 	sign: getSign(orderData)
-				// }
-				// console.log('请求支付参数', orderParams)
-				// http.post('weapp/prepaid', orderParams).then(res => {
-				// 	if(res.code === 0) {
-				// 	}
-				// })
-				// uni.request({
-				// 	url: 'https://www.example.com/request', //仅为示例，并非真实接口地址。
-				// 	data: orderParams,
-				// 	header: {
-				// 		'custom-header': 'hello' //自定义请求头信息
-				// 	},
-				// 	success: (res) => {
-				// 		console.log(res.data);
-				// 		this.text = 'request success';
-				// 	}
-				// })
 			}
 		}
 	}

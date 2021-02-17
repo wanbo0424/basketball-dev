@@ -8,4 +8,4 @@
 import request from '@/utils/request'
 
 export const getOrderList = (params) =>
-  request.get('/admin/getOrderList', params)
+  request.get('/admin/getOrderList', {params})

@@ -6,7 +6,6 @@ class PayController extends Controller {
     // 预支付
     async prepaid() {
         const { ctx } = this;
-        console.log('支付请求参数', ctx.request.body)
         const result = await ctx.curl('https://admin.xunhuweb.com/pay/mini',{
             method: 'POST',
             // 通过 contentType 告诉 HttpClient 以 JSON 格式发送
@@ -20,9 +19,7 @@ class PayController extends Controller {
     // 预支付回调
     async prepaidCb () {
         const { ctx } = this;
-        console.log(ctx.request.body, '支付回调参数')
-        if(ctx.request.body.return_code === 'SCCESS') {
-            console.log(ctx.request.body, '支付成功回调参数')
+        if(ctx.request.body.return_code === 'SUCCESS') {
             // 写入订单数据表
             const _id = await ctx.service.order.prepaidOrder(ctx.request.body);
             this.success(_id);
@@ -33,6 +30,13 @@ class PayController extends Controller {
     async getOrderList() {
         const { ctx } = this;
         const data = await ctx.service.order.getOrderList(ctx.request.query);
+        this.success(data);
+    }
+
+    // 用户订单详情
+    async getTrade_noDetail() {
+        const { ctx } = this;
+        const data = await ctx.service.order.getTrade_noDetail(ctx.request.query);
         this.success(data);
     }
 }

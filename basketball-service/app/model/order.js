@@ -13,6 +13,10 @@ module.exports = app => {
     transaction_id: {
       type: String,
     },
+    // 微信用户openId
+    openId: {
+      type: String
+    },
     // 用户端自主生成的订单号
     out_trade_no: {
         type: String,
@@ -23,6 +27,7 @@ module.exports = app => {
     time_end: {
         type: String
     },
+    // 0未支付 1预支付 2已支付尾款
     status: {
         type: Number
     }

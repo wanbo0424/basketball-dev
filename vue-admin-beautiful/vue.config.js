@@ -89,50 +89,50 @@ module.exports = {
     }
   },
   chainWebpack(config) {
-  //   config.resolve.symlinks(true)
-  //   config.module.rule('svg').exclude.add(resolve('src/icon/remixIcon')).end()
+    //   config.resolve.symlinks(true)
+    //   config.module.rule('svg').exclude.add(resolve('src/icon/remixIcon')).end()
 
-  //   config.module
-  //     .rule('remixIcon')
-  //     .test(/\.svg$/)
-  //     .include.add(resolve('src/icon/remixIcon'))
-  //     .end()
-  //     .use('svg-sprite-loader')
-  //     .loader('svg-sprite-loader')
-  //     .options({ symbolId: 'remix-icon-[name]' })
-  //     .end()
+    //   config.module
+    //     .rule('remixIcon')
+    //     .test(/\.svg$/)
+    //     .include.add(resolve('src/icon/remixIcon'))
+    //     .end()
+    //     .use('svg-sprite-loader')
+    //     .loader('svg-sprite-loader')
+    //     .options({ symbolId: 'remix-icon-[name]' })
+    //     .end()
 
-  //   config.when(process.env.NODE_ENV === 'development', (config) => {
-  //     config.devtool('source-map')
-  //   })
+    //   config.when(process.env.NODE_ENV === 'development', (config) => {
+    //     config.devtool('source-map')
+    //   })
 
-    config.when(process.env.NODE_ENV !== 'development', (config) => {
-      config.performance.set('hints', false)
-      config.devtool('none')
-      config.optimization.splitChunks({
-        chunks: 'all',
-        cacheGroups: {
-          libs: {
-            name: 'vue-admin-beautiful-libs',
-            test: /[\\/]node_modules[\\/]/,
-            priority: 10,
-            chunks: 'initial',
-          },
-        },
-      })
-      config
-        .plugin('banner')
-        .use(Webpack.BannerPlugin, [`${webpackBanner}${time}`])
-        .end()
-      config.module
-        .rule('images')
-        .use('image-webpack-loader')
-        .loader('image-webpack-loader')
-        .options({
-          bypassOnDebug: true,
-        })
-        .end()
-    })
+    // config.when(process.env.NODE_ENV !== 'development', (config) => {
+    //   config.performance.set('hints', false)
+    //   config.devtool('none')
+    //   config.optimization.splitChunks({
+    //     chunks: 'all',
+    //     cacheGroups: {
+    //       libs: {
+    //         name: 'vue-admin-beautiful-libs',
+    //         test: /[\\/]node_modules[\\/]/,
+    //         priority: 10,
+    //         chunks: 'initial',
+    //       },
+    //     },
+    //   })
+    //   config
+    //     .plugin('banner')
+    //     .use(Webpack.BannerPlugin, [`${webpackBanner}${time}`])
+    //     .end()
+    //   config.module
+    //     .rule('images')
+    //     .use('image-webpack-loader')
+    //     .loader('image-webpack-loader')
+    //     .options({
+    //       bypassOnDebug: true,
+    //     })
+    //     .end()
+    // })
 
     if (build7z) {
       config.when(process.env.NODE_ENV === 'production', (config) => {

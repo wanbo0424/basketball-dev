@@ -27,6 +27,10 @@ class PlayerService extends Service {
       openId: data.openId,
       creatorName: data.nickName,
       status: 0,
+      order_id: '',
+      transaction_id: '',
+      total_fee: '',
+      time_end: '',
     };
     await app.model.Order.create(orderData);
     return result._id;

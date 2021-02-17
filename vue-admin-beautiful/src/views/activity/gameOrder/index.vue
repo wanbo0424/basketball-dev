@@ -12,7 +12,20 @@
       :data-source="tableData"
       :pagination="false"
       :loading="loading"
-    ></a-table>
+    >
+      <template #createTime="{ text: createTime }">
+        <span>
+          {{
+            createTime ? moment(createTime).format('YYYY-MM-DD HH:mm:ss') : ''
+          }}
+        </span>
+      </template>
+      <template #status="{ text: status }">
+        <a-badge v-if="status === 0" status="error" text="未支付" />
+        <a-badge v-if="status === 1" status="processing" text="已支付定金" />
+        <a-badge v-if="status === 2" status="success" text="已支付全款" />
+      </template>
+    </a-table>
 
     <a-pagination
       v-model="pagination.current"
@@ -27,11 +40,24 @@
 <script>
   import { ref, reactive, onMounted } from 'vue'
   import { getOrderList } from '@/api/gameOrder'
+  import moment from 'moment'
   const columns = [
-    { title: '订单号', dataIndex: 'orderId' },
-    { title: '下单时间', dataIndex: 'createTime' },
+    { title: '支付订单号', dataIndex: 'order_id' },
+    {
+      title: '创建时间',
+      dataIndex: 'createTime',
+      slots: { customRender: 'createTime' },
+    },
+    {
+      title: '支付时间',
+      dataIndex: 'time_end',
+    },
     { title: '下单人', dataIndex: 'creatorName' },
-    { title: '支付状态', dataIndex: 'status' },
+    {
+      title: '支付状态',
+      dataIndex: 'status',
+      slots: { customRender: 'status' },
+    },
   ]
   export default {
     setup() {
@@ -70,6 +96,7 @@
         pagination,
         columns,
         currentChange,
+        moment,
       }
     },
   }
