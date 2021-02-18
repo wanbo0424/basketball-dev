@@ -6,6 +6,7 @@
 <script>
 	import { mapMutations, mapActions, mapGetters } from 'vuex'
 	import http from './api/index.js'
+	
 	export default {
 		data() {
 			return {

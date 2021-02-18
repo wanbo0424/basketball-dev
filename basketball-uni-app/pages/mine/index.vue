@@ -5,15 +5,19 @@
 			<h2 style="color:#fff;padding-left: 40rpx;">{{userInfo.nickName}}</h2>
 		</view>
 		<view class="navigation_list">
-			<u-grid :col="2" :border="false">
+			<u-grid :col="3" :border="false">
+				<u-grid-item @click="getOrderList">
+					<u-icon name="order" :size="46"></u-icon>
+					<view class="grid-text" >全部订单</view>
+				</u-grid-item>
+				<u-grid-item @click="getTobePaid">
+					<u-icon name="rmb-circle" :size="46"></u-icon>
+					<view class="grid-text" >待支付</view>
+				</u-grid-item>
 				<u-grid-item @click="getCareer">
 					<u-icon name="list" :size="46"></u-icon>
 					<view class="grid-text" >比赛记录</view>
 				</u-grid-item >
-				<u-grid-item @click="getOrder">
-					<u-icon name="order" :size="46"></u-icon>
-					<view class="grid-text" >订单记录</view>
-				</u-grid-item>
 			</u-grid>
 		</view>
 		<view class="cell_list">
@@ -45,8 +49,11 @@
 				uni.navigateTo({url: '/pages/match/index'})
 			},
 			
-			getOrder() {
-				uni.navigateTo({url: '/pages/order/index'})
+			getOrderList() {
+				uni.navigateTo({url: '/pages/order/index?type=all'})
+			},
+			getTobePaid() {
+				uni.navigateTo({url: '/pages/order/index?type=tobe'})
 			}
 		}
 	}

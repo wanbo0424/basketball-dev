@@ -12,7 +12,7 @@ const Service = require('egg').Service;
 class PlayerService extends Service {
   // 添加报名球员
   async addPlayer(data = {}) {
-    const { app, ctx } = this;
+    const { app } = this;
     // const findPalyer = await app.model.Player.find({ mobile: data.mobile });
     // if (findPalyer && findPalyer.length) {
     //   console.log('找到这个人了', findPalyer);
@@ -26,6 +26,7 @@ class PlayerService extends Service {
       out_trade_no: data.out_trade_no,
       openId: data.openId,
       creatorName: data.nickName,
+      gameId: data.gameId,
       status: 0,
       order_id: '',
       transaction_id: '',

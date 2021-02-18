@@ -15,22 +15,25 @@ module.exports = app => {
     },
     // 微信用户openId
     openId: {
-      type: String
+      type: String,
     },
     // 用户端自主生成的订单号
     out_trade_no: {
-        type: String,
+      type: String,
     },
     total_fee: {
-        type: Number
+      type: Number,
     },
     time_end: {
-        type: String
+      type: String,
+    },
+    gameId: {
+      type: Schema.Types.ObjectId,
     },
     // 0未支付 1预支付 2已支付尾款
     status: {
-        type: Number
-    }
+      type: Number,
+    },
   }, {
     versionKey: false,
     timestamps: { createdAt: 'createTime', updatedAt: 'updateTime' },

@@ -1,10 +1,11 @@
 <template>
 	<view class="pay_page">
 		<view class="order_info cell_info">
-			<h2>{{orderInfo.gameAddress}}</h2>
-			<view>
+			<h2>{{orderInfo.gameAddress.split('--')[0]}}</h2>
+			<h2>{{orderInfo.gameAddress.split('--')[1]}}</h2>
+			<!-- <view>
 				{{orderInfo.gameDate}}
-			</view>
+			</view> -->
 		</view>
 		
 		<view class="pay_info cell_info">
