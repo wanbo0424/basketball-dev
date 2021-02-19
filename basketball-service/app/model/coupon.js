@@ -2,7 +2,7 @@
  * @Description:优惠券基础信息
  * @Date: 2021-01-25 10:34:56
  * @LastEditors: yinwb
- * @LastEditTime: 2021-02-01 18:07:32
+ * @LastEditTime: 2021-02-19 15:30:19
  * @FilePath: \basketball-service\app\model\coupon.js
  */
 'use strict';
@@ -15,10 +15,11 @@ module.exports = app => {
     name: {
       type: String,
     },
-    money: {
+    // 折扣、津贴
+    allowance: {
       type: Number,
     },
-    // 0 折扣劵  1现金券
+    // 0 新人折扣劵  1现金券
     couponType: {
       type: Number,
     },
