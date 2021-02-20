@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:39:52
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-25 15:46:52
+ * @LastEditTime: 2021-02-20 18:28:18
  * @FilePath: \basketball-service\app\service\player.js
  */
 'use strict';
@@ -13,12 +13,12 @@ class PlayerService extends Service {
   // 添加报名球员
   async addPlayer(data = {}) {
     const { app } = this;
-    // const findPalyer = await app.model.Player.find({ mobile: data.mobile });
-    // if (findPalyer && findPalyer.length) {
-    //   console.log('找到这个人了', findPalyer);
+
+    const findPalyer = await app.model.Player.find({ openId: data.openId });
+    if (findPalyer && findPalyer.length) {
+      console.log('找到这个人了', findPalyer);
     //   return app.model.Player.updateOne({ mobile: data.mobile }, { $push: { gameIdList: data.gameId } });
-    // }
-    // return app.model.Player.create(data, { $push: { gameIdList: data.gameId } });
+    }
 
     const result = await app.model.Player.create(data);
     // 创建订单
@@ -33,7 +33,9 @@ class PlayerService extends Service {
       total_fee: '',
       time_end: '',
     };
-    await app.model.Order.create(orderData);
+    if (result._id) {
+      await app.model.Order.create(orderData);
+    }
     return result._id;
   }
 
@@ -118,13 +120,23 @@ class PlayerService extends Service {
     return gamesInfo;
   }
 
-  // 设置职业生涯
+  // 设置个人统计
   async setPersonalsStatis(data) {
     const { app } = this;
     const { _id } = await app.model.Player.updateOne({ _id: data._id }, {
-      $set: { personScore: data.personScore },
+      $set: {
+        personScore: data.personScore,
+        evaluationScore: data.evaluationScore,
+      },
     });
     return _id;
+  }
+
+  async getPlayerRank() {
+    const { app } = this;
+    // 按积分排序获取前50条
+    const docs = await app.model.Player.find().limit(50).sort({ evaluationScore: -1 });
+    return docs;
   }
 }
 

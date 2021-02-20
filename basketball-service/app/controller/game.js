@@ -42,11 +42,13 @@ class GameController extends Controller {
     this.success(data);
   }
 
-  // 填写个人统计
+  // 设置个人统计
   async setPersonalsStatis() {
     const { ctx } = this;
     const data = await ctx.service.player.setPersonalsStatis(ctx.request.body);
     this.success(data);
   }
+
+
 }
 module.exports = GameController;

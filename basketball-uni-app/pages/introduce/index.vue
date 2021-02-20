@@ -2,6 +2,8 @@
 	<view style="height: 100%;">
 		<image class="introduce-img" src="../../static/imgs/209aac44587ae218438ffd83a5a829a0.jpg" mode=""></image>
 		
+		<!-- 排名 -->
+		<player-rank></player-rank>
 		<view class="match-btn"@click="toDoMessage">
 			随缘匹配
 		</view>
@@ -12,8 +14,12 @@
 
 <script>
 	import http from '../../api/index.js'
+	import PlayerRank from './PlayerRank'
 	// import { mapActions } from 'vuex'
 	export default {
+		components:{
+			PlayerRank
+		},
 		data() {
 			return {
 				
@@ -33,6 +39,10 @@
 				// 	debugger
 				// })
 			}
+		},
+		
+		mounted() {
+			
 		}
 	}
 </script>
