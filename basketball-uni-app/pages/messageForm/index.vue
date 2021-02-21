@@ -60,7 +60,7 @@
 					sex: [{required: true, message: '请填写性别', trigger: ['change','blur']}],
 					role: [{required: true, message: '请填写角色', trigger: ['change','blur']}],
 					mobile: [
-						{required: true, message: '请填写联系方式', trigger: ['change','blur']},
+						// {required: true, message: '请填写联系方式', trigger: ['change','blur']},
 						{
 							validator: (rule, value, callback) => {
 								return this.$u.test.mobile(value);
@@ -132,22 +132,21 @@
 			},
 			// 提交报名信息
 			submit() {
-				this.form.openId = this.userInfo.openId
-				this.form.nickName = this.userInfo.nickName
-				this.form.out_trade_no = generateOrderNumber()
-				if(this.shared.nickName) {
-					this.form.sharedNickName = this.shared.nickName
-				}
-				http.post('weapp/players/apply', this.form).then(res => {
-					if(res.data.code === 0) {
-						uni.navigateTo({
-							url:`/pages/defray/index?gameAddress=${this.form.gameName}&out_trade_no=${this.form.out_trade_no}`
+				this.$refs.uForm.validate(valid => {
+					if (valid) {
+						this.form.openId = this.userInfo.openId
+						this.form.nickName = this.userInfo.nickName
+						this.form.out_trade_no = generateOrderNumber()
+						if(this.shared.nickName) {
+							this.form.sharedNickName = this.shared.nickName
+						}
+						http.post('weapp/players/apply', this.form).then(res => {
+							if(res.data.code === 0) {
+								uni.navigateTo({
+									url:`/pages/defray/index?gameAddress=${this.form.gameName}&out_trade_no=${this.form.out_trade_no}`
+								})
+							}
 						})
-						// this.$refs.uToast.show({
-						// 	title: '信息登记成功',
-						// 	type: 'success',
-						// 	url: `/pages/defray/index?gameAddress=${this.form.gameName}&gameDate=${this.gameDate}`
-						// })
 					}
 				})
 				

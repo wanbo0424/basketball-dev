@@ -2,7 +2,7 @@
  * @Description: 个人技术统计
  * @Date: 2021-01-21 10:08:16
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-22 10:13:31
+ * @LastEditTime: 2021-02-20 16:10:14
  * @FilePath: \vue-admin-beautiful\src\views\game\message\PersonalTechnicalStatis.vue
 -->
 <template>
@@ -13,7 +13,7 @@
 
     <a-table :columns="columns" :data-source="tableData" bordered>
       <template
-        v-for="col in ['personScore']"
+        v-for="col in ['personScore', 'evaluationScore']"
         :key="col"
         #[col]="{ text, record }"
       >
@@ -29,6 +29,7 @@
           </template>
         </div>
       </template>
+
       <template #operation="{ record }">
         <div class="editable-row-operations">
           <span v-if="record.editable">
@@ -69,6 +70,11 @@
       slots: { customRender: 'personScore' },
     },
     {
+      title: '本场比赛积分',
+      dataIndex: 'evaluationScore',
+      slots: { customRender: 'evaluationScore' },
+    },
+    {
       title: '操作',
       dataIndex: 'operation',
       slots: { customRender: 'operation' },
@@ -84,17 +90,24 @@
       function init(row) {
         visible.value = true
         tableData.value = row.playerIds
+        tableData.value.forEach((item) => {
+          item.editable = false
+        })
         cacheData.value = JSON.parse(JSON.stringify(tableData.value))
       }
 
+      // 保存句柄
       function save(record) {
         setPersonalsStatis({
           _id: record._id,
           personScore: record.personScore,
-        }).then((res) => {
-          console.log(res)
+          evaluationScore: record.evaluationScore,
+        }).then(() => {
+          record.editable = false
+          editingKey.value = ''
         })
       }
+
       function edit(key) {
         const newData = [...tableData.value]
         const target = newData.filter((item) => key === item._id)[0]

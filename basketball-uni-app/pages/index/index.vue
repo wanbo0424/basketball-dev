@@ -19,8 +19,10 @@
 			:label-disabled="true" 
 			:disabled="false" 
 			@change="changeBox">
-				<span>我已阅读<a style="position: relative;display: inline-block;width: 200rpx;text-decoration: underline">组队比赛协议</a></span>
+				<span>我已阅读并同意<a style="position: relative;display: inline-block;width: 300rpx;text-decoration: underline">篮球比赛免责协议</a></span>
 		</u-checkbox>
+		
+		<u-top-tips ref="uTips"></u-top-tips>
 	</view>
 </template>
 <script>
@@ -36,6 +38,10 @@
 		methods:{
 			toHome() {
 				if(!this.canToHome) {
+					this.$refs.uTips.show({
+						title: '请阅读协议并同意',
+						duration: '2000'
+					})
 					return
 				}
 				uni.redirectTo({url: '/pages/home/index'})

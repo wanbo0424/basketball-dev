@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:29:19
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-21 18:40:09
+ * @LastEditTime: 2021-02-20 15:06:25
  * @FilePath: \basketball-service\app\model\player.js
  */
 'use strict';
@@ -68,20 +68,28 @@ module.exports = app => {
     },
     mobile: {
       type: String,
-      required: true,
       index: true,
-      unique: false, // 值是唯一的
+      // unique: false, // 值是唯一的
     },
     gameId: {
       type: Schema.Types.ObjectId,
+    },
+    // 优惠券
+    couponIdList: {
+      type: Array,
     },
     // 0未支付 1预支付 2支付完成
     payStatus: {
       type: Number,
       default: 0,
     },
+    // 比赛得分
     personScore: {
       type: String,
+    },
+    // 评估积分
+    evaluationScore: {
+      type: Number,
     },
 
   }, {

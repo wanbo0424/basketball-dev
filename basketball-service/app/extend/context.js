@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-26 16:06:23
  * @LastEditors: yinwb
- * @LastEditTime: 2021-02-01 14:39:56
+ * @LastEditTime: 2021-02-20 15:13:26
  * @FilePath: \basketball-service\app\extend\context.js
  */
 'use strict';
@@ -22,7 +22,7 @@ module.exports = {
     const { app } = this;
     const { userName, _id } = data;
 
-    const token = app.jwt.sign({ userName, id: _id }, app.config.jwt.secret, { expiresIn: '12h' });
+    const token = app.jwt.sign({ userName, id: _id }, app.config.jwt.secret, { expiresIn: '1h' });
     const cookieConfig = { maxAge: 1000 * 3600 * 24 * 7, httpOnly: false, overwrite: true, signed: false };
     this.cookies.set('token', token, { ...cookieConfig });
     this.cookies.set('userName', userName, cookieConfig);
