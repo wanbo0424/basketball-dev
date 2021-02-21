@@ -85,7 +85,7 @@ module.exports = app => {
     },
     // 比赛得分
     personScore: {
-      type: String,
+      type: Number,
     },
     // 评估积分
     evaluationScore: {

@@ -17,11 +17,33 @@ module.exports = app => {
       type: String,
       unique: true,
     },
-    // 优惠券
-    couponList: {
+    nickName: {
+      type: String,
+    },
+    // 优惠券ID
+    couponIdList: {
       type: Array,
     },
+    // 参加的比赛
+    gameIdList: {
+      type: Array,
+    },
+    // 总积分
+    evaluationScoreTotal: {
+      type: Number,
+    },
+    // 总得分
+    personScoreTotal: {
+      type: Number,
+    },
 
+    // 速度值总得分
+
+    // 体力值总得分
+
+    // 经验值总得分
+
+    // 防守值总得分
 
   });
 

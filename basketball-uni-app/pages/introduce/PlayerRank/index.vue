@@ -1,25 +1,43 @@
 <template>
-	<u-table>
-		<u-tr class="u-tr">
-			<u-th class="u-th">昵称</u-th>
-			<u-th class="u-th">得分</u-th>
-			<u-th class="u-th">积分</u-th>
-			<u-th class="u-th">排名</u-th>
-		</u-tr>
-		<u-tr class="u-tr" v-for="(item, index) in tableData">
-			<u-td class="u-td">{{itme.nickName}}</u-td>
-			<u-td class="u-td">{{itme.personalScore}}</u-td>
-			<u-td class="u-td">{{item.evaluationScore}}</u-td>
-			<u-td class="u-td">{{index + 1}}</u-td>
-		</u-tr>
-	</u-table>
+	<view class="wrap">
+		<u-row >
+			<u-col span="3">
+				<view class="flex-center demo-layout bg-purple bg-purple-dark">排名</view>
+			</u-col>
+			<u-col span="3">
+				<view class="flex-center demo-layout bg-purple-dark">昵称</view>
+			</u-col>
+			<u-col span="3">
+				<view class="flex-center demo-layout bg-purple-dark">个人得分</view>
+			</u-col>
+			<u-col span="3">
+				<view class="flex-center demo-layout bg-purple-dark">积分</view>
+			</u-col>
+		</u-row>
+		<u-row v-for="(item, index) in tableData" >
+			<u-col span="3">
+				<view class="flex-center demo-layout bg-purple-light">{{index + 1}}</view>
+			</u-col>
+			<u-col span="3">
+				<view class="flex-center demo-layout bg-purple-light">{{item.nickName}}</view>
+			</u-col>
+			<u-col span="3">
+				<view class="flex-center demo-layout bg-purple-light">{{item.personScoreTotal}}</view>
+			</u-col>
+			<u-col span="3">
+				<view class="flex-center demo-layout bg-purple-light">{{item.evaluationScoreTotal}}</view>
+			</u-col>
+		</u-row>
+	</view>
 </template>
 
 <script>
 	import http from '../../../api/index.js'
 	export default {
 		data() {
-			tableData: []
+			return {
+				tableData: []
+			}
 		},
 		methods: {
 			loadData() {
@@ -36,5 +54,23 @@
 	}
 </script>
 
-<style>
+<style lang="scss" scoped>
+.flex-center{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.wrap{
+	text-align: center;
+}
+.demo-layout {
+	height: 40rpx;
+	border-radius: 8rpx;
+}
+.bg-purple-light {
+	background: #e5e9f2;
+}
+.bg-purple-dark {
+	background: #99a9bf;
+}
 </style>

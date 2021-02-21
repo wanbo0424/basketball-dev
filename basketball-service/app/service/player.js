@@ -135,7 +135,39 @@ class PlayerService extends Service {
   async getPlayerRank() {
     const { app } = this;
     // 按积分排序获取前50条
-    const docs = await app.model.Player.find().limit(50).sort({ evaluationScore: -1 });
+    let docs = await app.model.Player.aggregate([
+      { $group:
+        {
+          _id: '$openId',
+          evaluationScoreTotal: { $sum: '$evaluationScore' },
+          personScoreTotal: { $sum: '$personScore' },
+          info: { $mergeObjects: { nickName: '$nickName', role: '$role', age: '$age' } },
+        },
+      },
+      { $sort: { evaluationScoreTotal: -1 } },
+      // { $out: 'playerCareers' },
+      { $limit: 50 },
+    ]);
+    docs = docs.map(item => (
+      {
+        _id: item._id,
+        evaluationScoreTotal: item.evaluationScoreTotal,
+        personScoreTotal: item.personScoreTotal,
+        ...item.info,
+      }
+    ));
+    // const docs = await app.model.PlayerCareer.find();
+    // console.log(docs);
+    // const newDocs = docs.map(item => {
+    //   return {
+    //     _id: 'fdsafdfgsd',
+    //     evaluationScoreTotal: item.evaluationScoreTotal,
+    //     personScoreTotal: item.personScoreTotal,
+    //     // ...item.info,
+    //   }
+    //   ;
+    // });
+    // console.log(newDocs);
     return docs;
   }
 }

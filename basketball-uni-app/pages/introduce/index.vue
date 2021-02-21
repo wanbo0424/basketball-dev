@@ -1,5 +1,5 @@
 <template>
-	<view style="height: 100%;">
+	<view style="height: 100%;padding: 0 22rpx;">
 		<image class="introduce-img" src="../../static/imgs/209aac44587ae218438ffd83a5a829a0.jpg" mode=""></image>
 		
 		<!-- 排名 -->
