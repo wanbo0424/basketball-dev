@@ -11,7 +11,7 @@ const Service = require('egg').Service;
 
 class PlayerCareerService extends Service {
   // 创建球员档案（预支付后开始创建）
-  async createCareer(data) {
+  async setCareer(data) {
     // const { app } = this;
     // const unionId = data.mobile;
     // if (app.model.PlayerCareer.findOne({ mobile })) {

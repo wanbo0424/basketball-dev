@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:39:52
  * @LastEditors: yinwb
- * @LastEditTime: 2021-02-20 18:28:18
+ * @LastEditTime: 2021-02-22 09:29:25
  * @FilePath: \basketball-service\app\service\player.js
  */
 'use strict';
@@ -129,6 +129,9 @@ class PlayerService extends Service {
         evaluationScore: data.evaluationScore,
       },
     });
+    // if (_id) {
+    //   await ctx.service.playerCareer.setCareer(data);
+    // }
     return _id;
   }
 
