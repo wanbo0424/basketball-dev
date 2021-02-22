@@ -6,9 +6,9 @@
 			<div>This is for You</div>
 		</div> -->
 		<!-- <div class="into-button" @click="toHome">开始组队</div> -->
-		<image style="height:100%;width: 100%;" src="../../static/imgs/home-bg.jpeg" mode=""></image>
+		<image style="height:100%;width: 100%;" src="../../static/imgs/home-bg.png" mode=""></image>
 		<image 
-			style="transform: scale(0.5);position: absolute;bottom: -100rpx;" 
+			style="position: absolute;left: 30px;bottom: 62px;height: 116rpx;width: 221rpx;" 
 			@click="toHome" 
 			src="../../static/imgs/button1.png" 
 			mode="">
@@ -63,7 +63,7 @@
 		width: 100vw;
 		display: flex;
 		align-items: center;
-		justify-content: center;
+		// justify-content: center;
 		flex-direction: column;
 		background-color: #F1F1F1;
 		.main-img{

@@ -14,11 +14,11 @@ class PlayerService extends Service {
   async addPlayer(data = {}) {
     const { app } = this;
 
-    const findPalyer = await app.model.Player.find({ openId: data.openId });
-    if (findPalyer && findPalyer.length) {
-      console.log('找到这个人了', findPalyer);
+    // const findPalyer = await app.model.Player.find({ openId: data.openId });
+    // if (findPalyer && findPalyer.length) {
+    //   console.log('找到这个人了', findPalyer);
     //   return app.model.Player.updateOne({ mobile: data.mobile }, { $push: { gameIdList: data.gameId } });
-    }
+    // }
 
     const result = await app.model.Player.create(data);
     // 创建订单
@@ -122,16 +122,25 @@ class PlayerService extends Service {
 
   // 设置个人统计
   async setPersonalsStatis(data) {
-    const { app } = this;
-    const { _id } = await app.model.Player.updateOne({ _id: data._id }, {
+    const { app, ctx } = this;
+    const { _id } = await app.model.Player.findOneAndUpdate({ _id: data._id }, {
       $set: {
         personScore: data.personScore,
         evaluationScore: data.evaluationScore,
+        speedScore: data.speedScore,
+        staminaScore: data.staminaScore,
+        experienceScore: data.experienceScore,
+        defensiveScore: data.defensiveScore,
       },
     });
+    if (_id) {
+      // 创建球员生涯
+      await ctx.service.playerCareer.setCareer(data);
+    }
     return _id;
   }
 
+  // 获取球员几分排名
   async getPlayerRank() {
     const { app } = this;
     // 按积分排序获取前50条

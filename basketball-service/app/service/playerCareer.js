@@ -10,16 +10,43 @@
 const Service = require('egg').Service;
 
 class PlayerCareerService extends Service {
-  // 创建球员档案（预支付后开始创建）
-  async createCareer(data) {
-    // const { app } = this;
-    // const unionId = data.mobile;
-    // if (app.model.PlayerCareer.findOne({ mobile })) {
+  // 创建球员档案（设置球员个人统计之后）
+  async setCareer(data) {
+    const { app } = this;
+    const finders = await app.model.PlayerCareer.find({ openId: data.openId });
+    let result = {};
 
-    // } else {
+    if (finders && finders.length) {
+      const gameIdList = finders[0].gameIdList.push(data.gameId);
+      result = await app.model.PlayerCareer.findOneAndUpdate({ openId: data.openId }, {
+        $set: {
+          personScoreTotal: data.personScore + finders[0].personScoreTotal,
+          evaluationScoreTotal: data.evaluationScore + finders[0].evaluationScoreTotal,
+          speedTotal: data.speedScore + finders[0].speedTotal,
+          staminaTotal: data.staminaScore + finders[0].staminaTotal,
+          experienceTotal: data.experienceScore + finders[0].experienceTotal,
+          defensiveTotal: data.defensiveScore + finders[0].defensiveTotal,
+          nickName: data.nickName,
+          gameIdList,
+        },
+      });
+    } else {
+      const gameIdList = [ data.gameId ];
 
-    //   return await app.model.PlayerCareer.createCareer(data);
-    // }
+      const createData = {
+        personScoreTotal: data.personScore,
+        evaluationScoreTotal: +data.evaluationScore,
+        speedTotal: data.speedScore || 0,
+        staminaTotal: data.staminaScore || 0,
+        experienceTotal: data.experienceScore || 0,
+        defensiveTotal: data.defensiveScore || 0,
+        couponIdList: [],
+        nickName: data.nickName || '',
+        gameIdList,
+      };
+      await app.model.PlayerCareer.create(createData);
+    }
+    return result;
   }
 }
 

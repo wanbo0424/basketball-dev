@@ -100,6 +100,9 @@
       function save(record) {
         setPersonalsStatis({
           _id: record._id,
+          nickName: record.nickName,
+          openId: record.openId,
+          gameId: record.gameId,
           personScore: record.personScore,
           evaluationScore: record.evaluationScore,
         }).then(() => {
