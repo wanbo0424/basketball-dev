@@ -153,24 +153,14 @@
 						// })
 						
 						// 云函数
-						this.bcc.call({
-						    debug : true , //调试模式，在浏览器控制台输出日志信息
-						    url : 'api/player/apply' , //请求路径，直接以函数名称开头，开头不要加/，后面跟着路径
-						    data : this.form , //请求参数
-						    success : res => { 
-						        //当服务端返回state == 'ok' 或无state字段时，进入success回调
-						    },
-						    fail : res => { 
-						        //当服务端返回state == 'fail' 时，进入fail回调；
-						        //如未定义fail回调，则默认提示服务端返回的msg字段
-						    },
-						    complete : res => {
-						        //请求完成后的回调
-						    },
-							requestFail : res => {
-								//网络异常、服务无法访问、云函数不存在等引起的请求失败回调
-							}
-						});
+						uniCloud.callFunction({
+						  name: 'uni-router', // 要调用的云函数名称
+						  data: {
+						    action: 'player/apply', // 路由地址，对应 controller 下 user.js 的 login 方法
+						    // 参数列表
+						    data: this.form
+						  },
+						})
 						// uniCloud.callFunction({
 						// 	name: 'create-player',
 						// 	data: this.form

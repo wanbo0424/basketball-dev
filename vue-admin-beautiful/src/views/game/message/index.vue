@@ -9,6 +9,7 @@
   <div>
     <a-button type="primary" @click="add">添加比赛信息</a-button>
     <a-table
+      style="overflow: scroll"
       :columns="columns"
       :data-source="data"
       :pagination="false"
