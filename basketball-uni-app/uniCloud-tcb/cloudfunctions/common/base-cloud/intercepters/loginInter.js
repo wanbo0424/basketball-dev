@@ -1,6 +1,7 @@
 module.exports = {
 	handle : [] , //拦截的路径，此处留空表示拦截全部的路径
 	clear : [ //配置要清除拦截器的路径，注意：如果配置了handle则此处的配置无效。
+		/^api\//,
 		"user-center/user/login", 
 		"user-center/user/checkToken"
 	] , 

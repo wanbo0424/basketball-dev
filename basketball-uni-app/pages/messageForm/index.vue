@@ -63,7 +63,11 @@
 						// {required: true, message: '请填写联系方式', trigger: ['change','blur']},
 						{
 							validator: (rule, value, callback) => {
-								return this.$u.test.mobile(value);
+								if(value) {
+									return this.$u.test.mobile(value);
+								}else{
+									return true
+								}
 							},
 							message: '手机号码不正确',
 							trigger: ['change','blur']
