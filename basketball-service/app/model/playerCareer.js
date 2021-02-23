@@ -38,12 +38,21 @@ module.exports = app => {
     },
 
     // 速度值总得分
-
+    speedTotal: {
+      type: Number,
+    },
     // 体力值总得分
-
+    staminaTotal: {
+      type: Number,
+    },
     // 经验值总得分
-
+    experienceTotal: {
+      type: Number,
+    },
     // 防守值总得分
+    defensiveTotal: {
+      type: Number,
+    },
 
   });
 

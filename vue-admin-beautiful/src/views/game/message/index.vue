@@ -84,19 +84,24 @@
     {
       title: 'id',
       dataIndex: '_id',
+      width: 100,
+      ellipsis: true,
     },
     {
       title: '比赛时间',
       dataIndex: 'gameDate',
+      width: 200,
     },
     {
       title: '比赛地点',
       dataIndex: 'gameAddress',
+      width: 120,
     },
     {
       title: '比赛状态',
       dataIndex: 'gameStatus',
       slots: { customRender: 'status' },
+      width: 150,
     },
     {
       title: '球员列表',
@@ -107,11 +112,13 @@
       title: '比分',
       // dataIndex: 'playerIds',
       slots: { customRender: 'score' },
+      width: 160,
     },
     {
       title: '创建时间',
       dataIndex: 'createTime',
       slots: { customRender: 'createTime' },
+      width: 200,
     },
     {
       title: '操作',

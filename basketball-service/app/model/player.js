@@ -91,6 +91,18 @@ module.exports = app => {
     evaluationScore: {
       type: Number,
     },
+    speedScore: {
+      type: Number,
+    },
+    staminaScore: {
+      type: Number,
+    },
+    experienceScore: {
+      type: Number,
+    },
+    defensiveScore: {
+      type: Number,
+    },
 
   }, {
     versionKey: false,
