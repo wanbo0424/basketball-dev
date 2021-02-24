@@ -36,16 +36,25 @@ class PlayerCareerService extends Service {
       const createData = {
         personScoreTotal: data.personScore,
         evaluationScoreTotal: +data.evaluationScore,
+        scoreAbilityTotal: +data.scoreAbility || 0,
         speedTotal: data.speedScore || 0,
         staminaTotal: data.staminaScore || 0,
         experienceTotal: data.experienceScore || 0,
         defensiveTotal: data.defensiveScore || 0,
         couponIdList: [],
         nickName: data.nickName || '',
+        openId: data.openId,
         gameIdList,
       };
       await app.model.PlayerCareer.create(createData);
     }
+    return result;
+  }
+
+
+  async getCareerDetail(query) {
+    const { app } = this;
+    const result = await app.model.PlayerCareer.findOne({ openId: query.openId });
     return result;
   }
 }

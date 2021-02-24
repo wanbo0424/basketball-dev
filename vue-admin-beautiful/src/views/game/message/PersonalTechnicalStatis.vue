@@ -13,7 +13,15 @@
 
     <a-table :columns="columns" :data-source="tableData" bordered>
       <template
-        v-for="col in ['personScore', 'evaluationScore']"
+        v-for="col in [
+          'personScore',
+          'evaluationScore',
+          'scoreAbility',
+          'speedScore',
+          'staminaScore',
+          'experienceScore',
+          'defensiveScore',
+        ]"
         :key="col"
         #[col]="{ text, record }"
       >
@@ -67,16 +75,49 @@
     {
       title: '个人得分',
       dataIndex: 'personScore',
+      width: 120,
       slots: { customRender: 'personScore' },
     },
     {
       title: '本场比赛积分',
       dataIndex: 'evaluationScore',
+      width: 120,
       slots: { customRender: 'evaluationScore' },
+    },
+    {
+      title: '得分评估',
+      dataIndex: 'scoreAbility',
+      width: 120,
+      slots: { customRender: 'scoreAbility' },
+    },
+    {
+      title: '速度评估',
+      dataIndex: 'speedScore',
+      width: 120,
+      slots: { customRender: 'speedScore' },
+    },
+    {
+      title: '体力评估',
+      dataIndex: 'staminaScore',
+      width: 120,
+      slots: { customRender: 'staminaScore' },
+    },
+    {
+      title: '经验评估',
+      dataIndex: 'experienceScore',
+      width: 120,
+      slots: { customRender: 'experienceScore' },
+    },
+    {
+      title: '防守评估',
+      dataIndex: 'defensiveScore',
+      width: 120,
+      slots: { customRender: 'defensiveScore' },
     },
     {
       title: '操作',
       dataIndex: 'operation',
+      width: 80,
       slots: { customRender: 'operation' },
     },
   ]
@@ -98,14 +139,20 @@
 
       // 保存句柄
       function save(record) {
-        setPersonalsStatis({
+        let submit = {
           _id: record._id,
           nickName: record.nickName,
           openId: record.openId,
           gameId: record.gameId,
           personScore: record.personScore,
           evaluationScore: record.evaluationScore,
-        }).then(() => {
+          scoreAbility: record.scoreAbility,
+          speedScore: record.speedScore,
+          staminaScore: record.staminaScore,
+          experienceScore: record.experienceScore,
+          defensiveScore: record.defensiveScore,
+        }
+        setPersonalsStatis(submit).then(() => {
           record.editable = false
           editingKey.value = ''
         })
@@ -134,7 +181,7 @@
         const newData = [...tableData.value]
         const target = newData.filter((item) => key === item._id)[0]
         if (target) {
-          target[column] = value
+          target[column] = Number(value)
           tableData.value = newData
         }
       }

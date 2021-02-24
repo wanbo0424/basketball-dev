@@ -17,5 +17,7 @@ module.exports = app => {
   router.get('/weapp/player/getCareerList', controller.player.getCareerList);
   // 获取球员排名
   router.get('/weapp/player/getPlayerRank', controller.player.getPlayerRank);
+  // 获取球员数据
+  router.get('/weapp/playerCareer/getCareerDetail', controller.playerCareer.getCareerDetail);
 }
 ;

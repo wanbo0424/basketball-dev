@@ -17,6 +17,13 @@ class PlayerCareerController extends Controller {
     this.success(playerData);
   }
 
+
+  async getCareerDetail() {
+    const { ctx } = this;
+    const detail = await ctx.service.playerCareer.getCareerDetail(ctx.request.query);
+    this.success(detail);
+  }
+
 }
 
 module.exports = PlayerCareerController;

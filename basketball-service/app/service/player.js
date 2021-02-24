@@ -127,6 +127,7 @@ class PlayerService extends Service {
       $set: {
         personScore: data.personScore,
         evaluationScore: data.evaluationScore,
+        scoreAbility: data.scoreAbility,
         speedScore: data.speedScore,
         staminaScore: data.staminaScore,
         experienceScore: data.experienceScore,
@@ -135,6 +136,7 @@ class PlayerService extends Service {
     });
     if (_id) {
       // 创建球员生涯
+
       await ctx.service.playerCareer.setCareer(data);
     }
     return _id;

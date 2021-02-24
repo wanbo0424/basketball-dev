@@ -36,7 +36,10 @@ module.exports = app => {
     personScoreTotal: {
       type: Number,
     },
-
+    // 得分能力
+    scoreAbilityTotal: {
+      type: Number,
+    },
     // 速度值总得分
     speedTotal: {
       type: Number,

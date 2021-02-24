@@ -91,6 +91,9 @@ module.exports = app => {
     evaluationScore: {
       type: Number,
     },
+    scoreAbility: {
+      type: Number,
+    },
     speedScore: {
       type: Number,
     },
