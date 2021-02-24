@@ -4,6 +4,9 @@
 		
 		<!-- 排名 -->
 		<player-rank></player-rank>
+		
+		<!-- 流程 -->
+		<process-introduce></process-introduce>
 		<view class="match-btn"@click="toDoMessage">
 			随缘匹配
 		</view>
@@ -15,10 +18,12 @@
 <script>
 	import http from '../../api/index.js'
 	import PlayerRank from './PlayerRank'
+	import ProcessIntroduce from './ProcessIntroduce'
 	// import { mapActions } from 'vuex'
 	export default {
 		components:{
-			PlayerRank
+			PlayerRank,
+			ProcessIntroduce
 		},
 		data() {
 			return {

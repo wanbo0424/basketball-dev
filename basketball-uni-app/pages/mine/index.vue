@@ -4,6 +4,7 @@
 			<image style="height: 120rpx;width: 120rpx;border-radius: 10rpx;" :src="userInfo.avatarUrl" mode=""></image>
 			<h2 style="color:#fff;padding-left: 40rpx;">{{userInfo.nickName}}</h2>
 		</view>
+		
 		<view class="navigation_list">
 			<u-grid :col="3" :border="false">
 				<u-grid-item @click="getOrderList">
@@ -20,20 +21,23 @@
 				</u-grid-item >
 			</u-grid>
 		</view>
+		
 		<view class="cell_list">
 			优惠券
 			<u-icon name="arrow-right" style="float: right;"></u-icon>
 		</view>
 		
-		
+		<skill-map ref="map"></skill-map>
 	</view>
 </template>
 
 <script>
 	import http from '../../api/index.js'
 	import shareMixin from '../../mixins/share.js'
+	import SkillMap from './SkillMap'
 	import { mapGetters } from 'vuex'
 	export default {
+		components:{SkillMap},
 		data() {
 			return {
 			}
@@ -54,8 +58,9 @@
 			},
 			getTobePaid() {
 				uni.navigateTo({url: '/pages/order/index?type=tobe'})
-			}
-		}
+			},
+		},
+		
 	}
 </script>
 
