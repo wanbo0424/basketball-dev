@@ -1,6 +1,8 @@
 <template>
 	<view style="height: 100%;padding: 0 22rpx;">
-		<image class="introduce-img" src="../../static/imgs/209aac44587ae218438ffd83a5a829a0.jpg" mode=""></image>
+		<view class="wrap">
+			<u-swiper :list="swiperList" :effect3d="true"></u-swiper>
+		</view>
 		
 		<!-- 排名 -->
 		<player-rank></player-rank>
@@ -27,7 +29,20 @@
 		},
 		data() {
 			return {
-				
+				swiperList: [
+					{
+						image: 'https://cdn.uviewui.com/uview/swiper/1.jpg',
+						title: '昨夜星辰昨夜风，画楼西畔桂堂东'
+					},
+					{
+						image: 'https://cdn.uviewui.com/uview/swiper/2.jpg',
+						title: '身无彩凤双飞翼，心有灵犀一点通'
+					},
+					{
+						image: 'https://cdn.uviewui.com/uview/swiper/3.jpg',
+						title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳'
+					}
+				]
 			}
 		},
 		created() {
