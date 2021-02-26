@@ -22,17 +22,29 @@
 				<span>我已阅读并同意<a style="position: relative;display: inline-block;width: 300rpx;text-decoration: underline">篮球比赛免责协议</a></span>
 		</u-checkbox>
 		
+		<view class="share_button_view" 
+			@click="() => {
+				$refs.share.init()
+			}">
+			<u-icon name="share" custom-prefix="custom-icon" color="#fff" size="30" ></u-icon>
+		</view>
+		
+		<share-poster ref="share"></share-poster>
+		
 		<u-top-tips ref="uTips"></u-top-tips>
 	</view>
 </template>
 <script>
 	import shareMixin from '../../mixins/share.js'
+	import sharePoster from '../sharePoster'
 	export default{
 		mixins:[shareMixin],
+		components:{sharePoster},
 		data() {
 			return {
 				checked:'',
-				canToHome: false
+				canToHome: false,
+				showShare: false
 			}
 		},
 		methods:{
@@ -53,6 +65,7 @@
 	}
 </script>
 <style lang="scss" scoped>
+	
 	.content{
 		// background-color: black;
 		// background: url('../../static/imgs/main-img.jpeg') no-repeat center;
@@ -90,6 +103,18 @@
 			// color: #6b2807;
 			font-size: 60rpx;
 			text-align: center;
+		}
+		.share_button_view{
+			height: 60rpx;
+			width: 60rpx;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			border-radius: 50%;
+			background-color: #ff0000;
+			position: fixed;
+			bottom: 16rpx;
+			right: 16rpx;
 		}
 	}
 	@keyframes textScale
