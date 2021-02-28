@@ -31,11 +31,11 @@
 		<view class="navigation_list">
 			<u-grid :col="4" :border="false">
 				<u-grid-item @click="getOrderList">
-					<u-icon name="order" :size="46"></u-icon>
+					<u-icon name="74wodedingdan" custom-prefix="custom-icon" color="#f57463" :size="54"></u-icon>
 					<view class="grid-text" >全部订单</view>
 				</u-grid-item>
 				<u-grid-item @click="getTobePaid">
-					<u-icon name="rmb-circle" :size="46"></u-icon>
+					<u-icon name="daizhifudingdan" custom-prefix="custom-icon" color="#f57463" :size="54"></u-icon>
 					<view class="grid-text" >待支付</view>
 				</u-grid-item>
 				<u-grid-item @click="getCareer">
@@ -106,9 +106,11 @@
 </script>
 
 <style lang="scss" scoped>
+.grid-text{
+	color: #f57463
+}
 .mine_page{ 
 	padding: 50rpx 22rpx 0 22rpx;
-	
 	.user_info{
 		display: flex;
 		align-items: center;

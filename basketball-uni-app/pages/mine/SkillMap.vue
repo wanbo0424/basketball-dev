@@ -25,8 +25,8 @@
 		},
 		mounted() {
 			_self = this;
-			this.cWidth=uni.upx2px(750);
-			this.cHeight=uni.upx2px(750);
+			this.cWidth=uni.upx2px(400);
+			this.cHeight=uni.upx2px(400);
 			this.getServerData();
 		},
 		computed: {
@@ -61,7 +61,7 @@
 						let gameLength = res.data.data.gameIdList.length
 						let series = [
 							{
-								name: 'aa',
+								name: '个人能力分析',
 								data: [
 									3,
 									speedTotal/gameLength,
@@ -69,7 +69,7 @@
 									experienceTotal/gameLength,
 									defensiveTotal/gameLength
 								],
-								color: '#facc14'
+								color: '#f57463'
 							}
 							
 						]
@@ -111,18 +111,17 @@
 
 <style lang="scss" scoped>
 .qiun-columns{
-	margin-top: 40rpx;
-	
+	margin: 40rpx 0;
 }
 .qiun-charts {
-	width: 100%;
+	width: 375rpx;
 	height: 375rpx;
 	background-color: #FFFFFF;
 	border-radius: 18rpx;
 }
 	
 .charts {
-	width: 100%;
+	width: 375rpx;
 	height: 375rpx;
 	border-radius: 18rpx;
 	background-color: #FFFFFF;
