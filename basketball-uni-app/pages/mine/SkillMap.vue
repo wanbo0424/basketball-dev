@@ -74,7 +74,7 @@
 							
 						]
 						let Radar = {
-							categories:['得分能力', '速度值', '体力值', '经验值', '防守值'],
+							categories:['得分', '速度', '体力', '经验', '防守'],
 							series
 						};
 						_self.showRadar("canvasRadar",Radar);

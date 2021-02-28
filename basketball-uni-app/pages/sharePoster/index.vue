@@ -25,6 +25,7 @@
 	import {
 		getSharePoster
 	} from '../../js_sdk/QuShe-SharerPoster/QS-SharePoster/QS-SharePoster.js';
+	import http from '../../api/index.js'
 	export default {
 		data() {
 			return {
@@ -37,6 +38,7 @@
 		},
 		methods: {
 			async shareFc() {
+				let {data: {data: codePath }} = await http.post('weapp/expend/getWxacode', { path: '/pages/index/index' })
 				let _this = this;
 				try {
 					this.count++;
@@ -76,33 +78,34 @@
 									dy: 0,
 									sx: 0,
 									sy: 0,
-									dWidth: 0.2,
-									dHeight: 0.2,
+									// dWidth: 0.2,
+									// dHeight: 0.2,
 									serialNum: 0,
 									infoCallBack(imageInfo) {
-										let width;
-										let height;
-										if (imageInfo.width > imageInfo.height) {
-											width = imageInfo.width > 700 ? 700 : imageInfo.width;
-											height = width / imageInfo.width * imageInfo.height;
-										} else {
-											height = imageInfo.height > 700 ? 700 : imageInfo.height;
-											width = height / imageInfo.height * imageInfo.width;
-										}
-										if (width < 500) {
-											width = 500;
-											height = width / imageInfo.width * imageInfo.height;
-										}
-										let addHeight = height * .6;
-										if (addHeight < 150) addHeight = 150;
-										if (addHeight > 250) addHeight = 250;
+										// let width;
+										// let height;
+										// if (imageInfo.width > imageInfo.height) {
+										// 	width = imageInfo.width > 700 ? 700 : imageInfo.width;
+										// 	height = width / imageInfo.width * imageInfo.height;
+										// } else {
+										// 	height = imageInfo.height > 700 ? 700 : imageInfo.height;
+										// 	width = height / imageInfo.height * imageInfo.width;
+										// }
+										// if (width < 500) {
+										// 	width = 500;
+										// 	height = width / imageInfo.width * imageInfo.height;
+										// }
+										// let addHeight = height * .6;
+										// if (addHeight < 150) addHeight = 150;
+										// if (addHeight > 250) addHeight = 250;
 										setBgObj({
-											width,
-											height: height + addHeight
+											// width,
+											// height: height + addHeight
+											width: 70, height: 70
 										});
 										return {
-											dWidth: width,
-											dHeight: height
+											dWidth: 70,
+											dHeight: 70
 										}
 									}
 								},
@@ -111,7 +114,7 @@
 									id: 'productImage',
 									url: 'http://39.101.161.231/images/share_cover.png',
 									dx: 0,
-									dy: 100,
+									dy: 70,
 									serialNum: 1,
 									infoCallBack(imageInfo) {
 										let width;
@@ -133,6 +136,8 @@
 										setBgObj({
 											width,
 											height: height + addHeight
+											// width: 700,
+											// height: 200
 										});
 										return {
 											dWidth: width,
@@ -140,93 +145,131 @@
 										}
 									}
 								},
+								// {
+								// 	type: 'text',
+								// 	id: 'productName',
+								// 	text: '取舍',
+								// 	color: '#000',
+								// 	serialNum: 2,
+								// 	allInfoCallback({
+								// 		drawArray
+								// 	}) {
+								// 		console.log('allInfoCallback', 1)
+								// 		const productImage = drawArray.find(item => item.id === 'productImage')
+								// 		console.log('allInfoCallback', 2)
+								// 		console.log('allInfoCallback getBgObj', getBgObj)
+								// 		const addHeight = getBgObj().height - productImage.dHeight;
+								// 		console.log('allInfoCallback', 3)
+								// 		return {
+								// 			size: getBgObj().width * 0.05,
+								// 			lineFeed: {
+								// 				maxWidth: getBgObj().width * 0.5,
+								// 				lineNum: 1
+								// 			},
+								// 			dx: getBgObj().width * .05,
+								// 			dy: productImage.dHeight + addHeight * .25,
+								// 		}
+								// 	}
+								// },
+								// {
+								// 	type: 'text',
+								// 	text: '棒棒哒~',
+								// 	color: '#f1505c',
+								// 	serialNum: 3,
+								// 	allInfoCallback({
+								// 		drawArray
+								// 	}) {
+								// 		const productImage = drawArray.find(item => item.id === 'productImage')
+								// 		const addHeight = getBgObj().height - productImage.dHeight;
+								// 		return {
+								// 			size: getBgObj().width * 0.05,
+								// 			lineFeed: {
+								// 				maxWidth: getBgObj().width * 0.5,
+								// 				lineNum: 1
+								// 			},
+								// 			dx: getBgObj().width * .05,
+								// 			dy: productImage.dHeight + addHeight * .5,
+								// 		}
+								// 	}
+								// },
+								// {
+								// 	type: 'text',
+								// 	text: '无情哈拉少',
+								// 	serialNum: 4,
+								// 	allInfoCallback({
+								// 		drawArray
+								// 	}) {
+								// 		const productImage = drawArray.find(item => item.id === 'productImage')
+								// 		const addHeight = getBgObj().height - productImage.dHeight;
+								// 		return {
+								// 			size: getBgObj().width * 0.05,
+								// 			lineFeed: {
+								// 				maxWidth: getBgObj().width * 0.5,
+								// 				lineNum: 1
+								// 			},
+								// 			dx: getBgObj().width * .05,
+								// 			dy: productImage.dHeight + addHeight * .75,
+								// 		}
+								// 	}
+								// },
 								{
-									type: 'text',
-									id: 'productName',
-									text: '取舍',
-									color: '#000',
+									type: 'image',
+									id: 'productImage1',
+									url: `http://39.101.161.231${codePath}`,
+									dx: 0,
+									dy: 486,
+									sx: 0,
+									sy: 0,
+									// dWidth: 0.2,
+									// dHeight: 0.2,
 									serialNum: 2,
-									allInfoCallback({
-										drawArray
-									}) {
-										console.log('allInfoCallback', 1)
-										const productImage = drawArray.find(item => item.id === 'productImage')
-										console.log('allInfoCallback', 2)
-										console.log('allInfoCallback getBgObj', getBgObj)
-										const addHeight = getBgObj().height - productImage.dHeight;
-										console.log('allInfoCallback', 3)
+									infoCallBack(imageInfo) {
+										let width;
+										let height;
+										if (imageInfo.width > imageInfo.height) {
+											width = imageInfo.width > 700 ? 700 : imageInfo.width;
+											height = width / imageInfo.width * imageInfo.height;
+										} else {
+											height = imageInfo.height > 700 ? 700 : imageInfo.height;
+											width = height / imageInfo.height * imageInfo.width;
+										}
+										if (width < 500) {
+											width = 200;
+											height = width / imageInfo.width * imageInfo.height;
+										}
+										let addHeight = height * .6;
+										if (addHeight < 150) addHeight = 150;
+										if (addHeight > 250) addHeight = 250;
+										// setBgObj({
+										// 	width,
+										// 	height: height + addHeight
+										// });
 										return {
-											size: getBgObj().width * 0.05,
-											lineFeed: {
-												maxWidth: getBgObj().width * 0.5,
-												lineNum: 1
-											},
-											dx: getBgObj().width * .05,
-											dy: productImage.dHeight + addHeight * .25,
+											dWidth: width,
+											dHeight: height
 										}
 									}
 								},
-								{
-									type: 'text',
-									text: '棒棒哒~',
-									color: '#f1505c',
-									serialNum: 3,
-									allInfoCallback({
-										drawArray
-									}) {
-										const productImage = drawArray.find(item => item.id === 'productImage')
-										const addHeight = getBgObj().height - productImage.dHeight;
-										return {
-											size: getBgObj().width * 0.05,
-											lineFeed: {
-												maxWidth: getBgObj().width * 0.5,
-												lineNum: 1
-											},
-											dx: getBgObj().width * .05,
-											dy: productImage.dHeight + addHeight * .5,
-										}
-									}
-								},
-								{
-									type: 'text',
-									text: '无情哈拉少',
-									serialNum: 4,
-									allInfoCallback({
-										drawArray
-									}) {
-										const productImage = drawArray.find(item => item.id === 'productImage')
-										const addHeight = getBgObj().height - productImage.dHeight;
-										return {
-											size: getBgObj().width * 0.05,
-											lineFeed: {
-												maxWidth: getBgObj().width * 0.5,
-												lineNum: 1
-											},
-											dx: getBgObj().width * .05,
-											dy: productImage.dHeight + addHeight * .75,
-										}
-									}
-								},
-								{
-									type: 'qrcode',
-									text: '123456',
-									serialNum: 5,
-									allInfoCallback({
-										drawArray
-									}) {
-										const productImage = drawArray.find(item => item.id === 'productImage')
-										const addHeight = getBgObj().height - productImage.dHeight;
-										const widthSize = getBgObj().width * .4;
-										const heightSize = addHeight;
-										const countSize = widthSize > heightSize ? heightSize : widthSize;
-										const size = countSize * .6;
-										return {
-											size: size,
-											dx: getBgObj().width - countSize * .95,
-											dy: getBgObj().height - countSize * .95
-										}
-									}
-								}
+								// {
+								// 	type: 'qrcode',
+								// 	text: 'https://uniapp.dcloud.io/',
+								// 	serialNum: 5,
+								// 	allInfoCallback({
+								// 		drawArray
+								// 	}) {
+								// 		const productImage = drawArray.find(item => item.id === 'productImage')
+								// 		const addHeight = getBgObj().height - productImage.dHeight;
+								// 		const widthSize = getBgObj().width * .4;
+								// 		const heightSize = addHeight;
+								// 		const countSize = widthSize > heightSize ? heightSize : widthSize;
+								// 		const size = countSize * .6;
+								// 		return {
+								// 			size: size,
+								// 			dx: getBgObj().width - countSize * .95,
+								// 			dy: getBgObj().height - countSize * .95
+								// 		}
+								// 	}
+								// }
 							]
 						}
 					})

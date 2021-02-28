@@ -18,12 +18,6 @@
 		
 		
 		onLaunch: function() {
-			// uniCloud.callFunction({	
-			// 	name: 'create-ticket'
-			// }).then((res) => {
-			// 	console.log(res)
-			// 	debugger
-			// })
 		},
 		onShow: function() {
 			
@@ -40,22 +34,22 @@
 				}
 			})
 			// 分享给朋友
-			// wx.showShareMenu({
-			//   withShareTicket: true,
-			//   menus: ['shareAppMessage', 'shareTimeline'],
-			//   success: function(res)  {
-			// 	  console.log(res, 'share')
-			//   }
-			// })
+			wx.showShareMenu({
+			  withShareTicket: true,
+			  menus: ['shareAppMessage', 'shareTimeline'],
+			  success: function(res)  {
+				  console.log(res, 'share')
+			  }
+			})
 			
 			// wx.getShareInfo({
 			// 	success: function(res) {
 			// 		console.log(res, '获取分享信息')
 			// 	}
 			// })
-			uni.showShareMenu({
-				withShareTicket: true
-			})
+			// uni.showShareMenu({
+			// 	withShareTicket: true
+			// })
 		},
 		
 		onHide: function() {

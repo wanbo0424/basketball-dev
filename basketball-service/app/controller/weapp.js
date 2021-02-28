@@ -14,7 +14,7 @@ class WeappController extends Controller {
     const { ctx } = this;
     // 登录凭证校验
     const weappInfo =
-    await ctx.curl(`https://api.weixin.qq.com/sns/jscode2session?appid=wx3bd5737539be2537&secret=3e9c3da492abdbad0e1cee5a310646e9&js_code=${ctx.query.code}&grant_type=authorization_code`,
+    await ctx.curl(`https://api.weixin.qq.com/sns/jscode2session?appid=wx3bd5737539be2537&secret=8eae0891e063bca56590224254363fcc&js_code=${ctx.query.code}&grant_type=authorization_code`,
       {
         dataType: 'json',
       }) || {};

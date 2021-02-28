@@ -77,7 +77,7 @@
 	line-height: 250rpx;
 	border-radius: 50%;
 	margin: 0 auto;
-	margin-top: 400rpx;
+	margin-top: 40rpx;
 	background-color: #de8d05;
 	text-align: center;
 	font-size: 50rpx;

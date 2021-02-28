@@ -9,7 +9,8 @@ module.exports = app => {
   require('./router/weapp/player.js')(app);
   require('./router/weapp/gameOrder.js')(app);
   require('./router/weapp/pay.js')(app);
-
+  require('./router/weapp/expend.js')(app);
+  router.get('/weapp/login', controller.weapp.login);
 
   require('./router/admin/player.js')(app);
   require('./router/admin/game.js')(app);
@@ -25,7 +26,6 @@ module.exports = app => {
   // router.get('/weapp/game/ToHeldGameList', controller.game.ToHeldGameList);
   // // 球员个人生涯记录
   // router.get('/weapp/player/getCareerList', controller.player.getCareerList);
-  router.get('/weapp/login', controller.weapp.login);
 
 
   // 管理平台

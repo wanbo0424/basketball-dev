@@ -24,22 +24,23 @@
 		
 		<view class="share_button_view" 
 			@click="() => {
-				$refs.share.init()
+				$refs.share.draw()
 			}">
 			<u-icon name="share" custom-prefix="custom-icon" color="#fff" size="30" ></u-icon>
 		</view>
 		
-		<share-poster ref="share"></share-poster>
-		
+		<!-- <share-poster ref="share"></share-poster> -->
+		<custom-canvas ref="share"></custom-canvas>
 		<u-top-tips ref="uTips"></u-top-tips>
 	</view>
 </template>
 <script>
 	import shareMixin from '../../mixins/share.js'
-	import sharePoster from '../sharePoster'
+	// import sharePoster from '../sharePoster'
+	import customCanvas from '../canvas/share.vue'
 	export default{
 		mixins:[shareMixin],
-		components:{sharePoster},
+		components:{customCanvas},
 		data() {
 			return {
 				checked:'',
