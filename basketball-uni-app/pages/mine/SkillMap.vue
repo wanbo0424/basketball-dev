@@ -69,7 +69,7 @@
 									experienceTotal/gameLength,
 									defensiveTotal/gameLength
 								],
-								color: '#f57463'
+								color: '#f57463',
 							}
 							
 						]
