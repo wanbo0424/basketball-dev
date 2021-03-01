@@ -52,7 +52,9 @@ module.exports = app => {
     },
     openId: {
       type: String,
-      default: '2',
+    },
+    avatarUrl: {
+      type: String,
     },
     sex: {
       type: String,

@@ -1,7 +1,7 @@
 <template>
 	<view style="height: 100%;padding: 0 22rpx;">
 		<view class="wrap">
-			<u-swiper :list="swiperList" :effect3d="true"></u-swiper>
+			<u-swiper height="475rpx" :list="swiperList" :effect3d="true"></u-swiper>
 		</view>
 		
 		<!-- 排名 -->

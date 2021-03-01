@@ -1,13 +1,15 @@
 <template>
 	<view class="wrap">
 		<view class="left_area">
-			<view class="">
-				<image :src="tableData[0].avator" mode=""></image>
-				<span>tableData[0].nickName</span>
-			</view>
+			<!-- <view class=""> -->
+				<image style="width: 30%;height: 30%;" :src="tableData[0].avator" mode=""></image>
+				<span>{{tableData[0].nickName}}</span>
+			<!-- </view> -->
 		</view>
 		<view class="right_area">
-			
+			<ul>
+				<li class="rank-item"></li>
+			</ul>
 		</view>
 		<!-- <u-row >
 			<u-col span="3">
@@ -74,13 +76,25 @@
 	width: '100%';
 	height: 475rpx;
 	display: flex;
-	background: rgba($color: #646464, $alpha: 0.6);
+	margin-top: 24rpx;
+	border: 2rpx solid #f57463;
+	// background: rgba($color: #646464, $alpha: 0.6);
 	.left_area{
 		width: 50%;
 		padding: 10rpx;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 	.right_area{
 		width: 50%;
+		padding: 12rpx;
+		.rank-item{
+			height: 58rpx;
+			width: 100%;
+			margin-bottom: 8rpx;
+			background-color: #e5e5e5;
+		}
 	}
 }
 .demo-layout {
