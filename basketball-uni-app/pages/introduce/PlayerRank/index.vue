@@ -1,6 +1,15 @@
 <template>
 	<view class="wrap">
-		<u-row >
+		<view class="left_area">
+			<view class="">
+				<image :src="tableData[0].avator" mode=""></image>
+				<span>tableData[0].nickName</span>
+			</view>
+		</view>
+		<view class="right_area">
+			
+		</view>
+		<!-- <u-row >
 			<u-col span="3">
 				<view class="flex-center demo-layout bg-purple bg-purple-dark">排名</view>
 			</u-col>
@@ -27,7 +36,7 @@
 			<u-col span="3">
 				<view class="flex-center demo-layout bg-purple-light">{{item.evaluationScoreTotal}}</view>
 			</u-col>
-		</u-row>
+		</u-row> -->
 	</view>
 </template>
 
@@ -61,7 +70,18 @@
 	align-items: center;
 }
 .wrap{
-	text-align: center;
+	// text-align: center;
+	width: '100%';
+	height: 475rpx;
+	display: flex;
+	background: rgba($color: #646464, $alpha: 0.6);
+	.left_area{
+		width: 50%;
+		padding: 10rpx;
+	}
+	.right_area{
+		width: 50%;
+	}
 }
 .demo-layout {
 	height: 40rpx;

@@ -117,15 +117,6 @@
             
         }
         ,{
-            "path" : "pages/sharePoster/index",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
             "path" : "pages/canvas/share",
             "style" :                                                                                    
             {
