@@ -152,7 +152,7 @@ class PlayerService extends Service {
           _id: '$openId',
           evaluationScoreTotal: { $sum: '$evaluationScore' },
           personScoreTotal: { $sum: '$personScore' },
-          info: { $mergeObjects: { nickName: '$nickName', role: '$role', age: '$age' } },
+          info: { $mergeObjects: { nickName: '$nickName', role: '$role', age: '$age', avatarUrl: '$avatarUrl' } },
         },
       },
       { $sort: { evaluationScoreTotal: -1 } },

@@ -1,5 +1,6 @@
 <template>
 	<view class="wrap">
+<<<<<<< HEAD
 		<view class="matte">
 			<view class="left_area">
 				<view class="">
@@ -10,6 +11,18 @@
 			<view class="right_area">
 				
 			</view>
+=======
+		<view class="left_area">
+			<!-- <view class=""> -->
+				<image style="width: 30%;height: 30%;" :src="tableData[0].avator" mode=""></image>
+				<span>{{tableData[0].nickName}}</span>
+			<!-- </view> -->
+		</view>
+		<view class="right_area">
+			<ul>
+				<li class="rank-item"></li>
+			</ul>
+>>>>>>> 6e83e5b06ec8a60918b584646ea152b8027d32e5
 		</view>
 		<!-- <u-row >
 			<u-col span="3">
@@ -76,6 +89,7 @@
 	width: '100%';
 	height: 275rpx;
 	display: flex;
+<<<<<<< HEAD
 	background: #f57463;
 	position:relative;
 	.matte{
@@ -93,6 +107,26 @@
 		.right_area{
 			height: 100%;
 			width: 50%;
+=======
+	margin-top: 24rpx;
+	border: 2rpx solid #f57463;
+	// background: rgba($color: #646464, $alpha: 0.6);
+	.left_area{
+		width: 50%;
+		padding: 10rpx;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.right_area{
+		width: 50%;
+		padding: 12rpx;
+		.rank-item{
+			height: 58rpx;
+			width: 100%;
+			margin-bottom: 8rpx;
+			background-color: #e5e5e5;
+>>>>>>> 6e83e5b06ec8a60918b584646ea152b8027d32e5
 		}
 	}
 	
