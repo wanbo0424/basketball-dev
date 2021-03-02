@@ -1,13 +1,15 @@
 <template>
 	<view class="wrap">
-		<view class="left_area">
-			<view class="">
-				<image :src="tableData[0].avator" mode=""></image>
-				<span>tableData[0].nickName</span>
+		<view class="matte">
+			<view class="left_area">
+				<view class="">
+					<image :src="tableData[0].avator" mode=""></image>
+					<span>tableData[0].nickName</span>
+				</view>
 			</view>
-		</view>
-		<view class="right_area">
-			
+			<view class="right_area">
+				
+			</view>
 		</view>
 		<!-- <u-row >
 			<u-col span="3">
@@ -72,16 +74,28 @@
 .wrap{
 	// text-align: center;
 	width: '100%';
-	height: 475rpx;
+	height: 275rpx;
 	display: flex;
-	background: rgba($color: #646464, $alpha: 0.6);
-	.left_area{
-		width: 50%;
-		padding: 10rpx;
+	background: #f57463;
+	position:relative;
+	.matte{
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 0;
+		bottom: 0;
+		background: hsla(0, 0%, 100%, .3);
+		.left_area{
+			height: 100%;
+			width: 50%;
+			padding: 10rpx;
+		}
+		.right_area{
+			height: 100%;
+			width: 50%;
+		}
 	}
-	.right_area{
-		width: 50%;
-	}
+	
 }
 .demo-layout {
 	height: 40rpx;
