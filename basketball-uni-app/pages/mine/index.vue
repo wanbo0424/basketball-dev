@@ -67,8 +67,7 @@
 				</u-grid-item >
 			</u-grid>
 		</view>
-		
-		
+		<u-tabbar :list="list"></u-tabbar>
 	</view>
 </template>
 
@@ -81,6 +80,24 @@
 		components:{SkillMap},
 		data() {
 			return {
+				list: [
+					{
+						iconPath: "home",
+						selectedIconPath: "home-fill",
+						text: '首页',
+						isDot: true,
+						customIcon: false,
+						pagePath: '/pages/home/index'
+					},
+					{
+						iconPath: "account",
+						selectedIconPath: "account-fill",
+						text: '我的',
+						isDot: false,
+						customIcon: false,
+						pagePath: '/pages/mine/index'
+					}
+				]
 			}
 		},
 		mixins:[shareMixin],
@@ -110,6 +127,8 @@
 	color: #f57463
 }
 .mine_page{ 
+	background-color: black;
+	height: 100vh;
 	padding: 50rpx 22rpx 0 22rpx;
 	.user_info{
 		display: flex;

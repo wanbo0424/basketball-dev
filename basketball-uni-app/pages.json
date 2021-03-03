@@ -13,7 +13,6 @@
 			"path": "pages/home/index",
 			"style": {
 				"navigationBarTitleText": "首页",
-				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
 		},
@@ -142,27 +141,28 @@
 	            "path": "pages/canvas/AdmissionTicket" //启动页面，必选
 	        }]
 	},
-	// "tabBar": {
-	// 		// "color": "#909399",
-	// 		// "selectedColor": "#303133",
-	// 		// "backgroundColor": "#FFFFFF",
-	// 		// "borderStyle": "black",
-	// 		"list": [{
-	// 			"pagePath": "pages/home/index"
-	// 			// "iconPath": "home",
-	// 			// "selectedIconPath": "home-fill",
-	// 			// "text": "首页"
-	// 		}, {
-	// 			"pagePath": "pages/mine/index"
-	// 			// "iconPath": "account",
-	// 			// "selectedIconPath": "account-fill",
-	// 			// "text": "我的"
-	// 		}]
-	// 	},
+	
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
-	}
+	},
+	"tabBar": {
+			// "color": "#909399",
+			// "selectedColor": "#303133",
+			// "backgroundColor": "#FFFFFF",
+			// "borderStyle": "black",
+			"list": [{
+				"pagePath": "pages/home/index"
+				// "iconPath": "home",
+				// "selectedIconPath": "home-fill",
+				// "text": "首页"
+			}, {
+				"pagePath": "pages/mine/index"
+				// "iconPath": "account",
+				// "selectedIconPath": "account-fill",
+				// "text": "我的"
+			}]
+		}
 }

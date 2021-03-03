@@ -1,7 +1,7 @@
 <template>
 	<view style="height: 100%;padding: 0 22rpx;">
 		<view class="wrap">
-			<u-swiper height="475rpx" :list="swiperList" ></u-swiper>
+			<u-swiper height="400" :list="swiperList" ></u-swiper>
 		</view>
 		
 		<!-- 排名 -->
@@ -10,7 +10,11 @@
 		<!-- 流程 -->
 		<process-introduce></process-introduce>
 		<view class="match-btn"@click="toDoMessage">
-			随缘匹配
+			<image
+				style="height: 116rpx;width: 221rpx;" 
+				src="../../static/imgs/button1.png" 
+				mode="">
+			</image>
 		</view>
 		
 		<button open-type="getUserInfo"></button>
@@ -72,15 +76,13 @@
 	width: 100%;
 }
 .match-btn{
-	width: 250rpx;
-	height: 250rpx;
-	line-height: 250rpx;
-	border-radius: 50%;
-	margin: 0 auto;
+	// width: 250rpx;
+	// height: 250rpx;
+	
 	margin-top: 40rpx;
-	background-color: #de8d05;
+	// background-color: #de8d05;
 	text-align: center;
-	font-size: 50rpx;
-	font-weight: 500;
+	// font-size: 50rpx;
+	// font-weight: 500;
 }
 </style>

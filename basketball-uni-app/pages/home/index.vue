@@ -14,13 +14,13 @@
 			<button type="primary" @click="useCommon">使用公用模块</button>
 			<button type="primary" @click="upload">上传文件</button>
 		</view> -->
-		
-		<!-- 介绍页 -->
-		<introduce v-if="current === 0"></introduce>
-		
-		<!-- 我的页 -->
-		<mine v-if="current === 1"></mine>
-		
+		<view class="u-page">
+			<!-- 介绍页 -->
+			<introduce></introduce>
+			
+			<!-- 我的页 -->
+			<!-- <mine v-if="current === 1"></mine> -->
+		</view>
 		<u-tabbar v-model="current" :list="list" @change="changeTab"></u-tabbar>
 	</view>
 </template>
@@ -48,6 +48,7 @@
 						text: '首页',
 						isDot: true,
 						customIcon: false,
+						pagePath: '/pages/home/index'
 					},
 					{
 						iconPath: "account",
@@ -55,6 +56,7 @@
 						text: '我的',
 						isDot: false,
 						customIcon: false,
+						pagePath: '/pages/mine/index'
 					}
 				]
 			}
@@ -64,6 +66,7 @@
 				uni.navigateTo({url: '/pages/randomMatch/index'})
 			},
 			changeTab(index) {
+				this.current = index
 				// if(index === 1) {
 				// 	this.current = 'mine'
 				// }else{
@@ -255,7 +258,6 @@
 
 <style lang="scss" scoped>
 	.content {
-		background-color: #F1F1F1;
 		height: 100vh;
 	// 	padding: 30rpx 40rpx;
 	// 	.game-card{

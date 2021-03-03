@@ -63,11 +63,12 @@
 							{
 								name: '个人能力分析',
 								data: [
-									3,
-									speedTotal/gameLength,
-									staminaTotal/gameLength, 
-									experienceTotal/gameLength,
-									defensiveTotal/gameLength
+									// 3,
+									// speedTotal/gameLength,
+									// staminaTotal/gameLength, 
+									// experienceTotal/gameLength,
+									// defensiveTotal/gameLength
+									5, 6, 9, 7, 7
 								],
 								color: '#f57463',
 							}

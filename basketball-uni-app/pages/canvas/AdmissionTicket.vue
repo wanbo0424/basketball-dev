@@ -2,7 +2,7 @@
 	<view style="background-color: #000000;width: 3000rpx;height: 100vh;display: flex;">
 		<!-- <image style="width: 100%;" :src="ticketImage || ''" mode="widthFix" ></image> -->
 		
-		<canvas class="hideCanvas" style="width: 1300rpx;height:800rpx;transform: rotate(90deg);" id="ticket_id" canvas-id="ticket_id" ></canvas>
+		<canvas class="hideCanvas" style="width: 1300rpx;height:800rpx" id="ticket_id" canvas-id="ticket_id" ></canvas>
 	</view>
 </template>
 
