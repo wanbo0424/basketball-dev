@@ -17,6 +17,8 @@
 				this.ctx.fillRect(0, 0, 190 * 2, 79 * 2)
 				let ticketTmpPath = await this.downLoadFile('http://39.101.161.231/images/ticket.png')
 				this.ctx.drawImage(ticketTmpPath, 0, 0, 190 * 2, 79 * 2)
+				
+				this.drawTeam()
 				this.ctx.draw()
 			},
 			// 下载文件到临时路径

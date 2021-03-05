@@ -25,8 +25,8 @@
 		},
 		mounted() {
 			_self = this;
-			this.cWidth=uni.upx2px(400);
-			this.cHeight=uni.upx2px(400);
+			this.cWidth=uni.upx2px(750);
+			this.cHeight=uni.upx2px(750);
 			this.getServerData();
 		},
 		computed: {
@@ -63,11 +63,12 @@
 							{
 								name: '个人能力分析',
 								data: [
-									3,
-									speedTotal/gameLength,
-									staminaTotal/gameLength, 
-									experienceTotal/gameLength,
-									defensiveTotal/gameLength
+									// 3,
+									// speedTotal/gameLength,
+									// staminaTotal/gameLength, 
+									// experienceTotal/gameLength,
+									// defensiveTotal/gameLength
+									5,5,6,8,9
 								],
 								color: '#f57463',
 							}
@@ -98,7 +99,9 @@
 					height: _self.cHeight*_self.pixelRatio,
 					extra: {
 						radar: {
-							max: 10//雷达数值的最大值
+							max: 10,//雷达数值的最大值
+							gridColor: '#c0cc08',
+							labelColor: '#f57463'
 						}
 					},
 					// colors: ['#1890ff', '#2fc25b', '#facc14', '#f04864', '#8543e0', '#90ed7d']
@@ -114,15 +117,15 @@
 	margin: 40rpx 0;
 }
 .qiun-charts {
-	width: 375rpx;
-	height: 375rpx;
+	width: 750rpx;
+	height: 750rpx;
 	background-color: #FFFFFF;
 	border-radius: 18rpx;
 }
 	
 .charts {
-	width: 375rpx;
-	height: 375rpx;
+	width: 750rpx;
+	height: 750rpx;
 	border-radius: 18rpx;
 	background-color: #FFFFFF;
 }
