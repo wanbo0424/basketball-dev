@@ -6,7 +6,16 @@
 			</view>
 			
 			<view class="share_button">
-				<u-button type="success">发给朋友</u-button>
+				<button open-type="share" 
+				style="
+				color: #FFFFFF;border-color: #19be6b;font-size: 30rpx;
+				height: 80rpx;
+				line-height: 80rpx;
+				background-color: #19be6b;text-align: center;">
+					<!-- <u-button type="success">
+					</u-button> -->
+					发送给朋友
+				</button>
 				<u-button type="success" @click="saveImage">朋友圈</u-button>
 			</view>
 		</u-mask>

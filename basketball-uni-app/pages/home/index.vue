@@ -45,7 +45,7 @@
 					{
 						iconPath: "home",
 						selectedIconPath: "home-fill",
-						text: '首页',
+						text: '预约组队',
 						isDot: true,
 						customIcon: false,
 						pagePath: '/pages/home/index'
@@ -53,7 +53,7 @@
 					{
 						iconPath: "account",
 						selectedIconPath: "account-fill",
-						text: '我的',
+						text: '个人主页',
 						isDot: false,
 						customIcon: false,
 						pagePath: '/pages/mine/index'

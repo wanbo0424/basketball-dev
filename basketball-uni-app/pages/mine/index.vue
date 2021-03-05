@@ -4,23 +4,29 @@
 			<view class="avatar_info"> 
 				<image style="height: 120rpx;width: 120rpx;border-radius: 10rpx;" :src="userInfo.avatarUrl" mode=""></image>
 				<h2 style="color:#fff;padding-top: 16rpx;">{{userInfo.nickName}}</h2>
+				<h2 style="color:#fff;padding-top: 16rpx;">余额: 99</h2>
 			</view>
 			
 			<view class="gameInfo">
 				<view class="" style="display: flex;">
-					<view class="">
+					<view class="" style="width: 50%;">
 						积分:444
 					</view>
-					<view class="" style="margin-left: 30rpx;">
+					<view class="" style="width: 50%;">
 						得分:333
 					</view>
 				</view>
-				<view class="" style="display: flex;">
-					<view class="">
+				<view class="" style="display: flex;padding-top: 20rpx;">
+					<view class="" style="width: 50%;">
 						排位:58
 					</view>
-					<view class="" style="margin-left: 30rpx;">
+					<view class="" style="width: 50%;">
 						胜率:30%
+					</view>
+				</view>
+				<view class="" style="display: flex;padding-top: 20rpx;">
+					<view class="" style="width: 50%;">
+						mvp次数:58
 					</view>
 				</view>
 			</view>
@@ -29,7 +35,7 @@
 		<skill-map ref="map"></skill-map>
 		
 		<view class="navigation_list">
-			<u-grid :col="4" :border="false">
+			<!-- <u-grid :col="4" :border="false">
 				<u-grid-item @click="getOrderList">
 					<u-icon name="74wodedingdan" custom-prefix="custom-icon" color="#f57463" :size="54"></u-icon>
 					<view class="grid-text" >全部订单</view>
@@ -46,7 +52,7 @@
 					<u-icon name="yiwancheng" custom-prefix="custom-icon" color="#f57463"  :size="54"></u-icon>
 					<view class="grid-text" >已完成</view>
 				</u-grid-item >
-			</u-grid>
+			</u-grid> -->
 			
 			<u-grid :col="4" :border="false">
 				<u-grid-item @click="getOrderList">
@@ -84,7 +90,7 @@
 					{
 						iconPath: "home",
 						selectedIconPath: "home-fill",
-						text: '首页',
+						text: '预约组队',
 						isDot: true,
 						customIcon: false,
 						pagePath: '/pages/home/index'
@@ -92,7 +98,7 @@
 					{
 						iconPath: "account",
 						selectedIconPath: "account-fill",
-						text: '我的',
+						text: '个人主页',
 						isDot: false,
 						customIcon: false,
 						pagePath: '/pages/mine/index'
@@ -133,7 +139,7 @@
 	.user_info{
 		display: flex;
 		align-items: center;
-		height: 210rpx;
+		height: 356rpx;
 		// margin: 0 30rpx;
 		// padding-left: 45rpx;
 		background-color: #f57463;
@@ -167,5 +173,9 @@
 	}
 	
 }
-
+/deep/{
+	.u-grid-item-box{
+		background-color: #000000;
+	}
+}
 </style>

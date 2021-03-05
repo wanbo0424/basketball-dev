@@ -14,12 +14,12 @@
 			mode="">
 		</image>
 		<u-checkbox 
-			style="position: absolute;bottom: 50rpx;"  
+			style="position: absolute;bottom: 50rpx;font-weight: bold;"  
 			v-model="checked" 
 			:label-disabled="true" 
 			:disabled="false" 
 			@change="changeBox">
-				<span>我已阅读并同意<a style="position: relative;display: inline-block;width: 300rpx;text-decoration: underline">篮球比赛免责协议</a></span>
+				<span>我已阅读并同意<a style="position: relative;display: inline-block;width: 300rpx;text-decoration: underline">篮球比赛用户协议</a></span>
 		</u-checkbox>
 		
 		<view class="share_button_view" 
@@ -27,6 +27,9 @@
 				$refs.share.draw()
 			}">
 			<u-icon name="share" custom-prefix="custom-icon" color="#fff" size="30" ></u-icon>
+			<view class="" style="color: #FFFFFF;font-weight: 500;">
+				分享
+			</view>
 		</view>
 		
 		<!-- <share-poster ref="share"></share-poster> -->
@@ -107,15 +110,16 @@
 			text-align: center;
 		}
 		.share_button_view{
-			height: 60rpx;
-			width: 60rpx;
+			height: 86rpx;
+			width: 86rpx;
 			display: flex;
+			flex-direction: column;
 			justify-content: center;
 			align-items: center;
 			border-radius: 50%;
 			background-color: #ff0000;
 			position: fixed;
-			bottom: 16rpx;
+			bottom: 160rpx;
 			right: 16rpx;
 		}
 	}
