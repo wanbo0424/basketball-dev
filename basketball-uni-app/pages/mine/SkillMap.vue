@@ -68,7 +68,7 @@
 									// staminaTotal/gameLength, 
 									// experienceTotal/gameLength,
 									// defensiveTotal/gameLength
-									5,5,6,8,9
+									5, 6, 9, 7, 7
 								],
 								color: '#f57463',
 							}

@@ -57,7 +57,8 @@
 					})
 					return
 				}
-				uni.redirectTo({url: '/pages/home/index'})
+				// uni.redirectTo({url: '/pages/home/index'})
+				uni.switchTab({url: '/pages/home/index'})
 			},
 			changeBox(e) {
 				this.canToHome = e.value

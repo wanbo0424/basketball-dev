@@ -1,6 +1,8 @@
 <template>
-	<view style="background-color: #fff;height: 100%;">
-		<canvas class="hideCanvas" style="border:1px solid #1e1e1e;width: 1500rpx;height: 2000rpx;" id="ticket_id" canvas-id="ticket_id" ></canvas>
+	<view style="background-color: #000000;width: 3000rpx;height: 100vh;display: flex;">
+		<!-- <image style="width: 100%;" :src="ticketImage || ''" mode="widthFix" ></image> -->
+		
+		<canvas class="hideCanvas" style="width: 1300rpx;height:800rpx" id="ticket_id" canvas-id="ticket_id" ></canvas>
 	</view>
 </template>
 
@@ -8,18 +10,24 @@
 	export default {
 		data() {
 			return {
-				ctx: null
+				ctx: null,
+				ticketImage: ''
 			}
 		},
 		methods: {
 			async drawTicket() {
 				this.ctx.setFillStyle('#FFFFFF')
-				this.ctx.fillRect(0, 0, 190 * 2, 79 * 2)
+				this.ctx.fillRect(0, 0, 375 * 2, 156 * 2)
 				let ticketTmpPath = await this.downLoadFile('http://39.101.161.231/images/ticket.png')
-				this.ctx.drawImage(ticketTmpPath, 0, 0, 190 * 2, 79 * 2)
+				this.ctx.drawImage(ticketTmpPath, 0, 0, 375 * 2, 156 * 2)
 				
-				this.drawTeam()
-				this.ctx.draw()
+				this.drawTeamText()
+				this.drawTeamTime()
+				const _this = this
+				this.ctx.draw(false, () => {
+					// uni.hideLoading()
+					// _this.canvasToImage()
+				})
 			},
 			// 下载文件到临时路径
 			downLoadFile(imgUrl) {
@@ -37,6 +45,51 @@
 					});
 				});
 			},
+			
+			drawTeamText() {
+				this.ctx.setFontSize(24);
+				this.ctx.setFillStyle('#bf073e')
+				this.ctx.setTextBaseline('middle');
+				this.ctx.setTextAlign('center');
+				this.ctx.fillText('湖人', 80, 255)
+				this.ctx.fillText('篮网', 200, 255)
+			},
+			
+			drawTeamTime() {
+				this.ctx.setFontSize(16);
+				this.ctx.setFillStyle('#bf073e')
+				this.ctx.setTextBaseline('middle');
+				this.ctx.setTextAlign('center');
+				this.ctx.fillText('05', 255, 240)
+				this.ctx.fillText('23', 295, 240)
+				this.ctx.setFontSize(20);
+				this.ctx.fillText('18', 265, 270)
+				this.ctx.fillText('00', 305, 270)
+			},
+			
+			canvasToImage() {
+				const _this = this
+				uni.canvasToTempFilePath({
+				  x: 0,
+				  y: 0,
+				  width: 375 * 2,
+				  height: 156 * 2,
+				  destWidth: 375 * 2,
+				  destHeight: 156 * 2,
+				  canvasId: 'ticket_id',
+				  quality: 1,
+				  fileType: 'jpg',
+				  success: function(res) {
+				    // 在H5平台下，tempFilePath 为 base64
+					_this.ticketImage = res.tempFilePath
+					console.log(_this.ticketImage)
+					// _this.showMask = true
+				  },
+				  fail: function(err) {
+					  console.log('canvas生成图片临时路径失败', err)
+				  }				  
+				}, this)
+			},
 		},
 		mounted(){
 			this.ctx = uni.createCanvasContext('ticket_id', this)
@@ -45,6 +98,11 @@
 	}
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+.hideCanvas {
+	// position: fixed;
+	// top: -99999upx;
+	// left: -99999upx;
+	// z-index: -99999;
+}
 </style>
