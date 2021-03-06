@@ -96,6 +96,14 @@
 						pagePath: '/pages/home/index'
 					},
 					{
+						iconPath: "dingdan",
+						selectedIconPath: "dingdan-blue",
+						text: '订单',
+						isDot: true,
+						customIcon: true,
+						pagePath: '/pages/orderList/index'
+					},
+					{
 						iconPath: "account",
 						selectedIconPath: "account-fill",
 						text: '个人主页',

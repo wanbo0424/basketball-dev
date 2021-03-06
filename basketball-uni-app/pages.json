@@ -133,6 +133,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/orderList/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"condition": { //模式配置，仅开发期间生效
 	    "current": 0, //当前激活的模式（list 的索引项）
@@ -158,7 +167,14 @@
 				// "iconPath": "home",
 				// "selectedIconPath": "home-fill",
 				// "text": "首页"
-			}, {
+			},
+			{
+				"pagePath": "pages/orderList/index"
+				// "iconPath": "home",
+				// "selectedIconPath": "home-fill",
+				// "text": "首页"
+			},
+			{
 				"pagePath": "pages/mine/index"
 				// "iconPath": "account",
 				// "selectedIconPath": "account-fill",
