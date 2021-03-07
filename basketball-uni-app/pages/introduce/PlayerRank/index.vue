@@ -2,14 +2,15 @@
 	<view class="wrap">
 		<!-- <view class="matte"> -->
 			<view class="left_area">
-					<image style="width: 30%;height: 30%;" :src="tableData[0].avator" mode=""></image>
+					<image style="width: 30%;height: 30%;" src="../../../static/imgs/rank/top2.png" mode=""></image>
 					<span>{{tableData[0].nickName}}</span>
+					<span>排位：1</span>
 			</view>
 			<view class="right_area">
 				<ul style="height: 100%;">
 					<li class="rank-item" v-for="(item, index) in goldList">
 						<view class="rank-item-content">
-							<image style="width: 80rpx;height: 80rpx;transform: scale(1);" :src="item.medalUrl" mode=""></image>
+							<image style="width: 40rpx;height: 40rpx;transform: scale(1);" :src="item.medalUrl" mode=""></image>
 						</view>
 					</li>
 				</ul>
@@ -56,8 +57,11 @@
 					{nickName: '1111', score: 432, rank: 1, medalUrl: '/static/imgs/rank/champion200.png'},
 					{nickName: '1111', score: 286, rank: 2, medalUrl: '/static/imgs/rank/second200.png'},
 					{nickName: '1111', score: 256, rank: 3, medalUrl: '/static/imgs/rank/third200.png'},
+					{nickName: '1111', score: 256, rank: 4, medalUrl: '/static/imgs/rank/surplus200.png'},
+					{nickName: '1111', score: 256, rank: 5, medalUrl: '/static/imgs/rank/surplus200.png'},
 					// {nickName: '1111', score: 156, rank: 4, medalUrl: '../../../static/imgs/rank/4 5.png'},
-				]
+				],
+				ctx: null
 			}
 		},
 		methods: {
@@ -68,10 +72,10 @@
 						// this.goldList = this.tableData.split(0, 5)
 					}
 				})
-			}
+			},
+			
 		},
 		mounted() {
-			console.log(this)
 			this.loadData()
 		}
 	}
@@ -87,7 +91,7 @@
 	// text-align: center;
 	margin-top: 28rpx;
 	width: '100%';
-	height: 275rpx;
+	height: 360rpx;
 	display: flex;
 	position:relative;
 	padding: 12rpx;
@@ -114,6 +118,7 @@
 			width: 50%;
 			padding: 10rpx;
 			display: flex;
+			flex-direction: column;
 			justify-content: center;
 			align-items: center;
 			border-right: 2rpx solid #efe9e8;
@@ -123,10 +128,12 @@
 			width: 50%;
 			.rank-item{
 				padding: 8rpx;
-				height: 33%;
+				height: 20%;
 				width: 100%;
 				margin-bottom: 1%;
-				background-color: #efe9e8;
+				// background-color: #efe9e8;
+				box-shadow:0 0 0 1px hsla(0,0%,100%,.3) inset,
+				           0 4rpx 12rpx rgba(0, 0, 0, 0.3);
 				.rank-item-content{
 					height: 100%;
 					display: flex;

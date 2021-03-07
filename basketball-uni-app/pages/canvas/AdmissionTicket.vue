@@ -23,6 +23,8 @@
 				
 				this.drawTeamText()
 				this.drawTeamTime()
+				this.drawGameInfo()
+				this.drawPlayerInfo()
 				const _this = this
 				this.ctx.draw(false, () => {
 					// uni.hideLoading()
@@ -60,11 +62,34 @@
 				this.ctx.setFillStyle('#bf073e')
 				this.ctx.setTextBaseline('middle');
 				this.ctx.setTextAlign('center');
-				this.ctx.fillText('05', 255, 240)
-				this.ctx.fillText('23', 295, 240)
+				this.ctx.fillText('05', 255, 238)
+				this.ctx.fillText('23', 295, 238)
 				this.ctx.setFontSize(20);
 				this.ctx.fillText('18', 265, 270)
 				this.ctx.fillText('00', 305, 270)
+			},
+			
+			drawGameInfo() {
+				this.ctx.setFontSize(13);
+				this.ctx.font = 'sans-serif 800';
+				this.ctx.setFillStyle('#b00639')
+				this.ctx.setTextBaseline('middle');
+				this.ctx.setTextAlign('center');
+				this.ctx.fillText('延平门', 420, 242)
+			},
+			
+			drawPlayerInfo() {
+				this.ctx.setFontSize(17);
+				this.ctx.setFillStyle('#FFFFFF')
+				this.ctx.setTextBaseline('middle');
+				this.ctx.setTextAlign('center');
+				this.ctx.translate(670, 88)
+				this.ctx.rotate(270 * Math.PI / 180)
+				this.ctx.fillText('A队',-150, 0)
+				this.ctx.fillText('红色', -80, 0)
+				this.ctx.fillText('23', 0, 0)
+				this.ctx.restore()
+				
 			},
 			
 			canvasToImage() {

@@ -1,18 +1,23 @@
 <template>
 	<view style="width: 100vw;height: 100vh;">
-		<!-- <view class=""> -->
 			<view>
-				<u-tabs-swiper ref="uTabs" :list="swiperList" :current="current" @change="tabsChange"
+				<u-tabs-swiper ref="uTabs" :list="swiperList" active-color="#f57463" :current="current" @change="tabsChange"
 				 swiperWidth="750"></u-tabs-swiper>
 			</view>
-			<swiper :current="swiperCurrent" @transition="transition" @animationfinish="animationfinish">
+			<swiper 
+			style="height: calc(100% - 80rpx);
+			background: url(../../static/imgs/order-bg.jpg);opacity: 0.7;
+			background-size: cover;
+			background-repeat:no-repeat;
+			" 
+			:current="swiperCurrent" @transition="transition" @animationfinish="animationfinish">
 				<swiper-item class="swiper-item" v-for="(item, index) in tabs" :key="index">
 					<scroll-view scroll-y style="height: 100%;width: 100%;" @scrolltolower="onreachBottom">
 						{{index}}
 					</scroll-view>
 				</swiper-item>
 			</swiper>
-		<!-- </view> -->
+			
 		<u-tabbar :list="list"></u-tabbar>
 	</view>
 </template>
