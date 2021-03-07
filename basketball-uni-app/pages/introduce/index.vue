@@ -8,7 +8,7 @@
 		<player-rank></player-rank>
 		
 		<!-- 流程 -->
-		<process-introduce style="margin-top: 26rpx;"></process-introduce>
+		<process-introduce ></process-introduce>
 		<view class="match-btn"@click="toDoMessage">
 			<image
 				style="height: 116rpx;width: 221rpx;" 
