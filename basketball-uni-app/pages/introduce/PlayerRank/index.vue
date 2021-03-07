@@ -2,9 +2,10 @@
 	<view class="wrap">
 		<!-- <view class="matte"> -->
 			<view class="left_area">
-					<image style="width: 70%;height: 60%;" src="../../../static/imgs/rank/top2.png" mode=""></image>
+					<image style="width: 18rpx;height: 18rpx;" src="../../../static/imgs/rank/top2.png" mode=""></image>
+					<image style="width: 140rpx;height: 140rpx;border: 1px solid #2C405A;" src="" alt="头像" mode=""></image>
 					<span>{{tableData[0].nickName}}</span>
-					<span>排位：1</span>
+					<span>排位</span>
 			</view>
 			<view class="right_area">
 				<ul style="height: 100%;">
@@ -116,7 +117,7 @@
 		// }
 		.left_area{
 			height: 100%;
-			width: 30%;
+			width: 40%;
 			padding: 10rpx;
 			display: flex;
 			flex-direction: column;
@@ -126,7 +127,7 @@
 		}
 		.right_area{
 			height: 100%;
-			width: 70%;
+			width: 60%;
 			.rank-item{
 				padding: 8rpx;
 				height: 20%;
