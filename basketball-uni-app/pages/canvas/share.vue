@@ -26,6 +26,7 @@
 </template>
 
 <script>
+	import http from '../../api/index.js'
 	export default {
 		data() {
 			return {
@@ -44,6 +45,7 @@
 					title: '生成分享图片',
 					mask: true
 				})
+				let codePath = await this.getCodeImage()
 				this.ctx.setFillStyle('#FFFFFF')
 				this.ctx.fillRect(0, 0, 320 * 2, 440 * 2)
 
@@ -70,6 +72,16 @@
 				this.ctx.draw(false, () => {
 					uni.hideLoading()
 					_this.canvasToImage()
+				})
+			},
+			getCodeImage() {
+				return http.post('weapp/expend/getWxacode', {
+ "path":"page/index/index",
+ "width":430
+}).then(res => {
+					if(res.data.code === 0) {
+						return res.data.data
+					}
 				})
 			},
 			// 下载文件到临时路径

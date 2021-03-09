@@ -10,6 +10,7 @@ class ExpendController extends Controller {
       dataType: 'json',
     });
     let result = {};
+    console.log(ctx.request.body, 'ctx.request.body');
     if (access_token) {
       result = await ctx.curl(`https://api.weixin.qq.com/wxa/getwxacode?access_token=${access_token}`, {
         method: 'POST',
@@ -21,12 +22,12 @@ class ExpendController extends Controller {
       });
       const rootPath = '/home/www_wanbo_com';
       const codePath = '/images/code.jpeg';
-
-      if (!fs.readFileSync(rootPath + codePath)) {
-        fs.writeFileSync(rootPath + codePath, result.data, function(err) {
-          if (err) { console.log(err); }
-        });
-      }
+      console.log(result.data, 'code图片');
+      // if (!fs.readFileSync(rootPath + codePath)) {
+      fs.writeFileSync(rootPath + codePath, result.data, function(err) {
+        if (err) { console.log(err); }
+      });
+      // }
       this.success(codePath);
     }
 

@@ -50,7 +50,7 @@
 		
 		<!-- <share-poster ref="share"></share-poster> -->
 		<custom-canvas ref="share"></custom-canvas>
-		<u-top-tips ref="uTips"></u-top-tips>
+		<u-toast ref="uToast" />
 	</view>
 </template>
 <script>
@@ -120,8 +120,9 @@
 		methods:{
 			toHome() {
 				if(!this.canToHome) {
-					this.$refs.uTips.show({
+					this.$refs.uToast.show({
 						title: '请阅读协议并同意',
+						type: 'default',
 						duration: '2000'
 					})
 					return
