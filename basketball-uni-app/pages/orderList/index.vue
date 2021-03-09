@@ -1,21 +1,23 @@
 <template>
 	<view style="width: 100vw;height: 100vh;">
 			<view>
-				<u-tabs-swiper ref="uTabs" :list="swiperList" active-color="#f57463" :current="current" @change="tabsChange"
+				<u-tabs-swiper ref="uTabs" class="tabs-swiper" :list="swiperList" active-color="#f57463" :current="current" @change="tabsChange"
 				 swiperWidth="750"></u-tabs-swiper>
 			</view>
 			<swiper 
-			style="height: calc(100% - 80rpx);
-			background: url(../../static/imgs/order-bg.jpg);opacity: 0.7;
-			background-size: cover;
-			background-repeat:no-repeat;
-			" 
+				style="height: calc(100% - 80rpx);
+				padding-top: 90rpx;
+				background: url(../../static/imgs/order-bg.jpg);opacity: 0.7;
+				background-size: cover;
+				background-repeat:no-repeat;
+				" 
 			:current="swiperCurrent" @transition="transition" @animationfinish="animationfinish">
-				<swiper-item class="swiper-item" v-for="(item, index) in tabs" :key="index">
-					<scroll-view scroll-y style="height: 100%;width: 100%;" @scrolltolower="onreachBottom">
-						{{index}}
+				<swiper-item class="swiper-item" v-for="(item, index) in swiperList" :key="index">
+					<scroll-view scroll-y v-if="item.status === 0" style="height: 100%;width: 100%;" @scrolltolower="onreachBottom">
+						<to-be-entered></to-be-entered>
 					</scroll-view>
 				</swiper-item>
+				
 			</swiper>
 			
 		<u-tabbar :list="list"></u-tabbar>
@@ -23,7 +25,9 @@
 </template>
 
 <script>
+	import ToBeEntered from './ToBeEntered'
 	export default {
+		components:{ToBeEntered},
 		data() {
 			return {
 				current: 0,
@@ -55,10 +59,10 @@
 					}
 				],
 				swiperList: [
-					{name: '待支付'},
-					{name: '待参赛'},
-					{name: '已参赛'},
-					{name: '订单记录'},
+					// {name: '待支付'},
+					{name: '待参赛', status: 0},
+					{name: '已参赛', status: 1},
+					{name: '订单记录', status: 2},
 				],
 				tabs: [
 					1,2,3,4
@@ -90,7 +94,14 @@
 <style lang="scss" scoped>
 /deep/{
 	.u-tabs-item{
-		width: 25%;
+		width: 33%;
 	}
+}
+.tabs-swiper{
+	position: fixed;
+	/* top: 6px; */
+	width: 100%;
+	background: #fffff;
+	z-index: 10;
 }
 </style>
