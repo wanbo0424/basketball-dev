@@ -2,8 +2,10 @@
 	<view class="wrap">
 		<!-- <view class="matte"> -->
 			<view class="left_area">
-					<image style="width: 18rpx;height: 18rpx;" src="../../../static/imgs/rank/top2.png" mode=""></image>
+				<image style="width: 90rpx;height: 90rpx;position: absolute;top: 0;left: 0;" src="../../../static/imgs/rank/top2.png" mode=""></image>
+				<view style="display: flex;margin-top: 40rpx;">
 					<image style="width: 140rpx;height: 140rpx;border: 1px solid #2C405A;" src="" alt="头像" mode=""></image>
+				</view>
 					<span>{{tableData[0].nickName}}</span>
 					<span>排位</span>
 			</view>
@@ -14,6 +16,7 @@
 							<image style="width: 40rpx;height: 40rpx;transform: scale(1);" :src="item.medalUrl" mode=""></image>
 						</view>
 					</li>
+					<!-- <image height="50" src="../../../static/imgs/rank/detail.png" mode=""></image> -->
 				</ul>
 			</view>
 			<!-- <image style="float: right;" src="../../../static/imgs/rank/detail.png"></image> -->
@@ -59,8 +62,8 @@
 					{nickName: '1111', score: 432, rank: 1, medalUrl: '/static/imgs/rank/champion200.png'},
 					{nickName: '1111', score: 286, rank: 2, medalUrl: '/static/imgs/rank/second200.png'},
 					{nickName: '1111', score: 256, rank: 3, medalUrl: '/static/imgs/rank/third200.png'},
-					{nickName: '1111', score: 256, rank: 4, medalUrl: '/static/imgs/rank/surplus200.png'},
-					{nickName: '1111', score: 256, rank: 5, medalUrl: '/static/imgs/rank/surplus200.png'},
+					// {nickName: '1111', score: 256, rank: 4, medalUrl: '/static/imgs/rank/surplus200.png'},
+					// {nickName: '1111', score: 256, rank: 5, medalUrl: '/static/imgs/rank/surplus200.png'},
 					// {nickName: '1111', score: 156, rank: 4, medalUrl: '../../../static/imgs/rank/4 5.png'},
 				],
 				ctx: null
@@ -93,7 +96,7 @@
 	// text-align: center;
 	margin-top: 28rpx;
 	width: '100%';
-	height: 360rpx;
+	height: 292rpx;
 	display: flex;
 	position:relative;
 	padding: 12rpx;
@@ -130,7 +133,7 @@
 			width: 60%;
 			.rank-item{
 				padding: 8rpx;
-				height: 20%;
+				height: 25%;
 				width: 100%;
 				margin-bottom: 1%;
 				// background-color: #efe9e8;

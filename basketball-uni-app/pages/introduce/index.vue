@@ -9,6 +9,16 @@
 		
 		<!-- 流程 -->
 		<process-introduce ></process-introduce>
+		
+		<!--  -->
+		<a
+			style="
+			text-align: center;
+			position: relative;
+			margin-top: 40rpx;font-size: 28rpx;width: 100%;
+			color: #fd6060;text-decoration: underline;" 
+			@click="showModal=true">活动内容及规划
+		</a>
 		<view class="match-btn"@click="toDoMessage">
 			<image
 				style="height: 116rpx;width: 221rpx;" 

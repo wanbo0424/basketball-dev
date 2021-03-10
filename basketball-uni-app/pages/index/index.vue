@@ -121,7 +121,7 @@
 			toHome() {
 				if(!this.canToHome) {
 					this.$refs.uToast.show({
-						title: '请阅读协议并同意',
+						title: '请勾选页面下方的“篮球比赛用户协议”',
 						type: 'default',
 						duration: '2000'
 					})
