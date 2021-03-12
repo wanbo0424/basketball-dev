@@ -156,7 +156,7 @@
 						uniCloud.callFunction({
 						  name: 'uni-api', // 要调用的云函数名称
 						  data: {
-						    action: 'hello/sayHello', // 路由地址，对应 controller 下 user.js 的 login 方法
+						    action: 'player/apply', // 路由地址，对应 controller 下 user.js 的 login 方法
 						    // 参数列表
 						    data: this.form
 						  },
