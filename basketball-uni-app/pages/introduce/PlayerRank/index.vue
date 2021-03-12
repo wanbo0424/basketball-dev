@@ -2,20 +2,40 @@
 	<view class="wrap">
 		<!-- <view class="matte"> -->
 			<view class="left_area">
-				<image style="width: 90rpx;height: 90rpx;position: absolute;top: 0;left: 0;" src="../../../static/imgs/rank/cup.png" mode=""></image>
-				<view style="display: flex;margin-top: 40rpx;">
-					<image style="width: 140rpx;height: 140rpx;border: 1px solid #2C405A;" src="" alt="头像" mode=""></image>
+				<image style="height: 100rpx;width: 140rpx;position: absolute;top: 0;left: 0;" src="../../../static/imgs/rank/rank.png" mode=""></image>	
+				<view style="display: flex;margin-top: 84rpx;position: relative;">
+					<image 
+					style="width: 116rpx;height: 116rpx;border: 1px solid #2C405A;border-radius: 12rpx" 
+					:src="userInfo.avatarUrl" alt="头像" mode=""></image>
+					<image style="width: 104rpx;
+						height: 40rpx;
+						position: absolute;
+						right: -38rpx;
+						top: -26rpx;
+						transform: rotate(28deg);" src="../../../static/imgs/rank/crown.png" mode=""></image>
 				</view>
-					<span>{{tableData[0].nickName}}</span>
-					<span>排位</span>
+				<span style="display: inline-block;margin-top: 10rpx;">{{tableData[0].nickName}}</span>
+				<span style="display: inline-block;margin-top: 10rpx;">积分:908</span>
+				<!-- <image style="width: 70rpx;height: 70rpx;" src="../../../static/imgs/rank/top2.png" mode=""></image> -->
 			</view>
 			<view class="right_area">
 				<ul style="height: 100%;">
 					<li class="rank-item" v-for="(item, index) in goldList">
 						<view class="rank-item-content">
-							<image style="width: 40rpx;height: 40rpx;transform: scale(1);" :src="item.medalUrl" mode=""></image>
+							<image style="width: 50rpx;height: 50rpx;transform: scale(1);margin-top: 9rpx;" :src="item.medalUrl" mode=""></image>
+							<image style="width: 60rpx;height: 60rpx;margin-left: 10rpx;" :src="userInfo.avatarUrl" mode=""></image>
+							<view class="" style="display: flex;flex-direction: column;">
+								<span style="font-size: 22rpx;margin-left: 20rpx;">{{tableData[0].nickName}}</span>
+								<view class="">
+									<span style="font-size: 22rpx;margin-left: 20rpx;">积分:362</span>
+									<span style="font-size: 22rpx;margin-left: 20rpx;">胜率:72.6%</span>
+								</view>
+							</view>
+							
+							
 						</view>
 					</li>
+					<a style="float: right;">查看详情</a>
 					<!-- <image height="50" src="../../../static/imgs/rank/detail.png" mode=""></image> -->
 				</ul>
 			</view>
@@ -54,6 +74,7 @@
 
 <script>
 	import http from '../../../api/index.js'
+	import { mapGetters } from 'vuex'
 	export default {
 		data() {
 			return {
@@ -69,6 +90,11 @@
 				ctx: null
 			}
 		},
+		computed: {
+			...mapGetters([
+			  'userInfo',
+			])
+		 },
 		methods: {
 			loadData() {
 				http.get('weapp/player/getPlayerRank').then(res => {
@@ -96,7 +122,7 @@
 	// text-align: center;
 	margin-top: 28rpx;
 	width: '100%';
-	height: 292rpx;
+	height: 340rpx;
 	display: flex;
 	position:relative;
 	padding: 12rpx;
@@ -133,7 +159,7 @@
 			width: 60%;
 			.rank-item{
 				padding: 8rpx;
-				height: 25%;
+				height: 30%;
 				width: 100%;
 				margin-bottom: 1%;
 				// background-color: #efe9e8;
