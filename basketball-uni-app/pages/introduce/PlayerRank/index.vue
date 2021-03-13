@@ -31,58 +31,37 @@
 									<span style="font-size: 22rpx;margin-left: 20rpx;">胜率:72.6%</span>
 								</view>
 							</view>
-							
-							
 						</view>
 					</li>
-					<a style="float: right;">查看详情</a>
-					<!-- <image height="50" src="../../../static/imgs/rank/detail.png" mode=""></image> -->
+					<span 
+						style="color: #fbf8f4;
+						text-shadow: 0 0 2rpx red, 0 0 2rpx red, 0 0 10rpx red, 0 0 10rpx red;
+						float: right;
+						margin-top: 6rpx;"
+						@click="$refs.rankDetail.init()"
+						>
+						查看详情
+					</span>
 				</ul>
 			</view>
-			<!-- <image style="float: right;" src="../../../static/imgs/rank/detail.png"></image> -->
-		<!-- </view> -->
-		<!-- <u-row >
-			<u-col span="3">
-				<view class="flex-center demo-layout bg-purple bg-purple-dark">排名</view>
-			</u-col>
-			<u-col span="3">
-				<view class="flex-center demo-layout bg-purple-dark">昵称</view>
-			</u-col>
-			<u-col span="3">
-				<view class="flex-center demo-layout bg-purple-dark">个人得分</view>
-			</u-col>
-			<u-col span="3">
-				<view class="flex-center demo-layout bg-purple-dark">积分</view>
-			</u-col>
-		</u-row>
-		<u-row v-for="(item, index) in tableData" >
-			<u-col span="3">
-				<view class="flex-center demo-layout bg-purple-light">{{index + 1}}</view>
-			</u-col>
-			<u-col span="3">
-				<view class="flex-center demo-layout bg-purple-light">{{item.nickName}}</view>
-			</u-col>
-			<u-col span="3">
-				<view class="flex-center demo-layout bg-purple-light">{{item.personScoreTotal}}</view>
-			</u-col>
-			<u-col span="3">
-				<view class="flex-center demo-layout bg-purple-light">{{item.evaluationScoreTotal}}</view>
-			</u-col>
-		</u-row> -->
+			
+			<rank-detail ref="rankDetail"></rank-detail>
 	</view>
 </template>
 
 <script>
 	import http from '../../../api/index.js'
+	import RankDetail from './RankDetail'
 	import { mapGetters } from 'vuex'
 	export default {
+		components:{RankDetail},
 		data() {
 			return {
 				tableData: [],
 				goldList: [
-					{nickName: '1111', score: 432, rank: 1, medalUrl: '/static/imgs/rank/first.png'},
-					{nickName: '1111', score: 286, rank: 2, medalUrl: '/static/imgs/rank/second.png'},
-					{nickName: '1111', score: 256, rank: 3, medalUrl: '/static/imgs/rank/third.png'},
+					{nickName: '1111', score: 432, rank: 1, medalUrl: '/static/imgs/rank/champion200.png'},
+					{nickName: '1111', score: 286, rank: 2, medalUrl: '/static/imgs/rank/second200.png'},
+					{nickName: '1111', score: 256, rank: 3, medalUrl: '/static/imgs/rank/third200.png'},
 					// {nickName: '1111', score: 256, rank: 4, medalUrl: '/static/imgs/rank/surplus200.png'},
 					// {nickName: '1111', score: 256, rank: 5, medalUrl: '/static/imgs/rank/surplus200.png'},
 					// {nickName: '1111', score: 156, rank: 4, medalUrl: '../../../static/imgs/rank/4 5.png'},

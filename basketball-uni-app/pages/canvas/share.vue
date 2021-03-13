@@ -7,16 +7,20 @@
 			
 			<view class="share_button">
 				<button open-type="share" 
-				style="
-				color: #FFFFFF;border-color: #19be6b;font-size: 30rpx;
-				height: 80rpx;
-				line-height: 80rpx;
-				background-color: #19be6b;text-align: center;">
+					style="
+					color: #FFFFFF;border-color: #19be6b;font-size: 30rpx;
+					height: 80rpx;
+					line-height: 80rpx;
+					background-color: #19be6b;text-align: center;">
 					<!-- <u-button type="success">
 					</u-button> -->
+					<u-icon custom-prefix="custom-icon" name="weixin"></u-icon>
 					发送给朋友
 				</button>
-				<u-button type="success" @click="saveImage">朋友圈</u-button>
+				<u-button type="success" @click="saveImage">
+					<u-icon custom-prefix="custom-icon" name="pengyouquan"></u-icon>
+					朋友圈
+				</u-button>
 			</view>
 		</u-mask>
 		

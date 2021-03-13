@@ -45,7 +45,7 @@
 			return {
 				swiperList: [
 					{
-						image: 'https://cdn.uviewui.com/uview/swiper/1.jpg',
+						image: '/static/imgs/banner_01.png',
 						title: '昨夜星辰昨夜风，画楼西畔桂堂东'
 					},
 					{
