@@ -21,16 +21,7 @@
 			"style": {
 				"navigationBarTitleText": "填写信息"
 			}
-		},
-		{
-            "path" : "pages/signSuccess/index",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
+		}
         ,{
             "path" : "pages/introduce/index",
             "style" :                                                                                    
