@@ -1,5 +1,6 @@
 <template>
 	<view v-if="show"
+		class="rank-model"
 		style="position: fixed;
 		overflow: hidden;
 		background-color: #333333;
@@ -36,6 +37,7 @@
 					</view>
 				</view>
 			</view>
+			<view class="close-btn" @click="show = false">×</view>	
 		</view>
 	</view>
 </template>
@@ -78,6 +80,20 @@
 </script>
 
 <style lang="scss" scoped>
+	.close-btn{
+		width: 80rpx;
+		height: 80rpx;
+		line-height: 80rpx;
+		color: #FFFFFF;
+		border: 2rpx solid #FFFFFF;
+		border-radius: 50%;
+		font-size: 46rpx;
+		position: relative;
+		left: 50%;
+		margin-top: 20rpx;
+		transform: translate(-50%);
+		text-align: center;
+	}
 .warp{
 	width: 90%;
 	height: 80%;

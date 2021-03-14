@@ -29,6 +29,11 @@
 						mvp次数:58
 					</view>
 				</view>
+				<view class="" style="display: flex;padding-top: 20rpx;">
+					<view class="" style="width: 50%;">
+						段位：名人堂
+					</view>
+				</view>
 			</view>
 		</view>
 		

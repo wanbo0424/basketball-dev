@@ -140,8 +140,7 @@
 		}
 	}
 	.u-update-content{
-		// max-height: 900rpx;
-		// overflow-y: scroll;
+		height: 700rpx;
 	}
 	.content{
 		// background-color: black;

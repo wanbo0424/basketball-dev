@@ -18,7 +18,7 @@
 			position: relative;
 			margin-top: 40rpx;font-size: 28rpx;width: 100%;
 			color: #fd6060;text-decoration: underline;" 
-			@click="showModal=true">活动内容及规划
+			@click="showModal=true">怎么组队？
 		</a>
 		<view class="match-btn"@click="toDoMessage">
 			<image
@@ -27,7 +27,16 @@
 				mode="">
 			</image>
 		</view>
-		
+		<view class="share_button_view"
+			@click="() => {
+				$refs.share.draw()
+			}">
+			<u-icon name="share" custom-prefix="custom-icon" color="#fff" size="30" ></u-icon>
+			<view class="" style="color: #FFFFFF;font-weight: 500;">
+				分享
+			</view>
+		</view>
+		<custom-canvas ref="share"></custom-canvas>
 		<button open-type="getUserInfo"></button>
 	</view>
 </template>
@@ -37,12 +46,14 @@
 	import PlayerRank from './PlayerRank'
 	import ProcessIntroduce from './ProcessIntroduce'
 	import Toast from '../index/Toast'
+	import CustomCanvas from '../canvas/share'
 	// import { mapActions } from 'vuex'
 	export default {
 		components:{
 			PlayerRank,
 			ProcessIntroduce,
-			ColToast: Toast
+			ColToast: Toast,
+			CustomCanvas
 		},
 		data() {
 			return {
@@ -92,10 +103,23 @@
 	// width: 250rpx;
 	// height: 250rpx;
 	
-	margin-top: 40rpx;
+	margin-top: 20rpx;
 	// background-color: #de8d05;
 	text-align: center;
 	// font-size: 50rpx;
 	// font-weight: 500;
+}
+.share_button_view{
+	height: 86rpx;
+	width: 86rpx;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	background-color: #ff0000;
+	position: fixed;
+	bottom: 260rpx;
+	right: 16rpx;
 }
 </style>

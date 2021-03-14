@@ -14,6 +14,9 @@
 				<scroll-view scroll-y v-if="item.status === 0" style="height: 100%;width: 100%;" @scrolltolower="onreachBottom">
 					<to-be-entered></to-be-entered>
 				</scroll-view>
+				<scroll-view scroll-y v-if="item.status === 3" style="height: 100%;width: 100%;" @scrolltolower="onreachBottom">
+					<pay-back></pay-back>
+				</scroll-view>
 			</swiper-item>
 			
 		</swiper>
@@ -24,8 +27,9 @@
 
 <script>
 	import ToBeEntered from './ToBeEntered'
+	import PayBack from './PayBack'
 	export default {
-		components:{ToBeEntered},
+		components:{ToBeEntered, PayBack},
 		data() {
 			return {
 				current: 0,
@@ -61,6 +65,7 @@
 					{name: '待参赛', status: 0},
 					{name: '已参赛', status: 1},
 					{name: '订单记录', status: 2},
+					{name: '退款/售后', status: 3},
 				],
 				tabs: [
 					1,2,3,4
@@ -92,7 +97,7 @@
 <style lang="scss" scoped>
 /deep/{
 	.u-tabs-item{
-		width: 33%;
+		width: 25%;
 	}
 }
 .order-container{

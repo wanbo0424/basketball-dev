@@ -9,9 +9,9 @@
 				<view>球衣颜色：{{order.yanse}}</view>
 				<view>所在赛段：{{order.saiduan}}</view>
 			</view>
-			<view class="btn">
+			<!-- <view class="btn">
 				<button @click="$refs.contact.show = true">退款</button>
-			</view>
+			</view> -->
 		</view>
 		
 		<custom-service ref="contact"></custom-service>

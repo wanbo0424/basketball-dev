@@ -36,7 +36,7 @@
 				<view class="share-area" style="width: 50%;" @click="saveImage">
 					<image class="btn-img" src="/static/imgs/pengyouquan.png" mode=""></image>
 					<view class="" style="text-align: center;">
-						保存到相册
+						分享朋友圈
 					</view>
 				</view>
 			</view>
@@ -99,8 +99,9 @@
 				})
 			},
 			getCodeImage() {
+				
 				return http.post('weapp/expend/getWxacode', {
-				 "path":"page/index/index",
+				 "path": "page/index/index",
 				 "width": 430
 				}).then(res => {
 					if(res.data.code === 0) {
