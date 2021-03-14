@@ -1,25 +1,23 @@
 <template>
-	<view style="width: 100vw;height: 100vh;">
-			<view>
-				<u-tabs-swiper ref="uTabs" class="tabs-swiper" :list="swiperList" active-color="#f57463" :current="current" @change="tabsChange"
-				 swiperWidth="750"></u-tabs-swiper>
-			</view>
-			<swiper 
-				style="height: calc(100% - 80rpx);
-				padding-top: 90rpx;
-				background: url(../../static/imgs/order-bg.jpg);opacity: 0.7;
-				background-size: cover;
-				background-repeat:no-repeat;
-				" 
-			:current="swiperCurrent" @transition="transition" @animationfinish="animationfinish">
-				<swiper-item class="swiper-item" v-for="(item, index) in swiperList" :key="index">
-					<scroll-view scroll-y v-if="item.status === 0" style="height: 100%;width: 100%;" @scrolltolower="onreachBottom">
-						<to-be-entered></to-be-entered>
-					</scroll-view>
-				</swiper-item>
-				
-			</swiper>
+	<view class="order-container" style="width: 100vw;height: 100vh;opacity: 0.7;background-size: cover;
+			background-repeat:no-repeat;">
+		<view>
+			<u-tabs-swiper ref="uTabs" class="tabs-swiper" :list="swiperList" active-color="#f57463" :current="current" @change="tabsChange"
+			 swiperWidth="750"></u-tabs-swiper>
+		</view>
+		<swiper 
+			style="height: calc(100% - 260rpx);
+			padding-top: 90rpx;
+			" 
+		:current="swiperCurrent" @transition="transition" @animationfinish="animationfinish">
+			<swiper-item class="swiper-item" v-for="(item, index) in swiperList" :key="index">
+				<scroll-view scroll-y v-if="item.status === 0" style="height: 100%;width: 100%;" @scrolltolower="onreachBottom">
+					<to-be-entered></to-be-entered>
+				</scroll-view>
+			</swiper-item>
 			
+		</swiper>
+		
 		<u-tabbar :list="list"></u-tabbar>
 	</view>
 </template>
@@ -96,6 +94,9 @@
 	.u-tabs-item{
 		width: 33%;
 	}
+}
+.order-container{
+	background-image: url(/static/imgs/order-bg.jpg);
 }
 .tabs-swiper{
 	position: fixed;

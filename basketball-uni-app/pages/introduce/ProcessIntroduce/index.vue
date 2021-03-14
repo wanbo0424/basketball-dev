@@ -5,7 +5,7 @@
 			<view class="" style="display: flex">
 				<view style="width: 490rpx;">比赛分为两个阶段：</view>
 				<view>
-					第一阶段8人队内斗牛；
+					第一阶段8人队内斗牛；车轮战依次率先获得三分的前五位即视为首发
 					<span style="text-decoration: underline;">比赛规则。</span>
 					第二阶段5v5正赛；
 					<span style="text-decoration: underline;">比赛规则</span>
@@ -20,7 +20,6 @@
 		</view>
 		<view class="process-item" style="background-image: linear-gradient(-45deg, #ea2f05, #f18ca3);">
 			赛季奖励：5月9日--10月9日为第一个赛季；赛季结束后积分排名前三位的会进行礼物奖励；所有人的积分清零，段位降档。自动进入下一赛季
-			
 		</view>
 	</view>
 </template>

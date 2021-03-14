@@ -9,6 +9,8 @@ App.mpType = 'app'
 import store from './store'  
 import bcc from "./common/js/base-cloud-client.js" //引入客户端sdk文件
 Vue.prototype.bcc = bcc ; //注册为全局对象
+
+Vue.prototype.$apuDomain = 'http://39.101.161.231/'
 const app = new Vue({
 	store,
 	...App

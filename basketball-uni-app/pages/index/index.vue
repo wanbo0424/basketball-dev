@@ -1,18 +1,13 @@
 <template>
 	<view class="content">
-		
-		<!-- <div class="propagate-text">
-			<div>一起来打全场</div>
-			<div>This is for You</div>
-		</div> -->
-		<!-- <div class="into-button" @click="toHome">开始组队</div> -->
+		<col-toast></col-toast>
 		<u-modal v-model="showModal" :show-cancel-button="true" confirm-text="同意" :title-style="{fontSize: '40rpx'}"
 			title="参赛用户协议" @cancel="showModal = false" @confirm="()  => {
 				canToHome = true
 				checked = true
 			}"
 		>
-			<view style="height: 900rpx;overflow: auto;padding: 0 20rpx;" class="u-update-content">
+			<view class="u-update-content">
 				<rich-text :nodes="content"></rich-text>
 			</view>
 		</u-modal>
@@ -57,15 +52,17 @@
 	import shareMixin from '../../mixins/share.js'
 	// import sharePoster from '../sharePoster'
 	import customCanvas from '../canvas/share.vue'
+	import Toast from './Toast'
 	export default{
 		mixins:[shareMixin],
-		components:{customCanvas},
+		components:{customCanvas, ColToast: Toast},
 		data() {
 			return {
 				checked:'',
 				canToHome: false,
 				showShare: false,
 				showModal: false,
+				showColToast: true,
 				content:  `
 					一、声明：<br>
 					1、该协议的目的是为了蓝球队比赛活动发起人、参与组织者、领队（以下简称：发起者）和报名参加比赛活动的球队成员（以下简称：球队成员）明确知晓篮球队比赛活动所存在的风险，提高参加比赛活动人员的抗风险和自律能力，免除比赛活动的发起人和球队成员在比赛活动中出现的相关赔偿及法律连带等责任，让篮球队比赛活动更加安全、健康、快乐。<br>
@@ -137,7 +134,15 @@
 	}
 </script>
 <style lang="scss" scoped>
-	
+	/deep/{
+		.u-model__content{
+			overflow-y: scroll;
+		}
+	}
+	.u-update-content{
+		// max-height: 900rpx;
+		// overflow-y: scroll;
+	}
 	.content{
 		// background-color: black;
 		// background: url('../../static/imgs/main-img.jpeg') no-repeat center;
@@ -151,6 +156,7 @@
 		// justify-content: center;
 		flex-direction: column;
 		background-color: #F1F1F1;
+		
 		.main-img{
 			width: 100%;
 		}

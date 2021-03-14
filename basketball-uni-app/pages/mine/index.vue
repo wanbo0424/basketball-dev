@@ -59,7 +59,7 @@
 					<u-icon name="bisaijilu" custom-prefix="custom-icon" color="#f57463" :size="54"></u-icon>
 					<view class="grid-text" >比赛记录</view>
 				</u-grid-item>
-				<u-grid-item @click="getTobePaid">
+				<u-grid-item @click="toCoupon">
 					<u-icon name="youhuiquan" custom-prefix="custom-icon" color="#f57463" :size="54"></u-icon>
 					<view class="grid-text" >优惠券</view>
 				</u-grid-item>
@@ -67,13 +67,14 @@
 					<u-icon name="chongzhi" custom-prefix="custom-icon" color="#f57463" :size="54"></u-icon>
 					<view class="grid-text" >充值</view>
 				</u-grid-item >
-				<u-grid-item @click="getCareer">
+				<u-grid-item @click="$refs.contact.show = true" >
 					<u-icon name="kefu2" custom-prefix="custom-icon" color="#f57463" :size="54"></u-icon>
 					<view class="grid-text" >联系客服</view>
 				</u-grid-item >
 			</u-grid>
 		</view>
 		<u-tabbar :list="list"></u-tabbar>
+		<custom-service ref="contact"></custom-service>
 	</view>
 </template>
 
@@ -81,9 +82,10 @@
 	import http from '../../api/index.js'
 	import shareMixin from '../../mixins/share.js'
 	import SkillMap from './SkillMap'
+	import CustomService from './CustomService'
 	import { mapGetters } from 'vuex'
 	export default {
-		components:{SkillMap},
+		components:{SkillMap, CustomService},
 		data() {
 			return {
 				list: [
@@ -121,6 +123,11 @@
 			])
 		 },
 		methods: {
+			toCoupon() {
+				uni.navigateTo({
+					url: '/pages/mine/Coupon'
+				})
+			},
 			getCareer() {
 				uni.navigateTo({url: '/pages/match/index'})
 			},

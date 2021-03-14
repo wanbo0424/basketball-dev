@@ -15,6 +15,7 @@
 			<button type="primary" @click="upload">上传文件</button>
 		</view> -->
 		<view class="u-page">
+			
 			<!-- 介绍页 -->
 			<introduce></introduce>
 			
@@ -27,6 +28,7 @@
 
 <script>
 	import Introduce from '../introduce/index'
+	
 	import shareMixin from '../../mixins/share.js'
 	import Mine from '../mine/index'
 	export default {

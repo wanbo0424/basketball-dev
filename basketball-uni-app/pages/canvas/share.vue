@@ -5,26 +5,46 @@
 				<image :src="posterImage || ''" mode="widthFix" class="posterImage"></image>
 			</view>
 			
-			<view class="share_button">
+			<!-- <view class="share_button">
 				<button open-type="share" 
 					style="
+					display: flex;align-items: center;justify-content: center;
 					color: #FFFFFF;border-color: #19be6b;font-size: 30rpx;
 					height: 80rpx;
 					line-height: 80rpx;
-					background-color: #19be6b;text-align: center;">
-					<!-- <u-button type="success">
-					</u-button> -->
-					<u-icon custom-prefix="custom-icon" name="weixin"></u-icon>
-					发送给朋友
+					width: 160rpx;
+					text-align: center;">
 				</button>
-				<u-button type="success" @click="saveImage">
-					<u-icon custom-prefix="custom-icon" name="pengyouquan"></u-icon>
-					朋友圈
-				</u-button>
+				<button style="
+					display: flex;align-items: center;justify-content: center;
+					color: #FFFFFF;border-color: #19be6b;font-size: 30rpx;
+					height: 80rpx;
+					line-height: 80rpx;
+					width: 160rpx;
+					text-align: center;" @click="saveImage">
+				</button>
+			</view> -->
+			
+			<view class="foot-share-btn">
+				<button open-type="share" class="share-area" style="width: 50%;border: none;background-color: #FFFFFF;font-size: 30rpx;">
+					<image class="btn-img" sty src="/static/imgs/weixin.png" mode=""></image>
+					<view class="" style="text-align: center;">
+						发送给朋友
+					</view>
+					
+				</button>
+				<view class="share-area" style="width: 50%;" @click="saveImage">
+					<image class="btn-img" src="/static/imgs/pengyouquan.png" mode=""></image>
+					<view class="" style="text-align: center;">
+						保存到相册
+					</view>
+				</view>
 			</view>
 		</u-mask>
 		
 		<canvas class="hideCanvas" style="border:1px solid #1e1e1e;width: 1500rpx;height: 2000rpx;" id="share_id" canvas-id="share_id" ></canvas>
+		
+		
 		<u-toast ref="uToast" />
 	</view>
 </template>
@@ -80,9 +100,9 @@
 			},
 			getCodeImage() {
 				return http.post('weapp/expend/getWxacode', {
- "path":"page/index/index",
- "width":430
-}).then(res => {
+				 "path":"page/index/index",
+				 "width": 430
+				}).then(res => {
 					if(res.data.code === 0) {
 						return res.data.data
 					}
@@ -159,6 +179,10 @@
 </script>
 
 <style lang="scss" scoped>
+button{
+	background-color: #f8f8f8;
+	border: none;
+}
 .hideCanvas {
 	position: fixed;
 	top: -99999upx;
@@ -170,10 +194,31 @@
 	margin-top: 100rpx;
 	justify-content: space-around;
 	padding: 0 15%;
+	
 }
 .poster-bg{
 	margin-top: 26rpx;
 	display: flex;
 	justify-content: center;
+}
+.foot-share-btn{
+	position: fixed;
+	display: flex;
+	bottom: 0;
+	width: 100%;
+	height: 150rpx;
+	background-color: #FFFFFF;
+	.share-area{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		font-size: 30rpx;
+		.btn-img{
+			height: 60rpx;
+			width: 60rpx;
+		}
+	}
 }
 </style>

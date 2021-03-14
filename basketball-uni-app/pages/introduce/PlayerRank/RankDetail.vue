@@ -1,6 +1,15 @@
 <template>
-	<u-mask :show="show" @click="show = false">
-		<view class="warp">
+	<view v-if="show"
+		style="position: fixed;
+		overflow: hidden;
+		background-color: #333333;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 100;
+		right: 0;"
+	>
+		<view class="warp" >
 			<view class="detail-area">
 				<view class="rank-list-header">
 					<view class="" :style="{width: `${head.width}`}" v-for="(head, index) in headers" :key="index">
@@ -19,7 +28,7 @@
 							{{item.nickName}}
 						</view>
 						<view class="list-item-text" :style="{width: '15%'}">
-							{{item.winRate}}
+							{{item.integral}}
 						</view>
 						<view class="list-item-text" :style="{width: '25%'}">
 							{{item.duanwei}}
@@ -28,7 +37,7 @@
 				</view>
 			</view>
 		</view>
-	</u-mask>
+	</view>
 </template>
 
 <script>
@@ -40,7 +49,7 @@
 					{name: '排行', width: '10%' },
 					{name: '头像', width: '13%' },
 					{name: '昵称', width: '37%' },
-					{name: '胜率', width: '15%' },
+					{name: '积分', width: '15%' },
 					{name: '段位', width: '25%' },
 				],
 				datas: [
@@ -55,6 +64,8 @@
 					{avatarUrl: '', nickName: 'test3', score: '567', integral: '0987', winRate: '90.5%', rank: '3'},
 					{avatarUrl: '', nickName: 'test2', score: '435', integral: '8790', winRate: '59.8%', rank: '2'},
 					{avatarUrl: '', nickName: 'test3', score: '567', integral: '0987', winRate: '90.5%', rank: '3'},
+					{avatarUrl: '', nickName: '范德萨范德萨萨', score: '567', integral: '0987', winRate: '90.5%', rank: '3'},
+					{avatarUrl: '', nickName: '范德萨范德萨萨', score: '567', integral: '0987', winRate: '90.5%', rank: '3'},
 				]
 			}
 		},
@@ -69,10 +80,10 @@
 <style lang="scss" scoped>
 .warp{
 	width: 90%;
-	height: 85%;
+	height: 80%;
 	position: absolute;
 	left:50%;
-	top:50%;
+	top:42%;
 	transform: translate(-50%, -50%);
 	background-size: cover;
 	background-image: url(../../../static/imgs/rank/detail_bg.png);

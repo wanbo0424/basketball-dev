@@ -1,5 +1,6 @@
 <template>
 	<view style="height: 100%;padding: 0 22rpx;">
+		<col-toast></col-toast>
 		<view class="wrap">
 			<u-swiper height="400" :list="swiperList" ></u-swiper>
 		</view>
@@ -35,11 +36,13 @@
 	import http from '../../api/index.js'
 	import PlayerRank from './PlayerRank'
 	import ProcessIntroduce from './ProcessIntroduce'
+	import Toast from '../index/Toast'
 	// import { mapActions } from 'vuex'
 	export default {
 		components:{
 			PlayerRank,
-			ProcessIntroduce
+			ProcessIntroduce,
+			ColToast: Toast
 		},
 		data() {
 			return {
