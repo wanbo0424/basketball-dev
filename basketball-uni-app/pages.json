@@ -17,12 +17,6 @@
 			}
 		},
 		{
-			"path": "pages/messageForm/index",
-			"style": {
-				"navigationBarTitleText": "填写信息"
-			}
-		}
-        ,{
             "path" : "pages/introduce/index",
             "style" :                                                                                    
             {
@@ -30,61 +24,11 @@
                 "enablePullDownRefresh": false
             }
             
-        }
-        ,{
-            "path" : "pages/user/authorize",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-        }
-		,{
+        },{
 		    "path" : "pages/mine/index",
 		    "style" :                                                                                    
 		    {
 		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false
-		    }
-		}
-        ,{
-            "path" : "pages/match/index",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "比赛列表",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/order/index",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "订单列表",
-                "enablePullDownRefresh": false
-            }
-        }
-        ,{
-            "path" : "pages/defray/index",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-        }
-		,{
-		    "path" : "pages/pay/index",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "支付订单",
-		        "enablePullDownRefresh": false
-		    }
-		}
-		,{
-		    "path" : "pages/payStatus/index",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "支付结果",
 		        "enablePullDownRefresh": false
 		    }
 		}
@@ -186,6 +130,75 @@
             
         }
     ],
+	"subPackages": [{
+		"root": "pagesA",
+		"pages": [
+			{
+				"path": "messageForm/index",
+				"style": {
+					"navigationBarTitleText": "填写信息"
+				}
+			}
+			,{
+			    "path" : "user/authorize",
+			    "style" :                                                                                    
+			    {
+			        "navigationBarTitleText": "",
+			        "enablePullDownRefresh": false
+			    }
+			},
+			{
+				"path" : "match/index",
+				"style" :                                                                                    
+				{
+					"navigationBarTitleText": "比赛列表",
+					"enablePullDownRefresh": false
+				}
+			},
+			{
+				"path" : "order/index",
+				"style" :                                                                                    
+				{
+					"navigationBarTitleText": "订单列表",
+					"enablePullDownRefresh": false
+				}
+			},
+			{
+				"path" : "defray/index",
+				"style" :                                                                                    
+				{
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false
+				}
+			},
+			{
+				"path" : "payStatus/index",
+				"style" :                                                                                    
+				{
+					"navigationBarTitleText": "支付结果",
+					"enablePullDownRefresh": false
+				}
+			},
+			{
+				"path" : "pay/index",
+				"style" :                                                                                    
+				{
+					"navigationBarTitleText": "支付订单",
+					"enablePullDownRefresh": false
+				}
+			}
+		]
+	}],
+	"preloadRule": {
+		"pages/index/index": {
+			"network": "all",
+			"packages": ["__APP__", "pagesA"]
+		}
+		// "pagesA/detail/detail": {
+		// 	"network": "all",
+		// 	"packages": ["pagesA"]
+		// }
+	},
 	"condition": { //模式配置，仅开发期间生效
 	    "current": 0, //当前激活的模式（list 的索引项）
 	    "list": [{

@@ -10,7 +10,7 @@
 		</view>
 		<view class="contact">
 			如需退款，请点击并保存下方二维码添加客服微信办理相关退款事宜
-			<image style="width: 300rpx;height: 300rpx;" :src="`${apuDomain}images/weixin_contact.jpg`" mode=""></image>
+			<image @click="previewImage" style="width: 300rpx;height: 300rpx;" :src="`${apuDomain}images/weixin_contact.jpg`" mode=""></image>
 		</view>
 	</view>
 </template>
@@ -23,7 +23,14 @@
 			}
 		},
 		methods: {
-			
+			previewImage() {
+				uni.previewImage({
+					urls: [`${this.$apuDomain}images/weixin_contact.jpg`],
+					longPressActions: {
+						itemList: ['保存相册', '识别二维码']
+					}
+				})
+			}
 		}
 	}
 </script>

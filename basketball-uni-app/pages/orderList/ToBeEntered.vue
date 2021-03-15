@@ -13,15 +13,11 @@
 				<button @click="$refs.contact.show = true">退款</button>
 			</view> -->
 		</view>
-		
-		<custom-service ref="contact"></custom-service>
 	</view>
 </template>
 
 <script>
-	import CustomService from '../mine/CustomService'
 	export default {
-		components:{CustomService},
 		data() {
 			return {
 				orders: [

@@ -1,21 +1,18 @@
 <template>
-	<u-modal v-model="show" :show-cancel-button="true" :show-confirm-button="false" 
+	<!-- <u-modal v-model="show" :show-cancel-button="true" :show-confirm-button="false" 
 		title="客服联系方式" @cancel="cancel" @confirm="confirm"
 	>
 		<view class="u-update-content">
 			<image @click="previewImage" style="width: 100%;" :src="`${apuDomain}images/weixin_contact.jpg`" mode=""></image>
 			<view style="text-align: center;">点击保存二维码</view>
 		</view>
-	</u-modal>
-	<!-- <u-mask :show="show">
-		<view class="contact">
-			<image style="width: 100%;" :src="`${apuDomain}images/weixin_contact.jpg`" mode=""></image>
-			
+	</u-modal> -->
+	<view v-if="show" class="rank-model">
+		<view class="contact-model">
+			<image @click="previewImage" style="width: 100%;" :src="`${apuDomain}images/weixin_contact.jpg`" mode=""></image>
+			<view style="text-align: center;">点击保存二维码</view>
 		</view>
-			<view class="close-btn" @click="show = false">
-				×
-			</view>
-	</u-mask> -->
+	</view>
 </template>
 
 <script>
@@ -40,6 +37,12 @@
 </script>
 
 <style lang="scss" scoped>
+@import '../../common/common.scss';
+.contact-model{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 .contact{
 	width: 70%;
 	background-color: #FFFFFF;

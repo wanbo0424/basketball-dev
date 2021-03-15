@@ -2,7 +2,7 @@
 	<view class="coupon-list">
 		<view class="coupon-item" v-for="(coupon, index) in couponList">
 			<view class="coupon-price">
-				<view class="" style="font-size: 40rpx;">
+				<view class="" style="font-size: 44rpx;font-weight: 600;">
 					{{coupon.price}}
 				</view>
 				<view class="">
@@ -24,7 +24,11 @@
 					line-height: 50rpx;
 					font-size: 28rpx;
 					border-radius: 28rpx;
-					width: 170rpx;">
+					width: 170rpx;"
+					@click="uni.navigateTo({
+						url:'/pagesA/order/index'
+					})"
+					>
 					立即使用
 				</button>
 			</view>
@@ -37,7 +41,7 @@
 		data() {
 			return {
 				couponList: [
-					{price: '九折', description: '新人使用'}
+					{price: '9折', description: '新人使用'}
 				]
 			}
 		},
@@ -48,12 +52,14 @@
 </script>
 
 <style lang="scss" scoped>
+.coupon-list{
+	padding: 20rpx;
+}
 .coupon-item{
 	display: flex;
 	align-items: center;
 	padding: 50rpx 10rpx;
 	height: 260rpx;
-	background-color: rgba(243, 148, 124, 0.2);
 	border-radius: 26rpx;
 	.coupon-price{
 		width: 20%;
