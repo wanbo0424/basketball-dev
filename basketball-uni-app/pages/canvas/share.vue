@@ -83,7 +83,7 @@
 				this.ctx.setFillStyle('black')
 				this.ctx.setTextBaseline('middle');
 				this.ctx.setTextAlign('center');
-				this.ctx.fillText("阿普体育科技",160 * 2, 320 * 2, 100 * 2);
+				this.ctx.fillText("阿普 up !",160 * 2, 320 * 2, 100 * 2);
 
 				this.ctx.drawImage(codeTmpPath, 124 * 2, 340 * 2, 72 * 2, 72 * 2)
 				

@@ -30,7 +30,7 @@
 		    {
 		        "navigationBarTitleText": "",
 		        "enablePullDownRefresh": false
-		    }
+		    }	
 		}
         ,{
             "path" : "pages/introduce/ProcessIntroduce/index",
@@ -203,7 +203,7 @@
 	    "current": 0, //当前激活的模式（list 的索引项）
 	    "list": [{
 	            "name": "mine", //模式名称
-	            "path": "pages/orderList/index" //启动页面，必选
+	            "path": "pages/introduce/index" //启动页面，必选
 	        }]
 	},
 	

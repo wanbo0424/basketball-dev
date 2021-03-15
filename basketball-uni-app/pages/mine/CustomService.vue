@@ -8,10 +8,14 @@
 		</view>
 	</u-modal> -->
 	<view v-if="show" class="rank-model">
-		<view class="contact-model">
-			<image @click="previewImage" style="width: 100%;" :src="`${apuDomain}images/weixin_contact.jpg`" mode=""></image>
-			<view style="text-align: center;">点击保存二维码</view>
+		<view class="contact">
+			<view class="" style="padding: 10rpx;">
+				如需帮助请添加下方客服微信，在线时间9:00--21:00
+			</view>
+			<image @click="previewImage" style="width: 500rpx;height: 500rpx;" :src="`${apuDomain}images/weixin_contact.jpg`" mode=""></image>
+			<view style="text-align: center;padding-bottom: 10rpx;">点击保存二维码</view>
 		</view>
+		<view class="close-btn" @click="show = false">×</view>	
 	</view>
 </template>
 
