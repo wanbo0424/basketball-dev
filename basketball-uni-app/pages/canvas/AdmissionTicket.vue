@@ -28,7 +28,7 @@
 				const _this = this
 				this.ctx.draw(false, () => {
 					// uni.hideLoading()
-					// _this.canvasToImage()
+					return _this.canvasToImage()
 				})
 			},
 			// 下载文件到临时路径
@@ -107,18 +107,19 @@
 				  success: function(res) {
 				    // 在H5平台下，tempFilePath 为 base64
 					_this.ticketImage = res.tempFilePath
-					console.log(_this.ticketImage)
+					return Promise.resolve({imgUrl: _this.ticketImage})
 					// _this.showMask = true
 				  },
 				  fail: function(err) {
 					  console.log('canvas生成图片临时路径失败', err)
-				  }				  
+				  }	  
 				}, this)
 			},
 		},
 		mounted(){
 			this.ctx = uni.createCanvasContext('ticket_id', this)
-			this.drawTicket()
+			// this.drawTicket()
+			console.log(this.drawTicket(), 'drawTicket')
 		},
 	}
 </script>
