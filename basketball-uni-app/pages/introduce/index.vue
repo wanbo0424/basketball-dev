@@ -82,7 +82,7 @@
 			//   'getUserInfo', // 将 `this.increment()` 映射为 `this.$store.dispatch('increment')`
 			// ]),
 			toDoMessage() {
-				uni.navigateTo({url: '/pages/messageForm/index'})
+				uni.navigateTo({url: '/pagesA/messageForm/index'})
 				// http.get('/').then(res => {
 				// 	debugger
 				// })

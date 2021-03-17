@@ -1,20 +1,37 @@
 <template>
 	<view class="form-content">
 		<u-form :model="form" ref="uForm" label-width="140">
-			<u-form-item label="比赛场地" prop="gameName">
+			<u-form-item label="比赛场地" required="true" prop="gameName">
 				<u-input v-model="form.gameName" type="select" @click="showGameSelect = true" />
 				<u-select v-model="showGameSelect" :list="gameList" @confirm="gameSelected"></u-select>
 			</u-form-item>
-			<u-form-item label="性别" prop="sex">
+			<u-form-item label="比赛时间" required="true" prop="gameName">
+				<u-input v-model="form.gameName" type="select" @click="showGameSelect = true" />
+				<u-select v-model="showGameSelect" :list="gameList" @confirm="gameSelected"></u-select>
+			</u-form-item>
+			<u-form-item label="性别" required="true" prop="sex">
 				<u-input v-model="form.sex" type="select" @click="showSexSelect = true" />
 				<u-select v-model="showSexSelect" :list="sexList" @confirm="sexSelected"></u-select>
 			</u-form-item>
 			<u-form-item label="年龄" prop="age">
 				<u-input v-model="form.age" />
 			</u-form-item>
-			<u-form-item label="擅长位置" prop="role">
+			<u-form-item label="擅长位置" required="true" prop="role">
 				<u-input v-model="form.role" type="select" @click="showRoleSelect = true" />
 				<u-select v-model="showRoleSelect" :list="roleList" @confirm="roleSelected"></u-select>
+			</u-form-item>
+			<u-form-item label="需要赛事保险" label-width="190" required="true" prop="needInsurance">
+				<u-radio-group v-model="form.needInsurance" @change="changeRadio">
+					<u-radio v-for="(item, index) in [{name: '是'}, {name: '否'}]" :key="index" :name="item.name" :disabled="item.disabled">
+						{{ item.name }}
+					</u-radio>
+				</u-radio-group>
+			</u-form-item>
+			<u-form-item v-show="showInsurance" label="姓名" :required="showInsurance" prop="role">
+				<u-input v-model="form.actualName" />
+			</u-form-item>
+			<u-form-item v-show="showInsurance" label="身份证号" :required="showInsurance" prop="role">
+				<u-input v-model="form.identity" />
 			</u-form-item>
 			<u-form-item label="联系方式" prop="mobile">
 				<u-input v-model="form.mobile" />
@@ -39,9 +56,10 @@
 				showSexSelect: false,
 				showRoleSelect: false,
 				showGameSelect: false,
+				showInsurance: false,
 				form: {
 					age: '',
-					sex: '',
+					sex: '男',
 					role: '',
 					mobile: '',
 					gameId: '',
@@ -137,30 +155,30 @@
 			// 提交报名信息
 			submit() {
 				this.$refs.uForm.validate(valid => {
-					if (valid) {
-						this.form.openId = this.userInfo.openId
-						this.form.nickName = this.userInfo.nickName
-						this.form.out_trade_no = generateOrderNumber()
-						if(this.shared.nickName) {
-							this.form.sharedNickName = this.shared.nickName
-						}
+					// if (valid) {
+					// 	this.form.openId = this.userInfo.openId
+					// 	this.form.nickName = this.userInfo.nickName
+					// 	this.form.out_trade_no = generateOrderNumber()
+					// 	if(this.shared.nickName) {
+					// 		this.form.sharedNickName = this.shared.nickName
+					// 	}
 						// http.post('weapp/players/apply', this.form).then(res => {
 						// 	if(res.data.code === 0) {
-						// 		uni.navigateTo({
-						// 			url:`/pages/defray/index?gameAddress=${this.form.gameName}&out_trade_no=${this.form.out_trade_no}`
-						// 		})
+								uni.navigateTo({
+									url:`/pagesA/defray/index?gameAddress=${this.form.gameName}&out_trade_no=${this.form.out_trade_no}`
+								})
 						// 	}
 						// })
 						
 						// 云函数
-						uniCloud.callFunction({
-						  name: 'uni-api', // 要调用的云函数名称
-						  data: {
-						    action: 'player/apply', // 路由地址，对应 controller 下 user.js 的 login 方法
-						    // 参数列表
-						    data: this.form
-						  },
-						})
+						// uniCloud.callFunction({
+						//   name: 'uni-api', // 要调用的云函数名称
+						//   data: {
+						//     action: 'player/apply', // 路由地址，对应 controller 下 user.js 的 login 方法
+						//     // 参数列表
+						//     data: this.form
+						//   },
+						// })
 						// uniCloud.callFunction({
 						// 	name: 'create-player',
 						// 	data: this.form
@@ -181,16 +199,21 @@
 						// 	})
 						// 	console.error(err)
 						// })
-					}
+					// }
 				})
-				
-				
-				
-				
 			},
 			// 提交球员档案
 			submitPlayer(){
 				
+			},
+			changeRadio(name) {
+				this.form.needInsurance = name
+				if(this.form.needInsurance === '是') {
+					this.showInsurance = true
+				}else{
+					this.showInsurance = false
+				}
+				console.log(this.form.needInsurance)
 			}
 		},
 		onReady() {
