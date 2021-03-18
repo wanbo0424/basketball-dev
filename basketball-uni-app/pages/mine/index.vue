@@ -60,7 +60,7 @@
 			</u-grid> -->
 			
 			<u-grid :col="4" :border="false">
-				<u-grid-item @click="getOrderList">
+				<u-grid-item @click="getCareer">
 					<u-icon name="bisaijilu" custom-prefix="custom-icon" color="#f57463" :size="54"></u-icon>
 					<view class="grid-text" >比赛记录</view>
 				</u-grid-item>
@@ -134,11 +134,11 @@
 				})
 			},
 			getCareer() {
-				uni.navigateTo({url: '/pages/match/index'})
+				uni.navigateTo({url: '/pagesA/match/index'})
 			},
 			
 			getOrderList() {
-				uni.navigateTo({url: '/pages/order/index?type=all'})
+				uni.navigateTo({url: '/pagesA/order/index?type=all'})
 			},
 			getTobePaid() {
 				uni.navigateTo({url: '/pages/order/index?type=tobe'})

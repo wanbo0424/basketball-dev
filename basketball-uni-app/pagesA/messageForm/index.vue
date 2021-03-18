@@ -37,7 +37,7 @@
 				<u-input v-model="form.mobile" />
 			</u-form-item>
 		</u-form>
-		<u-button @click="submit">提交</u-button>
+		<u-button class="submt-button" @click="submit">提交</u-button>
 		
 		<u-toast ref="uToast" />
 	</view>
@@ -222,8 +222,25 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .form-content {
 	padding: 30rpx 40rpx;
+	height: 100vh;
+	width: 100vw;
+}
+.form-content:after{
+	content: '';
+	display: block;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+   background-image: url(/static/imgs/order-bg.jpg);
+   opacity: 0.5;
+   background-size: cover;
+   background-repeat:no-repeat;
 }
 </style>
