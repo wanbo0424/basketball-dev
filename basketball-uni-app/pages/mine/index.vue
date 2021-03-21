@@ -72,7 +72,7 @@
 					<u-icon name="chongzhi" custom-prefix="custom-icon" color="#f57463" :size="54"></u-icon>
 					<view class="grid-text" >充值</view>
 				</u-grid-item >
-				<u-grid-item @click="$refs.contact.show = true" >
+				<u-grid-item @click="toCustomService" >
 					<u-icon name="kefu2" custom-prefix="custom-icon" color="#f57463" :size="54"></u-icon>
 					<view class="grid-text" >联系客服</view>
 				</u-grid-item >
@@ -130,7 +130,7 @@
 		methods: {
 			toCoupon() {
 				uni.navigateTo({
-					url: '/pages/mine/Coupon'
+					url: '/pagesA/coupon/index'
 				})
 			},
 			getCareer() {
@@ -143,6 +143,9 @@
 			getTobePaid() {
 				uni.navigateTo({url: '/pages/order/index?type=tobe'})
 			},
+			toCustomService() {
+				uni.navigateTo({url: '/pagesA/customService/index'})
+			}
 		},
 		
 	}

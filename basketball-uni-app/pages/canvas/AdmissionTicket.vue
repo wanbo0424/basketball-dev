@@ -1,8 +1,8 @@
 <template>
-	<view style="background-color: #000000;width: 3000rpx;height: 100vh;display: flex;">
-		<!-- <image style="width: 100%;" :src="ticketImage || ''" mode="widthFix" ></image> -->
+	<view style="background-color: #000000;width: 100vw;height: 100vh;display: flex;align-items: center;">
+		<image style="width: 100%;" @click="previewTicket" :src="ticketImage || ''" mode="widthFix" ></image>
 		
-		<canvas class="hideCanvas" style="width: 1300rpx;height:800rpx" id="ticket_id" canvas-id="ticket_id" ></canvas>
+		<canvas class="hideCanvas" style="width: 3000rpx;height:800rpx" id="ticket_id" canvas-id="ticket_id" ></canvas>
 	</view>
 </template>
 
@@ -28,7 +28,7 @@
 				const _this = this
 				this.ctx.draw(false, () => {
 					// uni.hideLoading()
-					return _this.canvasToImage()
+					_this.canvasToImage()
 				})
 			},
 			// 下载文件到临时路径
@@ -107,7 +107,8 @@
 				  success: function(res) {
 				    // 在H5平台下，tempFilePath 为 base64
 					_this.ticketImage = res.tempFilePath
-					return Promise.resolve({imgUrl: _this.ticketImage})
+					_this.previewTicket()
+					// return Promise.resolve({imgUrl: _this.ticketImage})
 					// _this.showMask = true
 				  },
 				  fail: function(err) {
@@ -115,20 +116,29 @@
 				  }	  
 				}, this)
 			},
+			
+			previewTicket() {
+				uni.previewImage({
+					urls: [this.ticketImage],
+					longPressActions: {
+						itemList: ['保存相册', '识别二维码']
+					}
+				})
+			}
 		},
 		mounted(){
 			this.ctx = uni.createCanvasContext('ticket_id', this)
-			// this.drawTicket()
-			console.log(this.drawTicket(), 'drawTicket')
+			this.drawTicket()
+			// console.log(this.drawTicket(), 'drawTicket')
 		},
 	}
 </script>
 
 <style lang="scss" scoped>
 .hideCanvas {
-	// position: fixed;
-	// top: -99999upx;
-	// left: -99999upx;
-	// z-index: -99999;
+	position: fixed;
+	top: -99999upx;
+	left: -99999upx;
+	z-index: -99999;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="order-item" v-for="(order, index) in orders">
+		<view class="order-item" v-for="(order, index) in orders" @click="getTicket">
 			<view class="">
 				<view>比赛时间：{{order.time}}</view>
 				<view>比赛地点：{{order.gameAddress}}</view>
@@ -27,7 +27,11 @@
 			}
 		},
 		methods: {
-			
+			getTicket() {
+				uni.navigateTo({
+					url: '/pages/canvas/AdmissionTicket'
+				})
+			}
 		}
 	}
 </script>

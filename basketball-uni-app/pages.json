@@ -112,15 +112,6 @@
             
         }
         ,{
-            "path" : "pages/mine/Coupon",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
             "path" : "pages/orderList/PayBack",
             "style" :                                                                                    
             {
@@ -187,7 +178,49 @@
 					"enablePullDownRefresh": false
 				}
 			}
-		]
+		    ,{
+                    "path" : "customService/index",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "联系客服",
+                    "enablePullDownRefresh": false
+                }
+                
+            }
+			,{
+				"path" : "coupon/index",
+				"style" :                                                                                    
+				{
+					"navigationBarTitleText": "优惠券",
+					"enablePullDownRefresh": false
+				}
+			}
+			,{
+				"path" : "rule/rule1",
+				"style" :                                                                                    
+				{
+					"navigationBarTitleText": "1v1比赛规则",
+					"enablePullDownRefresh": false
+				}
+			},
+			{
+				"path" : "rule/rule2",
+				"style" :                                                                                    
+				{
+					"navigationBarTitleText": "5v5比赛规则",
+					"enablePullDownRefresh": false
+				}
+			}
+                ,{
+                    "path" : "rule/rule3",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "怎么组队",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+            ]
 	}],
 	"preloadRule": {
 		"pages/index/index": {

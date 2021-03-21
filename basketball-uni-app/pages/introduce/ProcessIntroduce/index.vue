@@ -6,9 +6,9 @@
 				<view style="width: 25%;font-weight: 600;font-size: 30rpx;">比赛阶段：</view>
 				<view style="width: 75%;color: #615d5d;">
 					一、队内1v1车轮赛逐首发；
-					<span style="text-decoration: underline;color: red;">比赛规则</span></br>
+					<span style="text-decoration: underline;color: red;" @click="viewRule1">比赛规则</span></br>
 					二、5v5全场正赛；
-					<span style="text-decoration: underline;color: red">比赛规则</span>
+					<span style="text-decoration: underline;color: red" @click="viewRule2">比赛规则</span>
 				</view>
 			<!-- </view> -->
 		</view>
@@ -36,14 +36,23 @@
 </template>
 
 <script>
+	
 	export default {
 		data() {
 			return {
-				
 			}
 		},
 		methods: {
-			
+			viewRule1() {
+				uni.navigateTo({
+					url: '/pagesA/rule/rule1'
+				})
+			},
+			viewRule2() {
+				uni.navigateTo({
+					url: '/pagesA/rule/rule2'
+				})
+			}
 		}
 	}
 </script>

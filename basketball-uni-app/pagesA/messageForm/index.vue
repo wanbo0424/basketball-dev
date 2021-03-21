@@ -20,9 +20,10 @@
 				<u-input v-model="form.role" type="select" @click="showRoleSelect = true" />
 				<u-select v-model="showRoleSelect" :list="roleList" @confirm="roleSelected"></u-select>
 			</u-form-item>
-			<u-form-item label="需要赛事保险" label-width="190" required="true" prop="needInsurance">
-				<u-radio-group v-model="form.needInsurance" @change="changeRadio">
-					<u-radio v-for="(item, index) in [{name: '是'}, {name: '否'}]" :key="index" :name="item.name" :disabled="item.disabled">
+			<u-form-item label="需要赛事保险" prop="needInsurance">
+				<u-radio-group v-model="form.needInsurance">
+					<u-radio v-for="(item, index) in [{name: '是'}, {name: '否'}]" 
+					:key="index" :name="item.name" :disabled="item.disabled" >
 						{{ item.name }}
 					</u-radio>
 				</u-radio-group>
@@ -56,14 +57,15 @@
 				showSexSelect: false,
 				showRoleSelect: false,
 				showGameSelect: false,
-				showInsurance: false,
+				showInsurance: true,
 				form: {
 					age: '',
 					sex: '男',
 					role: '',
 					mobile: '',
 					gameId: '',
-					gameName: ''
+					gameName: '',
+					needInsurance: '是'
 				},
 				sexList: [{value: 0, label: '男'}, {value: 1, label: '女'}],
 				roleList: [
@@ -94,6 +96,15 @@
 				},
 				gameList: [],
 				plarerData: {}
+			}
+		},
+		watch:{
+			'form.needInsurance'(val) {
+				if(this.form.needInsurance === '是') {
+					this.showInsurance = true
+				}else{
+					this.showInsurance = false
+				}
 			}
 		},
 		mounted() {
@@ -206,15 +217,6 @@
 			submitPlayer(){
 				
 			},
-			changeRadio(name) {
-				this.form.needInsurance = name
-				if(this.form.needInsurance === '是') {
-					this.showInsurance = true
-				}else{
-					this.showInsurance = false
-				}
-				console.log(this.form.needInsurance)
-			}
 		},
 		onReady() {
 			this.$refs.uForm.setRules(this.rules)
@@ -229,6 +231,7 @@
 	width: 100vw;
 }
 .form-content:after{
+	z-index: -10;
 	content: '';
 	display: block;
 	width: 100%;
@@ -239,7 +242,7 @@
 	bottom: 0;
 	left: 0;
    background-image: url(/static/imgs/order-bg.jpg);
-   opacity: 0.5;
+   opacity: 0.3;
    background-size: cover;
    background-repeat:no-repeat;
 }
