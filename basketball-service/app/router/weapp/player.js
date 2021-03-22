@@ -11,9 +11,11 @@ module.exports = app => {
   const { router, controller } = app;
   router.get('/', controller.home.index);
   // 微信小程序
+  // 球员报名
   router.post('/weapp/players/apply', controller.player.apply);
   // 创建球员生涯（预支付后创建）
   router.post('/weapp/playerCareer/createCareer', controller.playerCareer.createCareer);
+
   router.get('/weapp/player/getCareerList', controller.player.getCareerList);
   // 获取球员排名
   router.get('/weapp/player/getPlayerRank', controller.player.getPlayerRank);

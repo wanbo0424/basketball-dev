@@ -16,6 +16,9 @@
       :loading="loading"
       @change="handleTableChange"
     >
+      <template #gameDate="{ text: gameDate }">
+        <a @click="settingGameDate">{{ gameDate }}</a>
+      </template>
       <template #status="{ text: gameStatus }">
         <a-badge v-if="gameStatus === 0" status="default" text="未举办" />
         <a-badge
@@ -91,6 +94,7 @@
     {
       title: '比赛时间',
       dataIndex: 'gameDate',
+      slots: { customRender: 'gameDate' },
       width: 200,
     },
     {

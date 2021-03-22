@@ -154,7 +154,7 @@
 				this.gameDate = e[0].time
 			},
 			getGameList() {
-				http.get('weapp/game/ToHeldGameList').then(res => {
+				http.get('weapp/game/ToHeldGameAddresses').then(res => {
 					if(res.data.code === 0) {
 						this.gameList = res.data.data.map(item => ({
 							value: item._id,

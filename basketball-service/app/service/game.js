@@ -72,6 +72,20 @@ class GameService extends Service {
     return await app.model.Game.find({ gameStatus: 0 });
   }
 
+  // 将要举行比赛地点列表
+  async ToHeldGameAddresses() {
+    const { app } = this;
+    return await app.model.Game.aggregate([
+      {
+        $group: {
+          _id: '$gameAddress',
+          currentGames: { $push: { gameId: '$_id', gameDate: '$gameDate' } },
+        },
+      },
+
+    ]);
+  }
+
   // 设置比赛比分
   async scoreSetting(data) {
     const { app } = this;

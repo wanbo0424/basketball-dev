@@ -44,10 +44,6 @@ export const asyncRoutes = [
     ],
   },
   {
-    path: '/canvas',
-    component: () => import('@/views/canvas/index'),
-  },
-  {
     path: '/player',
     component: Layout,
     alwaysShow: true,

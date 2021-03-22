@@ -15,6 +15,8 @@
 <script>
   export default {
     async mounted() {
+      const test = import('@/api/game.js')
+      console.log(test)
       var c = document.getElementById('ticket_id')
       var ctx = c.getContext('2d')
       ctx.fillStyle = '#FFFFFF'
