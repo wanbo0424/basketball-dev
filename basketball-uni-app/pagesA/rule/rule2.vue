@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<h2 style="text-align: center;">5v5规则</h2>
+		<h2 style="text-align: center;margin-top: 20rpx;font-weight: bold;">5v5规则</h2>
 		<view class="rule-text">
 			1.执行中国篮协最新审定的《篮球竞赛规则》</br>
 			2.时间规则：5v5比赛分为四节，每节比赛时间为10分钟。每节之间休息2分钟，中场休息10分钟。比赛前三节采用不停表计时，即除暂停停表外，
@@ -19,6 +19,7 @@
 	.content{
 		padding: 10rpx 24rpx;
 		.rule-text{
+			margin-top: 60rpx;
 			line-height: 50rpx;
 		}
 	}

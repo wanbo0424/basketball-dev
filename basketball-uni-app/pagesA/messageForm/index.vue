@@ -11,7 +11,7 @@
 			</u-form-item>
 			<u-form-item label="性别" required="true" prop="sex">
 				<u-input v-model="form.sex" type="select" @click="showSexSelect = true" />
-				<u-select v-model="showSexSelect" :list="sexList" @confirm="sexSelected"></u-select>
+				<!-- <u-select v-model="showSexSelect" :list="sexList" @confirm="sexSelected"></u-select> -->
 			</u-form-item>
 			<u-form-item label="年龄" prop="age">
 				<u-input v-model="form.age" />

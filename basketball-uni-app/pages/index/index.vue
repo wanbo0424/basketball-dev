@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<col-toast></col-toast>
-		<u-modal v-model="showModal" :show-cancel-button="true" confirm-text="同意" :title-style="{fontSize: '40rpx'}"
+		<u-modal v-model="showModal" :show-cancel-button="true" confirm-text="同意" :title-style="{fontSize: '34rpx'}"
 			title="参赛用户协议" @cancel="showModal = false" @confirm="()  => {
 				canToHome = true
 				checked = true
@@ -140,7 +140,8 @@
 		}
 	}
 	.u-update-content{
-		height: 700rpx;
+		height: 1000rpx;
+		font-size: 24rpx;
 	}
 	.content{
 		// background-color: black;
