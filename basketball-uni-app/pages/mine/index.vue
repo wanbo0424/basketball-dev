@@ -68,7 +68,7 @@
 					<u-icon name="youhuiquan" custom-prefix="custom-icon" color="#f57463" :size="54"></u-icon>
 					<view class="grid-text" >优惠券</view>
 				</u-grid-item>
-				<u-grid-item @click="getCareer">
+				<u-grid-item @click="recharge">
 					<u-icon name="chongzhi" custom-prefix="custom-icon" color="#f57463" :size="54"></u-icon>
 					<view class="grid-text" >充值</view>
 				</u-grid-item >
@@ -145,6 +145,9 @@
 			},
 			toCustomService() {
 				uni.navigateTo({url: '/pagesA/customService/index'})
+			},
+			recharge() {
+				uni.navigateTo({url: '/pagesA/recharge/index'})
 			}
 		},
 		

@@ -211,16 +211,23 @@
 					"enablePullDownRefresh": false
 				}
 			}
-                ,{
-                    "path" : "rule/rule3",
-                    "style" :                                                                                    
+            ,{
+				"path" : "rule/rule3",
+				"style" :                                                                                    
                 {
                     "navigationBarTitleText": "怎么组队",
                     "enablePullDownRefresh": false
                 }
-                
-                }
-            ]
+            }
+			,{
+				"path" : "recharge/index",
+				"style" :                                                                                    
+			    {
+			        "navigationBarTitleText": "充值",
+			        "enablePullDownRefresh": false
+			    }
+			}
+        ]
 	}],
 	"preloadRule": {
 		"pages/index/index": {

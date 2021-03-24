@@ -9,6 +9,8 @@
 				<view>球衣颜色：{{order.yanse}}</view>
 				<view>所在赛段：{{order.saiduan}}</view>
 			</view>
+			
+			<image style="position: absolute;right: 0;bottom: 0;height: 200rpx;width: 180rpx;" src="../../static/imgs/participate.png" mode=""></image>
 			<!-- <view class="btn">
 				<button @click="$refs.contact.show = true">退款</button>
 			</view> -->
@@ -38,6 +40,7 @@
 
 <style lang="scss" scoped>
 .order-item{
+	position: relative;
 	display: flex;
 	background-color: #FFFFFF;
 	opacity: 0.9;
