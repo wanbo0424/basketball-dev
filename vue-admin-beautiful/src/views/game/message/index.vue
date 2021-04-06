@@ -2,7 +2,7 @@
  * @Description: 比赛信息
  * @Date: 2021-01-11 15:27:06
  * @LastEditors: yinwb
- * @LastEditTime: 2021-02-03 18:32:01
+ * @LastEditTime: 2021-04-06 15:41:27
  * @FilePath: \vue-admin-beautiful\src\views\game\message\index.vue
 -->
 <template>

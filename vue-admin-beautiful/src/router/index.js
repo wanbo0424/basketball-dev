@@ -44,10 +44,6 @@ export const asyncRoutes = [
     ],
   },
   {
-    path: '/canvas',
-    component: () => import('@/views/canvas/index'),
-  },
-  {
     path: '/player',
     component: Layout,
     alwaysShow: true,
@@ -91,6 +87,15 @@ export const asyncRoutes = [
         component: () => import('@/views/game/message'),
         meta: {
           title: '比赛信息',
+          icon: 'profile',
+        },
+      },
+      {
+        path: 'gameSetting',
+        name: 'GameSetting',
+        component: () => import('@/views/game/gameSetting'),
+        meta: {
+          title: '比赛设置',
           icon: 'profile',
         },
       },

@@ -50,5 +50,10 @@ class GameController extends Controller {
   }
 
 
+  // 按照比赛地点分组查询
+  async getGameListByAddress() {
+
+  }
+
 }
 module.exports = GameController;
