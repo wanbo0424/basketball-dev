@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-11 17:42:14
  * @LastEditors: yinwb
- * @LastEditTime: 2021-02-02 18:39:39
+ * @LastEditTime: 2021-04-06 17:56:35
  * @FilePath: \vue-admin-beautiful\src\api\game.js
  */
 import request from '@/utils/request'
@@ -28,6 +28,8 @@ export const list = (params) =>
     method: 'get',
     params,
   })
+export const gameListByAddress = (params) =>
+  request.get('/admin/gameListByAddress', { params })
 
 export const gameScoreSet = (data) =>
   request({

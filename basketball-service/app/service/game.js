@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-11 17:21:53
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-21 15:51:20
+ * @LastEditTime: 2021-04-06 17:59:42
  * @FilePath: \basketball-service\app\service\game.js
  */
 'use strict';
@@ -10,10 +10,27 @@
 const Service = require('egg').Service;
 
 class GameService extends Service {
+  // 添加比赛
   async addGame(data = {}) {
     const { app } = this;
-    const { _id } = await app.model.Game.create(data);
-    return _id;
+    const { gameDates, gameTimeRanges, ATeamName, BTeamName } = data;
+    const games = [];
+    if (gameDates && gameTimeRanges) {
+      gameDates.forEach(item => {
+        gameTimeRanges.forEach(ele => {
+          games.push({
+            gameDate: item,
+            gameTimeRange: ele,
+            ATeamName,
+            BTeamName,
+          });
+        });
+      });
+    }
+    // 批量添加比赛
+    const docs = await app.model.Game.insertMany(games);
+    // const { _id } = await app.model.Game.create(data);
+    return docs;
   }
 
   async updateGame(data = {}) {
@@ -104,7 +121,33 @@ class GameService extends Service {
     return _id;
   }
 
-
+  // 按照比赛地点分组查询
+  async gameListByAddress(params) {
+    const { app } = this;
+    const query = JSON.parse(JSON.stringify(params));
+    const { pageSize, current } = params;
+    delete query.pageSize;
+    delete query.current;
+    const docs = await app.model.Game.aggregate([
+      {
+        $group: {
+          _id: '$gameAddress',
+          gameDates: { $push: { gameDate: '$gameDate', gameId: '$_id', gameTimeRange: '$gameTimeRange' } },
+        },
+      },
+      { $skip: pageSize * (current - 1) },
+      { $limit: Number(pageSize) },
+    ]);
+    const pageInfo = {
+      total: await app.model.Game.countDocuments(query).exec(),
+      pageSize: Number(pageSize),
+      current: Number(current),
+    };
+    return {
+      docs,
+      pageInfo,
+    };
+  }
 }
 
 module.exports = GameService;

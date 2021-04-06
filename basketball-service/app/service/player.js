@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:39:52
  * @LastEditors: yinwb
- * @LastEditTime: 2021-02-22 09:29:25
+ * @LastEditTime: 2021-04-06 16:27:58
  * @FilePath: \basketball-service\app\service\player.js
  */
 'use strict';
@@ -142,7 +142,7 @@ class PlayerService extends Service {
     return _id;
   }
 
-  // 获取球员几分排名
+  // 获取球员积分排名
   async getPlayerRank() {
     const { app } = this;
     // 按积分排序获取前50条

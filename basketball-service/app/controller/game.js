@@ -6,8 +6,9 @@ class GameController extends Controller {
   async add() {
     const { ctx } = this;
     const requestBody = ctx.request.body;
-    const _id = await ctx.service.game.addGame(requestBody);
-    this.success(_id);
+    // const _id = await ctx.service.game.addGame(requestBody);
+    await ctx.service.game.addGame(requestBody);
+    this.success();
   }
 
   async update() {
@@ -57,8 +58,10 @@ class GameController extends Controller {
 
 
   // 按照比赛地点分组查询
-  async getGameListByAddress() {
-
+  async gameListByAddress() {
+    const { ctx } = this;
+    const data = await ctx.service.game.gameListByAddress(ctx.query);
+    this.success(data);
   }
 
 }
