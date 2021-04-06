@@ -29,6 +29,12 @@ class GameController extends Controller {
     this.success(data);
   }
 
+  async ToHeldGameAddresses() {
+    const { ctx } = this;
+    const data = await ctx.service.game.ToHeldGameAddresses();
+    this.success(data);
+  }
+
   async scoreSetting() {
     const { ctx } = this;
     const data = await ctx.service.game.scoreSetting(ctx.request.body);

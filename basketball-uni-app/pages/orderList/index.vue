@@ -1,6 +1,5 @@
 <template>
-	<view class="order-container" style="width: 100vw;height: 100vh;opacity: 0.7;background-size: cover;
-			background-repeat:no-repeat;">
+	<view class="order-container">
 		<view>
 			<u-tabs-swiper ref="uTabs" class="tabs-swiper" :list="swiperList" active-color="#f57463" :current="current" @change="tabsChange"
 			 swiperWidth="750"></u-tabs-swiper>
@@ -102,6 +101,11 @@
 }
 .order-container{
 	background-image: url(/static/imgs/order-bg.jpg);
+	width: 100vw;
+	height: 100vh;
+	opacity: 0.7;
+	background-size: cover;
+	background-repeat:no-repeat;
 }
 .tabs-swiper{
 	position: fixed;

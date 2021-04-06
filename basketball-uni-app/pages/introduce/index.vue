@@ -1,5 +1,5 @@
 <template>
-	<view style="height: 100%;padding: 0 22rpx;">
+	<view style="height: 100%;padding: 0 22rpx;position: relative;">
 		<col-toast></col-toast>
 		<view class="wrap">
 			<u-swiper height="400" :list="swiperList" ></u-swiper>
@@ -9,7 +9,7 @@
 		<player-rank></player-rank>
 		
 		<!-- 流程 -->
-		<process-introduce ></process-introduce>
+		<process-introduce @view-rule="viewRuleHandle"></process-introduce>
 		
 		<!--  -->
 		<a
@@ -18,7 +18,7 @@
 			position: relative;
 			margin-top: 40rpx;font-size: 28rpx;width: 100%;
 			color: #fd6060;text-decoration: underline;" 
-			@click="showModal=true">怎么组队？
+			@click="howCreate">怎么组队？
 		</a>
 		<view class="match-btn"@click="toDoMessage">
 			<image
@@ -53,7 +53,7 @@
 			PlayerRank,
 			ProcessIntroduce,
 			ColToast: Toast,
-			CustomCanvas
+			CustomCanvas,
 		},
 		data() {
 			return {
@@ -70,7 +70,8 @@
 						image: 'https://cdn.uviewui.com/uview/swiper/3.jpg',
 						title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳'
 					}
-				]
+				],
+				ruleContent: ''
 			}
 		},
 		created() {
@@ -82,10 +83,19 @@
 			//   'getUserInfo', // 将 `this.increment()` 映射为 `this.$store.dispatch('increment')`
 			// ]),
 			toDoMessage() {
-				uni.navigateTo({url: '/pages/messageForm/index'})
+				uni.navigateTo({url: '/pagesA/messageForm/index'})
 				// http.get('/').then(res => {
 				// 	debugger
 				// })
+			},
+			viewRuleHandle(content) {
+				this.$refs.mask.show = true
+				this.ruleContent = content
+			},
+			howCreate() {
+				uni.navigateTo({
+					url: '/pagesA/rule/rule3'
+				})
 			}
 		},
 		

@@ -11,4 +11,6 @@ module.exports = app => {
   const { router, controller } = app;
   // 将要举行比赛列表
   router.get('/weapp/game/ToHeldGameList', controller.game.ToHeldGameList);
+  // 将要举行比赛地点列表
+  router.get('/weapp/game/ToHeldGameAddresses', controller.game.ToHeldGameAddresses);
 };

@@ -1,15 +1,15 @@
 <template>
 	<view v-if="show"
 		class="rank-model"
-		style="position: fixed;
-		overflow: hidden;
-		background-color: #333333;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		z-index: 100;
-		right: 0;"
 	>
+	<!-- style="position: fixed;
+	overflow: hidden;
+	background-color: #333333;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 100;
+	right: 0;" -->
 		<view class="warp" >
 			<view class="detail-area">
 				<view class="rank-list-header">
@@ -80,20 +80,21 @@
 </script>
 
 <style lang="scss" scoped>
-	.close-btn{
-		width: 80rpx;
-		height: 80rpx;
-		line-height: 80rpx;
-		color: #FFFFFF;
-		border: 2rpx solid #FFFFFF;
-		border-radius: 50%;
-		font-size: 46rpx;
-		position: relative;
-		left: 50%;
-		margin-top: 20rpx;
-		transform: translate(-50%);
-		text-align: center;
-	}
+@import '../../../common/common.scss';
+.close-btn{
+	width: 80rpx;
+	height: 80rpx;
+	line-height: 80rpx;
+	color: #FFFFFF;
+	border: 2rpx solid #FFFFFF;
+	border-radius: 50%;
+	font-size: 46rpx;
+	position: relative;
+	left: 50%;
+	margin-top: 20rpx;
+	transform: translate(-50%);
+	text-align: center;
+}
 .warp{
 	width: 90%;
 	height: 80%;

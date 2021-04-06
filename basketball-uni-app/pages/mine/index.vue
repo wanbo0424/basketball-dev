@@ -60,7 +60,7 @@
 			</u-grid> -->
 			
 			<u-grid :col="4" :border="false">
-				<u-grid-item @click="getOrderList">
+				<u-grid-item @click="getCareer">
 					<u-icon name="bisaijilu" custom-prefix="custom-icon" color="#f57463" :size="54"></u-icon>
 					<view class="grid-text" >比赛记录</view>
 				</u-grid-item>
@@ -68,11 +68,11 @@
 					<u-icon name="youhuiquan" custom-prefix="custom-icon" color="#f57463" :size="54"></u-icon>
 					<view class="grid-text" >优惠券</view>
 				</u-grid-item>
-				<u-grid-item @click="getCareer">
+				<u-grid-item @click="recharge">
 					<u-icon name="chongzhi" custom-prefix="custom-icon" color="#f57463" :size="54"></u-icon>
 					<view class="grid-text" >充值</view>
 				</u-grid-item >
-				<u-grid-item @click="$refs.contact.show = true" >
+				<u-grid-item @click="toCustomService" >
 					<u-icon name="kefu2" custom-prefix="custom-icon" color="#f57463" :size="54"></u-icon>
 					<view class="grid-text" >联系客服</view>
 				</u-grid-item >
@@ -130,19 +130,25 @@
 		methods: {
 			toCoupon() {
 				uni.navigateTo({
-					url: '/pages/mine/Coupon'
+					url: '/pagesA/coupon/index'
 				})
 			},
 			getCareer() {
-				uni.navigateTo({url: '/pages/match/index'})
+				uni.navigateTo({url: '/pagesA/match/index'})
 			},
 			
 			getOrderList() {
-				uni.navigateTo({url: '/pages/order/index?type=all'})
+				uni.navigateTo({url: '/pagesA/order/index?type=all'})
 			},
 			getTobePaid() {
 				uni.navigateTo({url: '/pages/order/index?type=tobe'})
 			},
+			toCustomService() {
+				uni.navigateTo({url: '/pagesA/customService/index'})
+			},
+			recharge() {
+				uni.navigateTo({url: '/pagesA/recharge/index'})
+			}
 		},
 		
 	}

@@ -1,8 +1,8 @@
 <template>
 	<view class="pay_page">
 		<view class="order_info cell_info">
-			<h2>{{orderInfo.gameAddress.split('--')[0]}}</h2>
-			<h2>{{orderInfo.gameAddress.split('--')[1]}}</h2>
+			<h2>比赛地点：{{orderInfo.gameAddress.split('--')[0]}}</h2>
+			<h2>比赛时间：{{orderInfo.gameAddress.split('--')[1]}}</h2>
 			<!-- <view>
 				{{orderInfo.gameDate}}
 			</view> -->
@@ -119,6 +119,7 @@ import { mapGetters } from 'vuex'
 	padding: 50rpx 15rpx;
 	background-color: #fff;
 	border-radius: 25rpx;
+	line-height: 50rpx;
 }
 .order_info{ 
 	
