@@ -26,6 +26,7 @@ const handleCode = (code, msg) => {
     case 401:
       message.error(msg || '登录失效')
       store.dispatch('user/resetAll').catch(() => {})
+      router.push({ path: '/login' }).catch(() => {})
       break
     case 403:
       router.push({ path: '/401' }).catch(() => {})

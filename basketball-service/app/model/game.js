@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-11 14:32:16
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-22 10:04:12
+ * @LastEditTime: 2021-04-08 15:00:38
  * @FilePath: \basketball-service\app\model\game.js
  */
 'use strict';
@@ -39,11 +39,23 @@ module.exports = app => {
   const GameSchema = new Schema({
     gameAddress: { type: String },
     gameDate: { type: String },
-    COverage: { type: String },
-    PFOverage: { type: String },
-    SFOverage: { type: String },
-    SGOverage: { type: String },
-    PGOverage: { type: String },
+    gameTimeRange: { type: String },
+    COverage: {
+      type: String,
+      default: '2',
+    },
+    PFOverage: {
+      type: String,
+    },
+    SFOverage: {
+      type: String,
+    },
+    SGOverage: {
+      type: String,
+    },
+    PGOverage: {
+      type: String,
+    },
     playerIds: { type: Array },
     ATeamName: { type: String },
     BTeamName: { type: String },

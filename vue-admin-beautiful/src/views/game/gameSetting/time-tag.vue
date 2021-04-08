@@ -10,19 +10,31 @@
     </a-tag>
   </template>
   <template v-if="inputVisible">
-    <a-time-picker
-      ref="startRef"
-      v-model:value="startTime"
-      valueFormat="HH:mm:ss"
-    ></a-time-picker>
-    ---
-    <a-time-picker v-model:value="endTime" valueFormat="HH:mm:ss">
-      <template #addon>
-        <a-button size="small" type="primary" @click="handleEndTime">
-          Ok
-        </a-button>
-      </template>
-    </a-time-picker>
+    <template v-if="type === 'time'">
+      <a-time-picker
+        ref="startRef"
+        v-model:value="startTime"
+        valueFormat="HH:mm:ss"
+      ></a-time-picker>
+      ---
+      <a-time-picker v-model:value="endTime" valueFormat="HH:mm:ss">
+        <template #addon>
+          <a-button size="small" type="primary" @click="handleEndTime">
+            Ok
+          </a-button>
+        </template>
+      </a-time-picker>
+    </template>
+    <template v-else>
+      <a-date-picker
+        v-model:value="date"
+        :show-time="{ format: 'MMMM Do YYYY, HH:mm:ss' }"
+        type="date"
+        placeholder="选择比赛日期"
+        style="width: 100%"
+        @ok="handleDateOk"
+      />
+    </template>
   </template>
   <a-tag
     v-else
@@ -30,42 +42,56 @@
     style="background: #fff; border-style: dashed"
   >
     <plus-outlined />
-    时间段
+    {{ type === 'time' ? '时间段' : '日期' }}
   </a-tag>
 </template>
 <script>
-  import { reactive, toRefs, ref, nextTick } from 'vue'
+  import { reactive, toRefs, ref } from 'vue'
   import { PlusOutlined } from '@ant-design/icons-vue'
   export default {
     emits: ['input'],
     components: { PlusOutlined },
+    props: {
+      type: String,
+    },
     setup(props, { emit }) {
+      const { type } = toRefs(props)
       const startRef = ref()
       let startTime = ref('')
       let endTime = ref('')
+      let date = ref('')
       const state = reactive({
-        tags: ['14:00--16:00'],
+        tags:
+          type.value === 'time' ? ['14:00--16:00'] : ['2021-05-01 00:00:00'],
         inputVisible: false,
         inputValue: '',
       })
       const showInput = () => {
         state.inputVisible = true
-        startTime.value = ''
-        endTime.value = ''
-        nextTick(() => {
-          startRef.value.focus()
-        })
+        if (type.value === 'time') {
+          startTime.value = ''
+          endTime.value = ''
+        } else {
+          date.value = ''
+        }
       }
       const handleClose = (removedTag) => {
         const tags = state.tags.filter((tag) => tag !== removedTag)
         state.tags = tags
-        emit('input', state.tags)
+        emit('update:modelValue', state.tags)
       }
+
+      const handleDateOk = (date) => {
+        state.inputVisible = false
+        state.tags.push(date)
+        emit('update:modelValue', state.tags)
+      }
+
       const handleEndTime = () => {
         state.inputVisible = false
         state.tags.push(`${startTime.value}--${endTime.value}`)
 
-        emit('input', state.tags)
+        emit('update:modelValue', state.tags)
       }
 
       return {
@@ -74,6 +100,7 @@
         startRef,
         startTime,
         endTime,
+        handleDateOk,
         handleEndTime,
         handleClose,
       }

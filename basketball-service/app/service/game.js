@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-11 17:21:53
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-06 17:59:42
+ * @LastEditTime: 2021-04-07 09:22:10
  * @FilePath: \basketball-service\app\service\game.js
  */
 'use strict';
@@ -13,7 +13,7 @@ class GameService extends Service {
   // 添加比赛
   async addGame(data = {}) {
     const { app } = this;
-    const { gameDates, gameTimeRanges, ATeamName, BTeamName } = data;
+    const { gameDates, gameTimeRanges, gameAddress, ATeamName, BTeamName } = data;
     const games = [];
     if (gameDates && gameTimeRanges) {
       gameDates.forEach(item => {
@@ -21,6 +21,7 @@ class GameService extends Service {
           games.push({
             gameDate: item,
             gameTimeRange: ele,
+            gameAddress,
             ATeamName,
             BTeamName,
           });

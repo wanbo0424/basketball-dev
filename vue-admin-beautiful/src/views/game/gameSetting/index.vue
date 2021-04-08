@@ -3,7 +3,7 @@
  * @Date: 2021-04-06 10:18:37
  * @Author: yinwb
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-06 17:56:42
+ * @LastEditTime: 2021-04-08 16:42:33
  * @FilePath: \vue-admin-beautiful\src\views\game\gameSetting\index.vue
 -->
 <template>
@@ -17,10 +17,10 @@
       <template #operation>
         <a>Publish</a>
       </template>
-      <template #expandedRowRender>
+      <template #expandedRowRender="{ record }">
         <a-table
-          :columns="ChildColumns"
-          :data-source="childData"
+          :columns="childColumns"
+          :data-source="record.gameDates"
           :pagination="false"
         >
           <template #status>
@@ -59,25 +59,26 @@
       show-less-items
     />
     <!-- 修改 -->
-    <Edit ref="editCarousel" @refresh="loadData"></Edit>
+    <add-form ref="editCarousel" @refresh="loadData"></add-form>
   </div>
 </template>
 <script>
   import { ref, onMounted, reactive } from 'vue'
-  import Edit from './Edit'
+  import AddForm from './add-form'
   import { gameListByAddress } from '@/api/game'
   const columns = [{ title: '比赛地点', dataIndex: '_id', key: '_id' }]
-  const ChildColumns = [
+  const childColumns = [
     { title: '比赛Id', dataIndex: 'gameId', key: 'gameId' },
     { title: '比赛日期', dataIndex: 'gameDate', key: 'gameDate' },
   ]
   const GrandsonColumns = [
     { title: '比赛Id', dataIndex: 'gameId', key: 'gameId' },
     { title: '比赛时间段', dataIndex: 'gamePeriod', key: 'gamePeriod' },
+    { title: '比赛状态', dataIndex: 'gameStatus', key: 'gameStatus' },
   ]
   export default {
     components: {
-      Edit,
+      AddForm,
     },
     setup() {
       const data = ref([])
@@ -113,7 +114,7 @@
       return {
         pagination,
         columns,
-        ChildColumns,
+        childColumns,
         GrandsonColumns,
         editCarousel,
         data,

@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-26 16:06:23
  * @LastEditors: yinwb
- * @LastEditTime: 2021-02-20 15:13:26
+ * @LastEditTime: 2021-04-08 15:51:06
  * @FilePath: \basketball-service\app\extend\context.js
  */
 'use strict';
@@ -44,8 +44,9 @@ module.exports = {
       app.jwt.verify(token, app.config.jwt.secret, (err, decoded) => {
         if (err) {
           if (err.name === 'TokenExpiredError' && userId) {
-            this.setToken({ userName, userId }); // 刷新token
-            resolve({ verify: true, message: { userId } });
+            // this.setToken({ userName, userId }); // 刷新token
+            // resolve({ verify: true, message: { userId } });
+            resolve({ verify: false, message: '用户token已过期' });
           } else {
             resolve({ verify: false, message: err.message });
           }

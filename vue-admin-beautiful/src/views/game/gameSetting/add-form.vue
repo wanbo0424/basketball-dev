@@ -1,10 +1,10 @@
 <!--
- * @Description: 比阿尼基比赛信息
+ * @Description: 比赛信息
  * @Date: 2021-04-06 14:22:46
  * @Author: yinwb
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-06 16:07:49
- * @FilePath: \vue-admin-beautiful\src\views\game\gameSetting\Edit.vue
+ * @LastEditTime: 2021-04-08 17:06:26
+ * @FilePath: \vue-admin-beautiful\src\views\game\gameSetting\add-form.vue
 -->
 <template>
   <a-modal v-model:visible="visible" title="比赛设置" :width="800">
@@ -25,16 +25,17 @@
         <a-input placeholder="比赛地点" v-model:value="form.gameAddress" />
       </a-form-item>
       <a-form-item label="比赛日期">
-        <a-date-picker
-          v-model:value="form.gameDate"
+        <!-- <a-date-picker
+          v-model:value="form.gameDates"
           :show-time="{ format: 'MMMM Do YYYY, HH:mm:ss' }"
           type="date"
           placeholder="选择比赛日期"
           style="width: 100%"
-        />
+        /> -->
+        <time-tag type="date" v-model="form.gameTimeRanges"></time-tag>
       </a-form-item>
       <a-form-item label="比赛时间段">
-        <time-tag></time-tag>
+        <time-tag type="time" v-model="form.gameTimeRanges"></time-tag>
       </a-form-item>
       <a-form-item label="A队名称">
         <a-input v-model:value="form.ATeamName" />
@@ -48,23 +49,18 @@
 <script>
   import { reactive, ref } from 'vue'
   import TimeTag from './time-tag'
+  import { add } from '@/api/game'
   export default {
     components: {
       TimeTag,
     },
-    setup() {
+    setup(props, { emit }) {
       let visible = ref(false)
       let type = ref('')
       let form = reactive({
         gameAddress: '',
-        gameDate: '',
-        startTime: '',
-        endTime: '',
-        COverage: null,
-        PFOverage: null,
-        SFOverage: null,
-        SGOverage: null,
-        PGOverage: null,
+        gameDates: [],
+        gameTimeRanges: [],
       })
       function init(row, pageType) {
         type.value = pageType
@@ -84,6 +80,10 @@
       function handleOk() {
         console.log(form)
         debugger
+        add(form).then((res) => {
+          console.log(res)
+          emit('refresh')
+        })
       }
       return {
         visible,
