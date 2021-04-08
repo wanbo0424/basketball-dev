@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-11 17:21:53
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-07 09:22:10
+ * @LastEditTime: 2021-04-09 00:01:20
  * @FilePath: \basketball-service\app\service\game.js
  */
 'use strict';
@@ -133,9 +133,17 @@ class GameService extends Service {
       {
         $group: {
           _id: '$gameAddress',
-          gameDates: { $push: { gameDate: '$gameDate', gameId: '$_id', gameTimeRange: '$gameTimeRange' } },
+          gameDate: { $first: '$gameDate' },
+          gameDates: {
+            $push: {
+              gameDate: '$gameDate',
+              gameId: '$_id',
+              gameTimeRange: '$gameTimeRange',
+            },
+          },
         },
       },
+      { $sort: { gameDate: -1 } },
       { $skip: pageSize * (current - 1) },
       { $limit: Number(pageSize) },
     ]);

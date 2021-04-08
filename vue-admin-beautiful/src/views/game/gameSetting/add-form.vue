@@ -3,7 +3,7 @@
  * @Date: 2021-04-06 14:22:46
  * @Author: yinwb
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-08 17:06:26
+ * @LastEditTime: 2021-04-08 22:47:28
  * @FilePath: \vue-admin-beautiful\src\views\game\gameSetting\add-form.vue
 -->
 <template>
@@ -32,7 +32,7 @@
           placeholder="选择比赛日期"
           style="width: 100%"
         /> -->
-        <time-tag type="date" v-model="form.gameTimeRanges"></time-tag>
+        <time-tag type="date" v-model="form.gameDates"></time-tag>
       </a-form-item>
       <a-form-item label="比赛时间段">
         <time-tag type="time" v-model="form.gameTimeRanges"></time-tag>

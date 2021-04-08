@@ -28,11 +28,11 @@
     <template v-else>
       <a-date-picker
         v-model:value="date"
-        :show-time="{ format: 'MMMM Do YYYY, HH:mm:ss' }"
         type="date"
+        valueFormat="YYYY-mm-DD"
         placeholder="选择比赛日期"
         style="width: 100%"
-        @ok="handleDateOk"
+        @change="handleDateOk"
       />
     </template>
   </template>
@@ -61,8 +61,7 @@
       let endTime = ref('')
       let date = ref('')
       const state = reactive({
-        tags:
-          type.value === 'time' ? ['14:00--16:00'] : ['2021-05-01 00:00:00'],
+        tags: type.value === 'time' ? ['14:00--16:00'] : [],
         inputVisible: false,
         inputValue: '',
       })
@@ -98,6 +97,7 @@
         ...toRefs(state),
         showInput,
         startRef,
+        date,
         startTime,
         endTime,
         handleDateOk,

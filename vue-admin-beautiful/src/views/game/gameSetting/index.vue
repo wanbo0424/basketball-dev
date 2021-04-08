@@ -3,7 +3,7 @@
  * @Date: 2021-04-06 10:18:37
  * @Author: yinwb
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-08 16:42:33
+ * @LastEditTime: 2021-04-08 23:35:41
  * @FilePath: \vue-admin-beautiful\src\views\game\gameSetting\index.vue
 -->
 <template>
@@ -70,6 +70,7 @@
   const childColumns = [
     { title: '比赛Id', dataIndex: 'gameId', key: 'gameId' },
     { title: '比赛日期', dataIndex: 'gameDate', key: 'gameDate' },
+    { title: '比赛时间段', dataIndex: 'gameTimeRange', key: 'gameTimeRange' },
   ]
   const GrandsonColumns = [
     { title: '比赛Id', dataIndex: 'gameId', key: 'gameId' },
@@ -105,6 +106,11 @@
           })
           .finally(() => {})
       }
+      function currentChange(page) {
+        pagination.current = page
+        loadData(pagination)
+      }
+
       function add() {
         editCarousel.value.init()
       }
@@ -120,6 +126,7 @@
         data,
         childData,
         add,
+        currentChange,
       }
     },
   }

@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-26 16:06:23
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-08 15:51:06
+ * @LastEditTime: 2021-04-08 22:44:29
  * @FilePath: \basketball-service\app\extend\context.js
  */
 'use strict';
@@ -73,8 +73,8 @@ module.exports = {
 
   // 校验token失败
   verifyFail(code, message) {
-    this.body = { code, message };
-    this.status = code;
+    this.ctx.body = { code, message };
+    this.ctx.status = code;
   },
 }
 ;
