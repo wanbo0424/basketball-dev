@@ -16,7 +16,7 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1610002671985_9747';
 
   // add your middleware config here
-  config.middleware = [ 'response' ];
+  config.middleware = [ 'response', 'auth' ];
   // 小程序只能存storage，关闭csrf
   config.security = {
     csrf: {

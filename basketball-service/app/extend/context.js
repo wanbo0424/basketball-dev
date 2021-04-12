@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-26 16:06:23
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-08 22:44:29
+ * @LastEditTime: 2021-04-12 14:12:34
  * @FilePath: \basketball-service\app\extend\context.js
  */
 'use strict';
@@ -45,8 +45,8 @@ module.exports = {
         if (err) {
           if (err.name === 'TokenExpiredError' && userId) {
             // this.setToken({ userName, userId }); // 刷新token
-            // resolve({ verify: true, message: { userId } });
-            resolve({ verify: false, message: '用户token已过期' });
+            resolve({ verify: true, message: { userId } });
+            // resolve({ verify: false, message: '用户token已过期' });
           } else {
             resolve({ verify: false, message: err.message });
           }
@@ -55,12 +55,11 @@ module.exports = {
         }
       });
     });
-
     if (!verifyResult.verify) {
       this.verifyFail(401, verifyResult.message);
       return false;
     }
-    if (userId !== verifyResult.message.userUuid) {
+    if (userId !== verifyResult.message.id) {
       this.verifyFail(401, '用户 UUID 与 Token 不一致');
       return false;
     }
@@ -73,8 +72,8 @@ module.exports = {
 
   // 校验token失败
   verifyFail(code, message) {
-    this.ctx.body = { code, message };
-    this.ctx.status = code;
+    this.body = { code, message };
+    this.status = code;
   },
 }
 ;
