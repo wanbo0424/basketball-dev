@@ -13,6 +13,7 @@
       :columns="columns"
       :data-source="data"
       class="components-table-demo-nested"
+      :pagination="false"
     >
       <template #operation>
         <a>Publish</a>
