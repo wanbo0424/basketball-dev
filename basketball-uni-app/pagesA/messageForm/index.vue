@@ -5,8 +5,12 @@
 				<u-input v-model="form.gameName" type="select" @click="showGameSelect = true" />
 				<u-select v-model="showGameSelect" :list="gameList" @confirm="gameSelected"></u-select>
 			</u-form-item>
+			<u-form-item label="比赛日期" required="true" prop="gameName">
+				<u-input v-model="form.gameDate" type="select" @click="showGameSelect = true" />
+				<u-select v-model="showGameSelect" :list="gameList" @confirm="gameSelected"></u-select>
+			</u-form-item>
 			<u-form-item label="比赛时间" required="true" prop="gameName">
-				<u-input v-model="form.gameName" type="select" @click="showGameSelect = true" />
+				<u-input v-model="form.gameTimeRange" type="select" @click="showGameSelect = true" />
 				<u-select v-model="showGameSelect" :list="gameList" @confirm="gameSelected"></u-select>
 			</u-form-item>
 			<u-form-item label="性别" required="true" prop="sex">
@@ -154,7 +158,7 @@
 				this.gameDate = e[0].time
 			},
 			getGameList() {
-				http.get('weapp/game/ToHeldGameAddresses').then(res => {
+				http.get('weapp/game/ToHeldGameList').then(res => {
 					if(res.data.code === 0) {
 						this.gameList = res.data.data.map(item => ({
 							value: item._id,

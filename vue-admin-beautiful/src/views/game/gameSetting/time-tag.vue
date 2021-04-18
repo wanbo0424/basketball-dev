@@ -1,10 +1,5 @@
 <template>
   <template v-for="(tag, index) in tags" :key="index">
-    <!-- <a-tooltip v-if="tag.length > 20" :title="tag">
-      <a-tag :key="tag" :closable="index !== 0" @close="handleClose(tag)">
-        {{ `${tag.slice(0, 20)}...` }}
-      </a-tag>
-    </a-tooltip> -->
     <a-tag closable @close="handleClose(tag)">
       {{ tag }}
     </a-tag>
@@ -29,7 +24,7 @@
       <a-date-picker
         v-model:value="date"
         type="date"
-        valueFormat="YYYY-mm-DD"
+        valueFormat="YYYY-MM-DD"
         placeholder="选择比赛日期"
         style="width: 100%"
         @change="handleDateOk"
@@ -81,6 +76,7 @@
       }
 
       const handleDateOk = (date) => {
+        console.log(date)
         state.inputVisible = false
         state.tags.push(date)
         emit('update:modelValue', state.tags)

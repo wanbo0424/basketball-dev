@@ -1,8 +1,8 @@
 /*
  * @Description:
  * @Date: 2021-01-11 17:21:53
- * @LastEditors: yinwb
- * @LastEditTime: 2021-04-09 00:01:20
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-04-18 11:31:46
  * @FilePath: \basketball-service\app\service\game.js
  */
 'use strict';
@@ -84,10 +84,36 @@ class GameService extends Service {
   // }
 
 
-  // 将要举行比赛列表
+  // 将要举行比赛列表【小程序】
   async ToHeldGameList() {
     const { app } = this;
-    return await app.model.Game.find({ gameStatus: 0 });
+    const docs = await app.model.Game.aggregate([
+      {
+        $group: {
+          _id: '$gameAddress',
+          gameDate: { $first: '$gameDate' },
+          gameDates: {
+            $push: {
+              gameDate: '$gameDate',
+              gameId: '$_id',
+              gameTimeRange: '$gameTimeRange',
+            },
+          },
+        },
+      },
+      { $sort: { gameDate: -1 } },
+    ]);
+    let newDocs = [];
+    if (docs && docs.length) {
+      newDocs = docs.filter(item => {
+        if (item.gameDate) {
+          return new Date(item.gameDate).getTime() > new Date().getTime();
+        }
+        return false;
+
+      });
+    }
+    return newDocs;
   }
 
   // 将要举行比赛地点列表

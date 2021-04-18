@@ -17,6 +17,9 @@ module.exports = appInfo => {
 
   // add your middleware config here
   config.middleware = [ 'response', 'auth' ];
+  config.auth = {
+    ignore: /^\/weapp/,
+  };
   // 小程序只能存storage，关闭csrf
   config.security = {
     csrf: {

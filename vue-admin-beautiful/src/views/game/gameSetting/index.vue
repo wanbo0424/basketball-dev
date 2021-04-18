@@ -2,8 +2,8 @@
  * @Description: 比赛设置
  * @Date: 2021-04-06 10:18:37
  * @Author: yinwb
- * @LastEditors: yinwb
- * @LastEditTime: 2021-04-08 23:35:41
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-04-18 11:51:56
  * @FilePath: \vue-admin-beautiful\src\views\game\gameSetting\index.vue
 -->
 <template>
@@ -32,20 +32,8 @@
           </template>
           <template #operation>
             <span class="table-operation">
-              <a>Pause</a>
+              <a>添加</a>
               <a>Stop</a>
-              <a-dropdown>
-                <template #overlay>
-                  <a-menu>
-                    <a-menu-item>Action 1</a-menu-item>
-                    <a-menu-item>Action 2</a-menu-item>
-                  </a-menu>
-                </template>
-                <a>
-                  More
-                  <down-outlined />
-                </a>
-              </a-dropdown>
             </span>
           </template>
         </a-table>
