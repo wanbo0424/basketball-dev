@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-11 14:32:16
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-08 15:00:38
+ * @LastEditTime: 2021-04-19 16:01:48
  * @FilePath: \basketball-service\app\model\game.js
  */
 'use strict';
@@ -42,7 +42,6 @@ module.exports = app => {
     gameTimeRange: { type: String },
     COverage: {
       type: String,
-      default: '2',
     },
     PFOverage: {
       type: String,
@@ -61,8 +60,8 @@ module.exports = app => {
     BTeamName: { type: String },
     ATeamScore: { type: Number },
     BTeamScore: { type: Number },
-    ATeamPlayers: { type: Array },
-    BTeamPlayers: { type: Array },
+    // ATeamPlayers: { type: Array },
+    // BTeamPlayers: { type: Array },
     // 0:未举行 1：正在举行 2：已举行
     gameStatus: {
       type: Number,

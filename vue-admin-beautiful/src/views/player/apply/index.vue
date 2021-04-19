@@ -2,11 +2,12 @@
  * @Description: 
  * @Date: 2021-01-08 17:59:51
  * @LastEditors: yinwb
- * @LastEditTime: 2021-02-01 15:43:52
+ * @LastEditTime: 2021-04-19 17:54:25
  * @FilePath: \vue-admin-beautiful\src\views\player\apply\index.vue
 -->
 <template>
   <div>
+    <search @load-data="loadData"></search>
     <a-table
       :columns="columns"
       :data-source="data"
@@ -21,6 +22,16 @@
           }}
         </span>
       </template>
+      <template #team="row">
+        <a-radio-group
+          name="radioGroup"
+          @change="changeTeam(row)"
+          v-model:value="row.text"
+        >
+          <a-radio value="A">A</a-radio>
+          <a-radio value="B">B</a-radio>
+        </a-radio-group>
+      </template>
     </a-table>
 
     <a-pagination
@@ -34,13 +45,21 @@
   </div>
 </template>
 <script>
-  import { ref, onMounted, reactive } from 'vue'
+  import { ref, onMounted, reactive, unref } from 'vue'
   import { getList } from '@/api/player'
   import moment from 'moment'
+  import Search from './Search'
   const columns = [
     {
       title: 'id',
       dataIndex: '_id',
+      width: 90,
+      ellipsis: true,
+    },
+    {
+      title: '比赛id',
+      dataIndex: 'gameId',
+      ellipsis: true,
     },
     {
       title: '性别',
@@ -63,23 +82,30 @@
       dataIndex: 'createTime',
       slots: { customRender: 'createTime' },
     },
+    {
+      title: '分组',
+      dataIndex: 'team',
+      slots: { customRender: 'team' },
+    },
   ]
   export default {
+    components: { Search },
     setup() {
       const loadingRef = ref(false)
       const data = ref([])
 
       const pagination = reactive({
-        pageSize: 5,
+        pageSize: 12,
         current: 1,
         total: 0,
       })
 
       function handleTableChange() {}
 
-      function loadData() {
+      function loadData(search = {}) {
         let submit = {
           ...pagination,
+          ...search,
         }
         delete submit.total
         getList(submit).then((res) => {
@@ -96,6 +122,11 @@
         loadData(pagination)
       }
 
+      const changeTeam = (row) => {
+        let dataRef = unref(data)
+        dataRef[row.index].team = row.text
+      }
+
       onMounted(() => {
         loadData()
       })
@@ -108,6 +139,8 @@
         data,
         pagination,
         moment,
+        loadData,
+        changeTeam,
       }
     },
   }

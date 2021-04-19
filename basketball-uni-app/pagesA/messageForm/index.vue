@@ -2,19 +2,19 @@
 	<view class="form-content">
 		<u-form :model="form" ref="uForm" label-width="140">
 			<u-form-item label="比赛场地" required="true" prop="gameName">
-				<u-input v-model="form.gameName" type="select" @click="showGameSelect = true" />
-				<u-select v-model="showGameSelect" :list="gameList" @confirm="gameSelected"></u-select>
+				<u-input v-model="form.gameAddress" type="select" @click="showGameSelect = true" />
+				<u-select v-model="showGameSelect" :list="gameList" @confirm="gamAddressSelected"></u-select>
 			</u-form-item>
 			<u-form-item label="比赛日期" required="true" prop="gameName">
-				<u-input v-model="form.gameDate" type="select" @click="showGameSelect = true" />
-				<u-select v-model="showGameSelect" :list="gameList" @confirm="gameSelected"></u-select>
+				<u-input v-model="form.gameDate" type="select" @click="showGameDateSelect = true" />
+				<u-select v-model="showGameDateSelect" :list="gameDateList" @confirm="gameDateSelected"></u-select>
 			</u-form-item>
 			<u-form-item label="比赛时间" required="true" prop="gameName">
 				<u-input v-model="form.gameTimeRange" type="select" @click="showGameSelect = true" />
-				<u-select v-model="showGameSelect" :list="gameList" @confirm="gameSelected"></u-select>
+				<u-select v-model="showGameSelect" :list="gameTimeList" @confirm="gameTimeSelected"></u-select>
 			</u-form-item>
 			<u-form-item label="性别" required="true" prop="sex">
-				<u-input v-model="form.sex" type="select" @click="showSexSelect = true" />
+				<u-input v-model="form.sex" disabled type="select" @click="showSexSelect = true" />
 				<!-- <u-select v-model="showSexSelect" :list="sexList" @confirm="sexSelected"></u-select> -->
 			</u-form-item>
 			<u-form-item label="年龄" prop="age">
@@ -61,6 +61,8 @@
 				showSexSelect: false,
 				showRoleSelect: false,
 				showGameSelect: false,
+				showGameDateSelect: false,
+				showGameTimeSelect: false,
 				showInsurance: true,
 				form: {
 					age: '',
@@ -98,7 +100,9 @@
 						}
 					],
 				},
-				gameList: [],
+				gameAddressList: [],
+				gameDateList: [],
+				gameTimeList: [],
 				plarerData: {}
 			}
 		},
@@ -146,23 +150,53 @@
 			])
 		 },
 		methods: {
+			gamAddressSelected(e) {
+				this.form.gameAddress = e[0].label
+				let findItem = this.gameAddressList.find(item => {
+					item.gameDate = e[0].label
+				})
+				if(findItem){
+					this.gameDateList = findItem.gameDates.map(item => ({
+						value: item,
+						label: item
+					}))
+				}else{
+					this.gameDateList = []
+				}
+			},
+			gameDateSelected(e) {
+				this.form.gameDate = e[0].label
+				if(this.gameDateList && this.gameDateList.length) {
+					this.gameTimeList = this.gameDateList.filter(item => {
+						return item.gameTimeRange = e[0].label
+					})
+					this.gameTimeList = this.gameTimeList.map(item => ({
+						value: item.gameId,
+						label: item.gameTimeRange,
+					}))
+				}
+			},
+			gameTimeSelected(e) {
+				this.form.gameTimeRange = e[0].label
+				this.form.gameId= e[0].value
+			},
 			sexSelected(e) {
-				this.form.sex = e[0].label;
+				this.form.sex = e[0].label;	
 			},
 			roleSelected(e) {
 				this.form.role = e[0].label;
 			},
-			gameSelected(e) {
-				this.form.gameName = e[0].label
-				this.form.gameId = e[0].value
-				this.gameDate = e[0].time
-			},
+			// gameSelected(e) {
+			// 	this.form.gameName = e[0].label
+			// 	this.form.gameId = e[0].value
+			// 	this.gameDate = e[0].time
+			// },
 			getGameList() {
 				http.get('weapp/game/ToHeldGameList').then(res => {
 					if(res.data.code === 0) {
-						this.gameList = res.data.data.map(item => ({
-							value: item._id,
-							label: `${item.gameAddress}-- ${item.gameDate}`
+						this.gameAddressList = res.data.data.map(item => ({
+							value: item,
+							label: item
 						}))
 					}
 				})

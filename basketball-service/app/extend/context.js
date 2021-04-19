@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-26 16:06:23
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-12 14:12:34
+ * @LastEditTime: 2021-04-19 15:56:10
  * @FilePath: \basketball-service\app\extend\context.js
  */
 'use strict';
@@ -55,7 +55,6 @@ module.exports = {
         }
       });
     });
-    console.log(verifyResult)
     if (!verifyResult.verify) {
       this.verifyFail(401, verifyResult.message);
       return false;
