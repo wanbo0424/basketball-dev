@@ -1,8 +1,8 @@
 /*
  * @Description:
  * @Date: 2021-01-11 17:21:53
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-04-18 11:31:46
+ * @LastEditors: yinwb
+ * @LastEditTime: 2021-04-20 15:38:18
  * @FilePath: \basketball-service\app\service\game.js
  */
 'use strict';
@@ -139,7 +139,7 @@ class GameService extends Service {
     return _id;
   }
 
-  // 球员分组
+  // 球员组队（废弃）
   async buildTeam(data) {
     const { app } = this;
     const { _id } = await app.model.Game.updateOne({ _id: data._id }, {
@@ -147,6 +147,7 @@ class GameService extends Service {
     });
     return _id;
   }
+
 
   // 按照比赛地点分组查询
   async gameListByAddress(params) {

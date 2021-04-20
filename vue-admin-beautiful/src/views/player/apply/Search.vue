@@ -3,7 +3,7 @@
  * @Date: 2021-04-19 16:12:41
  * @Author: yinwb
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-19 16:51:34
+ * @LastEditTime: 2021-04-20 16:10:30
  * @FilePath: \vue-admin-beautiful\src\views\player\apply\Search.vue
 -->
 <template>
@@ -25,22 +25,35 @@
         查询
       </a-button>
     </a-form-item>
+    <a-form-item v-if="showGroup">
+      <a-button type="primary" @click="grouping" html-type="submit">
+        分组
+      </a-button>
+    </a-form-item>
   </a-form>
 </template>
 <script>
-  import { reactive } from 'vue'
+  import { reactive, ref, toRaw } from 'vue'
   export default {
-    emits: ['load-data'],
+    emits: ['load-data', 'group-player'],
     setup(props, { emit }) {
       let form = reactive({
         gameId: '',
       })
+      let showGroup = ref(false)
       const search = () => {
+        let formValue = toRaw(form)
+        showGroup.value = !!toRaw(formValue.gameId)
         emit('load-data', form)
+      }
+      const grouping = () => {
+        emit('group-player', form)
       }
       return {
         form,
         search,
+        grouping,
+        showGroup,
       }
     },
   }

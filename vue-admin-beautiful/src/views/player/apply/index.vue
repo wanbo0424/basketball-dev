@@ -2,12 +2,12 @@
  * @Description: 
  * @Date: 2021-01-08 17:59:51
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-19 17:54:25
+ * @LastEditTime: 2021-04-20 17:37:28
  * @FilePath: \vue-admin-beautiful\src\views\player\apply\index.vue
 -->
 <template>
   <div>
-    <search @load-data="loadData"></search>
+    <search @load-data="loadData" @group-player="groupPlayer"></search>
     <a-table
       :columns="columns"
       :data-source="data"
@@ -46,7 +46,7 @@
 </template>
 <script>
   import { ref, onMounted, reactive, unref } from 'vue'
-  import { getList } from '@/api/player'
+  import { getList, groupPlayerBatch } from '@/api/player'
   import moment from 'moment'
   import Search from './Search'
   const columns = [
@@ -60,6 +60,7 @@
       title: '比赛id',
       dataIndex: 'gameId',
       ellipsis: true,
+      width: 240,
     },
     {
       title: '性别',
@@ -95,7 +96,7 @@
       const data = ref([])
 
       const pagination = reactive({
-        pageSize: 12,
+        pageSize: 10,
         current: 1,
         total: 0,
       })
@@ -127,6 +128,18 @@
         dataRef[row.index].team = row.text
       }
 
+      const groupPlayer = () => {
+        let params = {
+          // gameId: search.gameId,
+          datas: data.value,
+        }
+        groupPlayerBatch(params).then((res) => {
+          if (res.code === 0) {
+            loadData()
+          }
+        })
+      }
+
       onMounted(() => {
         loadData()
       })
@@ -141,6 +154,7 @@
         moment,
         loadData,
         changeTeam,
+        groupPlayer,
       }
     },
   }

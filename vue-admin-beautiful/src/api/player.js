@@ -16,17 +16,9 @@ export function getPlayerList(params) {
   })
 }
 
-export function doEdit(data) {
+export function groupPlayerBatch(data) {
   return request({
-    url: '/table/doEdit',
-    method: 'post',
-    data,
-  })
-}
-
-export function doDelete(data) {
-  return request({
-    url: '/table/doDelete',
+    url: '/admin/groupPlayer',
     method: 'post',
     data,
   })

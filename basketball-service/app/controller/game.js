@@ -42,7 +42,8 @@ class GameController extends Controller {
     this.success(data);
   }
 
-  // 球员分组
+
+  // 球员组队
   async buildTeam() {
     const { ctx } = this;
     const data = await ctx.service.game.buildTeam(ctx.request.body);

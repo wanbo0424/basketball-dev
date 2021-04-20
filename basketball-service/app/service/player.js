@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:39:52
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-06 16:27:58
+ * @LastEditTime: 2021-04-20 17:26:15
  * @FilePath: \basketball-service\app\service\player.js
  */
 'use strict';
@@ -42,6 +42,11 @@ class PlayerService extends Service {
   // 报名记录列表
   async query(params) {
     const { app } = this;
+    for (const key in params) {
+      if (!params[key]) {
+        delete params[key];
+      }
+    }
     const query = JSON.parse(JSON.stringify(params));
     const { pageSize, current } = query;
     delete query.pageSize;
@@ -62,6 +67,11 @@ class PlayerService extends Service {
   // 根据openid分组（唯一标识）
   async playerList(params) {
     const { app } = this;
+    for (const key in params) {
+      if (!params[key]) {
+        delete params[key];
+      }
+    }
     const query = JSON.parse(JSON.stringify(params));
     const { pageSize, current } = query;
     delete query.pageSize;
@@ -180,6 +190,28 @@ class PlayerService extends Service {
     // });
     // console.log(newDocs);
     return docs;
+  }
+
+  // 球员分组
+  async groupPlayer(data) {
+    const { app } = this;
+    const { datas } = data;
+    if (datas && datas.length) {
+      datas.forEach(item => {
+        (async () => {
+          await app.model.Player.updateOne({ _id: item._id }, {
+            $set: { team: item.team },
+          });
+        })();
+        // if(_id) {
+        // :TODO 短信通知操作
+        // }
+      });
+    }
+    // const { _id } = await app.model.Game.updateOne({ _id: data._id }, {
+    //   $set: { ATeamPlayers: data.ATeamPlayers, BTeamPlayers: data.BTeamPlayers },
+    // });
+    return true;
   }
 }
 
