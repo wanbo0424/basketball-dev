@@ -3,7 +3,7 @@
  * @Date: 2021-04-06 14:22:46
  * @Author: yinwb
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-08 22:47:28
+ * @LastEditTime: 2021-04-21 14:46:25
  * @FilePath: \vue-admin-beautiful\src\views\game\gameSetting\add-form.vue
 -->
 <template>
@@ -54,6 +54,7 @@
     components: {
       TimeTag,
     },
+    emits: ['refresh'],
     setup(props, { emit }) {
       let visible = ref(false)
       let type = ref('')
@@ -78,8 +79,6 @@
         }
       }
       function handleOk() {
-        console.log(form)
-        debugger
         add(form).then((res) => {
           console.log(res)
           emit('refresh')

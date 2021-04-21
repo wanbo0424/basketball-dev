@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-11 17:21:53
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-20 15:38:18
+ * @LastEditTime: 2021-04-21 14:31:22
  * @FilePath: \basketball-service\app\service\game.js
  */
 'use strict';
@@ -166,6 +166,10 @@ class GameService extends Service {
               gameDate: '$gameDate',
               gameId: '$_id',
               gameTimeRange: '$gameTimeRange',
+              ATeamName: '$ATeamName',
+              BTeamName: '$BTeamName',
+              ATeamScore: '$ATeamScore',
+              BTeamScore: '$BTeamScore',
             },
           },
         },

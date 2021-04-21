@@ -2,8 +2,8 @@
  * @Description: 比赛设置
  * @Date: 2021-04-06 10:18:37
  * @Author: yinwb
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-04-18 11:51:56
+ * @LastEditors: yinwb
+ * @LastEditTime: 2021-04-21 14:48:46
  * @FilePath: \vue-admin-beautiful\src\views\game\gameSetting\index.vue
 -->
 <template>
@@ -30,10 +30,9 @@
               Finished
             </span>
           </template>
-          <template #operation>
+          <template #operation="{ record }">
             <span class="table-operation">
-              <a>添加</a>
-              <a>Stop</a>
+              <a @click="editTeam(record)">设置</a>
             </span>
           </template>
         </a-table>
@@ -49,37 +48,43 @@
     />
     <!-- 修改 -->
     <add-form ref="editCarousel" @refresh="loadData"></add-form>
+    <!-- 比赛球队设置 -->
+    <setting-team ref="settingTeamRef" @refresh="loadData"></setting-team>
   </div>
 </template>
 <script>
   import { ref, onMounted, reactive } from 'vue'
   import AddForm from './add-form'
+  import SettingTeam from './setting-team'
   import { gameListByAddress } from '@/api/game'
   const columns = [{ title: '比赛地点', dataIndex: '_id', key: '_id' }]
   const childColumns = [
     { title: '比赛Id', dataIndex: 'gameId', key: 'gameId' },
     { title: '比赛日期', dataIndex: 'gameDate', key: 'gameDate' },
     { title: '比赛时间段', dataIndex: 'gameTimeRange', key: 'gameTimeRange' },
-  ]
-  const GrandsonColumns = [
-    { title: '比赛Id', dataIndex: 'gameId', key: 'gameId' },
-    { title: '比赛时间段', dataIndex: 'gamePeriod', key: 'gamePeriod' },
-    { title: '比赛状态', dataIndex: 'gameStatus', key: 'gameStatus' },
+    { title: 'A队名称', dataIndex: 'ATeamName', key: 'ATeamName' },
+    { title: 'B队名称', dataIndex: 'BTeamName', key: 'BTeamName' },
+    { title: 'A队得分', dataIndex: 'ATeamScore', key: 'ATeamScore' },
+    { title: 'B队得分', dataIndex: 'BTeamScore', key: 'BTeamScore' },
+    { title: '操作', slots: { customRender: 'operation' } },
   ]
   export default {
     components: {
       AddForm,
+      SettingTeam,
     },
     setup() {
       const data = ref([])
       const childData = ref([])
       const editCarousel = ref(null)
+      const settingTeamRef = ref(null)
       let pagination = reactive({
-        pageSize: 5,
+        pageSize: 10,
         current: 1,
         total: 0,
       })
       const loadData = () => {
+        debugger
         let submit = {
           ...pagination,
         }
@@ -95,6 +100,7 @@
           })
           .finally(() => {})
       }
+
       function currentChange(page) {
         pagination.current = page
         loadData(pagination)
@@ -103,6 +109,10 @@
       function add() {
         editCarousel.value.init()
       }
+
+      const editTeam = (row) => {
+        settingTeamRef.value.init(row)
+      }
       onMounted(() => {
         loadData()
       })
@@ -110,12 +120,14 @@
         pagination,
         columns,
         childColumns,
-        GrandsonColumns,
         editCarousel,
+        settingTeamRef,
         data,
         childData,
         add,
         currentChange,
+        editTeam,
+        loadData,
       }
     },
   }
