@@ -80,8 +80,10 @@
       }
       function handleOk() {
         add(form).then((res) => {
-          console.log(res)
-          emit('refresh')
+          if (res.code === 0) {
+            visible.value = false
+            emit('refresh')
+          }
         })
       }
       return {
