@@ -49,7 +49,7 @@ export const asyncRoutes = [
     alwaysShow: true,
     meta: {
       title: '球员管理',
-      icon: 'user',
+      icon: 'team-fill',
     },
     children: [
       {
@@ -78,7 +78,7 @@ export const asyncRoutes = [
     alwaysShow: true,
     meta: {
       title: '比赛管理',
-      icon: 'apps-line',
+      icon: 'basketball-fill',
     },
     children: [
       {
@@ -125,6 +125,26 @@ export const asyncRoutes = [
         component: () => import('@/views/activity/gameOrder'),
         meta: {
           title: '订单',
+          icon: 'table-2',
+        },
+      },
+    ],
+  },
+  {
+    path: '/appletManage',
+    component: Layout,
+    alwaysShow: true,
+    meta: {
+      title: '小程序管理',
+      icon: 'wechat-fill',
+    },
+    children: [
+      {
+        path: 'bannerManage',
+        name: 'BannerManage',
+        component: () => import('@/views/appletManage/bannerManage'),
+        meta: {
+          title: 'banner管理',
           icon: 'table-2',
         },
       },
