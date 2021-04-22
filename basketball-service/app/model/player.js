@@ -56,6 +56,10 @@ module.exports = app => {
     avatarUrl: {
       type: String,
     },
+    // 用户端自主生成的订单号
+    out_trade_no: {
+      type: String,
+    },
     sex: {
       type: String,
       required: true,

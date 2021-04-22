@@ -103,7 +103,6 @@ class GameService extends Service {
       },
       { $sort: { gameDate: -1 } },
     ]);
-    console.log(docs);
     let newDocs = [];
     if (docs && docs.length) {
       newDocs = docs.filter(item => {

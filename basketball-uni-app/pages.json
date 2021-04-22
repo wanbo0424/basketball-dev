@@ -32,15 +32,14 @@
 		        "enablePullDownRefresh": false
 		    }	
 		}
-        ,{
-            "path" : "pages/introduce/ProcessIntroduce/index",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
+        // ,{
+        //     "path" : "pages/introduce/ProcessIntroduce/index",
+        //     "style" :                                                                                    
+        //     {
+        //         "navigationBarTitleText": "",
+        //         "enablePullDownRefresh": false
+        //     }
+        // }
         ,{
             "path" : "pages/mine/SkillMap",
             "style" :                                                                                    
@@ -84,15 +83,14 @@
                 "enablePullDownRefresh": false
             }
         }
-        ,{
-            "path" : "pages/introduce/PlayerRank/RankDetail",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
+        // ,{
+        //     "path" : "pages/introduce/PlayerRank/RankDetail",
+        //     "style" :                                                                                    
+        //     {
+        //         "navigationBarTitleText": "",
+        //         "enablePullDownRefresh": false
+        //     }
+        // }
         ,{
             "path" : "pages/index/Toast",
             "style" :                                                                                    
@@ -124,6 +122,30 @@
 	"subPackages": [{
 		"root": "pagesA",
 		"pages": [
+			// {
+			//     "path" : "PlayerRank/RankDetail",
+			//     "style" :                                                                                    
+			//     {
+			//         "navigationBarTitleText": "",
+			//         "enablePullDownRefresh": false
+			//     }
+			// },
+			// {
+			//     "path" : "PlayerRank/index",
+			//     "style" :                                                                                    
+			//     {
+			//         "navigationBarTitleText": "",
+			//         "enablePullDownRefresh": false
+			//     }
+			// },
+			// {
+			//     "path" : "ProcessIntroduce/index",
+			//     "style" :                                                                                    
+			//     {
+			//         "navigationBarTitleText": "",
+			//         "enablePullDownRefresh": false
+			//     }
+			// },
 			{
 				"path": "messageForm/index",
 				"style": {

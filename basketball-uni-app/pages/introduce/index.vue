@@ -43,8 +43,8 @@
 
 <script>
 	import http from '../../api/index.js'
-	import PlayerRank from './PlayerRank'
-	import ProcessIntroduce from './ProcessIntroduce'
+	import PlayerRank from './PlayerRank/index.vue'
+	import ProcessIntroduce from './ProcessIntroduce/index.vue'
 	import Toast from '../index/Toast'
 	import CustomCanvas from '../canvas/share'
 	// import { mapActions } from 'vuex'

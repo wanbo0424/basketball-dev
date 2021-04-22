@@ -103,7 +103,7 @@
 	top:42%;
 	transform: translate(-50%, -50%);
 	background-size: cover;
-	background-image: url(../../../static/imgs/rank/detail_bg.png);
+	background-image: url(/pagesA/static/detail_bg.png);
 	border: 4rpx solid #fff;
 	border-radius: 10rpx;
 	padding: 0 24rpx;
