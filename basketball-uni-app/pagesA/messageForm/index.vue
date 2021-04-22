@@ -3,15 +3,15 @@
 		<u-form :model="form" ref="uForm" label-width="140">
 			<u-form-item label="比赛场地" required="true" prop="gameName">
 				<u-input v-model="form.gameAddress" type="select" @click="showGameSelect = true" />
-				<u-select v-model="showGameSelect" :list="gameList" @confirm="gamAddressSelected"></u-select>
+				<u-select v-model="showGameSelect" :list="gameAddressList" @confirm="gamAddressSelected"></u-select>
 			</u-form-item>
-			<u-form-item label="比赛日期" required="true" prop="gameName">
+			<u-form-item label="比赛日期" required="true" prop="gameDate">
 				<u-input v-model="form.gameDate" type="select" @click="showGameDateSelect = true" />
 				<u-select v-model="showGameDateSelect" :list="gameDateList" @confirm="gameDateSelected"></u-select>
 			</u-form-item>
-			<u-form-item label="比赛时间" required="true" prop="gameName">
-				<u-input v-model="form.gameTimeRange" type="select" @click="showGameSelect = true" />
-				<u-select v-model="showGameSelect" :list="gameTimeList" @confirm="gameTimeSelected"></u-select>
+			<u-form-item label="比赛时间" required="true" prop="gameTimeRange">
+				<u-input v-model="form.gameTimeRange" type="select" @click="showGameTimeSelect = true" />
+				<u-select v-model="showGameTimeSelect" :list="gameTimeList" @confirm="gameTimeSelected"></u-select>
 			</u-form-item>
 			<u-form-item label="性别" required="true" prop="sex">
 				<u-input v-model="form.sex" disabled type="select" @click="showSexSelect = true" />
@@ -103,6 +103,7 @@
 				gameAddressList: [],
 				gameDateList: [],
 				gameTimeList: [],
+				gameList: [],
 				plarerData: {}
 			}
 		},
@@ -152,13 +153,13 @@
 		methods: {
 			gamAddressSelected(e) {
 				this.form.gameAddress = e[0].label
-				let findItem = this.gameAddressList.find(item => {
-					item.gameDate = e[0].label
-				})
+				let findItem = this.gameList.find(item => item._id === e[0].label)
 				if(findItem){
 					this.gameDateList = findItem.gameDates.map(item => ({
-						value: item,
-						label: item
+						value: item.gameDate,
+						label: item.gameDate,
+						gameTimeRange: item.gameTimeRange,
+						gameId: item.gameId,
 					}))
 				}else{
 					this.gameDateList = []
@@ -168,7 +169,7 @@
 				this.form.gameDate = e[0].label
 				if(this.gameDateList && this.gameDateList.length) {
 					this.gameTimeList = this.gameDateList.filter(item => {
-						return item.gameTimeRange = e[0].label
+						return item.label === e[0].label
 					})
 					this.gameTimeList = this.gameTimeList.map(item => ({
 						value: item.gameId,
@@ -194,9 +195,10 @@
 			getGameList() {
 				http.get('weapp/game/ToHeldGameList').then(res => {
 					if(res.data.code === 0) {
+						this.gameList = res.data.data
 						this.gameAddressList = res.data.data.map(item => ({
-							value: item,
-							label: item
+							value: item._id,
+							label: item._id
 						}))
 					}
 				})
@@ -204,20 +206,20 @@
 			// 提交报名信息
 			submit() {
 				this.$refs.uForm.validate(valid => {
-					// if (valid) {
-					// 	this.form.openId = this.userInfo.openId
-					// 	this.form.nickName = this.userInfo.nickName
-					// 	this.form.out_trade_no = generateOrderNumber()
-					// 	if(this.shared.nickName) {
-					// 		this.form.sharedNickName = this.shared.nickName
-					// 	}
-						// http.post('weapp/players/apply', this.form).then(res => {
-						// 	if(res.data.code === 0) {
+					if (valid) {
+						this.form.openId = this.userInfo.openId
+						this.form.nickName = this.userInfo.nickName
+						this.form.out_trade_no = generateOrderNumber()
+						if(this.shared.nickName) {
+							this.form.sharedNickName = this.shared.nickName
+						}
+						http.post('weapp/players/apply', this.form).then(res => {
+							if(res.data.code === 0) {
 								uni.navigateTo({
 									url:`/pagesA/defray/index?gameAddress=${this.form.gameName}&out_trade_no=${this.form.out_trade_no}`
 								})
-						// 	}
-						// })
+							}
+						})
 						
 						// 云函数
 						// uniCloud.callFunction({
@@ -248,7 +250,7 @@
 						// 	})
 						// 	console.error(err)
 						// })
-					// }
+					}
 				})
 			},
 			// 提交球员档案

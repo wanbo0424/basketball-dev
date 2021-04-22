@@ -91,7 +91,7 @@ class GameService extends Service {
       {
         $group: {
           _id: '$gameAddress',
-          gameDate: { $first: '$gameDate' },
+          gameDate: { $last: '$gameDate' },
           gameDates: {
             $push: {
               gameDate: '$gameDate',
@@ -103,6 +103,7 @@ class GameService extends Service {
       },
       { $sort: { gameDate: -1 } },
     ]);
+    console.log(docs);
     let newDocs = [];
     if (docs && docs.length) {
       newDocs = docs.filter(item => {
