@@ -1,0 +1,6 @@
+// 本文件中的json内容将在云函数【运行】时作为参数传给云函数。
+// 配置教程参考：https://uniapp.dcloud.net.cn/uniCloud/quickstart?id=runparam
+{	age":"22","sex":"男","role":"中锋（C）","mobile":"13454543543","gameId":"60010304c1cb882ad47ab8a5","gameName":"数据结构-- 2021-01-22 10:50:28","openId":"oXT7l5QAwttqvTevVb0iy0KUmerw","clientInfo":{"PLATFORM":"mp-weixin","OS":"devtools","APPID":"__UNI__404B0A1","CLIENT_SDK_VERSION":"1.0.0"},"uniCloudClientInfo":"%7B%22ak%22%3A%22__UNI__404B0A1%22%2C%22p%22%3A%22i%22%2C%22ut%22%3A%22wx%22%2C%22uuid%22%3A%22s1oagqgtmh82q43tq31tc88f2fmqjo5k%22%2C%22fn%22%3A%22create-player%22%2C%22sid%22%3A%22tcb-mxdkoyjzrwzasst5a3409-b6316d%22%2C%22pvd%22%3A%22t%22%7D"}"
+	access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoie1wiZW52TmFtZVwiOlwidGNiLW14ZGtveWp6cnd6YXNzdDVhMzQwOS1iNjMxNmRcIixcImxvZ2luVHlwZVwiOlwiQU5PTllNT1VTXCIsXCJ1dWlkXCI6XCI3NjhiNWExYzg5ZmE0ODQ5YjBiMjE3NGU3NjE3NGNmMVwifSIsImlhdCI6MTYxMDk2MTQwNiwiZXhwIjoxNjEwOTY1MDA2fQ.YQXBZ077I91Ugl4H0GhgJFKmnrUtqPakhTSMDMcApDE;1610952401"
+	seqId: "4947e4926788f"
+}

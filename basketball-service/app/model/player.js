@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:29:19
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-19 16:08:22
+ * @LastEditTime: 2021-04-22 17:07:36
  * @FilePath: \basketball-service\app\model\player.js
  */
 'use strict';
@@ -112,7 +112,11 @@ module.exports = app => {
     team: {
       type: String,
     },
-
+    // 短信状态  0：未发送， 1：发送成功， 2：发送失败
+    smsStatus: {
+      type: Number,
+      default: 0,
+    },
   }, {
     versionKey: false,
     timestamps: { createdAt: 'createTime', updatedAt: 'updateTime' },

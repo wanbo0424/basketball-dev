@@ -2,7 +2,7 @@
  * @Description: 
  * @Date: 2021-01-08 17:59:51
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-20 17:37:28
+ * @LastEditTime: 2021-04-22 18:09:44
  * @FilePath: \vue-admin-beautiful\src\views\player\apply\index.vue
 -->
 <template>
@@ -32,6 +32,20 @@
           <a-radio value="B">B</a-radio>
         </a-radio-group>
       </template>
+      <template #sms="{ record }">
+        <a-badge v-if="!record.smsStatus" color="#2db7f5" text="未发送" />
+        <a-badge
+          v-if="record.smsStatus === 1"
+          color="#87d068"
+          text="发送成功"
+        />
+        <a-badge v-if="record.smsStatus === 2" color="#f50" text="发送失败" />
+      </template>
+      <template #action="{ text }">
+        <a-button type="link" :loading="smsLoading" @click="sendMessage(text)">
+          发送短信
+        </a-button>
+      </template>
     </a-table>
 
     <a-pagination
@@ -47,6 +61,8 @@
 <script>
   import { ref, onMounted, reactive, unref } from 'vue'
   import { getList, groupPlayerBatch } from '@/api/player'
+  import { sendSms } from '@/api/game'
+  import { message } from 'ant-design-vue'
   import moment from 'moment'
   import Search from './Search'
   const columns = [
@@ -88,11 +104,21 @@
       dataIndex: 'team',
       slots: { customRender: 'team' },
     },
+    {
+      title: '短信状态',
+      dataIndex: 'smsStatus',
+      slots: { customRender: 'sms' },
+    },
+    {
+      title: '操作',
+      slots: { customRender: 'action' },
+    },
   ]
   export default {
     components: { Search },
     setup() {
       const loadingRef = ref(false)
+      const smsLoading = ref(false)
       const data = ref([])
 
       const pagination = reactive({
@@ -109,13 +135,18 @@
           ...search,
         }
         delete submit.total
-        getList(submit).then((res) => {
-          if (res.code === 0) {
-            data.value = res.data.docs
-            pagination.current = res.data.pageInfo.current
-            pagination.total = res.data.pageInfo.total
-          }
-        })
+        loadingRef.value = true
+        getList(submit)
+          .then((res) => {
+            if (res.code === 0) {
+              data.value = res.data.docs
+              pagination.current = res.data.pageInfo.current
+              pagination.total = res.data.pageInfo.total
+            }
+          })
+          .finally(() => {
+            loadingRef.value = false
+          })
       }
 
       function currentChange(page) {
@@ -140,6 +171,31 @@
         })
       }
 
+      const sendMessage = (row) => {
+        smsLoading.value = true
+        sendSms({
+          _id: row._id,
+          phone: row.mobile,
+          templateId: '11108',
+          data: {
+            player: row.nickName || '白雪王子',
+            date: row.gameDate || '2020-05-20',
+            gameAddress: row.gameAddress || '延平门',
+          },
+        })
+          .then((res) => {
+            if (res.code === 0 && res.data.data.success) {
+              message.success('发送成功')
+              loadData()
+            } else {
+              message.error('发送失败')
+            }
+          })
+          .finally(() => {
+            smsLoading.value = false
+          })
+      }
+
       onMounted(() => {
         loadData()
       })
@@ -150,11 +206,13 @@
         handleTableChange,
         currentChange,
         data,
+        smsLoading,
         pagination,
         moment,
         loadData,
         changeTeam,
         groupPlayer,
+        sendMessage,
       }
     },
   }

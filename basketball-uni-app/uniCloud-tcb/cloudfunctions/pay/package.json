@@ -1,5 +1,5 @@
 {
-  "name": "uni-api",
+  "name": "pay",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "uni-cloud-router": "file:../common/uni-cloud-router"
+    "config": "file:../common/config",
+    "uni-id": "file:../common/uni-id",
+    "unipay": "file:../common/unipay"
   }
 }

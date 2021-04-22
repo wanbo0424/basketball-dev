@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:39:52
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-20 17:26:15
+ * @LastEditTime: 2021-04-22 17:03:52
  * @FilePath: \basketball-service\app\service\player.js
  */
 'use strict';
@@ -39,6 +39,14 @@ class PlayerService extends Service {
     return result._id;
   }
 
+  async updatePlayer(data = {}) {
+    const { app } = this;
+    const { _id } = await app.model.Player.updateOne({ _id: data._id }, {
+      $set: data,
+    });
+    return _id;
+  }
+
   // 报名记录列表
   async query(params) {
     const { app } = this;
@@ -51,7 +59,27 @@ class PlayerService extends Service {
     const { pageSize, current } = query;
     delete query.pageSize;
     delete query.current;
-    const docs = await app.model.Player.find(query).skip(pageSize * (current - 1)).limit(Number(pageSize));
+    // const docs = await app.model.Player.find(query).skip(pageSize * (current - 1)).limit(Number(pageSize));
+    const docs = await app.model.Player.aggregate([
+      {
+        $lookup:
+        {
+          from: 'games',
+          localField: 'gameId',
+          foreignField: '_id',
+          as: 'gamesInfo',
+        },
+      },
+      {
+        $replaceRoot: {
+          newRoot: { $mergeObjects: [{ $arrayElemAt: [ '$gamesInfo', 0 ] }, '$$ROOT' ] },
+        },
+      },
+      { $project: { gamesInfo: 0 } },
+      { $skip: pageSize * (current - 1) },
+      { $limit: Number(pageSize) },
+    ]);
+
     // 分页信息
     const pageInfo = {
       total: await app.model.Player.countDocuments(query).exec(),
