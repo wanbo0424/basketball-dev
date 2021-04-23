@@ -18,6 +18,10 @@ module.exports = {
     enable: true,
     package: 'egg-mongoose',
   },
+  oss: {
+    enable: true,
+    package: 'egg-oss',
+  },
   // alinode: {
   //   enable: true,
   //   package: 'egg-alinode',

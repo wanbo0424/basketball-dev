@@ -27,12 +27,24 @@ module.exports = appInfo => {
     },
   };
 
-  config.sequelize = {
-    dialect: 'mysql',
-    host: '127.0.0.1',
-    port: 3306,
-    password: 'ywb123456',
-    database: 'basketball-dev',
+  // config.sequelize = {
+  //   dialect: 'mysql',
+  //   host: '127.0.0.1',
+  //   port: 3306,
+  //   password: 'ywb123456',
+  //   database: 'basketball-dev',
+  // };
+  config.multipart = {
+    mode: 'stream',
+  };
+  config.oss = {
+    client: {
+      accessKeyId: 'LTAI5tDaHc9k6WBDU4CHJJk4',
+      accessKeySecret: 'bMLArCIZbRPgxH7iCBDjgDirTyLol3',
+      bucket: 'apu-applets-all',
+      endpoint: 'oss-cn-zhangjiakou.aliyuncs.com',
+      timeout: '60s',
+    },
   };
 
   config.mongoose = {
