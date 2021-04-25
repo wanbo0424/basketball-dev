@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:29:19
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-22 17:07:36
+ * @LastEditTime: 2021-04-25 17:12:05
  * @FilePath: \basketball-service\app\model\player.js
  */
 'use strict';
@@ -120,6 +120,10 @@ module.exports = app => {
     smsStatus: {
       type: Number,
       default: 0,
+    },
+    // 是否需要保险
+    needInsurance: {
+      type: Boolean,
     },
   }, {
     versionKey: false,

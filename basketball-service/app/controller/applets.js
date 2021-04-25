@@ -3,7 +3,7 @@
  * @Date: 2021-04-23 15:12:28
  * @Author: yinwb
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-23 17:06:06
+ * @LastEditTime: 2021-04-25 18:17:38
  * @FilePath: \basketball-service\app\controller\applets.js
  */
 'use strict';
@@ -47,6 +47,17 @@ class AppletsController extends Controller {
         console.log('result:', result);
       }
     }
+  }
+
+  async bannerList() {
+    const { ctx } = this;
+    const result = await ctx.oss.list();
+    if (result.res.statusCode === 200) {
+      this.success(result.objects);
+    } else {
+      this.fail(500, '查询Bucket列表失败');
+    }
+    return result;
   }
 }
 module.exports = AppletsController

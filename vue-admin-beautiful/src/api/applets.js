@@ -12,3 +12,5 @@ export const addBanner = (data) => {
     contentType: 'multipart/form-data',
   })
 }
+
+export const bannerList = () => request.get('/admin/applets/bannerList')
