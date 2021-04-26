@@ -67,7 +67,7 @@
       }
       const deletes = (row) => {
         loading.value = true
-        deleteBanner({ name: row.name }).then((res) => {
+        deleteBanner({ _id: row._id }).then((res) => {
           loading.value = false
           if (res.code === 0) {
             loadData()
@@ -76,7 +76,9 @@
       }
       const syncBucket = () => {
         syncBucketList().then((res) => {
-          console.log(res)
+          if (res.code === 0) {
+            loadData()
+          }
         })
       }
       onMounted(() => {

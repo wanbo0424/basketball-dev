@@ -40,6 +40,7 @@ class AppletsService extends Service {
         banner_url: item.url,
         status: 1,
         toUrl: '',
+        title: '',
       }));
     } else {
       // this.fail(500, '查询Bucket列表失败');
@@ -47,7 +48,6 @@ class AppletsService extends Service {
 
     await app.model.Banner.deleteMany();
     const result = await app.model.Banner.insertMany(syncList);
-    console.log('result', result);
     return result;
   }
 }

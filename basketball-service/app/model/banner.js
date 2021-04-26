@@ -26,6 +26,9 @@ module.exports = app => {
     toUrl: {
       type: String,
     },
+    title: {
+      type: String,
+    },
   }, {
     versionKey: false,
     timestamps: { createdAt: 'createTime', updatedAt: 'updateTime' },

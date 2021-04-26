@@ -102,9 +102,9 @@
 				http.get('weapp/applets/bannerList').then(res => {
 					if(res.data.code === 0) {
 						this.swiperList = res.data.data.map(item => ({
-							
+							image: item.banner_url,
+							title: item.title
 						}))
-						// this.goldList = this.tableData.split(0, 5)
 					}
 				})
 			}
