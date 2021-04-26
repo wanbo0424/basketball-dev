@@ -3,7 +3,7 @@
  * @Date: 2021-04-23 14:19:36
  * @Author: yinwb
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-23 16:25:36
+ * @LastEditTime: 2021-04-26 15:56:50
  * @FilePath: \vue-admin-beautiful\src\views\appletManage\bannerManage\add-banner.vue
 -->
 <template>
@@ -19,7 +19,7 @@
         确定
       </a-button>
     </template>
-    <a-form :model="form" labelAlign="left">
+    <a-form labelAlign="left">
       <a-form-item label="上传图片">
         <a-upload
           list-type="picture-card"
@@ -51,8 +51,9 @@
     components: {
       PlusOutlined,
     },
-    setup() {
+    setup(props, { emit }) {
       let visible = ref(false)
+      let loading = ref(false)
       let fileList = ref([])
       const previewImage = ref('')
       const previewVisible = ref(false)
@@ -78,7 +79,6 @@
         fileList.value = newFileList
       }
       const handleOk = () => {
-        console.log(fileList)
         // let submit = {
         //   file: fileList.value.map((item) => item.originFileObj),
         // }
@@ -86,9 +86,12 @@
         fileList.value.forEach((item, index) => {
           submit[`file${index + 1}`] = item.originFileObj
         })
-        debugger
+        loading.value = true
         addBanner(submit).then((res) => {
-          console.log(res)
+          loading.value = false
+          if (res.code === 0) {
+            emit('refresh')
+          }
         })
       }
       return {
@@ -100,6 +103,7 @@
         previewImage,
         handleChange,
         handleOk,
+        loading,
       }
     },
   }

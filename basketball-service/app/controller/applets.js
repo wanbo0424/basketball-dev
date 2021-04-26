@@ -3,7 +3,7 @@
  * @Date: 2021-04-23 15:12:28
  * @Author: yinwb
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-25 18:17:38
+ * @LastEditTime: 2021-04-26 18:38:19
  * @FilePath: \basketball-service\app\controller\applets.js
  */
 'use strict';
@@ -44,20 +44,49 @@ class AppletsController extends Controller {
           await sendToWormhole(part);
           throw err;
         }
-        console.log('result:', result);
+        let _id;
+        if (result && result.res.statusCode === 200) {
+          _id = await ctx.service.player.addBanner({ name: result.name, banner_url: result.url, status: 1, toUrl: '' });
+          this.success(_id);
+        } else {
+          this.success(500, '图片上传失败');
+        }
       }
     }
   }
 
   async bannerList() {
     const { ctx } = this;
-    const result = await ctx.oss.list();
-    if (result.res.statusCode === 200) {
-      this.success(result.objects);
-    } else {
-      this.fail(500, '查询Bucket列表失败');
-    }
-    return result;
+    const docs = await ctx.service.applets.bannerList();
+    // const result = await ctx.oss.list();
+    // if (result.res.statusCode === 200) {
+    //   this.success(result.objects);
+    // } else {
+    //   this.fail(500, '查询Bucket列表失败');
+    // }
+    this.success(docs);
+  }
+
+  async deleteBanner() {
+    const { ctx } = this;
+    const result = ctx.service.applets.deleteBanner(ctx.query);
+    this.success(result);
+    // let result;
+    // try {
+    //   // 填写Object完整路径。Object完整路径中不能包含Bucket名称。
+    //   result = await ctx.oss.delete(ctx.query.name);
+    // } catch (e) {
+    //   console.log(e);
+    // }
+    // if (result.res.status === 204) {
+    //   this.success('删除成功');
+    // }
+  }
+
+  async syncBucketList() {
+    const { ctx } = this;
+    const result = await ctx.service.applets.syncBucketList();
+    this.success(result);
   }
 }
 module.exports = AppletsController

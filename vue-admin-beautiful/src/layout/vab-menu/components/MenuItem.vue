@@ -34,7 +34,9 @@
           else if (this.$route.path !== routePath) window.open(routePath.href)
         } else {
           if (isExternal(routePath)) window.location.href = routePath
-          else if (this.$route.path !== routePath) this.$router.push(routePath)
+          else if (this.$route.path !== routePath) {
+            this.$router.push(routePath)
+          }
         }
       },
     },

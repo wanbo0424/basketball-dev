@@ -14,3 +14,8 @@ export const addBanner = (data) => {
 }
 
 export const bannerList = () => request.get('/admin/applets/bannerList')
+
+export const syncBucketList = () => request.get('/admin/applets/syncBucketList')
+
+export const deleteBanner = (params) =>
+  request.delete(`/admin/applets/deleteBanner`, { params })

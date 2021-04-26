@@ -76,6 +76,7 @@
 		},
 		created() {
 			// this.getUserInfo()
+			this.getBannerList()
 		},
 		methods: {
 			// 获取用户信息
@@ -95,6 +96,16 @@
 			howCreate() {
 				uni.navigateTo({
 					url: '/pagesA/rule/rule3'
+				})
+			},
+			getBannerList() {
+				http.get('weapp/applets/bannerList').then(res => {
+					if(res.data.code === 0) {
+						this.swiperList = res.data.data.map(item => ({
+							
+						}))
+						// this.goldList = this.tableData.split(0, 5)
+					}
 				})
 			}
 		},

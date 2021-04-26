@@ -145,7 +145,7 @@ export const asyncRoutes = [
         component: () => import('@/views/appletManage/bannerManage'),
         meta: {
           title: 'banner管理',
-          icon: 'table-2',
+          icon: 'image-2-line',
         },
       },
     ],
