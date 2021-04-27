@@ -21,39 +21,45 @@ const store = new Vuex.Store({
     },
 	actions: {
 		getUserInfo({commit}) {
+			console.log('getUserProfile', )
+			uni.getUserProfile({
+				desc: '获取昵称以更好组队',
+				complete: (userInfo) => {
+					console.log('userInfo', userInfo)
+				}
+			})
 			uni.getSetting({
 				success: (res) => {
-					console.log('getSetting',res)
-				  if (res.authSetting['scope.userInfo']) {
-					// 已经授权，可以直接调用 getUserInfo 获取头像昵称
-					uni.getUserInfo({
-					  withCredentials: false,
-					  success: ({ userInfo: info = {} }) => {
-						commit('SET_USER_INFO', info)
-						// getApp().globalData.userInfo = info;
-						// resolve(info);
-					  },
-					});
-				  } else {
-					// 未授权，跳转授权页面
-					uni.reLaunch({ url: '/pages/user/authorize' });
-					// reject();
-				  }
+			// 	  if (res.authSetting['scope.userInfo']) {
+			// 		// 已经授权，可以直接调用 getUserInfo 获取头像昵称
+			// 		uni.getUserInfo({
+			// 		  withCredentials: false,
+			// 		  success: ({ userInfo: info = {} }) => {
+			// 			commit('SET_USER_INFO', info)
+			// 			// getApp().globalData.userInfo = info;
+			// 			// resolve(info);
+			// 		  },
+			// 		});
+			// 	  } else {
+			// 		// 未授权，跳转授权页面
+			// 		uni.reLaunch({ url: '/pagesA/user/authorize' });
+			// 		// reject();
+			// 	  }
 				  
 				  // 获取位置信息
-				  // if(res.authSetting['scope.userLocation']) {
-					 //  uni.getLocation({
-					 //    withCredentials: false,
-					 //    success: (res) => {
-					 //    },
-					 // });
-				  // }else{
-					 //  uni.authorize({
-					 //      scope: 'scope.userLocation',
-						//   success: (res) => {
-						//   },
-					 //  })
-				  // }
+				  if(res.authSetting['scope.userLocation']) {
+					  uni.getLocation({
+					    withCredentials: false,
+					    success: (res) => {
+					    },
+					 });
+				  }else{
+					  uni.authorize({
+					      scope: 'scope.userLocation',
+						  success: (res) => {
+						  },
+					  })
+				  }
 				},
 			  });
 		}

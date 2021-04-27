@@ -156,7 +156,9 @@
 				this.form.gameAddress = e[0].label
 				let findItem = this.gameList.find(item => item._id === e[0].label)
 				if(findItem){
-					this.gameDateList = findItem.gameDates.filter(item => new Date(item.gameDate).getTime() > new Date().getTime() ).map(item => item.gameDate)
+					this.gameDateList = findItem.gameDates
+						.filter(item => new Date(item.gameDate).getTime() > new Date().getTime() )
+						.map(item => item.gameDate)
 					this.gameDateList = Array.from(new Set(this.gameDateList))
 					this.gameDateList = this.gameDateList.map(item => ({
 						value: item,
