@@ -2,7 +2,7 @@
  * @Description: 
  * @Date: 2021-01-08 17:59:51
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-22 18:09:44
+ * @LastEditTime: 2021-04-27 14:27:55
  * @FilePath: \vue-admin-beautiful\src\views\player\apply\index.vue
 -->
 <template>
@@ -41,8 +41,17 @@
         />
         <a-badge v-if="record.smsStatus === 2" color="#f50" text="发送失败" />
       </template>
+      <template #pay="{ record }">
+        <a-badge v-if="!record.payStatus" color="#f50" text="未支付" />
+        <a-badge v-if="record.payStatus === 2" color="#87d068" text="已支付" />
+      </template>
       <template #action="{ text }">
-        <a-button type="link" :loading="smsLoading" @click="sendMessage(text)">
+        <a-button
+          type="link"
+          :loading="smsLoading"
+          :disabled="!text.payStatus"
+          @click="sendMessage(text)"
+        >
           发送短信
         </a-button>
       </template>
@@ -66,12 +75,12 @@
   import moment from 'moment'
   import Search from './Search'
   const columns = [
-    {
-      title: 'id',
-      dataIndex: '_id',
-      width: 90,
-      ellipsis: true,
-    },
+    // {
+    //   title: 'id',
+    //   dataIndex: '_id',
+    //   width: 90,
+    //   ellipsis: true,
+    // },
     {
       title: '比赛id',
       dataIndex: 'gameId',
@@ -97,17 +106,24 @@
     {
       title: '创建时间',
       dataIndex: 'createTime',
+      width: 170,
       slots: { customRender: 'createTime' },
     },
     {
       title: '分组',
       dataIndex: 'team',
+      width: 150,
       slots: { customRender: 'team' },
     },
     {
       title: '短信状态',
       dataIndex: 'smsStatus',
       slots: { customRender: 'sms' },
+    },
+    {
+      title: '支付状态',
+      dataIndex: 'payStatus',
+      slots: { customRender: 'pay' },
     },
     {
       title: '操作',

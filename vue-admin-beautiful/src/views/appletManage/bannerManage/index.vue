@@ -3,7 +3,7 @@
  * @Date: 2021-04-21 16:02:52
  * @Author: yinwb
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-26 18:41:22
+ * @LastEditTime: 2021-04-27 09:53:59
  * @FilePath: \vue-admin-beautiful\src\views\appletManage\bannerManage\index.vue
 -->
 <template>
@@ -42,6 +42,14 @@
   import { ref, onMounted } from 'vue'
   import { bannerList, deleteBanner, syncBucketList } from '@/api/applets'
   const columns = [
+    {
+      title: '标题',
+      dataIndex: 'title',
+    },
+    {
+      title: '跳转链接',
+      dataIndex: 'toUrl',
+    },
     {
       title: 'banner图',
       slots: { customRender: 'bannerUrl' },

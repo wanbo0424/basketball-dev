@@ -11,6 +11,10 @@ class OrderService extends Service {
     if (updateData.total_fee === prepaidFree && updateData.status === 'complete') {
       updateData.status = 1;
     }
+    await app.model.Player.updateOne({ out_trade_no: updateData.out_trade_no }, {
+      $set: { payStatus: 2 },
+    });
+
     const result = await app.model.Order.updateOne({ out_trade_no: updateData.out_trade_no }, {
       $set: updateData,
     });

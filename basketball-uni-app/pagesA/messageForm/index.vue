@@ -117,6 +117,7 @@
 			}
 		},
 		mounted() {
+			console.log(this.userInfo)
 			this.getGameList()
 			this.plarerData = {
 				nickName: this.userInfo.nickName
@@ -155,11 +156,11 @@
 				this.form.gameAddress = e[0].label
 				let findItem = this.gameList.find(item => item._id === e[0].label)
 				if(findItem){
-					this.gameDateList = findItem.gameDates.map(item => ({
-						value: item.gameDate,
-						label: item.gameDate,
-						gameTimeRange: item.gameTimeRange,
-						gameId: item.gameId,
+					this.gameDateList = findItem.gameDates.filter(item => new Date(item.gameDate).getTime() > new Date().getTime() ).map(item => item.gameDate)
+					this.gameDateList = Array.from(new Set(this.gameDateList))
+					this.gameDateList = this.gameDateList.map(item => ({
+						value: item,
+						label: item,
 					}))
 				}else{
 					this.gameDateList = []
@@ -167,14 +168,15 @@
 			},
 			gameDateSelected(e) {
 				this.form.gameDate = e[0].label
-				if(this.gameDateList && this.gameDateList.length) {
-					this.gameTimeList = this.gameDateList.filter(item => {
-						return item.label === e[0].label
-					})
-					this.gameTimeList = this.gameTimeList.map(item => ({
-						value: item.gameId,
-						label: item.gameTimeRange,
-					}))
+				if(this.gameList && this.gameList.length) {
+					let findItem = this.gameList.find(item => item._id === this.form.gameAddress)
+					if(findItem){
+						this.gameTimeList = findItem.gameDates.filter(item => item.gameDate === this.form.gameDate)
+						this.gameTimeList = this.gameTimeList.map(item => ({
+							value: item.gameId,
+							label: item.gameTimeRange
+						}))
+					}
 				}
 			},
 			gameTimeSelected(e) {
@@ -210,6 +212,7 @@
 						this.form.openId = this.userInfo.openId
 						this.form.nickName = this.userInfo.nickName
 						this.form.out_trade_no = generateOrderNumber()
+						this.form.needInsurance = (this.form.needInsurance === '是')
 						if(this.shared.nickName) {
 							this.form.sharedNickName = this.shared.nickName
 						}

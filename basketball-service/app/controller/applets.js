@@ -3,7 +3,7 @@
  * @Date: 2021-04-23 15:12:28
  * @Author: yinwb
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-26 18:38:19
+ * @LastEditTime: 2021-04-27 09:51:28
  * @FilePath: \basketball-service\app\controller\applets.js
  */
 'use strict';
@@ -46,7 +46,7 @@ class AppletsController extends Controller {
         }
         let _id;
         if (result && result.res.statusCode === 200) {
-          _id = await ctx.service.player.addBanner({ name: result.name, banner_url: result.url, status: 1, toUrl: '' });
+          _id = await ctx.service.applets.addBanner({ name: result.name, banner_url: result.url, status: 1, toUrl: '', title: '' });
           this.success(_id);
         } else {
           this.success(500, '图片上传失败');
