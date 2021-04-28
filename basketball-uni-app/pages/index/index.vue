@@ -53,6 +53,7 @@
 	// import sharePoster from '../sharePoster'
 	import customCanvas from '../canvas/share.vue'
 	import Toast from './Toast'
+	import { mapActions } from 'vuex'
 	export default{
 		mixins:[shareMixin],
 		components:{customCanvas, ColToast: Toast},
@@ -115,7 +116,7 @@
 			}
 		},
 		methods:{
-			toHome() {
+			async toHome() {
 				if(!this.canToHome) {
 					this.$refs.uToast.show({
 						title: '请勾选页面下方的“篮球比赛用户协议”',
@@ -124,12 +125,20 @@
 					})
 					return
 				}
-				// uni.redirectTo({url: '/pages/home/index'})
-				uni.switchTab({url: '/pages/home/index'})
+				let result1 = await this.getUserInfo()
+				let result2 = await this.getLocationInfo()
+				console.log(result1)
+				if(result1 === 'success' && result2 === 'success'){
+					uni.switchTab({url: '/pages/home/index'})
+				}
 			},
 			changeBox(e) {
 				this.canToHome = e.value
-			}
+			},
+			...mapActions([
+			  'getUserInfo', // 将 `this.increment()` 映射为 `this.$store.dispatch('increment')`
+			  'getLocationInfo'
+			]),
 		},
 	}
 </script>

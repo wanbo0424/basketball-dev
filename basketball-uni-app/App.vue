@@ -1,6 +1,7 @@
 <template>
 	<view>
 		<button type="primary" open-type="share"></button>
+		
 	</view>
 </template>
 <script>
@@ -13,7 +14,7 @@
 			}
 		},
 		created() {
-			this.getUserInfo()
+			// this.getUserInfo()
 		},
 		
 		
