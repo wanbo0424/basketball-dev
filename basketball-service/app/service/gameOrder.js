@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-25 15:54:28
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-25 17:38:42
+ * @LastEditTime: 2021-04-29 15:41:35
  * @FilePath: \basketball-service\app\service\gameOrder.js
  */
 'use strict';
@@ -34,6 +34,7 @@ class GameOrderService extends Service {
     const docs = await app.model.GameOrder.find(query);
     return docs;
   }
+
 }
 module.exports = GameOrderService
 ;

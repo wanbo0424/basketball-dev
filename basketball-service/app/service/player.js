@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:39:52
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-22 17:03:52
+ * @LastEditTime: 2021-04-29 17:15:08
  * @FilePath: \basketball-service\app\service\player.js
  */
 'use strict';
@@ -240,6 +240,55 @@ class PlayerService extends Service {
     //   $set: { ATeamPlayers: data.ATeamPlayers, BTeamPlayers: data.BTeamPlayers },
     // });
     return true;
+  }
+
+
+  // 待参赛（小程序）
+  async toEnteredList(query) {
+    const { app } = this;
+    const docs = await app.model.Player.aggregate([
+      {
+        $lookup:
+        {
+          from: 'games',
+          localField: 'gameId',
+          foreignField: '_id',
+          as: 'gamesInfo',
+        },
+      },
+      {
+        $replaceRoot: {
+          newRoot: { $mergeObjects: [{ $arrayElemAt: [ '$gamesInfo', 0 ] }, '$$ROOT' ] },
+        },
+      },
+      { $project: { gamesInfo: 0 } },
+      { $match: { openId: query.openId, gameStatus: 0 } },
+    ]);
+    return docs;
+  }
+
+  // 已参赛（小程序）
+  async enteredList(query) {
+    const { app } = this;
+    const docs = await app.model.Player.aggregate([
+      {
+        $lookup:
+        {
+          from: 'games',
+          localField: 'gameId',
+          foreignField: '_id',
+          as: 'gamesInfo',
+        },
+      },
+      {
+        $replaceRoot: {
+          newRoot: { $mergeObjects: [{ $arrayElemAt: [ '$gamesInfo', 0 ] }, '$$ROOT' ] },
+        },
+      },
+      { $project: { gamesInfo: 0 } },
+      { $match: { openId: query.openId, gameStatus: 2 } },
+    ]);
+    return docs;
   }
 }
 

@@ -25,7 +25,6 @@ class PayController extends Controller {
       await ctx.service.order.prepaidOrder(ctx.request.body);
       ctx.status = 200;
       ctx.body = 'success';
-
     //   this.success('_id');
     }
   }

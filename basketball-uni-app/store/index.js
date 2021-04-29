@@ -20,8 +20,13 @@ const store = new Vuex.Store({
 		}
     },
 	actions: {
-		getUserInfo({commit}) {
+		async getUserInfo({commit, state}, canToHome) {
 			return new Promise(resolve => {
+				if(state.userInfo.nickName) {
+					resolve('success')
+					return
+				}
+				// 微信官方已废弃getUserInfo方法
 				// 	  if (res.authSetting['scope.userInfo']) {
 				// 		// 已经授权，可以直接调用 getUserInfo 获取头像昵称
 				// 		uni.getUserInfo({
@@ -38,12 +43,14 @@ const store = new Vuex.Store({
 				// 		// reject();
 				// 	  }
 				uni.getUserProfile({
-					desc: '获取昵称以更好组队',
+					desc: '获取昵称为大家更好的技术统计',
 					lang: 'zh_CN',
 					success: ({userInfo}) => {
-						console.log('userInfo', userInfo)
-						resolve(userInfo)
-						// commit('SET_USER_INFO', userInfo)
+						commit('SET_USER_INFO', userInfo)
+						resolve('success')
+						if(canToHome) {
+							uni.switchTab({url: '/pages/home/index'})
+						}
 					}
 				})
 			}) 

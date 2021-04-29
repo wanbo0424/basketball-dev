@@ -67,6 +67,10 @@ module.exports = app => {
       type: Number,
       default: 0,
     },
+    // 球衣颜色
+    AjerseyColor: {
+      type: String,
+    },
   }, {
     versionKey: false,
     timestamps: { createdAt: 'createTime', updatedAt: 'updateTime' },

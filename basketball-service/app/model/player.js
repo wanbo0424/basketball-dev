@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:29:19
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-25 17:12:05
+ * @LastEditTime: 2021-04-29 17:08:25
  * @FilePath: \basketball-service\app\model\player.js
  */
 'use strict';
@@ -125,11 +125,14 @@ module.exports = app => {
     needInsurance: {
       type: Boolean,
     },
+    // 球衣号码
+    jerseyNumber: {
+      type: String,
+    },
   }, {
     versionKey: false,
     timestamps: { createdAt: 'createTime', updatedAt: 'updateTime' },
   });
-
 
   return mongoose.model('Player', PlayerSchema, 'players');
 };

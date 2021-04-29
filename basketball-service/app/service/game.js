@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-11 17:21:53
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-21 14:31:22
+ * @LastEditTime: 2021-04-29 17:47:42
  * @FilePath: \basketball-service\app\service\game.js
  */
 'use strict';
@@ -36,6 +36,9 @@ class GameService extends Service {
 
   async updateGame(data = {}) {
     const { app } = this;
+    if (data.ATeamScore && data.BTeamScore) {
+      data.gameStatus = 2;
+    }
     const { _id } = await app.model.Game.findOneAndUpdate({ _id: data._id }, {
       $set: data,
     });

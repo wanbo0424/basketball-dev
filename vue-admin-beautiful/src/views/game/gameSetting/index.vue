@@ -3,7 +3,7 @@
  * @Date: 2021-04-06 10:18:37
  * @Author: yinwb
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-21 14:48:46
+ * @LastEditTime: 2021-04-29 16:52:57
  * @FilePath: \vue-admin-beautiful\src\views\game\gameSetting\index.vue
 -->
 <template>
@@ -25,10 +25,12 @@
           :pagination="false"
         >
           <template #status>
-            <span>
-              <a-badge status="success" />
-              Finished
-            </span>
+            <a-badge v-if="!record.gameStatus" color="#f50" text="未举行" />
+            <a-badge
+              v-if="record.gameStatus === 2"
+              color="#87d068"
+              text="已举行"
+            />
           </template>
           <template #operation="{ record }">
             <span class="table-operation">
@@ -66,6 +68,7 @@
     { title: 'B队名称', dataIndex: 'BTeamName', key: 'BTeamName' },
     { title: 'A队得分', dataIndex: 'ATeamScore', key: 'ATeamScore' },
     { title: 'B队得分', dataIndex: 'BTeamScore', key: 'BTeamScore' },
+    { title: '状态', slots: { customRender: 'status' } },
     { title: '操作', slots: { customRender: 'operation' } },
   ]
   export default {

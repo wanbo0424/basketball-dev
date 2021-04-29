@@ -11,7 +11,10 @@
 		:current="swiperCurrent" @transition="transition" @animationfinish="animationfinish">
 			<swiper-item class="swiper-item" v-for="(item, index) in swiperList" :key="index">
 				<scroll-view scroll-y v-if="item.status === 0" style="height: 100%;width: 100%;" @scrolltolower="onreachBottom">
-					<to-be-entered></to-be-entered>
+					<to-be-entered :data="toEnteredList"></to-be-entered>
+				</scroll-view>
+				<scroll-view scroll-y v-if="item.status === 2" style="height: 100%;width: 100%;" @scrolltolower="onreachBottom">
+					<to-be-entered :data="enteredList"></to-be-entered>
 				</scroll-view>
 				<scroll-view scroll-y v-if="item.status === 3" style="height: 100%;width: 100%;" @scrolltolower="onreachBottom">
 					<pay-back></pay-back>
@@ -27,6 +30,8 @@
 <script>
 	import ToBeEntered from './ToBeEntered'
 	import PayBack from './PayBack'
+	import http from '../../api/index.js'
+	import { mapGetters } from 'vuex'
 	export default {
 		components:{ToBeEntered, PayBack},
 		data() {
@@ -66,15 +71,30 @@
 					{name: '订单记录', status: 2},
 					{name: '退款/售后', status: 3},
 				],
+				toEnteredList: [],
+				enteredList: [],
 				tabs: [
 					1,2,3,4
 				]
 			}
 		},
+		computed: {
+			...mapGetters([
+			  'userInfo',
+			])
+		 },
+		mounted() {
+			this.getToEnteredList()
+		},
 		methods: {
 			tabsChange(index) {
 				// this.current = index
 				this.swiperCurrent = index
+				if(this.swiperCurrent === 0) {
+					this.getToEnteredList()
+				}else if(this.swiperCurrent === 1) {
+					this.getEnteredList()
+				}
 			},
 			// swiper-item左右移动，通知tabs的滑块跟随移动
 			transition(e) {
@@ -89,6 +109,20 @@
 				this.swiperCurrent = current;
 				this.current = current;
 			},
+			getToEnteredList() {
+				http.get('weapp/toEnteredList', { params: { openId: this.userInfo.openId } }).then(res => {
+					if(res.data.code === 0) {
+						this.toEnteredList = res.data.data
+					}
+				})
+			},
+			getEnteredList() {
+				http.get('weapp/enteredList', { params: { openId: this.userInfo.openId } }).then(res => {
+					if(res.data.code === 0) {
+						this.enteredList = res.data.data
+					}
+				})
+			}
 		}
 	}
 </script>

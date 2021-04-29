@@ -1,7 +1,6 @@
 <template>
 	<view>
 		<button type="primary" open-type="share"></button>
-		
 	</view>
 </template>
 <script>
@@ -24,6 +23,7 @@
 			
 			// 3e9c3da492abdbad0e1cee5a310646e9  AppSecret
 			// wx3bd5737539be2537  AppID
+			
 			// 登录
 			const _this = this
 			uni.login({
@@ -58,9 +58,6 @@
 		methods: {
 			...mapMutations([
 			  'SET_USER_INFO' // 将 `this.incrementBy(amount)` 映射为 `this.$store.commit('incrementBy', amount)`
-			]),
-			...mapActions([
-			  'getUserInfo', // 将 `this.increment()` 映射为 `this.$store.dispatch('increment')`
 			]),
 			
 			share() {
