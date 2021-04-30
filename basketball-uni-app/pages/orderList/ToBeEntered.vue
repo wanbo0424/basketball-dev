@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="order-item" v-for="(order, index) in orders" @click="getTicket">
+		<view class="order-item" v-for="(order, index) in orders" @click="getTicket(order)">
 			<view class="">
 				<view>比赛时间：{{order.gameDate}}</view>
 				<view>比赛地点：{{order.gameAddress}}</view>
@@ -19,16 +19,19 @@
 </template>
 
 <script>
+	import moment from 'moment'
 	export default {
 		props: {
 			data: {
 				type: Array,
 				default: []
+			},
+			swiperCurrent: {
+				type: Number,
 			}
 		},
 		watch: {
 			'data'(val) {
-				debugger
 				this.orders = val
 			}
 		},
@@ -42,10 +45,20 @@
 			// this.getToEnteredList()
 		},
 		methods: {
-			getTicket() {
-				uni.navigateTo({
-					url: '/pages/canvas/AdmissionTicket'
-				})
+			getTicket(order) {
+				if(this.swiperCurrent === 0) {
+					let month = (new Date(order.gameDate).getMonth() + 1).toString().padStart(2, '0')
+					let date = new Date(order.gameDate).getDate()
+					let team = order.team || ''
+					let gameAddress = order.gameAddress || ''
+					let jerseyNumber = order.jerseyNumber || ''
+					let jerseyColor = order.jerseyColor || ''
+					let hour = moment(order.gameDate).format('HH')
+					let minute = moment(order.gameDate).format('mm')
+					uni.navigateTo({
+						url: `/pages/canvas/AdmissionTicket?month=${month}&date=${date}&hour=${hour}&minute=${minute}&team=${team}&gameAddress=${gameAddress}&jerseyColor=${jerseyColor}&&jerseyNumber=${jerseyNumber}`
+					})
+				}
 			}
 		}
 	}

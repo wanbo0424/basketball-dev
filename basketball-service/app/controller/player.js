@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:34:06
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-20 15:45:18
+ * @LastEditTime: 2021-04-30 18:19:34
  * @FilePath: \basketball-service\app\controller\player.js
  */
 'use strict';
@@ -15,6 +15,13 @@ class PlayerController extends Controller {
     const { ctx } = this;
     const requestBody = ctx.request.body;
     const _id = await ctx.service.player.addPlayer(requestBody);
+    this.success(_id);
+  }
+
+  async updatePlayer() {
+    const { ctx } = this;
+    const requestBody = ctx.request.body;
+    const _id = await ctx.service.player.updatePlayer(requestBody);
     this.success(_id);
   }
 

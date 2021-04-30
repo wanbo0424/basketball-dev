@@ -6,17 +6,20 @@
 		</view>
 		<swiper 
 			style="height: calc(100% - 260rpx);
-			padding-top: 90rpx;
+			padding: 90rpx 20rpx 0 20rpx;
 			" 
-		:current="swiperCurrent" @transition="transition" @animationfinish="animationfinish">
+			:current="swiperCurrent" @transition="transition" @animationfinish="animationfinish">
 			<swiper-item class="swiper-item" v-for="(item, index) in swiperList" :key="index">
-				<scroll-view scroll-y v-if="item.status === 0" style="height: 100%;width: 100%;" @scrolltolower="onreachBottom">
-					<to-be-entered :data="toEnteredList"></to-be-entered>
+				<scroll-view scroll-y v-if="item.status === 0" style="height: 100%;width: 100%;" >
+					<to-be-entered :swiperCurrent="swiperCurrent" :data="toEnteredList"></to-be-entered>
 				</scroll-view>
-				<scroll-view scroll-y v-if="item.status === 2" style="height: 100%;width: 100%;" @scrolltolower="onreachBottom">
-					<to-be-entered :data="enteredList"></to-be-entered>
+				<scroll-view scroll-y v-if="item.status === 1" style="height: 100%;width: 100%;" >
+					<to-be-entered :swiperCurrent="swiperCurrent" :data="enteredList"></to-be-entered>
 				</scroll-view>
-				<scroll-view scroll-y v-if="item.status === 3" style="height: 100%;width: 100%;" @scrolltolower="onreachBottom">
+				<scroll-view scroll-y v-if="item.status === 2" style="height: 100%;width: 100%;" >
+					<to-be-entered :swiperCurrent="swiperCurrent" :data="allOrderList"></to-be-entered>
+				</scroll-view>
+				<scroll-view scroll-y v-if="item.status === 3" style="height: 100%;width: 100%;" >
 					<pay-back></pay-back>
 				</scroll-view>
 			</swiper-item>
@@ -73,6 +76,7 @@
 				],
 				toEnteredList: [],
 				enteredList: [],
+				allOrderList: [],
 				tabs: [
 					1,2,3,4
 				]
@@ -94,6 +98,8 @@
 					this.getToEnteredList()
 				}else if(this.swiperCurrent === 1) {
 					this.getEnteredList()
+				}else if(this.swiperCurrent === 2) {
+					this.getAllOrderList()
 				}
 			},
 			// swiper-item左右移动，通知tabs的滑块跟随移动
@@ -120,6 +126,13 @@
 				http.get('weapp/enteredList', { params: { openId: this.userInfo.openId } }).then(res => {
 					if(res.data.code === 0) {
 						this.enteredList = res.data.data
+					}
+				})
+			},
+			getAllOrderList() {
+				http.get('weapp/allOrderList', { params: { openId: this.userInfo.openId } }).then(res => {
+					if(res.data.code === 0) {
+						this.allOrderList = res.data.data
 					}
 				})
 			}

@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:39:52
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-29 17:15:08
+ * @LastEditTime: 2021-04-30 09:57:14
  * @FilePath: \basketball-service\app\service\player.js
  */
 'use strict';
@@ -287,6 +287,30 @@ class PlayerService extends Service {
       },
       { $project: { gamesInfo: 0 } },
       { $match: { openId: query.openId, gameStatus: 2 } },
+    ]);
+    return docs;
+  }
+
+  // 所有订单列表
+  async allOrderList(query) {
+    const { app } = this;
+    const docs = await app.model.Player.aggregate([
+      {
+        $lookup:
+        {
+          from: 'games',
+          localField: 'gameId',
+          foreignField: '_id',
+          as: 'gamesInfo',
+        },
+      },
+      {
+        $replaceRoot: {
+          newRoot: { $mergeObjects: [{ $arrayElemAt: [ '$gamesInfo', 0 ] }, '$$ROOT' ] },
+        },
+      },
+      { $project: { gamesInfo: 0 } },
+      { $match: { openId: query.openId } },
     ]);
     return docs;
   }

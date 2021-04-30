@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:29:19
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-29 17:08:25
+ * @LastEditTime: 2021-04-30 15:45:46
  * @FilePath: \basketball-service\app\model\player.js
  */
 'use strict';
@@ -97,18 +97,23 @@ module.exports = app => {
     evaluationScore: {
       type: Number,
     },
+    // 得分
     scoreAbility: {
       type: Number,
     },
-    speedScore: {
+    // 命中率
+    hitRateScore: {
       type: Number,
     },
-    staminaScore: {
+    // 体能
+    physicalScore: {
       type: Number,
     },
-    experienceScore: {
+    // 稳定
+    stableScore: {
       type: Number,
     },
+    // 防守
     defensiveScore: {
       type: Number,
     },

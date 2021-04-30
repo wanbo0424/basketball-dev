@@ -14,17 +14,21 @@
 				ticketImage: ''
 			}
 		},
+		onLoad: function (option) { //option为object类型，会序列化上个页面传递的参数
+			this.ctx = uni.createCanvasContext('ticket_id', this)
+			this.drawTicket(option)
+		},
 		methods: {
-			async drawTicket() {
+			async drawTicket({month , date, hour, minute, team, gameAddress, jerseyNumber, jerseyColor } = {}) {
 				this.ctx.setFillStyle('#FFFFFF')
 				this.ctx.fillRect(0, 0, 375 * 2, 156 * 2)
 				let ticketTmpPath = await this.downLoadFile('http://39.101.161.231/images/ticket.png')
 				this.ctx.drawImage(ticketTmpPath, 0, 0, 375 * 2, 156 * 2)
 				
 				this.drawTeamText()
-				this.drawTeamTime()
-				this.drawGameInfo()
-				this.drawPlayerInfo()
+				this.drawTeamTime(month, date, hour, minute )
+				this.drawGameInfo(gameAddress)
+				this.drawPlayerInfo(team, jerseyNumber, jerseyColor)
 				const _this = this
 				this.ctx.draw(false, () => {
 					// uni.hideLoading()
@@ -53,41 +57,41 @@
 				this.ctx.setFillStyle('#bf073e')
 				this.ctx.setTextBaseline('middle');
 				this.ctx.setTextAlign('center');
-				this.ctx.fillText('湖人', 80, 255)
-				this.ctx.fillText('篮网', 200, 255)
+				this.ctx.fillText('A队', 80, 255)
+				this.ctx.fillText('B队', 200, 255)
 			},
 			
-			drawTeamTime() {
+			drawTeamTime(month = '', date = '', hour = '', minute = '') {
 				this.ctx.setFontSize(16);
 				this.ctx.setFillStyle('#bf073e')
 				this.ctx.setTextBaseline('middle');
 				this.ctx.setTextAlign('center');
-				this.ctx.fillText('05', 255, 238)
-				this.ctx.fillText('23', 295, 238)
+				this.ctx.fillText(month, 255, 238)
+				this.ctx.fillText(date, 295, 238)
 				this.ctx.setFontSize(20);
-				this.ctx.fillText('18', 265, 270)
-				this.ctx.fillText('00', 305, 270)
+				this.ctx.fillText(hour, 265, 270)
+				this.ctx.fillText(minute, 305, 270)
 			},
 			
-			drawGameInfo() {
+			drawGameInfo(gameAddress) {
 				this.ctx.setFontSize(13);
 				this.ctx.font = 'sans-serif 800';
 				this.ctx.setFillStyle('#b00639')
 				this.ctx.setTextBaseline('middle');
 				this.ctx.setTextAlign('center');
-				this.ctx.fillText('延平门', 420, 242)
+				this.ctx.fillText(gameAddress, 420, 242)
 			},
 			
-			drawPlayerInfo() {
+			drawPlayerInfo(team, jerseyNumber = '', jerseyColor = ''  ) {
 				this.ctx.setFontSize(17);
 				this.ctx.setFillStyle('#FFFFFF')
 				this.ctx.setTextBaseline('middle');
 				this.ctx.setTextAlign('center');
 				this.ctx.translate(670, 88)
 				this.ctx.rotate(270 * Math.PI / 180)
-				this.ctx.fillText('A队',-150, 0)
-				this.ctx.fillText('红色', -80, 0)
-				this.ctx.fillText('23', 0, 0)
+				this.ctx.fillText(team, -150, 0)
+				this.ctx.fillText(jerseyColor, -80, 0)
+				this.ctx.fillText(jerseyNumber, 0, 0)
 				this.ctx.restore()
 				
 			},
@@ -127,8 +131,8 @@
 			}
 		},
 		mounted(){
-			this.ctx = uni.createCanvasContext('ticket_id', this)
-			this.drawTicket()
+			// this.ctx = uni.createCanvasContext('ticket_id', this)
+			// this.drawTicket()
 			// console.log(this.drawTicket(), 'drawTicket')
 		},
 	}

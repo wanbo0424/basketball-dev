@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-25 15:48:19
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-29 17:14:42
+ * @LastEditTime: 2021-04-30 09:40:04
  * @FilePath: \basketball-service\app\controller\gameOrder.js
  */
 'use strict';
@@ -36,6 +36,12 @@ class GameOrderController extends Controller {
     this.success(data);
   }
 
+  // 全部订单
+  async allOrderList() {
+    const { ctx } = this;
+    const data = await ctx.service.player.allOrderList(ctx.request.query);
+    this.success(data);
+  }
 }
 module.exports = GameOrderController
 ;

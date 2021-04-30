@@ -2,7 +2,7 @@
  * @Description: 
  * @Date: 2021-01-08 17:59:51
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-29 16:52:48
+ * @LastEditTime: 2021-04-30 19:38:49
  * @FilePath: \vue-admin-beautiful\src\views\player\apply\index.vue
 -->
 <template>
@@ -54,6 +54,7 @@
         >
           发送短信
         </a-button>
+        <a-button type="link" @click="setStatistics(text)">个人统计</a-button>
       </template>
     </a-table>
 
@@ -212,6 +213,10 @@
           })
       }
 
+      const setStatistics = (row) => {
+        console.log(row)
+      }
+
       onMounted(() => {
         loadData()
       })
@@ -229,6 +234,7 @@
         changeTeam,
         groupPlayer,
         sendMessage,
+        setStatistics,
       }
     },
   }
