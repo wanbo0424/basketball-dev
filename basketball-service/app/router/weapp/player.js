@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-20 16:31:42
  * @LastEditors: yinwb
- * @LastEditTime: 2021-02-20 16:29:17
+ * @LastEditTime: 2021-05-06 11:33:53
  * @FilePath: \basketball-service\app\router\weapp\player.js
  */
 'use strict';

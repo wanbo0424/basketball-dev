@@ -35,7 +35,6 @@
 			_self = this;
 			this.cWidth=uni.upx2px(600);
 			this.cHeight=uni.upx2px(540);
-			this.getServerData();
 		},
 		computed: {
 			...mapGetters([
@@ -43,52 +42,30 @@
 			])
 		 },
 		methods: {
-			getServerData(){
-				// uni.request({
-				// 	url: 'https://www.ucharts.cn/data.json',
-				// 	data:{
-				// 	},
-				// 	success: function(res) {
-				// 		console.log(res.data.data)
-				// 		let Radar = {
-				// 			categories:['得分能力', '速度值', '体力值', '经验值', '防守值'],
-				// 			series:[],
-				// 		};
-				// 		Radar.categories=res.data.data.Radar.categories;
-				// 		debugger
-				// 		Radar.series=res.data.data.Radar.series;
-				// 		_self.showRadar("canvasRadar",Radar);
-				// 	},
-				// 	fail: () => {
-				// 		_self.tips="网络错误，小程序端请检查合法域名";
-				// 	},
-				// });
-				http.get('weapp/playerCareer/getCareerDetail', {params:{openId: this.userInfo.openId}}).then(res => {
-					if(res.data.code === 0) {
-						// let {scoreAbilityTotal, speedTotal,staminaTotal,experienceTotal,defensiveTotal} = res.data.data
-						// let gameLength = res.data.data.gameIdList.length
-						let series = [
-							{
-								name: '个人能力分析',
-								data: [
-									// 3,
-									// speedTotal/gameLength,
-									// staminaTotal/gameLength, 
-									// experienceTotal/gameLength,
-									// defensiveTotal/gameLength
-									5, 6, 9, 7, 7
-								],
-								color: '#f57463',
-							}
-							
-						]
-						let Radar = {
-							categories:['得分', '稳定', '体能', '命中率', '防守'],
-							series
-						};
-						_self.showRadar("canvasRadar",Radar);
+			getServerData({
+				scoreAbility,
+				hitRateScore,
+				physicalScore,
+				stableScore,
+				defensiveScore}){
+				let series = [
+					{
+						name: '个人能力分析',
+						data: [
+							scoreAbility,
+							stableScore,
+							physicalScore,
+							hitRateScore,
+							defensiveScore,
+						],
+						color: '#f57463',
 					}
-				})
+				]
+				let Radar = {
+					categories:['得分', '稳定', '体能', '命中率', '防守'],
+					series
+				};
+				_self.showRadar("canvasRadar",Radar);
 			},
 			showRadar(canvasId,chartData){
 				canvaRadar=new uCharts({

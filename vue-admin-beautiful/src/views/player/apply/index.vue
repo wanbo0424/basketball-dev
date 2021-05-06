@@ -2,7 +2,7 @@
  * @Description: 
  * @Date: 2021-01-08 17:59:51
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-30 19:38:49
+ * @LastEditTime: 2021-05-06 10:45:22
  * @FilePath: \vue-admin-beautiful\src\views\player\apply\index.vue
 -->
 <template>
@@ -66,6 +66,8 @@
       @change="currentChange"
       show-less-items
     />
+
+    <edit-statistics ref="statisticsRef" @refresh="loadData"></edit-statistics>
   </div>
 </template>
 <script>
@@ -75,6 +77,7 @@
   import { message } from 'ant-design-vue'
   import moment from 'moment'
   import Search from './Search'
+  import EditStatistics from './edit-statistics'
   const columns = [
     // {
     //   title: 'id',
@@ -132,10 +135,11 @@
     },
   ]
   export default {
-    components: { Search },
+    components: { Search, EditStatistics },
     setup() {
       const loadingRef = ref(false)
       const smsLoading = ref(false)
+      const statisticsRef = ref(null)
       const data = ref([])
 
       const pagination = reactive({
@@ -214,7 +218,7 @@
       }
 
       const setStatistics = (row) => {
-        console.log(row)
+        statisticsRef.value.init(row)
       }
 
       onMounted(() => {
@@ -235,6 +239,7 @@
         groupPlayer,
         sendMessage,
         setStatistics,
+        statisticsRef,
       }
     },
   }

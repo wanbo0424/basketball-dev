@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:29:19
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-30 15:45:46
+ * @LastEditTime: 2021-05-06 11:11:36
  * @FilePath: \basketball-service\app\model\player.js
  */
 'use strict';
@@ -116,6 +116,10 @@ module.exports = app => {
     // 防守
     defensiveScore: {
       type: Number,
+    },
+    // 是否是mvp
+    isMvp: {
+      type: Boolean,
     },
     // 所属球队（'A', 'B')
     team: {

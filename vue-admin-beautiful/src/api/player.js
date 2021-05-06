@@ -23,3 +23,11 @@ export function groupPlayerBatch(data) {
     data,
   })
 }
+
+export function updatePlayer(data) {
+  return request({
+    url: '/admin/updatePlayer',
+    method: 'post',
+    data,
+  })
+}

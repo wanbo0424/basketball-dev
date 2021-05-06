@@ -10,23 +10,23 @@
 			<view class="gameInfo">
 				<view class="" style="display: flex;">
 					<view class="" style="width: 50%;">
-						积分:444
+						积分:{{statisticsInfo.totalEvaluationScore || 0}}
 					</view>
 					<view class="" style="width: 50%;">
-						得分:333
-					</view>
-				</view>
-				<view class="" style="display: flex;padding-top: 20rpx;">
-					<view class="" style="width: 50%;">
-						排位:58
-					</view>
-					<view class="" style="width: 50%;">
-						胜率:30%
+						得分:{{statisticsInfo.totalPersonScore || 0}}
 					</view>
 				</view>
 				<view class="" style="display: flex;padding-top: 20rpx;">
 					<view class="" style="width: 50%;">
-						mvp次数:58
+						排位:{{statisticsInfo.rank + 1 || 0}}
+					</view>
+					<view class="" style="width: 50%;">
+						胜率:{{winRate}}%
+					</view>
+				</view>
+				<view class="" style="display: flex;padding-top: 20rpx;">
+					<view class="" style="width: 50%;">
+						mvp次数:{{statisticsInfo.mvpCount || 0}}
 					</view>
 				</view>
 				<view class="" style="display: flex;padding-top: 20rpx;">
@@ -118,16 +118,32 @@
 						customIcon: false,
 						pagePath: '/pages/mine/index'
 					}
-				]
+				],
+				statisticsInfo: {}
 			}
 		},
 		mixins:[shareMixin],
 		computed: {
 			...mapGetters([
 			  'userInfo',
-			])
+			]),
+			winRate() {
+				if(this.statisticsInfo.allCount) {
+					return ((this.statisticsInfo.victoryCount / this.statisticsInfo.allCount) * 100).toFixed(2)
+				}else{
+					return '0'
+				}
+			}
 		 },
 		methods: {
+			getStatisticsInfo() {
+				http.get('weapp/playerCareer/getCareerDetail', {params: {openId: this.userInfo.openId}}).then(res => {
+					if(res.data.code === 0) {
+						this.statisticsInfo = res.data.data
+						this.$refs.map.getServerData(this.statisticsInfo)
+					}
+				})
+			},
 			toCoupon() {
 				uni.navigateTo({
 					url: '/pagesA/coupon/index'
@@ -150,7 +166,9 @@
 				uni.navigateTo({url: '/pagesA/recharge/index'})
 			}
 		},
-		
+		mounted() {
+			this.getStatisticsInfo()
+		}
 	}
 </script>
 
