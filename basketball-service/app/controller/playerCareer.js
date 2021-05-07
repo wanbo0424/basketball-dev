@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-13 18:35:35
  * @LastEditors: yinwb
- * @LastEditTime: 2021-01-13 18:37:16
+ * @LastEditTime: 2021-05-07 11:33:39
  * @FilePath: \basketball-service\app\controller\playerCareer.js
  */
 'use strict';
@@ -17,10 +17,15 @@ class PlayerCareerController extends Controller {
     this.success(playerData);
   }
 
-
   async getCareerDetail() {
     const { ctx } = this;
     const detail = await ctx.service.playerCareer.getCareerDetail(ctx.request.query);
+    this.success(detail);
+  }
+
+  async getAllCareerList() {
+    const { ctx } = this;
+    const detail = await ctx.service.playerCareer.getAllCareerList(ctx.request.query);
     this.success(detail);
   }
 

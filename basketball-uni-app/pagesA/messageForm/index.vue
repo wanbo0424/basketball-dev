@@ -213,6 +213,7 @@
 					if (valid) {
 						this.form.openId = this.userInfo.openId
 						this.form.nickName = this.userInfo.nickName
+						this.form.avatarUrl = this.userInfo.avatarUrl
 						this.form.out_trade_no = generateOrderNumber()
 						this.form.needInsurance = (this.form.needInsurance === '是')
 						if(this.shared.nickName) {

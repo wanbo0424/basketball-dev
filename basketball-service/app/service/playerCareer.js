@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-13 18:36:21
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-06 17:32:35
+ * @LastEditTime: 2021-05-07 11:27:10
  * @FilePath: \basketball-service\app\service\playerCareer.js
  */
 'use strict';
@@ -106,6 +106,45 @@ class PlayerCareerService extends Service {
     // const result = await app.model.PlayerCareer.findOne({ openId: query.openId });
     return result;
   }
+
+  async getAllCareerList() {
+    const { app } = this;
+    // 获取所有球员生涯数据
+    const docs = await app.model.Player.aggregate([
+      {
+        $lookup:
+        {
+          from: 'games',
+          localField: 'gameId',
+          foreignField: '_id',
+          as: 'gamesInfo',
+        },
+      },
+      {
+        $replaceRoot: {
+          newRoot: { $mergeObjects: [{ $arrayElemAt: [ '$gamesInfo', 0 ] }, '$$ROOT' ] },
+        },
+      },
+      { $project: { gamesInfo: 0 } },
+      {
+        $group: {
+          _id: '$openId',
+          nickName: { $first: '$nickName' },
+          avatarUrl: { $first: '$avatarUrl' },
+          careerGames: {
+            $push: {
+              team: '$team',
+              ATeamScore: '$ATeamScore',
+              BTeamScore: '$BTeamScore',
+              evaluationScore: '$evaluationScore',
+            },
+          },
+        },
+      },
+    ]);
+    return docs;
+  }
+
 }
 
 module.exports = PlayerCareerService;

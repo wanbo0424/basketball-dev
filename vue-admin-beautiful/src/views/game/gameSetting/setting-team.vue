@@ -39,7 +39,7 @@
         ATeamName: '',
         BTeamName: '',
         ATeamScore: 0,
-        BTeamScore: 0,
+        // BTeamScore: 0,
       })
       function init(row) {
         for (let key in form) {

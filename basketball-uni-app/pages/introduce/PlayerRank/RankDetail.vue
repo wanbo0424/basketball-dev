@@ -29,10 +29,10 @@
 							{{item.nickName}}
 						</view>
 						<view class="list-item-text" :style="{width: '15%'}">
-							{{item.integral}}
+							{{item.evaluationScoreTotal}}
 						</view>
 						<view class="list-item-text" :style="{width: '25%'}">
-							{{item.duanwei}}
+							{{levelName(item.evaluationScoreTotal)}}
 						</view>
 					</view>
 				</view>
@@ -43,6 +43,7 @@
 </template>
 
 <script>
+	import { LEVEL_TYPE } from '../../../utils/constant.js'
 	export default {
 		data() {
 			return {
@@ -54,26 +55,27 @@
 					{name: '积分', width: '15%' },
 					{name: '段位', width: '25%' },
 				],
-				datas: [
-					{avatarUrl: '', nickName: '范德萨范德萨萨', score: '456', integral: '7568', winRate: '36.5%', rank: '1', duanwei: '黄金段位'},
-					{avatarUrl: '', nickName: 'test2', score: '435', integral: '8790', winRate: '59.8%', rank: '2'},
-					{avatarUrl: '', nickName: 'test3', score: '567', integral: '0987', winRate: '90.5%', rank: '3'},
-					{avatarUrl: '', nickName: 'test2', score: '435', integral: '8790', winRate: '59.8%', rank: '2'},
-					{avatarUrl: '', nickName: 'test3', score: '567', integral: '0987', winRate: '90.5%', rank: '3'},
-					{avatarUrl: '', nickName: 'test2', score: '435', integral: '8790', winRate: '59.8%', rank: '2'},
-					{avatarUrl: '', nickName: 'test3', score: '567', integral: '0987', winRate: '90.5%', rank: '3'},
-					{avatarUrl: '', nickName: 'test2', score: '435', integral: '8790', winRate: '59.8%', rank: '2'},
-					{avatarUrl: '', nickName: 'test3', score: '567', integral: '0987', winRate: '90.5%', rank: '3'},
-					{avatarUrl: '', nickName: 'test2', score: '435', integral: '8790', winRate: '59.8%', rank: '2'},
-					{avatarUrl: '', nickName: 'test3', score: '567', integral: '0987', winRate: '90.5%', rank: '3'},
-					{avatarUrl: '', nickName: '范德萨范德萨萨', score: '567', integral: '0987', winRate: '90.5%', rank: '3'},
-					{avatarUrl: '', nickName: '范德萨范德萨萨', score: '567', integral: '0987', winRate: '90.5%', rank: '3'},
-				]
+				datas: []
+			}
+		},
+		computed:{
+			levelName() {
+				return (evaluationScoreTotal) => {
+					let levelName = ''
+					for(let key in LEVEL_TYPE) {
+						if(evaluationScoreTotal >= LEVEL_TYPE[key].min && evaluationScoreTotal < LEVEL_TYPE[key].max) {
+							levelName = key
+							break
+						}
+					}
+					return levelName
+				}
 			}
 		},
 		methods: {
-			init() {
+			init(datas) {
 				this.show = true
+				this.datas = datas
 			}
 		}
 	}
