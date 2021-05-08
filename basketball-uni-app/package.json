@@ -15,6 +15,7 @@
     "js-cookie": "^2.2.1",
     "luch-request": "^3.0.4",
     "moment": "^2.29.1",
+    "mp-cloud-openapi": "file:uniCloud-tcb/cloudfunctions/common/mp-cloud-openapi",
     "uview-ui": "^1.8.3",
     "vuex": "^3.6.0"
   },

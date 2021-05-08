@@ -9,6 +9,9 @@
 
 module.exports = app => {
   const { router, controller } = app;
+  // 短信通知
   router.post('/api/admin/sendSms', controller.sms.sendSms);
+  // 小程序推送
+  router.post('/api/admin/pushSms', controller.sms.pushSms);
 }
 ;

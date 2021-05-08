@@ -2,11 +2,12 @@
  * @Description:
  * @Date: 2021-01-11 17:42:14
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-06 17:56:35
+ * @LastEditTime: 2021-05-08 17:54:48
  * @FilePath: \vue-admin-beautiful\src\api\game.js
  */
 import request from '@/utils/request'
-
+// import axios from 'axios'
+// const instance = axios.create({baseURL: ''})
 export const add = (data) => {
   return request({
     url: '/admin/gameAdd',
@@ -57,3 +58,5 @@ export const sendSms = (data) =>
     method: 'post',
     data,
   })
+
+export const pushSms = (data) => request.post('/admin/pushSms', data)

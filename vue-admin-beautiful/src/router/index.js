@@ -70,6 +70,15 @@ export const asyncRoutes = [
           icon: 'solution',
         },
       },
+      {
+        path: 'userAgreement',
+        name: 'UserAgreement',
+        component: () => import('@/views/player/userAgreement'),
+        meta: {
+          title: '同意用户协议列表',
+          icon: 'book-open-line',
+        },
+      },
     ],
   },
   {

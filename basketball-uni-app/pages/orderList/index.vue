@@ -54,7 +54,7 @@
 						iconPath: "dingdan",
 						selectedIconPath: "dingdan-blue",
 						text: '订单',
-						isDot: true,
+						isDot: false,
 						customIcon: true,
 						pagePath: '/pages/orderList/index'
 					},
@@ -119,6 +119,9 @@
 				http.get('weapp/toEnteredList', { params: { openId: this.userInfo.openId } }).then(res => {
 					if(res.data.code === 0) {
 						this.toEnteredList = res.data.data
+						if(this.toEnteredList.length) {
+							this.$set(this.list[1], 'count', res.data.data.length )
+						}
 					}
 				})
 			},

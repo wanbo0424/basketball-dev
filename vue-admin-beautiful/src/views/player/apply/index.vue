@@ -2,7 +2,7 @@
  * @Description: 
  * @Date: 2021-01-08 17:59:51
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-06 10:45:22
+ * @LastEditTime: 2021-05-08 19:13:11
  * @FilePath: \vue-admin-beautiful\src\views\player\apply\index.vue
 -->
 <template>
@@ -54,6 +54,9 @@
         >
           发送短信
         </a-button>
+        <a-button type="link" :loading="smsLoading" @click="pushApplets(text)">
+          推送
+        </a-button>
         <a-button type="link" @click="setStatistics(text)">个人统计</a-button>
       </template>
     </a-table>
@@ -73,7 +76,7 @@
 <script>
   import { ref, onMounted, reactive, unref } from 'vue'
   import { getList, groupPlayerBatch } from '@/api/player'
-  import { sendSms } from '@/api/game'
+  import { sendSms, pushSms } from '@/api/game'
   import { message } from 'ant-design-vue'
   import moment from 'moment'
   import Search from './Search'
@@ -217,6 +220,19 @@
           })
       }
 
+      const pushApplets = (row) => {
+        pushSms({
+          touser: row.openId,
+          template_id: 'T4Bq3RFYlZ4f7GWSwuOAvONC9kVYZrBpPwtQ5NwxGZM',
+          data: {
+            time1: { value: '123' },
+            thing2: { value: '456' },
+          },
+        }).then((res) => {
+          console.log(res)
+        })
+      }
+
       const setStatistics = (row) => {
         statisticsRef.value.init(row)
       }
@@ -240,6 +256,7 @@
         sendMessage,
         setStatistics,
         statisticsRef,
+        pushApplets,
       }
     },
   }

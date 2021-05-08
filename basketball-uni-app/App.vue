@@ -13,7 +13,6 @@
 			}
 		},
 		created() {
-			// this.getUserInfo()
 		},
 		
 		
@@ -21,7 +20,7 @@
 		},
 		onShow: function() {
 			
-			// 3e9c3da492abdbad0e1cee5a310646e9  AppSecret
+			// 8eae0891e063bca56590224254363fcc  AppSecret
 			// wx3bd5737539be2537  AppID
 			
 			// 登录
@@ -42,6 +41,7 @@
 				  console.log(res, 'share')
 			  }
 			})
+			
 			
 			// wx.getShareInfo({
 			// 	success: function(res) {

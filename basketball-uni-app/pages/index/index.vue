@@ -2,10 +2,7 @@
 	<view class="content">
 		<col-toast></col-toast>
 		<u-modal v-model="showModal" :show-cancel-button="true" confirm-text="同意" :title-style="{fontSize: '34rpx'}"
-			title="参赛用户协议" @cancel="showModal = false" @confirm="()  => {
-				canToHome = true
-				checked = true
-			}"
+			title="参赛用户协议" @cancel="showModal = false" @confirm="agree"
 		>
 			<view class="u-update-content">
 				<rich-text :nodes="content"></rich-text>
@@ -53,7 +50,8 @@
 	// import sharePoster from '../sharePoster'
 	import customCanvas from '../canvas/share.vue'
 	import Toast from './Toast'
-	import { mapActions } from 'vuex'
+	import http from '../../api/index.js'
+	import { mapActions, mapGetters } from 'vuex'
 	export default{
 		mixins:[shareMixin],
 		components:{customCanvas, ColToast: Toast},
@@ -115,8 +113,19 @@
 				`,
 			}
 		},
+		computed: {
+			...mapGetters([
+			  'userInfo',
+			])
+		 },
 		methods:{
 			async toHome() {
+				wx.requestSubscribeMessage({
+				  tmplIds: ['T4Bq3RFYlZ4f7GWSwuOAvONC9kVYZrBpPwtQ5NwxGZM'],
+				  success: (res) => { 
+					  console.log(res)
+				  },
+				})
 				if(!this.canToHome) {
 					this.$refs.uToast.show({
 						title: '请勾选页面下方的“篮球比赛用户协议”',
@@ -142,6 +151,14 @@
 			},
 			changeBox(e) {
 				this.canToHome = e.value
+			},
+			agree() {
+				http.post('weapp/applets/agreeProtocol', {nickName: this.userInfo.nickName, isAgree: true}).then(res => {
+					if(res.code === 0) {
+						this.canToHome = true
+						this.checked = true
+					}
+				})
 			},
 			...mapActions([
 			  'getUserInfo', // 将 `this.increment()` 映射为 `this.$store.dispatch('increment')`

@@ -28,7 +28,7 @@
 
 <script>
 	import Introduce from '../introduce/index'
-	
+	import http from '../../api/index.js'
 	import shareMixin from '../../mixins/share.js'
 	import Mine from '../mine/index'
 	export default {
@@ -56,7 +56,7 @@
 						iconPath: "dingdan",
 						selectedIconPath: "dingdan-blue",
 						text: '订单',
-						isDot: true,
+						isDot: false,
 						customIcon: true,
 						pagePath: '/pages/orderList/index'
 					},
@@ -71,6 +71,9 @@
 				]
 			}
 		},
+		mounted() {
+			this.getToEnteredList()
+		},
 		methods: {
 			doMessage() {
 				uni.navigateTo({url: '/pages/randomMatch/index'})
@@ -82,6 +85,15 @@
 				// }else{
 				// 	this.current = 'home'
 				// }
+			},
+			getToEnteredList() {
+				http.get('weapp/toEnteredList', { params: { openId: this.userInfo.openId } }).then(res => {
+					if(res.data.code === 0) {
+						if(res.data.data.length) {
+							this.$set(this.list[1], 'count', res.data.data.length)
+						}
+					}
+				})
 			},
 			add() {
 				uni.showLoading({

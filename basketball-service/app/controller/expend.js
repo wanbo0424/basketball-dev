@@ -10,7 +10,6 @@ class ExpendController extends Controller {
       dataType: 'json',
     });
     let result = {};
-    console.log(ctx.request.body, 'ctx.request.body');
     if (access_token) {
       result = await ctx.curl(`https://api.weixin.qq.com/wxa/getwxacode?access_token=${access_token}`, {
         method: 'POST',

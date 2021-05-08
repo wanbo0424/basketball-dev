@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-26 15:36:18
  * @LastEditors: yinwb
- * @LastEditTime: 2021-02-01 14:37:02
+ * @LastEditTime: 2021-05-08 11:13:14
  * @FilePath: \basketball-service\app\controller\user\common.js
  */
 'use strict';
@@ -10,6 +10,7 @@
 const Controller = require('../../core/base_controller');
 
 class UserCommonController extends Controller {
+  // 登录
   async login() {
     const { ctx, app } = this;
     const { userName, password } = ctx.request.body;
@@ -29,6 +30,20 @@ class UserCommonController extends Controller {
   async logout() {
     this.ctx.removeToken();
     this.success();
+  }
+
+  // 同意用户协议
+  async agreeProtocol() {
+    const { ctx } = this;
+    await ctx.service.user.common.agreeProtocol(ctx.request.body);
+    this.success();
+  }
+
+  // 用户协议同意列表
+  async agreeProtocolList() {
+    const { ctx } = this;
+    const result = await ctx.service.user.common.agreeProtocolList(ctx.request.body);
+    this.success(result);
   }
 }
 
