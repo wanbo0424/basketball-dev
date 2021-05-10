@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-22 14:20:15
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-08 19:15:44
+ * @LastEditTime: 2021-05-10 09:27:07
  * @FilePath: \basketball-service\app\controller\sms.js
  */
 'use strict';
@@ -40,7 +40,6 @@ class SmsController extends Controller {
       dataType: 'json',
     });
     const result = await ctx.curl(
-      // 'https://tcb-mxdkoyjzrwzasst5a3409-b6316d.service.tcloudbase.com/sendSms',
       `https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=${access_token}`,
       {
         method: 'POST',

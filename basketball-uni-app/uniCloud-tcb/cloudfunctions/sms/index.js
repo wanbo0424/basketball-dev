@@ -23,5 +23,5 @@ exports.main = async (event, context) => {
 	      code: err.errCode,
 	      msg: err.errMsg
 	    }
-	  }
+	}
 };

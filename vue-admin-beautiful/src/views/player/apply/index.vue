@@ -2,7 +2,7 @@
  * @Description: 
  * @Date: 2021-01-08 17:59:51
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-08 19:13:11
+ * @LastEditTime: 2021-05-10 16:09:37
  * @FilePath: \vue-admin-beautiful\src\views\player\apply\index.vue
 -->
 <template>
@@ -55,7 +55,7 @@
           发送短信
         </a-button>
         <a-button type="link" :loading="smsLoading" @click="pushApplets(text)">
-          推送
+          微信推送
         </a-button>
         <a-button type="link" @click="setStatistics(text)">个人统计</a-button>
       </template>
@@ -225,8 +225,11 @@
           touser: row.openId,
           template_id: 'T4Bq3RFYlZ4f7GWSwuOAvONC9kVYZrBpPwtQ5NwxGZM',
           data: {
-            time1: { value: '123' },
+            time1: {
+              value: moment(row.gameDate).format('YYYY年MM月DD日 HH:mm:ss'),
+            },
             thing2: { value: '456' },
+            thing3: { value: '789' },
           },
         }).then((res) => {
           console.log(res)

@@ -2,7 +2,7 @@
  * @Description:优惠券基础信息
  * @Date: 2021-01-25 10:34:56
  * @LastEditors: yinwb
- * @LastEditTime: 2021-02-19 15:30:19
+ * @LastEditTime: 2021-05-10 09:53:07
  * @FilePath: \basketball-service\app\model\coupon.js
  */
 'use strict';
