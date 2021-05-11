@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:29:19
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-06 11:11:36
+ * @LastEditTime: 2021-05-11 16:01:18
  * @FilePath: \basketball-service\app\model\player.js
  */
 'use strict';
@@ -66,7 +66,6 @@ module.exports = app => {
     },
     age: {
       type: Number,
-      required: true,
     },
     role: {
       type: String,
@@ -81,7 +80,7 @@ module.exports = app => {
       type: Schema.Types.ObjectId,
     },
     // 优惠券
-    couponIdList: {
+    couponList: {
       type: Array,
     },
     // 0未支付 1预支付 2支付完成

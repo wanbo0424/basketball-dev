@@ -65,6 +65,7 @@ const store = new Vuex.Store({
 						  uni.getLocation({
 						    withCredentials: false,
 						    success: (res) => {
+								console.log(res, 'scope.userLocation')
 								resolve('success')
 						    },
 						 });

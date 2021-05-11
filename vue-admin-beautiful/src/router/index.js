@@ -137,6 +137,15 @@ export const asyncRoutes = [
           icon: 'table-2',
         },
       },
+      {
+        path: 'coupon',
+        name: 'Coupon',
+        component: () => import('@/views/activity/coupon'),
+        meta: {
+          title: '优惠券',
+          icon: 'coupon-line',
+        },
+      },
     ],
   },
   {

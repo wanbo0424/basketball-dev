@@ -117,7 +117,6 @@
 			}
 		},
 		mounted() {
-			console.log(this.userInfo)
 			this.getGameList()
 			this.plarerData = {
 				nickName: this.userInfo.nickName
@@ -204,6 +203,7 @@
 							value: item._id,
 							label: item._id
 						}))
+						console.log(this.gameAddressList, 'gameAddressList')
 					}
 				})
 			},
@@ -220,9 +220,10 @@
 							this.form.sharedNickName = this.shared.nickName
 						}
 						http.post('weapp/players/apply', this.form).then(res => {
+							console.log(res)
 							if(res.data.code === 0) {
 								uni.navigateTo({
-									url:`/pagesA/defray/index?gameAddress=${this.form.gameName}&out_trade_no=${this.form.out_trade_no}`
+									url:`/pagesA/defray/index?gameAddress=${this.form.gameAddress}&out_trade_no=${this.form.out_trade_no}&gameDate=${this.form.gameDate}&gameTimeRange=${this.form.gameTimeRange}`
 								})
 							}
 						})

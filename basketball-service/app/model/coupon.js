@@ -2,7 +2,7 @@
  * @Description:优惠券基础信息
  * @Date: 2021-01-25 10:34:56
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-10 09:53:07
+ * @LastEditTime: 2021-05-11 11:27:27
  * @FilePath: \basketball-service\app\model\coupon.js
  */
 'use strict';
@@ -25,6 +25,10 @@ module.exports = app => {
     },
     // 0未使用   1已使用
     status: {
+      type: Number,
+    },
+    // 有效期
+    validPeriod: {
       type: Number,
     },
   }, {

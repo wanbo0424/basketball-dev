@@ -19,6 +19,7 @@ module.exports = app => {
   require('./router/admin/gameOrder.js')(app);
   require('./router/admin/user.js')(app);
   require('./router/admin/applets.js')(app);
+  require('./router/admin/coupon.js')(app);
   // router.get('/', controller.home.index);
   // // 微信小程序
   // router.post('/weapp/players/apply', controller.player.apply);

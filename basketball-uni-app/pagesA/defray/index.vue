@@ -1,8 +1,8 @@
 <template>
 	<view class="pay_page">
 		<view class="order_info cell_info">
-			<h2>比赛地点：{{orderInfo.gameAddress.split('--')[0]}}</h2>
-			<h2>比赛时间：{{orderInfo.gameAddress.split('--')[1]}}</h2>
+			<h2>比赛地点：{{orderInfo.gameAddress}}</h2>
+			<h2>比赛时间：{{orderInfo.gameDate}} {{orderInfo.gameTimeRange}}</h2>
 			<!-- <view>
 				{{orderInfo.gameDate}}
 			</view> -->
@@ -13,10 +13,10 @@
 				<span>总金额</span>
 				<span>¥{{orderInfo.totalAmount}}</span>
 			</view>
-			<view class="pay_item">
+			<!-- <view class="pay_item">
 				<span>预交金</span>
 				<span>¥{{orderInfo.defray}}</span>
-			</view>
+			</view> -->
 		</view>
 		
 		<view class="checkout_counter">
@@ -55,16 +55,17 @@ import { mapGetters } from 'vuex'
 			isPaying(val) {
 				if(val) {
 					uni.navigateTo({
-						url: `/pages/payStatus/index?out_trade_no=${this.orderInfo.out_trade_no}`
+						url: `/pagesA/payStatus/index?out_trade_no=${this.orderInfo.out_trade_no}`
 					})
 				}
 			}
 		},
 		
-		onLoad: function({gameDate, gameAddress, out_trade_no}){
+		onLoad: function({gameDate, gameAddress, out_trade_no, gameTimeRange}){
+			this.orderInfo.out_trade_no = out_trade_no
 			this.orderInfo.gameDate = gameDate
 			this.orderInfo.gameAddress = gameAddress
-			this.orderInfo.out_trade_no = out_trade_no
+			this.orderInfo.gameTimeRange = gameTimeRange
 		},
 		methods: {
 			bindPay() { 
