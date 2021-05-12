@@ -3,7 +3,7 @@
  * @Date: 2021-04-23 14:19:36
  * @Author: yinwb
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-07 16:33:47
+ * @LastEditTime: 2021-05-12 10:58:22
  * @FilePath: \vue-admin-beautiful\src\views\appletManage\bannerManage\add-banner.vue
 -->
 <template>

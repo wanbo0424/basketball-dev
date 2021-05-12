@@ -18,7 +18,7 @@ const {
   donation,
 } = require('./src/config')
 const { webpackBarName, webpackBanner, donationConsole } = require('vab-config')
-
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
 if (donation) donationConsole()
 const { version, author } = require('./package.json')
 const Webpack = require('webpack')
@@ -85,6 +85,13 @@ module.exports = {
         new Webpack.ProvidePlugin(providePlugin),
         new WebpackBar({
           name: webpackBarName,
+        }),
+        new CompressionWebpackPlugin({
+          algorithm: 'gzip',
+          test: new RegExp('\\.(' + ['js', 'css'].join('|') + ')$'),
+          threshold: 10240,
+          minRatio: 0.8,
+          deleteOriginalAssets: false, // 删除原文件
         }),
       ],
     }

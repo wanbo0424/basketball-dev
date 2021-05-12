@@ -49,6 +49,7 @@ module.exports = appInfo => {
 
   config.mongoose = {
     client: {
+      // url: 'mongodb://39.101.161.231:27017/admin',
       url: 'mongodb://127.0.0.1:27017/admin',
       options: {
         useUnifiedTopology: true,

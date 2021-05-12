@@ -13,6 +13,9 @@
 				<u-input v-model="form.gameTimeRange" type="select" @click="showGameTimeSelect = true" />
 				<u-select v-model="showGameTimeSelect" :list="gameTimeList" @confirm="gameTimeSelected"></u-select>
 			</u-form-item>
+			<u-form-item label="剩余名额" class="place-form-item" >
+				{{ places }}
+			</u-form-item>
 			<u-form-item label="性别" required="true" prop="sex">
 				<u-input v-model="form.sex" disabled type="select" @click="showSexSelect = true" />
 				<!-- <u-select v-model="showSexSelect" :list="sexList" @confirm="sexSelected"></u-select> -->
@@ -38,7 +41,7 @@
 			<u-form-item v-show="showInsurance" label="身份证号" :required="showInsurance" prop="role">
 				<u-input v-model="form.identity" />
 			</u-form-item>
-			<u-form-item label="联系方式" prop="mobile">
+			<u-form-item label="联系方式" prop="mobile" required="true">
 				<u-input v-model="form.mobile" />
 			</u-form-item>
 		</u-form>
@@ -64,6 +67,7 @@
 				showGameDateSelect: false,
 				showGameTimeSelect: false,
 				showInsurance: true,
+				places: 16,
 				form: {
 					age: '',
 					sex: '男',
@@ -86,7 +90,7 @@
 					sex: [{required: true, message: '请填写性别', trigger: ['change','blur']}],
 					role: [{required: true, message: '请填写角色', trigger: ['change','blur']}],
 					mobile: [
-						// {required: true, message: '请填写联系方式', trigger: ['change','blur']},
+						{required: true, message: '请填写联系方式', trigger: ['change','blur']},
 						{
 							validator: (rule, value, callback) => {
 								if(value) {
@@ -183,6 +187,11 @@
 			gameTimeSelected(e) {
 				this.form.gameTimeRange = e[0].label
 				this.form.gameId= e[0].value
+				http.get('weapp/player/getRemainPlaces', { params: {gameId:  this.form.gameId } }).then(res => {
+					if(res.data.code === 0) {
+						this.places = res.data.data
+					}
+				})
 			},
 			sexSelected(e) {
 				this.form.sex = e[0].label;	
@@ -203,7 +212,6 @@
 							value: item._id,
 							label: item._id
 						}))
-						console.log(this.gameAddressList, 'gameAddressList')
 					}
 				})
 			},
@@ -220,7 +228,6 @@
 							this.form.sharedNickName = this.shared.nickName
 						}
 						http.post('weapp/players/apply', this.form).then(res => {
-							console.log(res)
 							if(res.data.code === 0) {
 								uni.navigateTo({
 									url:`/pagesA/defray/index?gameAddress=${this.form.gameAddress}&out_trade_no=${this.form.out_trade_no}&gameDate=${this.form.gameDate}&gameTimeRange=${this.form.gameTimeRange}`
@@ -276,6 +283,13 @@
 	padding: 30rpx 40rpx;
 	height: 100vh;
 	width: 100vw;
+}
+.place-form-item{
+	/deep/{
+		.u-form-item__body{	
+			color: #2979ff;
+		}
+	}
 }
 .form-content:after{
 	z-index: -10;

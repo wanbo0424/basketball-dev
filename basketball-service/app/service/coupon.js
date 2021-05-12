@@ -3,7 +3,7 @@
  * @Date: 2021-05-10 10:00:43
  * @Author: yinwb
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-11 17:50:55
+ * @LastEditTime: 2021-05-12 17:46:16
  * @FilePath: \basketball-service\app\service\coupon.js
  */
 'use strict';
@@ -34,11 +34,11 @@ class CouponService extends Service {
         users = await app.model.Player.find({ openId: trade_no_user[0].openId });
       }
     }
-
+    console.log(users, 'users');
     if (users.length === 1) {
       const newUserCoupons = await app.model.Coupon.find({ couponType: 0 });
       if (newUserCoupons && newUserCoupons.length) {
-        await app.model.Player.updateOne({ openId: trade_no_user[0].openId }, {
+        await app.model.Player.updateMany({ openId: trade_no_user[0].openId }, {
           $set: { couponList: newUserCoupons },
         });
       }

@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:39:52
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-30 09:57:14
+ * @LastEditTime: 2021-05-12 18:06:02
  * @FilePath: \basketball-service\app\service\player.js
  */
 'use strict';
@@ -313,6 +313,24 @@ class PlayerService extends Service {
       { $match: { openId: query.openId } },
     ]);
     return docs;
+  }
+  // 剩余名额
+  async getRemainPlaces(query) {
+    const { app } = this;
+    let places = 0;
+    const docs = await app.model.Player.find({ gameId: query.gameId });
+    places = 16 - docs.length;
+    return places;
+  }
+
+  async getCouponList(query) {
+    const { app } = this;
+    const doc = await app.model.Player.findOne({ openId: query.openId });
+    let coupons = [];
+    if (doc) {
+      coupons = doc.couponList;
+    }
+    return coupons;
   }
 }
 

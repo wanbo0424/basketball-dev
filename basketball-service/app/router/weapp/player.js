@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-20 16:31:42
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-07 11:33:12
+ * @LastEditTime: 2021-05-12 17:47:58
  * @FilePath: \basketball-service\app\router\weapp\player.js
  */
 'use strict';
@@ -23,5 +23,9 @@ module.exports = app => {
   router.get('/weapp/playerCareer/getCareerDetail', controller.playerCareer.getCareerDetail);
   // 获取所有球员数据
   router.get('/weapp/playerCareer/getAllCareerList', controller.playerCareer.getAllCareerList);
+  // 获取优惠券
+  router.get('/weapp/player/getCouponList', controller.player.getCouponList);
+  // 获取剩余名额
+  router.get('/weapp/player/getRemainPlaces', controller.player.getRemainPlaces);
 }
 ;

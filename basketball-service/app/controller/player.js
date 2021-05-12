@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:34:06
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-30 18:19:34
+ * @LastEditTime: 2021-05-12 17:52:09
  * @FilePath: \basketball-service\app\controller\player.js
  */
 'use strict';
@@ -56,6 +56,18 @@ class PlayerController extends Controller {
   async groupPlayer() {
     const { ctx } = this;
     const data = await ctx.service.player.groupPlayer(ctx.request.body);
+    this.success(data);
+  }
+
+  async getRemainPlaces() {
+    const { ctx } = this;
+    const data = await ctx.service.player.getRemainPlaces(ctx.query);
+    this.success(data);
+  }
+
+  async getCouponList() {
+    const { ctx } = this;
+    const data = await ctx.service.player.getCouponList(ctx.query);
     this.success(data);
   }
 }

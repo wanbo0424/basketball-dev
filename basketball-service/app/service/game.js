@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-11 17:21:53
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-29 17:47:42
+ * @LastEditTime: 2021-05-12 10:17:42
  * @FilePath: \basketball-service\app\service\game.js
  */
 'use strict';
@@ -113,7 +113,6 @@ class GameService extends Service {
           return new Date(item.gameDate).getTime() > new Date().getTime();
         }
         return false;
-
       });
     }
     return newDocs;
