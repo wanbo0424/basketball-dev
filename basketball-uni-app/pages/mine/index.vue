@@ -75,6 +75,17 @@
 				<u-grid-item @click="toCustomService" >
 					<u-icon name="kefu2" custom-prefix="custom-icon" color="#f57463" :size="54"></u-icon>
 					<view class="grid-text" >联系客服</view>
+				</u-grid-item>
+			</u-grid>
+			<u-grid :col="4" :border="false">
+				<u-grid-item >
+					<button plain type="primary" open-type="contact" 
+					style="font-size: 28rpx;border: none;">
+						<u-icon name="kefu2" custom-prefix="custom-icon" color="#f57463" style="height: 58rpx;" :size="54"></u-icon>
+						<view class="" style="height: 36rpx;line-height: 36rpx;">
+							在线客服
+						</view>
+					</button>
 				</u-grid-item >
 			</u-grid>
 		</view>
@@ -202,7 +213,7 @@
 		}
 	}
 	.navigation_list{
-		background-color: #fff;
+		// background-color: #fff;
 		border-radius: 20rpx;
 	}
 	.cell_list{

@@ -25,7 +25,7 @@ class PayController extends Controller {
       await ctx.service.order.prepaidOrder(ctx.request.body);
 
       // 录入新用户优惠券
-      await ctx.service.coupon.addCouponToNewplayer(ctx.request.body.out_trade_no);
+      await ctx.service.coupon.updateCouponToNewplayer(ctx.request.body.out_trade_no);
       ctx.status = 200;
       ctx.body = 'success';
     //   this.success('_id');

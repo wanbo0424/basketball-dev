@@ -17,12 +17,18 @@
 				<span>预交金</span>
 				<span>¥{{orderInfo.defray}}</span>
 			</view> -->
+			<view class="pay_item coupon">
+				<template v-if="couponInfo.couponType === 0">
+					<span>折扣券</span>
+					<span style="font-size: 40rpx;" >{{couponInfo.allowance}}折</span>
+				</template>
+			</view>
 		</view>
 		
 		<view class="checkout_counter">
 			<view class="amount">
 				<span>¥</span>
-				<span style="font-size: 40rpx;">{{orderInfo.defray}}</span>
+				<span style="font-size: 40rpx;">{{orderInfo.totalAmount}}</span>
 			</view>
 			<view class="bindPay_button" @click="bindPay">
 				去支付
@@ -41,9 +47,11 @@ import { mapGetters } from 'vuex'
 					gameDate: '',
 					gameAddress: '',
 					totalAmount: 100 ,//订单总金额
-					defray: 50 //预交金
+					// defray: 50 //预交金
 				},
-				isPaying: false
+				isPaying: false,
+				couponInfo: {},
+				discountPrice: 0
 			}
 		},
 		computed: {
@@ -58,6 +66,16 @@ import { mapGetters } from 'vuex'
 						url: `/pagesA/payStatus/index?out_trade_no=${this.orderInfo.out_trade_no}`
 					})
 				}
+			},
+			couponInfo: {
+				handler(val) {
+					if(val.couponType === 0) {
+						this.orderInfo.totalAmount = (this.couponInfo.allowance / 10) * 100
+						this.discountPrice = 100 - this.orderInfo.totalAmount - (this.couponInfo.allowance / 10) * 100
+					}
+				},
+				deep: true,
+				immediate: true
 			}
 		},
 		
@@ -66,6 +84,9 @@ import { mapGetters } from 'vuex'
 			this.orderInfo.gameDate = gameDate
 			this.orderInfo.gameAddress = gameAddress
 			this.orderInfo.gameTimeRange = gameTimeRange
+		},
+		mounted() {
+			this.getCoupons()
 		},
 		methods: {
 			bindPay() { 
@@ -102,6 +123,13 @@ import { mapGetters } from 'vuex'
 					  // 跳转失败：弹出提示组件引导用户跳转
 					  console.log('跳转到 xunhupay 小程序失败 - 准备弹窗提醒跳转', e)
 					  this.isPaying = false
+					}
+				})
+			},
+			getCoupons() {
+				http.get('weapp/player/getCouponList', {params: {openId: this.userInfo.openId}}).then(res => {
+					if(res.data.code === 0) {
+						this.couponInfo = res.data.data[0]
 					}
 				})
 			}

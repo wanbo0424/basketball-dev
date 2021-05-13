@@ -2,7 +2,7 @@
 	<view>
 		<view class="order-item" v-for="(order, index) in orders" @click="getTicket(order)">
 			<view class="">
-				<view>比赛时间：{{order.gameDate}}</view>
+				<view>比赛时间：{{order.gameDate}} {{order.gameTimeRange}}</view>
 				<view>比赛地点：{{order.gameAddress}}</view>
 				<view>球衣号码：{{order.jerseyNumber}}</view>
 				<view>所在队伍：{{order.team}}</view>

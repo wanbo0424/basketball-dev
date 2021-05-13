@@ -2,7 +2,7 @@
  * @Description: 
  * @Date: 2021-01-08 17:59:51
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-10 16:09:37
+ * @LastEditTime: 2021-05-13 16:08:05
  * @FilePath: \vue-admin-beautiful\src\views\player\apply\index.vue
 -->
 <template>
@@ -43,7 +43,7 @@
       </template>
       <template #pay="{ record }">
         <a-badge v-if="!record.payStatus" color="#f50" text="未支付" />
-        <a-badge v-if="record.payStatus === 2" color="#87d068" text="已举行" />
+        <a-badge v-if="record.payStatus === 2" color="#87d068" text="已支付" />
       </template>
       <template #action="{ text }">
         <a-button

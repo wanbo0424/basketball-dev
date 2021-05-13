@@ -4,7 +4,7 @@ import Request from 'luch-request'
 const http = new Request({
 	// baseURL: 'http://127.0.0.1:7001/' 
 	// baseURL: 'http://39.101.161.231/' //生产环境
-	baseURL: 'http://www.apusport.cn/' //生产环境
+	baseURL: 'https://www.apusport.cn/' //生产环境
 });
 
 http.interceptors.request.use((config) => { // 可使用async await 做异步操作
