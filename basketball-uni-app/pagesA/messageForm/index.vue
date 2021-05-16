@@ -156,6 +156,14 @@
 		 },
 		methods: {
 			gamAddressSelected(e) {
+				if(e[0].label.indexOf('（待开放）') !== -1) {
+					this.$refs.uToast.show({
+						title: '该场次待开放',
+						type: 'default',
+						duration: '2000'
+					})
+					return
+				}
 				this.form.gameAddress = e[0].label
 				let findItem = this.gameList.find(item => item._id === e[0].label)
 				if(findItem){
@@ -167,11 +175,27 @@
 						value: item,
 						label: item,
 					}))
+					this.gameDateList.forEach(item => {
+						let dateItems = findItem.gameDates.filter(ele => ele.gameDate === item.value).length
+						let closeItems = findItem.gameDates.filter(ele => ele.gameDate === item.value && ele.gameStatus === 3).length
+						if(dateItems === closeItems) {
+							item.disabled = true
+							item.value = item.label = `${item.label} （待开放）`
+						}
+					})
 				}else{
 					this.gameDateList = []
 				}
 			},
 			gameDateSelected(e) {
+				if(e[0].label.indexOf('（待开放）') !== -1) {
+					this.$refs.uToast.show({
+						title: '该场次待开放',
+						type: 'default',
+						duration: '2000'
+					})
+					return
+				}
 				this.form.gameDate = e[0].label
 				if(this.gameList && this.gameList.length) {
 					let findItem = this.gameList.find(item => item._id === this.form.gameAddress)
@@ -179,7 +203,7 @@
 						this.gameTimeList = findItem.gameDates.filter(item => item.gameDate === this.form.gameDate)
 						this.gameTimeList = this.gameTimeList.map(item => ({
 							value: item.gameId,
-							label: item.gameTimeRange
+							label: item.gameTimeRange,
 						}))
 					}
 				}
@@ -215,7 +239,7 @@
 						}))
 						this.gameAddressList.forEach(item => {
 							if(item.disabled) {
-								item.value = item.label = `${item.label} (待开放)`
+								item.value = item.label = `${item.label} （待开放）`
 							}
 						})
 					}
