@@ -73,9 +73,9 @@
 				this.ctx.setFillStyle('#FFFFFF')
 				this.ctx.fillRect(0, 0, 320 * 2, 440 * 2)
 
-				let logoTmpPath = await this.downLoadFile('http://39.101.161.231/images/logo1.png')
-				let codeTmpPath = await this.downLoadFile('http://39.101.161.231/images/code.jpeg')
-				let mainTmpPath = await this.downLoadFile('http://39.101.161.231/images/share_cover.png')
+				let logoTmpPath = await this.downLoadFile('https://www.apusport.cn/images/logo1.png')
+				let codeTmpPath = await this.downLoadFile('https://www.apusport.cn/images/code.jpeg')
+				let mainTmpPath = await this.downLoadFile('https://www.apusport.cn/images/share_cover.png')
 				this.ctx.drawImage(logoTmpPath, 0, 0, 45 * 2, 45 * 2)
 				this.ctx.drawImage(mainTmpPath, 0, 45 * 2, 320 * 2, 256 * 2)
 				

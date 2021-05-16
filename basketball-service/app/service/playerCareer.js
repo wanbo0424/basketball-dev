@@ -72,29 +72,34 @@ class PlayerCareerService extends Service {
         },
       },
     ]);
-    // 排名文档
-    const scoreRank = await app.model.Player.aggregate([
-      {
-        $group: {
-          _id: '$openId',
-          totalPersonScore: { $sum: '$personScore' },
-          totalEvaluationScore: { $sum: '$evaluationScore' },
-        },
-      },
-      {
-        $match: {
-          totalEvaluationScore: {
-            $gt: docs[0].totalEvaluationScore,
+    let scoreRank = [];
+    let victoryDocs = [];
+    let allDocs = [];
+    if (docs && docs.length) {
+      // 排名文档
+      scoreRank = await app.model.Player.aggregate([
+        {
+          $group: {
+            _id: '$openId',
+            totalPersonScore: { $sum: '$personScore' },
+            totalEvaluationScore: { $sum: '$evaluationScore' },
           },
         },
-      },
-    ]);
-    // 所有比赛文档
-    const allDocs = await ctx.service.player.allOrderList({ openId: query.openId });
-    // 胜利比赛文档
-    const victoryDocs = allDocs.filter(item => {
-      return ((item.team === 'A' && item.ATeamScore > item.BTeamScore) || (item.team === 'B' && item.BTeamScore > item.ATeamScore));
-    });
+        {
+          $match: {
+            totalEvaluationScore: {
+              $gt: docs[0].totalEvaluationScore,
+            },
+          },
+        },
+      ]);
+      // 所有比赛文档
+      allDocs = await ctx.service.player.allOrderList({ openId: query.openId });
+      // 胜利比赛文档
+      victoryDocs = allDocs.filter(item => {
+        return ((item.team === 'A' && item.ATeamScore > item.BTeamScore) || (item.team === 'B' && item.BTeamScore > item.ATeamScore));
+      });
+    }
     result = {
       mvpCount,
       ...docs[0],

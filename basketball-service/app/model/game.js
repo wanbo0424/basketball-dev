@@ -62,7 +62,7 @@ module.exports = app => {
     BTeamScore: { type: Number },
     // ATeamPlayers: { type: Array },
     // BTeamPlayers: { type: Array },
-    // 0:未举行 1：正在举行 2：已举行
+    // 0:未举行 1：正在举行 2：已举行  3：未开放
     gameStatus: {
       type: Number,
       default: 0,

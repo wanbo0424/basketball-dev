@@ -25,6 +25,46 @@
       <a-form-item label="B队得分">
         <a-input placeholder="B队得分" v-model:value="form.BTeamScore" />
       </a-form-item>
+      <a-form-item label="比赛时间段">
+        <a-time-picker
+          ref="startRef"
+          v-model:value="startTime"
+          valueFormat="HH:mm"
+          format="HH:mm"
+        ></a-time-picker>
+        ---
+        <a-time-picker
+          v-model:value="endTime"
+          valueFormat="HH:mm"
+          format="HH:mm"
+        >
+          <template #addon>
+            <a-button size="small" type="primary" @click="handleEndTime">
+              Ok
+            </a-button>
+          </template>
+        </a-time-picker>
+      </a-form-item>
+      <a-form-item label="比赛状态">
+        <a-select
+          :size="size"
+          v-model:value="form.gameStatus"
+          style="width: 200px"
+        >
+          <a-select-option
+            v-for="(i, index) in [
+              { value: 0, label: '未举行' },
+              { value: 1, label: '正在举行' },
+              { value: 2, label: '已举行' },
+              { value: 3, label: '未开放' },
+            ]"
+            :value="i.value"
+            :key="index"
+          >
+            {{ i.label }}
+          </a-select-option>
+        </a-select>
+      </a-form-item>
     </a-form>
   </a-modal>
 </template>
@@ -35,15 +75,23 @@
     emits: ['refresh'],
     setup(props, { emit }) {
       let visible = ref(false)
+      let startTime = ref('')
+      let endTime = ref('')
       let form = reactive({
         ATeamName: '',
         BTeamName: '',
         ATeamScore: 0,
-        // BTeamScore: 0,
+        BTeamScore: 0,
+        gameStatus: '',
+        gameTimeRange: '',
       })
       function init(row) {
         for (let key in form) {
           form[key] = row[key]
+        }
+        if (row.gameTimeRange) {
+          startTime.value = row.gameTimeRange.split('--')[0]
+          endTime.value = row.gameTimeRange.split('--')[1]
         }
         form._id = row.gameId
         delete form.gameId
@@ -51,6 +99,9 @@
       }
 
       const handleOk = () => {
+        if (startTime.value && endTime.value) {
+          form.gameTimeRange = `${startTime.value}--${endTime.value}`
+        }
         let submit = toRaw(form)
         update(submit).then((res) => {
           if (res.code === 0) {
@@ -60,6 +111,8 @@
         })
       }
       return {
+        startTime,
+        endTime,
         init,
         visible,
         form,

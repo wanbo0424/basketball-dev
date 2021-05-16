@@ -210,8 +210,14 @@
 						this.gameList = res.data.data
 						this.gameAddressList = res.data.data.map(item => ({
 							value: item._id,
-							label: item._id
+							label: item._id,
+							disabled: (item.gameDates && item.gameDates.every(ele => ele.gameStatus === 3))
 						}))
+						this.gameAddressList.forEach(item => {
+							if(item.disabled) {
+								item.value = item.label = `${item.label} (待开放)`
+							}
+						})
 					}
 				})
 			},

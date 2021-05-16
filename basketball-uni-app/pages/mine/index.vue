@@ -31,7 +31,7 @@
 				</view>
 				<view class="" style="display: flex;padding-top: 20rpx;">
 					<view class="" style="width: 50%;">
-						段位：名人堂
+						段位：无
 					</view>
 				</view>
 			</view>
@@ -79,11 +79,11 @@
 			</u-grid>
 			<u-grid :col="4" :border="false">
 				<u-grid-item >
-					<button plain type="primary" open-type="contact" 
+					<button plain type="primary" open-type="feedback" 
 					style="font-size: 28rpx;border: none;">
 						<u-icon name="kefu2" custom-prefix="custom-icon" color="#f57463" style="height: 58rpx;" :size="54"></u-icon>
-						<view class="" style="height: 36rpx;line-height: 36rpx;">
-							在线客服
+						<view class="" style="height: 36rpx;line-height: 36rpx;color:#f57463">
+							用户反馈
 						</view>
 					</button>
 				</u-grid-item >
