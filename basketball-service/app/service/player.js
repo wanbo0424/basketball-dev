@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:39:52
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-14 10:43:55
+ * @LastEditTime: 2021-05-17 15:31:34
  * @FilePath: \basketball-service\app\service\player.js
  */
 'use strict';
@@ -262,7 +262,7 @@ class PlayerService extends Service {
         },
       },
       { $project: { gamesInfo: 0 } },
-      { $match: { openId: query.openId, gameStatus: 0 } },
+      { $match: { openId: query.openId, gameStatus: 0, payStatus: 2 } },
     ]);
     docs = docs.filter(item => !!item.team);
     return docs;
@@ -315,11 +315,12 @@ class PlayerService extends Service {
     ]);
     return docs;
   }
+
   // 剩余名额
   async getRemainPlaces(query) {
     const { app } = this;
     let places = 0;
-    const docs = await app.model.Player.find({ gameId: query.gameId });
+    const docs = await app.model.Player.find({ gameId: query.gameId, payStatus: 2 });
     places = 16 - docs.length;
     return places;
   }

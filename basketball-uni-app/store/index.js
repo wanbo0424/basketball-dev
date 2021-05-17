@@ -5,7 +5,10 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({  
     state: {  
-        userInfo: {},
+        userInfo: {
+			avatarUrl: '',
+			nickName: ''
+		},
     },  
 	getters: {
 		userInfo: state => {
@@ -48,6 +51,11 @@ const store = new Vuex.Store({
 					success: ({userInfo}) => {
 						commit('SET_USER_INFO', userInfo)
 						resolve('success')
+						// if(canToHome) {
+						// 	uni.switchTab({url: '/pages/home/index'})
+						// }
+					},
+					complete: () => {
 						if(canToHome) {
 							uni.switchTab({url: '/pages/home/index'})
 						}

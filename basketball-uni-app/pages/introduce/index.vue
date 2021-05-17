@@ -38,6 +38,7 @@
 		</view>
 		<custom-canvas ref="share"></custom-canvas>
 		<button open-type="getUserInfo"></button>
+		<u-toast ref="uToast" />
 	</view>
 </template>
 
@@ -47,6 +48,7 @@
 	import ProcessIntroduce from './ProcessIntroduce/index.vue'
 	import Toast from '../index/Toast'
 	import CustomCanvas from '../canvas/share'
+	import { mapGetters } from 'vuex'
 	// import { mapActions } from 'vuex'
 	export default {
 		components:{
@@ -55,6 +57,11 @@
 			ColToast: Toast,
 			CustomCanvas,
 		},
+		computed: {
+			// ...mapGetters([
+			//   'userInfo',
+			// ])
+		 },
 		data() {
 			return {
 				swiperList: [
@@ -84,6 +91,14 @@
 			//   'getUserInfo', // 将 `this.increment()` 映射为 `this.$store.dispatch('increment')`
 			// ]),
 			toDoMessage() {
+				if(!this.userInfo.nickName) {
+					this.$refs.uToast.show({
+						title: '请先去个人主页登录',
+						type: 'default',
+						duration: '2000'
+					})
+					return
+				}
 				uni.navigateTo({url: '/pagesA/messageForm/index'})
 				// http.get('/').then(res => {
 				// 	debugger

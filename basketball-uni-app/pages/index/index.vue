@@ -138,18 +138,9 @@
 				})
 				let result1 = await this.getUserInfo(this.canToHome)
 				let result2 = await this.getLocationInfo()
-				if(result1 !== 'success') {
-					return
-				}
-				
-				if(!this.canToHome) {
-					this.$refs.uToast.show({
-						title: '请勾选页面下方的“篮球比赛用户协议”',
-						type: 'default',
-						duration: '2000'
-					})
-					return
-				}
+				// if(result1 !== 'success') {
+				// 	return
+				// }
 				uni.switchTab({url: '/pages/home/index'})
 			},
 			changeBox(e) {

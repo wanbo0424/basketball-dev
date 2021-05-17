@@ -34,6 +34,8 @@
 				去支付
 			</view>
 		</view>
+		
+		<u-modal v-model="showPaid" :content="'预支付成功，组队成功后会发送短信和微信通知比赛时间地点。请准时到达场地参赛！'" @confirm="backToIntroduce"></u-modal>
 	</view>
 </template>
 <script>
@@ -50,6 +52,7 @@ import { mapGetters } from 'vuex'
 					// defray: 50 //预交金
 				},
 				isPaying: false,
+				showPaid: false,
 				couponInfo: {},
 				discountPrice: 0
 			}
@@ -62,9 +65,10 @@ import { mapGetters } from 'vuex'
 		watch:{
 			isPaying(val) {
 				if(val) {
-					uni.navigateTo({
-						url: `/pagesA/payStatus/index?out_trade_no=${this.orderInfo.out_trade_no}`
-					})
+					this.showPaid = true
+					// uni.navigateTo({
+					// 	url: `/pagesA/payStatus/index?out_trade_no=${this.orderInfo.out_trade_no}`
+					// })
 				}
 			},
 			couponInfo: {
@@ -89,6 +93,11 @@ import { mapGetters } from 'vuex'
 			this.getCoupons()
 		},
 		methods: {
+			backToIntroduce() {
+				uni.navigateBack({
+					delta: 2
+				})
+			},
 			bindPay() { 
 				// uni.navigateTo({
 				// 	url: `/pages/pay/index?out_trade_no=${this.orderInfo.out_trade_no}&toPaied=true`

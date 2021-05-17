@@ -4,7 +4,12 @@
 			<view class="avatar_info"> 
 				<image style="height: 120rpx;width: 120rpx;border-radius: 10rpx;" :src="userInfo.avatarUrl" mode=""></image>
 				<h2 style="color:#fff;padding-top: 16rpx;">{{userInfo.nickName}}</h2>
-				<h2 style="color:#fff;padding-top: 16rpx;">余额: 99</h2>
+				<!-- <h2 style="color:#fff;padding-top: 16rpx;">余额: 99</h2> -->
+				<view v-if="!userInfo.nickName" type="primary" 
+				style="background-color: #f57463;border: solid 2rpx #FFFFFF;border-radius: 18rpx;color: #FFFFFF;padding: 8rpx 20rpx;"
+				@click="getUserProfile">
+					登录
+				</view>
 			</view>
 			
 			<view class="gameInfo">
@@ -81,11 +86,15 @@
 				<u-grid-item >
 					<button plain type="primary" open-type="feedback" 
 					style="font-size: 28rpx;border: none;">
-						<u-icon name="kefu2" custom-prefix="custom-icon" color="#f57463" style="height: 58rpx;" :size="54"></u-icon>
-						<view class="" style="height: 36rpx;line-height: 36rpx;color: #f57463;">
+						<u-icon name="edit-pen-fill" color="#f57463" style="height: 58rpx;" :size="54"></u-icon>
+						<view class="" style="height: 36rpx;line-height: 0;color: #f57463;">
 							用户反馈
 						</view>
 					</button>
+				</u-grid-item >
+				<u-grid-item @click="subscribe">
+					<u-icon name="email-fill" color="#f57463" :size="54"></u-icon>
+					<view class="grid-text" >订阅消息</view>
 				</u-grid-item >
 			</u-grid>
 		</view>
@@ -99,7 +108,7 @@
 	import shareMixin from '../../mixins/share.js'
 	import SkillMap from './SkillMap'
 	import CustomService from './CustomService'
-	import { mapGetters } from 'vuex'
+	import { mapGetters, mapActions } from 'vuex'
 	export default {
 		components:{SkillMap, CustomService},
 		data() {
@@ -130,7 +139,7 @@
 						pagePath: '/pages/mine/index'
 					}
 				],
-				statisticsInfo: {}
+				statisticsInfo: {},
 			}
 		},
 		mixins:[shareMixin],
@@ -147,6 +156,9 @@
 			}
 		 },
 		methods: {
+			...mapActions([
+			  'getUserInfo', // 将 `this.increment()` 映射为 `this.$store.dispatch('increment')`
+			]),
 			getStatisticsInfo() {
 				http.get('weapp/playerCareer/getCareerDetail', {params: {openId: this.userInfo.openId}}).then(res => {
 					if(res.data.code === 0) {
@@ -175,6 +187,19 @@
 			},
 			recharge() {
 				uni.navigateTo({url: '/pagesA/recharge/index'})
+			},
+			subscribe() {
+				wx.requestSubscribeMessage({
+				  tmplIds: ['T4Bq3RFYlZ4f7GWSwuOAvONC9kVYZrBpPwtQ5NwxGZM'],
+				  success: (res) => { 
+					  console.log(res)
+				  },
+				  complate: async () => {
+				  }
+				})
+			},
+			async getUserProfile() {
+				await this.getUserInfo()
 			}
 		},
 		mounted() {

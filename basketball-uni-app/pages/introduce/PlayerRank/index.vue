@@ -56,7 +56,7 @@
 	import RankDetail from './RankDetail'
 	import { mapGetters } from 'vuex'
 	export default {
-		components:{RankDetail},
+		components:{ RankDetail },
 		data() {
 			return {
 				tableData: [],
@@ -105,6 +105,7 @@
 		},
 		mounted() {
 			this.loadData()
+			
 		}
 	}
 </script>

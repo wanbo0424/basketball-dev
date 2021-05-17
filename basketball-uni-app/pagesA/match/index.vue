@@ -15,6 +15,11 @@
 				</view>
 			</u-card>
 		</template>
+		
+		<view class="no-data" v-if="!matchList.length">
+			<image src="../static/no-data.png" mode=""></image>
+			<span style="margin-top: 20rpx;">暂无比赛数据</span>
+		</view>
 	</view>
 </template>
 
@@ -33,7 +38,7 @@
 			])
 		 },
 		mounted() {
-			http.get('weapp/allOrderList', { params: { openId: this.userInfo.openId } }).then(res => {
+			http.get('weapp/enteredList', { params: { openId: this.userInfo.openId } }).then(res => {
 				if(res.data.code === 0) {
 					this.matchList = res.data.data
 				}
@@ -50,5 +55,17 @@
 	.team-score-item{
 		font-size: 34rpx;
 	}
+}
+.no-data{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	// font-size: 36rpx;
+	height: 100vh;
+	width: 100vw;
+	// background: url(../static/no-data.png);
+	// background-size: contain;
+	// background-repeat: no-repeat;
 }
 </style>
