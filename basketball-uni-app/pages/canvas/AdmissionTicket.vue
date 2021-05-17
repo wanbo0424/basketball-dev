@@ -22,7 +22,7 @@
 			async drawTicket({month , date, hour, minute, team, gameAddress, jerseyNumber, jerseyColor } = {}) {
 				this.ctx.setFillStyle('#FFFFFF')
 				this.ctx.fillRect(0, 0, 375 * 2, 156 * 2)
-				let ticketTmpPath = await this.downLoadFile('http://39.101.161.231/images/ticket.png')
+				let ticketTmpPath = await this.downLoadFile('https://www.apusport.cn/images/ticket.png')
 				this.ctx.drawImage(ticketTmpPath, 0, 0, 375 * 2, 156 * 2)
 				
 				this.drawTeamText()

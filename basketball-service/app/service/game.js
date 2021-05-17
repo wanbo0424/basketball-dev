@@ -36,9 +36,9 @@ class GameService extends Service {
 
   async updateGame(data = {}) {
     const { app } = this;
-    if (data.ATeamScore && data.BTeamScore) {
-      data.gameStatus = 2;
-    }
+    // if (data.ATeamScore && data.BTeamScore) {
+    //   data.gameStatus = 2;
+    // }
     const { _id } = await app.model.Game.findOneAndUpdate({ _id: data._id }, {
       $set: data,
     });
@@ -100,6 +100,7 @@ class GameService extends Service {
               gameDate: '$gameDate',
               gameId: '$_id',
               gameTimeRange: '$gameTimeRange',
+              gameStatus: '$gameStatus',
             },
           },
         },
@@ -172,6 +173,7 @@ class GameService extends Service {
               BTeamName: '$BTeamName',
               ATeamScore: '$ATeamScore',
               BTeamScore: '$BTeamScore',
+              gameStatus: '$gameStatus',
             },
           },
         },

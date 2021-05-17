@@ -102,7 +102,7 @@ import { mapGetters } from 'vuex'
 					total_fee: 1,
 					out_trade_no: this.orderInfo.out_trade_no,
 					body: '报名预交金',
-					notify_url: 'http://39.101.161.231/weapp/prepaidCb',
+					notify_url: 'https://www.apusport.cn/weapp/prepaidCb',
 					nonce_str: getRandomNumber(),
 				}
 				let orderParams = {

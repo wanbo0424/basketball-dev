@@ -24,12 +24,22 @@
           :data-source="record.gameDates"
           :pagination="false"
         >
-          <template #status>
+          <template #gameStatus="{ record }">
             <a-badge v-if="!record.gameStatus" color="#f50" text="未举行" />
+            <a-badge
+              v-if="record.gameStatus === 1"
+              color="#87d068"
+              text="正在举行"
+            />
             <a-badge
               v-if="record.gameStatus === 2"
               color="#87d068"
               text="已举行"
+            />
+            <a-badge
+              v-if="record.gameStatus === 3"
+              color="#87d068"
+              text="未开放"
             />
           </template>
           <template #operation="{ record }">
@@ -68,7 +78,7 @@
     { title: 'B队名称', dataIndex: 'BTeamName', key: 'BTeamName' },
     { title: 'A队得分', dataIndex: 'ATeamScore', key: 'ATeamScore' },
     { title: 'B队得分', dataIndex: 'BTeamScore', key: 'BTeamScore' },
-    { title: '状态', slots: { customRender: 'status' } },
+    { title: '状态', slots: { customRender: 'gameStatus' } },
     { title: '操作', slots: { customRender: 'operation' } },
   ]
   export default {
@@ -87,7 +97,6 @@
         total: 0,
       })
       const loadData = () => {
-        debugger
         let submit = {
           ...pagination,
         }

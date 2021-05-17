@@ -31,7 +31,7 @@
 				</view>
 				<view class="" style="display: flex;padding-top: 20rpx;">
 					<view class="" style="width: 50%;">
-						段位：名人堂
+						段位：无
 					</view>
 				</view>
 			</view>
