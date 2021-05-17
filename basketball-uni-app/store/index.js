@@ -5,12 +5,12 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({  
     state: {  
-        userInfo: {}
+        userInfo: {},
     },  
 	getters: {
 		userInfo: state => {
 			return state.userInfo
-		}
+		},
 	},
     mutations: {  
 		SET_USER_INFO(state, info) {

@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:29:19
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-11 16:01:18
+ * @LastEditTime: 2021-05-14 11:02:55
  * @FilePath: \basketball-service\app\model\player.js
  */
 'use strict';
@@ -135,6 +135,10 @@ module.exports = app => {
     },
     // 球衣号码
     jerseyNumber: {
+      type: String,
+    },
+    // 球衣颜色
+    jerseyColor: {
       type: String,
     },
   }, {

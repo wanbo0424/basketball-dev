@@ -4,7 +4,7 @@ import { reactive } from 'vue';
  * @Date: 2021-05-06 09:35:39
  * @Author: yinwb
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-06 11:16:29
+ * @LastEditTime: 2021-05-14 11:02:50
  * @FilePath: \vue-admin-beautiful\src\views\player\apply\edit-statistics.vue
 -->
 <template>
@@ -22,24 +22,58 @@ import { reactive } from 'vue';
     </template>
 
     <a-form :model="form" labelAlign="left">
-      <a-form-item label="比赛得分" prop="personScore">
-        <a-input placeholder="比赛得分" v-model:value="form.personScore" />
-      </a-form-item>
-      <a-form-item label="积分" prop="evaluationScore">
-        <a-input placeholder="积分" v-model:value="form.evaluationScore" />
-      </a-form-item>
-      <a-form-item label="得分能力" prop="scoreAbility">
-        <a-input placeholder="得分能力" v-model:value="form.scoreAbility" />
-      </a-form-item>
-      <a-form-item label="命中率" prop="hitRateScore">
-        <a-input placeholder="命中率" v-model:value="form.hitRateScore" />
-      </a-form-item>
-      <a-form-item label="体能" prop="physicalScore">
-        <a-input placeholder="体能" v-model:value="form.physicalScore" />
-      </a-form-item>
-      <a-form-item label="稳定" prop="stableScore">
-        <a-input placeholder="稳定" v-model:value="form.stableScore" />
-      </a-form-item>
+      <a-row :gutter="16">
+        <a-col :span="12">
+          <a-form-item label="球衣颜色" prop="jerseyColor">
+            <a-input placeholder="球衣颜色" v-model:value="form.jerseyColor" />
+          </a-form-item>
+        </a-col>
+        <a-col :span="12">
+          <a-form-item label="球衣号码" prop="jerseyNumber">
+            <a-input placeholder="球衣号码" v-model:value="form.jerseyNumber" />
+          </a-form-item>
+        </a-col>
+      </a-row>
+
+      <a-row :gutter="16">
+        <a-col :span="12">
+          <a-form-item label="比赛得分" prop="personScore">
+            <a-input placeholder="比赛得分" v-model:value="form.personScore" />
+          </a-form-item>
+        </a-col>
+        <a-col :span="12">
+          <a-form-item label="积分" prop="evaluationScore">
+            <a-input placeholder="积分" v-model:value="form.evaluationScore" />
+          </a-form-item>
+        </a-col>
+      </a-row>
+
+      <a-row :gutter="16">
+        <a-col :span="12">
+          <a-form-item label="得分能力" prop="scoreAbility">
+            <a-input placeholder="得分能力" v-model:value="form.scoreAbility" />
+          </a-form-item>
+        </a-col>
+        <a-col :span="12">
+          <a-form-item label="命中率" prop="hitRateScore">
+            <a-input placeholder="命中率" v-model:value="form.hitRateScore" />
+          </a-form-item>
+        </a-col>
+      </a-row>
+
+      <a-row :gutter="16">
+        <a-col :span="12">
+          <a-form-item label="体能" prop="physicalScore">
+            <a-input placeholder="体能" v-model:value="form.physicalScore" />
+          </a-form-item>
+        </a-col>
+        <a-col>
+          <a-form-item label="稳定" prop="stableScore">
+            <a-input placeholder="稳定" v-model:value="form.stableScore" />
+          </a-form-item>
+        </a-col>
+      </a-row>
+
       <a-form-item label="是否Mvp" prop="isMvp">
         <a-radio-group v-model:value="form.isMvp">
           <a-radio :value="true">是</a-radio>
