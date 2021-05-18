@@ -64,6 +64,7 @@
 		 },
 		data() {
 			return {
+				test: true,
 				swiperList: [
 					// {
 					// 	image: '/static/imgs/banner_01.png',

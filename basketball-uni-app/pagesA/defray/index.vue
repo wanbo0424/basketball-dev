@@ -35,7 +35,16 @@
 			</view>
 		</view>
 		
-		<u-modal v-model="showPaid" :content="payContent" @confirm="backToIntroduce"></u-modal>
+		<u-modal v-model="showPaid" :content="payContent" @confirm="backToIntroduce">
+			<template v-if="showCoupon">
+				<div style="text-align: center;">
+					<image style="height: 240rpx;width: 424rpx;" src="../static/coupon.png" mode=""></image>
+				</div>
+				<div style="padding: 0 24rpx;">
+					恭喜您获得新人折扣券，请在优惠券中查看。组队成功后会发送短信和微信通知比赛时间地点。请准时到达场地参赛！
+				</div>
+			</template>
+		</u-modal>
 		<!-- <u-modal v-model="showCoupon" :content="'恭喜您获得新人折扣券，请在优惠券中查看'" @confirm="backToIntroduce"></u-modal> -->
 	</view>
 	
@@ -111,7 +120,7 @@ import { mapGetters } from 'vuex'
 						http.get('weapp/allOrderList', {openId: this.userInfo.openId}).then(res => {
 							if(res.data.code === 0) {
 								if(res.data.data.length === 1) {
-									this.payContent = `恭喜您获得新人折扣券，请在优惠券中查看${this.payContent}。组队成功后会发送短信和微信通知比赛时间地点。请准时到达场地参赛！`
+									this.showCoupon = true
 									this.showPaid = true
 								}
 							}
