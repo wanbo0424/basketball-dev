@@ -25,7 +25,7 @@ class CouponService extends Service {
 
   // 更新用户新人券
   async updateCouponToNewplayer(out_trade_no) {
-    const { app } = this;
+    const { app, ctx } = this;
     const trade_no_user = await app.model.Player.find({ out_trade_no });
     let users = [];
     if (trade_no_user && trade_no_user.length) {

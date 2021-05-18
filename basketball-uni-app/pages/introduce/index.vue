@@ -58,9 +58,9 @@
 			CustomCanvas,
 		},
 		computed: {
-			// ...mapGetters([
-			//   'userInfo',
-			// ])
+			...mapGetters([
+			  'userInfo',
+			])
 		 },
 		data() {
 			return {

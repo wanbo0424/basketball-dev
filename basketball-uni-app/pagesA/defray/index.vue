@@ -35,8 +35,10 @@
 			</view>
 		</view>
 		
-		<u-modal v-model="showPaid" :content="'预支付成功，组队成功后会发送短信和微信通知比赛时间地点。请准时到达场地参赛！'" @confirm="backToIntroduce"></u-modal>
+		<u-modal v-model="showPaid" :content="payContent" @confirm="backToIntroduce"></u-modal>
+		<!-- <u-modal v-model="showCoupon" :content="'恭喜您获得新人折扣券，请在优惠券中查看'" @confirm="backToIntroduce"></u-modal> -->
 	</view>
+	
 </template>
 <script>
 import {generateOrderNumber, getRandomNumber, getSign} from '../../utils/payUtils.js'
@@ -52,8 +54,13 @@ import { mapGetters } from 'vuex'
 					// defray: 50 //预交金
 				},
 				isPaying: false,
+				paySuccess: false,
 				showPaid: false,
-				couponInfo: {},
+				showCoupon: false,
+				payContent: '支付成功，组队成功后会发送短信和微信通知比赛时间地点。请准时到达场地参赛！',
+				couponInfo: {
+					couponType: ''
+				},
 				discountPrice: 0
 			}
 		},
@@ -63,17 +70,14 @@ import { mapGetters } from 'vuex'
 			])
 		},
 		watch:{
-			isPaying(val) {
-				if(val) {
-					this.showPaid = true
-					// uni.navigateTo({
-					// 	url: `/pagesA/payStatus/index?out_trade_no=${this.orderInfo.out_trade_no}`
-					// })
-				}
-			},
+			// paySuccess(val) {
+			// 	if(val) {
+			// 		this.showPaid = true
+			// 	}
+			// },
 			couponInfo: {
 				handler(val) {
-					if(val.couponType === 0) {
+					if(val && val.couponType === 0) {
 						this.orderInfo.totalAmount = (this.couponInfo.allowance / 10) * 100
 						this.discountPrice = 100 - this.orderInfo.totalAmount - (this.couponInfo.allowance / 10) * 100
 					}
@@ -91,9 +95,39 @@ import { mapGetters } from 'vuex'
 		},
 		mounted() {
 			this.getCoupons()
+			wx.onAppShow(appOptions => {
+				if(!this.isPaying) return
+				
+				this.isPaying = false
+				if (appOptions.scene === 1038 && appOptions.referrerInfo.appId === 'wx2574b5c5ee8da56b') {
+				  // 来源于 xunhupay 小程序返回
+				  console.log('确认来源于 xunhupay 回调返回')
+				  let extraData = appOptions.referrerInfo.extraData
+				  console.log('extraData', extraData)
+				  if (extraData.paySuccess) {
+					this.paySuccess = true
+					if(appOptions.query.out_trade_no) {
+						// 如果是第一次参加通知发放新人优惠券
+						http.get('weapp/allOrderList', {openId: this.userInfo.openId}).then(res => {
+							if(res.data.code === 0) {
+								if(res.data.data.length === 1) {
+									this.payContent = `恭喜您获得新人折扣券，请在优惠券中查看${this.payContent}。组队成功后会发送短信和微信通知比赛时间地点。请准时到达场地参赛！`
+									this.showPaid = true
+								}
+							}
+						})
+					}
+				  } else {
+					this.paySuccess = false
+					this.payContent = '支付失败，请重新支付'
+					this.showPaid = true
+				  }
+				}
+			})
 		},
 		methods: {
 			backToIntroduce() {
+				if(!this.paySuccess) return
 				uni.navigateBack({
 					delta: 2
 				})

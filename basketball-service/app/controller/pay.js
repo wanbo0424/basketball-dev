@@ -16,9 +16,10 @@ class PayController extends Controller {
     this.success(result);
   }
 
-  // 预支付回调
+  // 预支付回调(支付成功后)
   async prepaidCb() {
-    const { ctx } = this;
+    const { ctx, app } = this;
+    app.logger.info('支付回调1', ctx.request.body);
     console.log('支付回调', ctx.request.body);
     if (ctx.request.body.return_code === 'SUCCESS') {
       // 写入订单数据表

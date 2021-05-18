@@ -292,7 +292,11 @@ class PlayerService extends Service {
     return docs;
   }
 
-  // 所有订单列表
+/**
+   * @description: 所有订单列表
+   * @param {Object} {openId, out_tarde_no} 
+   * @return {*}
+   */
   async allOrderList(query) {
     const { app } = this;
     const docs = await app.model.Player.aggregate([
@@ -311,7 +315,7 @@ class PlayerService extends Service {
         },
       },
       { $project: { gamesInfo: 0 } },
-      { $match: { openId: query.openId } },
+      { $match: query },
     ]);
     return docs;
   }
