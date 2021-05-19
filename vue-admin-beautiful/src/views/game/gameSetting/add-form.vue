@@ -3,7 +3,7 @@
  * @Date: 2021-04-06 14:22:46
  * @Author: yinwb
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-21 14:46:25
+ * @LastEditTime: 2021-05-19 15:30:48
  * @FilePath: \vue-admin-beautiful\src\views\game\gameSetting\add-form.vue
 -->
 <template>
@@ -23,6 +23,12 @@
     <a-form :model="form" labelAlign="left">
       <a-form-item label="比赛地点">
         <a-input placeholder="比赛地点" v-model:value="form.gameAddress" />
+      </a-form-item>
+      <a-form-item label="纬度">
+        <a-input placeholder="纬度" v-model:value="form.latitude" />
+      </a-form-item>
+      <a-form-item label="经度">
+        <a-input placeholder="经度" v-model:value="form.longitude" />
       </a-form-item>
       <a-form-item label="比赛日期">
         <!-- <a-date-picker
@@ -60,6 +66,8 @@
       let type = ref('')
       let form = reactive({
         gameAddress: '',
+        latitude: '',
+        longitude: '',
         gameDates: [],
         gameTimeRanges: [],
       })

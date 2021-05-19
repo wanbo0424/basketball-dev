@@ -17,12 +17,12 @@
 				<span>预交金</span>
 				<span>¥{{orderInfo.defray}}</span>
 			</view> -->
-			<view class="pay_item coupon">
+			<!-- <view class="pay_item coupon" v-if="couponList.length"> -->
 				<template v-if="couponInfo.couponType === 0">
 					<span>折扣券</span>
 					<span style="font-size: 40rpx;" >{{couponInfo.allowance}}折</span>
 				</template>
-			</view>
+			<!-- </view> -->
 		</view>
 		
 		<view class="checkout_counter">
@@ -47,7 +47,6 @@
 		</u-modal>
 		<!-- <u-modal v-model="showCoupon" :content="'恭喜您获得新人折扣券，请在优惠券中查看'" @confirm="backToIntroduce"></u-modal> -->
 	</view>
-	
 </template>
 <script>
 import {generateOrderNumber, getRandomNumber, getSign} from '../../utils/payUtils.js'
@@ -70,7 +69,8 @@ import { mapGetters } from 'vuex'
 				couponInfo: {
 					couponType: ''
 				},
-				discountPrice: 0
+				discountPrice: 0,
+				couponList: []
 			}
 		},
 		computed: {
@@ -96,11 +96,15 @@ import { mapGetters } from 'vuex'
 			}
 		},
 		
-		onLoad: function({gameDate, gameAddress, out_trade_no, gameTimeRange}){
+		onLoad: function({gameDate, gameAddress, out_trade_no, gameTimeRange, couponList}){
 			this.orderInfo.out_trade_no = out_trade_no
 			this.orderInfo.gameDate = gameDate
 			this.orderInfo.gameAddress = gameAddress
 			this.orderInfo.gameTimeRange = gameTimeRange
+			this.couponList = couponList
+			if(this.couponList.length) {
+				this.couponInfo = this.couponList[0]
+			}
 		},
 		mounted() {
 			this.getCoupons()

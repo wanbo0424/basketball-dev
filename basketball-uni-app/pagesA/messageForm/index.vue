@@ -108,6 +108,7 @@
 				gameDateList: [],
 				gameTimeList: [],
 				gameList: [],
+				couponList: [],
 				plarerData: {}
 			}
 		},
@@ -247,7 +248,7 @@
 			},
 			// 提交报名信息
 			submit() {
-				this.$refs.uForm.validate(valid => {
+				this.$refs.uForm.validate(async valid => {
 					if (valid) {
 						this.form.openId = this.userInfo.openId
 						this.form.nickName = this.userInfo.nickName
@@ -257,10 +258,11 @@
 						if(this.shared.nickName) {
 							this.form.sharedNickName = this.shared.nickName
 						}
+						await this.getCouponList()
 						http.post('weapp/players/apply', this.form).then(res => {
 							if(res.data.code === 0) {
 								uni.navigateTo({
-									url:`/pagesA/defray/index?gameAddress=${this.form.gameAddress}&out_trade_no=${this.form.out_trade_no}&gameDate=${this.form.gameDate}&gameTimeRange=${this.form.gameTimeRange}`
+									url:`/pagesA/defray/index?gameAddress=${this.form.gameAddress}&out_trade_no=${this.form.out_trade_no}&gameDate=${this.form.gameDate}&gameTimeRange=${this.form.gameTimeRange}&couponList=${this.couponList}`
 								})
 							}
 						})
@@ -300,6 +302,14 @@
 			// 提交球员档案
 			submitPlayer(){
 				
+			},
+			getCouponList() {
+				return http.get('weapp/player/getCouponList', { params: { openId: this.userInfo.openId } }).then(res => {
+					if(res.data.code === 0) {
+						this.couponList = res.data.data
+						return Promise.resolve(this.couponList)
+					}
+				})
 			},
 		},
 		onReady() {

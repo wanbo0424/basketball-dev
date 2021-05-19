@@ -38,6 +38,12 @@ module.exports = app => {
 
   const GameSchema = new Schema({
     gameAddress: { type: String },
+    latitude: {
+      type: Number
+    },
+    longitude: {
+      type: Number
+    },
     gameDate: { type: String },
     gameTimeRange: { type: String },
     COverage: {

@@ -3,18 +3,22 @@
 		<view class="order-item" v-for="(order, index) in orders" @click="getTicket(order)">
 			<view class="">
 				<view>比赛时间：{{order.gameDate}} {{order.gameTimeRange}}</view>
-				<view>比赛地点：{{order.gameAddress}}</view>
+				<!-- <view>比赛地点：{{order.gameAddress}}</view> -->
 				<view>球衣号码：{{order.jerseyNumber || ''}}</view>
 				<view>所在队伍：{{order.team || ''}}</view>
 				<view>球衣颜色：{{order.jerseyColor || ''}}</view>
 				<view>所在赛段：{{order.stage || ''}}</view>
 			</view>
-			
-			<image style="position: absolute;right: 0;bottom: 0;height: 200rpx;width: 180rpx;" src="../../static/imgs/participate.png" mode=""></image>
+			<view class="address-item" @click="createMap(order)">
+				<span>比赛地点：{{order.gameAddress}}</span>
+				<span style="float:right">></span>
+			</view>
+			<image style="position: absolute;right: 0;top: 0;height: 200rpx;width: 180rpx;" src="../../static/imgs/participate.png" mode=""></image>
 			<!-- <view class="btn">
 				<button @click="$refs.contact.show = true">退款</button>
 			</view> -->
 		</view>
+		<!-- <map id="map1" v-if="showMap"></map> -->
 	</view>
 </template>
 
@@ -37,7 +41,9 @@
 		},
 		data() {
 			return {
-				orders: []
+				orders: [],
+				Mapcontext: null,
+				showMap: false
 			}
 		},
 		
@@ -45,6 +51,14 @@
 			// this.getToEnteredList()
 		},
 		methods: {
+			createMap(order) {
+				this.showMap = true
+				// this.Mapcontext = wx.createMapContext('map1', this)
+				wx.openLocation({
+					latitude: order.latitude,
+					longitude: order.longitude
+				})
+			},
 			getTicket(order) {
 				if(this.swiperCurrent === 0) {
 					let month = (new Date(order.gameDate).getMonth() + 1).toString().padStart(2, '0')
@@ -68,6 +82,7 @@
 .order-item{
 	position: relative;
 	display: flex;
+	flex-direction: column;
 	background-color: #FFFFFF;
 	opacity: 0.9;
 	border-radius: 26rpx;
@@ -87,6 +102,13 @@
 			color: #FFFFFF;
 			background-color: red;
 		}
+	}
+	.address-item{ 
+		border-top: 2rpx solid #878787;
+		height: 40rpx;
+		line-height: 40rpx;
+		padding-top: 6rpx ;
+		margin-top: 10rpx;
 	}
 }
 </style>
