@@ -46,7 +46,7 @@
 			</u-form-item>
 		</u-form>
 		<u-button class="submt-button" @click="submit">提交</u-button>
-		
+		<map id="map1" v-show="showMap" :latitude="latitude" :longitude="longitude" style="width: 100%;" :scale="13" :show-location="true" @tap="mapTab"></map>
 		<u-toast ref="uToast" />
 	</view>
 </template>
@@ -61,12 +61,14 @@
 		mixins:[shareMixin],
 		data() {
 			return {
+				MapContext: null,
 				showSexSelect: false,
 				showRoleSelect: false,
 				showGameSelect: false,
 				showGameDateSelect: false,
 				showGameTimeSelect: false,
 				showInsurance: true,
+				showMap: false,
 				places: 16,
 				form: {
 					age: '',
@@ -109,7 +111,9 @@
 				gameTimeList: [],
 				gameList: [],
 				couponList: [],
-				plarerData: {}
+				plarerData: {},
+				latitude: 34.343119,
+				longitude: 108.93963
 			}
 		},
 		watch:{
@@ -122,6 +126,7 @@
 			}
 		},
 		mounted() {
+			this.MapContext = wx.createMapContext('map1', this)
 			this.getGameList()
 			this.plarerData = {
 				nickName: this.userInfo.nickName
@@ -156,6 +161,34 @@
 			])
 		 },
 		methods: {
+			createMap(order) {
+				this.showMap = true
+				this.MapContext.moveToLocation({ longitude: order.longitude, latitude: order.latitude })
+				this.MapContext.addMarkers({
+					markers: [
+						{
+							id: 324,
+							latitude: order.latitude,
+							longitude: order.longitude,
+							iconPath: '../static/Marker.png',
+							label: {
+								content: this.form.gameAddress,
+							}
+						}
+					],
+				})
+			},
+			mapTab(e) {
+				wx.openLocation({
+					latitude: e.detail.latitude,
+					longitude: e.detail.longitude
+				})
+				// this.MapContext.openMapApp({
+				// 	longitude: e.detail.longitude,
+				// 	latitude: e.detail.latitude,
+				// 	destination: this.form.gameAddress
+				// })
+			},
 			gamAddressSelected(e) {
 				if(e[0].label.indexOf('（待开放）') !== -1) {
 					this.$refs.uToast.show({
@@ -205,11 +238,17 @@
 						this.gameTimeList = this.gameTimeList.map(item => ({
 							value: item.gameId,
 							label: item.gameTimeRange,
+							latitude: item.latitude,
+							longitude: item.longitude,
 						}))
 					}
 				}
 			},
 			gameTimeSelected(e) {
+				let findItem = this.gameTimeList.find(item => item.label === e[0].label)
+				if(findItem) {
+					this.createMap(findItem)
+				}
 				this.form.gameTimeRange = e[0].label
 				this.form.gameId= e[0].value
 				http.get('weapp/player/getRemainPlaces', { params: {gameId:  this.form.gameId } }).then(res => {
@@ -258,11 +297,19 @@
 						if(this.shared.nickName) {
 							this.form.sharedNickName = this.shared.nickName
 						}
-						await this.getCouponList()
+						let playerList = await this.getPlayerList()
+						if(playerList.length && playerList.length >= 16) {
+							this.$refs.uToast.show({
+								title: '报名人数已满',
+								type: 'default',
+								duration: '2000'
+							})
+							return
+						}
 						http.post('weapp/players/apply', this.form).then(res => {
 							if(res.data.code === 0) {
 								uni.navigateTo({
-									url:`/pagesA/defray/index?gameAddress=${this.form.gameAddress}&out_trade_no=${this.form.out_trade_no}&gameDate=${this.form.gameDate}&gameTimeRange=${this.form.gameTimeRange}&couponList=${this.couponList}`
+									url:`/pagesA/defray/index?gameAddress=${this.form.gameAddress}&out_trade_no=${this.form.out_trade_no}&gameDate=${this.form.gameDate}&gameTimeRange=${this.form.gameTimeRange}`
 								})
 							}
 						})
@@ -303,6 +350,13 @@
 			submitPlayer(){
 				
 			},
+			getPlayerList() {
+				return http.get('weapp/player/getPlayerList', { params: { gameId: this.form.gameId } }).then(res => {
+					if(res.data.code === 0) {
+						return Promise.resolve(res.data.data)
+					}
+				})
+			},
 			getCouponList() {
 				return http.get('weapp/player/getCouponList', { params: { openId: this.userInfo.openId } }).then(res => {
 					if(res.data.code === 0) {
@@ -321,7 +375,7 @@
 <style lang="scss" scoped>
 .form-content {
 	padding: 30rpx 40rpx;
-	height: 100vh;
+	height: 100%;
 	width: 100vw;
 }
 .place-form-item{
@@ -340,7 +394,7 @@
 	position: absolute;
 	top: 0;
 	right: 0;
-	bottom: 0;
+	// bottom: 0;
 	left: 0;
    background-image: url(/static/imgs/order-bg.jpg);
    opacity: 0.3;

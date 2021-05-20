@@ -17,12 +17,16 @@
 				<span>预交金</span>
 				<span>¥{{orderInfo.defray}}</span>
 			</view> -->
-			<!-- <view class="pay_item coupon" v-if="couponList.length"> -->
-				<template v-if="couponInfo.couponType === 0">
+			<view class="pay_item coupon" v-if="couponList.length" @click="showCouponList = true">
+				<template v-if="couponInfo.couponType === 0" >
 					<span>折扣券</span>
-					<span style="font-size: 40rpx;" >{{couponInfo.allowance}}折</span>
+					<span>
+						<u-icon name="youhuiquan1" custom-prefix="custom-icon" color="red" style="padding-right: 12rpx;"></u-icon>
+						{{couponInfo.allowance}}折
+						<span style="padding-left: 14rpx;">></span>
+					</span>
 				</template>
-			<!-- </view> -->
+			</view>
 		</view>
 		
 		<view class="checkout_counter">
@@ -35,7 +39,7 @@
 			</view>
 		</view>
 		
-		<u-modal v-model="showPaid" :content="payContent" @confirm="backToIntroduce">
+		<u-modal v-model="showPaid" :content="payContent" @confirm="backToIntroduce" height="250">
 			<template v-if="showCoupon">
 				<div style="text-align: center;">
 					<image style="height: 240rpx;width: 424rpx;" src="../static/coupon.png" mode=""></image>
@@ -45,7 +49,59 @@
 				</div>
 			</template>
 		</u-modal>
-		<!-- <u-modal v-model="showCoupon" :content="'恭喜您获得新人折扣券，请在优惠券中查看'" @confirm="backToIntroduce"></u-modal> -->
+		
+		<u-popup v-model="showCouponList" mode="bottom" :height="600">
+			<view class="" style="font-size: 36rpx; text-align: center;padding-top: 12rpx;">
+				优惠券
+			</view>
+			<view style="padding: 24rpx 18rpx;">
+				<u-radio-group v-model="selectedCoupon">
+					<view class="coupon-item" v-for="(coupon, index) in couponList">
+						<view class="coupon-price">
+							<view class="" style="font-size: 44rpx;font-weight: 600;">
+								<template v-if="coupon.couponType === 0">
+									{{coupon.allowance}}折
+								</template>
+								<template v-else>
+									{{coupon.allowance}}元
+								</template>
+							</view>
+							<view class="">
+								{{coupon.couponType === 0 ? '折扣券' : '代金券'}}
+							</view>
+						</view>
+						<view class="coupon-content">
+							<view class="" style="font-size: 26rpx;">
+								{{coupon.name}}
+							</view>
+							<view class="" style="color: #f96d0a;padding-left: 10rpx;">
+								不限期
+							</view>
+						</view>
+						<view class="coupon-btn">
+							<u-radio :name="coupon._id">
+							</u-radio>
+						</view>
+					</view>
+				</u-radio-group>
+			</view>
+			<view class="" style="height: 80rpx;position: fixed;width: 100%; bottom: 0;">
+				<button style="
+					position: absolute;
+					right: 20rpx;
+					background: #f96d0a;
+					color: #fff;
+					height: 50rpx;
+					line-height: 50rpx;
+					font-size: 28rpx;
+					border-radius: 28rpx;
+					width: 170rpx;"
+					@click="selectCoupon"
+				>
+					立即使用
+				</button>
+			</view>
+		</u-popup>
 	</view>
 </template>
 <script>
@@ -65,12 +121,33 @@ import { mapGetters } from 'vuex'
 				paySuccess: false,
 				showPaid: false,
 				showCoupon: false,
+				showCouponList: true,
+				selectedCoupon: '',
 				payContent: '支付成功，组队成功后会发送短信和微信通知比赛时间地点。请准时到达场地参赛！',
 				couponInfo: {
 					couponType: ''
 				},
 				discountPrice: 0,
-				couponList: []
+				couponList: [
+					// {
+					// 	allowance: 9,
+					// 	couponType: 0,
+					// 	createTime: "2021-05-12T09:20:48.970Z",
+					// 	name: "新人折扣券",
+					// 	updateTime: "2021-05-12T09:20:48.970Z",
+					// 	validPeriod: 60,
+					// 	_id: "609b9df067b47b4cb25c6fca",
+					// },
+					// {
+					// 	allowance: 9,
+					// 	couponType: 0,
+					// 	createTime: "2021-05-12T09:20:48.970Z",
+					// 	name: "新人折扣券",
+					// 	updateTime: "2021-05-12T09:20:48.970Z",
+					// 	validPeriod: 60,
+					// 	_id: "609b9df067b47b4cb25c6fcc",
+					// }
+				]
 			}
 		},
 		computed: {
@@ -96,18 +173,19 @@ import { mapGetters } from 'vuex'
 			}
 		},
 		
-		onLoad: function({gameDate, gameAddress, out_trade_no, gameTimeRange, couponList}){
+		onLoad: async function({gameDate, gameAddress, out_trade_no, gameTimeRange, couponList}){
+			await this.getCoupons()
 			this.orderInfo.out_trade_no = out_trade_no
 			this.orderInfo.gameDate = gameDate
 			this.orderInfo.gameAddress = gameAddress
 			this.orderInfo.gameTimeRange = gameTimeRange
-			this.couponList = couponList
-			if(this.couponList.length) {
-				this.couponInfo = this.couponList[0]
-			}
+			// this.couponList = couponList
+			// console.log(couponList, 'couponList2')
+			// if(this.couponList.length) {
+			// 	this.couponInfo = this.couponList[0]
+			// }
 		},
 		mounted() {
-			this.getCoupons()
 			wx.onAppShow(appOptions => {
 				if(!this.isPaying) return
 				
@@ -116,7 +194,6 @@ import { mapGetters } from 'vuex'
 				  // 来源于 xunhupay 小程序返回
 				  console.log('确认来源于 xunhupay 回调返回')
 				  let extraData = appOptions.referrerInfo.extraData
-				  console.log('extraData', extraData)
 				  if (extraData.paySuccess) {
 					this.paySuccess = true
 					if(appOptions.query.out_trade_no) {
@@ -183,11 +260,19 @@ import { mapGetters } from 'vuex'
 				})
 			},
 			getCoupons() {
-				http.get('weapp/player/getCouponList', {params: {openId: this.userInfo.openId}}).then(res => {
+				return http.get('weapp/player/getCouponList', {params: {openId: this.userInfo.openId}}).then(res => {
 					if(res.data.code === 0) {
-						this.couponInfo = res.data.data[0]
+						this.couponList = res.data.data
+						if(res.data.data.length) {
+							this.couponInfo = res.data.data[0]
+							this.selectedCoupon = this.couponInfo._id
+						}
 					}
 				})
+			},
+			selectCoupon() {
+				this.couponInfo = this.couponList.find(item => item._id === this.selectedCoupon)
+				this.showCouponList = false
 			}
 		}
 	}
@@ -241,6 +326,26 @@ import { mapGetters } from 'vuex'
 		font-weight: 600;
 		font-size: 35rpx;
 		border-radius: 0 45rpx 45rpx 0;
+	}
+}
+.coupon-item{
+	display: flex;
+	align-items: center;
+	padding: 20rpx 50rpx;
+	height: 126rpx;
+	border-radius: 26rpx;
+	background-color: #dcdcdc;
+	box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.2);
+	margin-bottom: 22rpx;
+	.coupon-price{
+		width: 20%;
+		color: #f96d0a;
+	}
+	.coupon-content{
+		width: 50%;
+	}
+	.coupon-btn{
+		width: 30%;
 	}
 }
 </style>

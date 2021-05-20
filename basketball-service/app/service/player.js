@@ -19,7 +19,11 @@ class PlayerService extends Service {
     //   console.log('找到这个人了', findPalyer);
     //   return app.model.Player.updateOne({ mobile: data.mobile }, { $push: { gameIdList: data.gameId } });
     // }
-
+    // 先查询数据是否满员
+    let currentGamePlayers = await app.model.Player.find({ gameId:data.gameId })
+    if(currentGamePlayers.length >= 16) {
+      return 1;
+    }
     const result = await app.model.Player.create(data);
     // 创建订单
     const orderData = {

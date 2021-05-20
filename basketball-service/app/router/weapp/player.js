@@ -13,6 +13,8 @@ module.exports = app => {
   // 微信小程序
   // 球员报名
   router.post('/weapp/players/apply', controller.player.apply);
+  // 查看本场比赛报名球员
+  // router.get('/weapp/player/getPlayerList', controller.player.List);
   // 创建球员生涯（预支付后创建）
   router.post('/weapp/playerCareer/createCareer', controller.playerCareer.createCareer);
 

@@ -14,8 +14,12 @@ class PlayerController extends Controller {
   async apply() {
     const { ctx } = this;
     const requestBody = ctx.request.body;
-    const _id = await ctx.service.player.addPlayer(requestBody);
-    this.success(_id);
+    const result = await ctx.service.player.addPlayer(requestBody);
+    if(result === 1) {
+      this.fail(100, '名额已满');
+    }else{
+      this.success(_id);  
+    }
   }
 
   async updatePlayer() {
