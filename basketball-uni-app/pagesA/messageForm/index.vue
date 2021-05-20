@@ -46,7 +46,7 @@
 			</u-form-item>
 		</u-form>
 		<u-button class="submt-button" @click="submit">提交</u-button>
-		<map id="map1" v-show="showMap" :latitude="latitude" :longitude="longitude" style="width: 100%;" :scale="13" :show-location="true" @tap="mapTab"></map>
+		<map id="map1" v-show="showMap" :latitude="centerlatitude" :longitude="centerlongitude" style="width: 100%;" :scale="10" :show-location="true" @tap="mapTab"></map>
 		<u-toast ref="uToast" />
 	</view>
 </template>
@@ -112,8 +112,10 @@
 				gameList: [],
 				couponList: [],
 				plarerData: {},
-				latitude: 34.343119,
-				longitude: 108.93963
+				centerlatitude: 34.343119,
+				centerlongitude: 108.93963,
+				currentLatitude: 34.343119,
+				currentLongitude: 108.93963,
 			}
 		},
 		watch:{
@@ -127,6 +129,12 @@
 		},
 		mounted() {
 			this.MapContext = wx.createMapContext('map1', this)
+			// this.MapContext.on('markerClusterClick', (res) => {
+			// 	wx.openLocation({
+			// 		latitude: this.currentLatitude,
+			// 		longitude: this.currentLongitude
+			// 	})
+			// })
 			this.getGameList()
 			this.plarerData = {
 				nickName: this.userInfo.nickName
@@ -179,14 +187,15 @@
 				})
 			},
 			mapTab(e) {
+				console.log(e)
 				wx.openLocation({
-					latitude: e.detail.latitude,
-					longitude: e.detail.longitude
+					latitude: this.currentLatitude,
+					longitude: this.currentLongitude
 				})
 				// this.MapContext.openMapApp({
-				// 	longitude: e.detail.longitude,
-				// 	latitude: e.detail.latitude,
-				// 	destination: this.form.gameAddress
+				// 	longitude: this.currentLongitude,
+				// 	latitude: this.currentLatitude,
+				// 	destination: '陕西省西安市雁塔区西沣一路58号附一号高新第五季北门对面(泛想车城南侧,交警快赔隔壁)'
 				// })
 			},
 			gamAddressSelected(e) {
@@ -247,6 +256,8 @@
 			gameTimeSelected(e) {
 				let findItem = this.gameTimeList.find(item => item.label === e[0].label)
 				if(findItem) {
+					this.currentLatitude = findItem.latitude
+					this.currentLongitude = findItem.longitude
 					this.createMap(findItem)
 				}
 				this.form.gameTimeRange = e[0].label

@@ -122,30 +122,6 @@
 	"subPackages": [{
 		"root": "pagesA",
 		"pages": [
-			// {
-			//     "path" : "PlayerRank/RankDetail",
-			//     "style" :                                                                                    
-			//     {
-			//         "navigationBarTitleText": "",
-			//         "enablePullDownRefresh": false
-			//     }
-			// },
-			// {
-			//     "path" : "PlayerRank/index",
-			//     "style" :                                                                                    
-			//     {
-			//         "navigationBarTitleText": "",
-			//         "enablePullDownRefresh": false
-			//     }
-			// },
-			// {
-			//     "path" : "ProcessIntroduce/index",
-			//     "style" :                                                                                    
-			//     {
-			//         "navigationBarTitleText": "",
-			//         "enablePullDownRefresh": false
-			//     }
-			// },
 			{
 				"path": "messageForm/index",
 				"style": {
@@ -252,10 +228,10 @@
         ]
 	}],
 	"preloadRule": {
-		"pages/index/index": {
-			"network": "all",
-			"packages": ["__APP__", "pagesA"]
-		}
+		// "pages/index/index": {
+		// 	"network": "all",
+		// 	"packages": ["__APP__", "pagesA"]
+		// }
 		// "pagesA/detail/detail": {
 		// 	"network": "all",
 		// 	"packages": ["pagesA"]
