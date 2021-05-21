@@ -46,17 +46,23 @@
 			</u-form-item>
 		</u-form>
 		<u-button class="submt-button" @click="submit">提交</u-button>
-		<map id="map1" v-show="showMap" :latitude="centerlatitude" :longitude="centerlongitude" style="width: 100%;" :scale="10" :show-location="true" @tap="mapTab"></map>
+		<map id="map1" v-show="showMap" 
+			:latitude="centerlatitude" 
+			:longitude="centerlongitude" 
+			style="width: 100%;height: 350rpx;margin-top:20rpx" 
+			:scale="12" 
+			:show-location="true" 
+			@tap="mapTab">
+		</map>
 		<u-toast ref="uToast" />
 	</view>
 </template>
 
 <script>
 	import http from '../../api/index.js'
-	import Cookies from 'js-cookie'
 	import { mapGetters } from 'vuex'
 	import shareMixin from '../../mixins/share.js'
-	import {generateOrderNumber} from '../../utils/payUtils.js'
+	import { generateOrderNumber } from '../../utils/payUtils.js'
 	export default {
 		mixins:[shareMixin],
 		data() {
@@ -187,7 +193,6 @@
 				})
 			},
 			mapTab(e) {
-				console.log(e)
 				wx.openLocation({
 					latitude: this.currentLatitude,
 					longitude: this.currentLongitude
@@ -244,16 +249,27 @@
 					let findItem = this.gameList.find(item => item._id === this.form.gameAddress)
 					if(findItem){
 						this.gameTimeList = findItem.gameDates.filter(item => item.gameDate === this.form.gameDate)
-						this.gameTimeList = this.gameTimeList.map(item => ({
-							value: item.gameId,
-							label: item.gameTimeRange,
-							latitude: item.latitude,
-							longitude: item.longitude,
-						}))
+						this.gameTimeList = this.gameTimeList.map(item => {
+							let label = item.gameStatus === 3 ? `${item.gameTimeRange}（待开放）` : item.gameTimeRange
+							return {
+								value: item.gameId,
+								label,
+								latitude: item.latitude,
+								longitude: item.longitude,
+							}
+						})
 					}
 				}
 			},
 			gameTimeSelected(e) {
+				if(e[0].label.indexOf('（待开放）') !== -1) {
+					this.$refs.uToast.show({
+						title: '该场次待开放',
+						type: 'default',
+						duration: '2000'
+					})
+					return
+				}
 				let findItem = this.gameTimeList.find(item => item.label === e[0].label)
 				if(findItem) {
 					this.currentLatitude = findItem.latitude
@@ -388,6 +404,8 @@
 	padding: 30rpx 40rpx;
 	height: 100%;
 	width: 100vw;
+	background-size: cover;
+	background-repeat:no-repeat;
 }
 .place-form-item{
 	/deep/{
