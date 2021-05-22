@@ -6,8 +6,9 @@
 				<u-select v-model="showGameSelect" :list="gameAddressList" @confirm="gamAddressSelected"></u-select>
 			</u-form-item>
 			<view v-if="specificLocation !== ''" @click="mapTab">
-				<image src="../../static/imgs/Marker.png" mode="" style="display: inline-block;height: 32rpx;width: 32rpx;"></image>
-				<span>{{ specificLocation }}</span>
+				<image src="../../static/imgs/Marker.png" mode="" 
+				style="display: inline-block;height: 32rpx;width: 32rpx;vertical-align: middle;"></image>
+				<span>{{ specificLocation }} {{distance}}km</span>
 			</view>
 			<u-form-item label="比赛日期" required="true" prop="gameDate">
 				<u-input v-model="form.gameDate" type="select" @click="showGameDateSelect = true" />
@@ -64,6 +65,7 @@
 
 <script>
 	import http from '../../api/index.js'
+	import {getDistance} from '../../utils/index.js'
 	import { mapGetters } from 'vuex'
 	import shareMixin from '../../mixins/share.js'
 	import { generateOrderNumber } from '../../utils/payUtils.js'
@@ -123,7 +125,8 @@
 				plarerData: {},
 				currentLatitude: 34.343119,
 				currentLongitude: 108.93963,
-				specificLocation: ''
+				specificLocation: '',
+				distance: ''
 			}
 		},
 		watch:{
@@ -224,6 +227,7 @@
 						this.currentLatitude = findItem.gameDates.filter(item => item.specificLocation)[0].latitude
 						this.currentLongitude = findItem.gameDates.filter(item => item.specificLocation)[0].longitude
 						this.specificLocation = findItem.gameDates.filter(item => item.specificLocation)[0].specificLocation
+						this.computDistance()
 					}
 					this.gameDateList = Array.from(new Set(this.gameDateList))
 					this.gameDateList = this.gameDateList.map(item => ({
@@ -380,10 +384,6 @@
 					}
 				})
 			},
-			// 提交球员档案
-			submitPlayer(){
-				
-			},
 			getPlayerList() {
 				return http.get('weapp/player/getPlayerList', { params: { gameId: this.form.gameId } }).then(res => {
 					if(res.data.code === 0) {
@@ -399,6 +399,13 @@
 					}
 				})
 			},
+			computDistance() {
+				wx.getLocation({
+					success: (res) => {
+						this.distance = getDistance(34.24276, 108.892258, this.currentLatitude, this.currentLongitude)
+					}
+				})
+			}
 		},
 		onReady() {
 			this.$refs.uForm.setRules(this.rules)
