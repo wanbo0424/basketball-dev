@@ -10,6 +10,9 @@
 				<view>所在赛段：{{order.stage || ''}}</view>
 			</view>
 			<view class="address-item" @click="createMap(order)">
+				<image src="../../static/imgs/Marker.png" mode="" 
+					style="display: inline-block;height: 32rpx;width: 32rpx;vertical-align: middle;">
+				</image>
 				<span>比赛地点：{{order.gameAddress}}</span>
 				<span style="float:right">></span>
 			</view>
@@ -107,7 +110,7 @@
 		border-top: 2rpx solid #878787;
 		height: 40rpx;
 		line-height: 40rpx;
-		padding-top: 6rpx ;
+		// padding-top: 6rpx ;
 		margin-top: 10rpx;
 	}
 }

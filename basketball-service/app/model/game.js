@@ -39,10 +39,13 @@ module.exports = app => {
   const GameSchema = new Schema({
     gameAddress: { type: String },
     latitude: {
-      type: Number
+      type: Number,
     },
     longitude: {
-      type: Number
+      type: Number,
+    },
+    specificLocation: {
+      type: String,
     },
     gameDate: { type: String },
     gameTimeRange: { type: String },
