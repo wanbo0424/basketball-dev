@@ -2,14 +2,11 @@
 	<view class="mine_page">
 		<view class="user_info">
 			<view class="avatar_info"> 
-				<image style="height: 120rpx;width: 120rpx;border-radius: 10rpx;" :src="userInfo.avatarUrl" mode=""></image>
+				<image style="height: 120rpx;width: 120rpx;border-radius: 10rpx;border: solid 3rpx #fff;" v-if="userInfo.avatarUrl"
+				:src="userInfo.avatarUrl" mode=""></image>
+				<image v-if="!userInfo.avatarUrl" style="height: 120rpx;width: 120rpx;border-radius: 10rpx;border: solid 3rpx #fff;" src="../../static/imgs/question.png" mode=""></image>
 				<h2 style="color:#fff;padding-top: 16rpx;">{{userInfo.nickName}}</h2>
 				<!-- <h2 style="color:#fff;padding-top: 16rpx;">余额: 99</h2> -->
-				<view v-if="!userInfo.nickName" type="primary" 
-				style="background-color: #f57463;border: solid 2rpx #FFFFFF;border-radius: 18rpx;color: #FFFFFF;padding: 8rpx 20rpx;"
-				@click="getUserProfile">
-					登录
-				</view>
 			</view>
 			
 			<view class="gameInfo">
@@ -33,12 +30,30 @@
 					<view class="" style="width: 50%;">
 						mvp次数:{{statisticsInfo.mvpCount || 0}}
 					</view>
+					
 				</view>
 				<view class="" style="display: flex;padding-top: 20rpx;">
 					<view class="" style="width: 50%;">
 						段位：无
 					</view>
+					<view
+						v-if="!userInfo.nickName" 
+						type="primary"
+						style="
+							width: 50%;
+							background-color: #f57463;
+							border: solid 2rpx #FFFFFF;
+							border-radius: 18rpx;
+							color: #FFFFFF;
+							padding: 8rpx 20rpx;width: 100rpx;
+							position: relative;
+							top: -20rpx;
+							left: 12rpx;"
+						@click="getUserProfile">
+						登录
+					</view>
 				</view>
+				
 			</view>
 		</view>
 		
