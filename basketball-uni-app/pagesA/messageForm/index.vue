@@ -5,6 +5,11 @@
 				<u-input v-model="form.gameAddress" type="select" @click="showGameSelect = true" />
 				<u-select v-model="showGameSelect" :list="gameAddressList" @confirm="gamAddressSelected"></u-select>
 			</u-form-item>
+			<view v-if="specificLocation !== ''" @click="mapTab">
+				<image src="../../static/imgs/Marker.png" mode="" 
+				style="display: inline-block;height: 32rpx;width: 32rpx;vertical-align: middle;"></image>
+				<span>{{ specificLocation }} {{distance}}km</span>
+			</view>
 			<u-form-item label="比赛日期" required="true" prop="gameDate">
 				<u-input v-model="form.gameDate" type="select" @click="showGameDateSelect = true" />
 				<u-select v-model="showGameDateSelect" :list="gameDateList" @confirm="gameDateSelected"></u-select>
@@ -46,13 +51,13 @@
 			</u-form-item>
 		</u-form>
 		<u-button class="submt-button" @click="submit">提交</u-button>
-		<map id="map1" v-show="showMap" 
+		<!-- <map id="map1" v-show="showMap" 
 			:latitude="centerlatitude" 
 			:longitude="centerlongitude" 
 			style="width: 100%;height: 350rpx;margin-top:20rpx" 
 			:scale="12" 
 			:show-location="true" 
-			@tap="mapTab">
+			@tap="mapTab"> -->
 		</map>
 		<u-toast ref="uToast" />
 	</view>
@@ -60,6 +65,7 @@
 
 <script>
 	import http from '../../api/index.js'
+	import {getDistance} from '../../utils/index.js'
 	import { mapGetters } from 'vuex'
 	import shareMixin from '../../mixins/share.js'
 	import { generateOrderNumber } from '../../utils/payUtils.js'
@@ -74,7 +80,6 @@
 				showGameDateSelect: false,
 				showGameTimeSelect: false,
 				showInsurance: true,
-				showMap: false,
 				places: 16,
 				form: {
 					age: '',
@@ -118,10 +123,10 @@
 				gameList: [],
 				couponList: [],
 				plarerData: {},
-				centerlatitude: 34.343119,
-				centerlongitude: 108.93963,
 				currentLatitude: 34.343119,
 				currentLongitude: 108.93963,
+				specificLocation: '',
+				distance: ''
 			}
 		},
 		watch:{
@@ -192,7 +197,7 @@
 					],
 				})
 			},
-			mapTab(e) {
+			mapTab() {
 				wx.openLocation({
 					latitude: this.currentLatitude,
 					longitude: this.currentLongitude
@@ -218,6 +223,12 @@
 					this.gameDateList = findItem.gameDates
 						.filter(item => new Date(item.gameDate).getTime() > new Date().getTime() )
 						.map(item => item.gameDate)
+					if(findItem.gameDates.filter(item => item.specificLocation).length) {
+						this.currentLatitude = findItem.gameDates.filter(item => item.specificLocation)[0].latitude
+						this.currentLongitude = findItem.gameDates.filter(item => item.specificLocation)[0].longitude
+						this.specificLocation = findItem.gameDates.filter(item => item.specificLocation)[0].specificLocation
+						this.computDistance()
+					}
 					this.gameDateList = Array.from(new Set(this.gameDateList))
 					this.gameDateList = this.gameDateList.map(item => ({
 						value: item,
@@ -373,10 +384,6 @@
 					}
 				})
 			},
-			// 提交球员档案
-			submitPlayer(){
-				
-			},
 			getPlayerList() {
 				return http.get('weapp/player/getPlayerList', { params: { gameId: this.form.gameId } }).then(res => {
 					if(res.data.code === 0) {
@@ -392,6 +399,13 @@
 					}
 				})
 			},
+			computDistance() {
+				wx.getLocation({
+					success: (res) => {
+						this.distance = getDistance(34.24276, 108.892258, this.currentLatitude, this.currentLongitude)
+					}
+				})
+			}
 		},
 		onReady() {
 			this.$refs.uForm.setRules(this.rules)
