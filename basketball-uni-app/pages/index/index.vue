@@ -1,13 +1,14 @@
 <template>
 	<view class="content">
 		<col-toast></col-toast>
-		<u-modal v-model="showModal" :show-cancel-button="true" confirm-text="同意" :title-style="{fontSize: '34rpx'}"
+		<!-- <u-modal v-model="showModal" :show-cancel-button="true" confirm-text="同意" :title-style="{fontSize: '34rpx'}"
 			title="参赛用户协议" @cancel="showModal = false" @confirm="agree"
 		>
 			<view class="u-update-content">
 				<rich-text :nodes="content"></rich-text>
 			</view>
-		</u-modal>
+		</u-modal> -->
+		<agreement v-model="showModal" ref="agreement" :content="content" @agree="agree"></agreement>
 		
 		<image style="height:100%;width: 100%;" src="../../static/imgs/home-bg.png" mode=""></image>
 		<image 
@@ -24,8 +25,9 @@
 			@change="changeBox">
 				<span>我已阅读并同意
 					<a 
+					href="javascript:viod(0)"
 					style="position: relative;display: inline-block;width: 300rpx;text-decoration: underline;" 
-					@click="showModal=true">篮球比赛用户协议
+					@click="showModal = true">篮球比赛用户协议
 					</a>
 				</span>
 		</u-checkbox>
@@ -50,11 +52,12 @@
 	// import sharePoster from '../sharePoster'
 	import customCanvas from '../canvas/share.vue'
 	import Toast from './Toast'
+	import Agreement from './Agreement'
 	import http from '../../api/index.js'
 	import { mapActions, mapGetters } from 'vuex'
 	export default{
 		mixins:[shareMixin],
-		components:{customCanvas, ColToast: Toast},
+		components:{customCanvas, ColToast: Toast, Agreement},
 		data() {
 			return {
 				checked:'',

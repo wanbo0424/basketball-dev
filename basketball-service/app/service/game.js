@@ -102,7 +102,7 @@ class GameService extends Service {
               gameTimeRange: '$gameTimeRange',
               gameStatus: '$gameStatus',
               latitude: '$latitude',
-              longitude: '$longitude',
+              longitude: '$latitude',
             },
           },
         },
