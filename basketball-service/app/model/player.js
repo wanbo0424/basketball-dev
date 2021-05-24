@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:29:19
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-14 11:02:55
+ * @LastEditTime: 2021-05-24 17:21:10
  * @FilePath: \basketball-service\app\model\player.js
  */
 'use strict';
@@ -139,6 +139,10 @@ module.exports = app => {
     },
     // 球衣颜色
     jerseyColor: {
+      type: String,
+    },
+    // 分享主的昵称
+    sharedNickName: {
       type: String,
     },
   }, {

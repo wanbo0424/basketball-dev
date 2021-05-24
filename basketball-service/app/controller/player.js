@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:34:06
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-12 17:52:09
+ * @LastEditTime: 2021-05-24 17:55:56
  * @FilePath: \basketball-service\app\controller\player.js
  */
 'use strict';
@@ -15,10 +15,10 @@ class PlayerController extends Controller {
     const { ctx } = this;
     const requestBody = ctx.request.body;
     const result = await ctx.service.player.addPlayer(requestBody);
-    if(result === 1) {
+    if (result === 1) {
       this.fail(100, '名额已满');
-    }else{
-      this.success(_id);  
+    } else {
+      this.success(result);
     }
   }
 

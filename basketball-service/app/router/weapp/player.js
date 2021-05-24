@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-20 16:31:42
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-12 17:47:58
+ * @LastEditTime: 2021-05-24 17:40:41
  * @FilePath: \basketball-service\app\router\weapp\player.js
  */
 'use strict';
@@ -14,7 +14,7 @@ module.exports = app => {
   // 球员报名
   router.post('/weapp/players/apply', controller.player.apply);
   // 查看本场比赛报名球员
-  // router.get('/weapp/player/getPlayerList', controller.player.List);
+  router.get('/weapp/player/getPlayerList', controller.player.List);
   // 创建球员生涯（预支付后创建）
   router.post('/weapp/playerCareer/createCareer', controller.playerCareer.createCareer);
 

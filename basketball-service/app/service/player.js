@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:39:52
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-17 15:31:34
+ * @LastEditTime: 2021-05-24 17:23:37
  * @FilePath: \basketball-service\app\service\player.js
  */
 'use strict';
@@ -20,8 +20,8 @@ class PlayerService extends Service {
     //   return app.model.Player.updateOne({ mobile: data.mobile }, { $push: { gameIdList: data.gameId } });
     // }
     // 先查询数据是否满员
-    let currentGamePlayers = await app.model.Player.find({ gameId:data.gameId })
-    if(currentGamePlayers.length >= 16) {
+    const currentGamePlayers = await app.model.Player.find({ gameId: data.gameId });
+    if (currentGamePlayers.length >= 16) {
       return 1;
     }
     const result = await app.model.Player.create(data);
@@ -296,9 +296,9 @@ class PlayerService extends Service {
     return docs;
   }
 
-/**
+  /**
    * @description: 所有订单列表
-   * @param {Object} {openId, out_tarde_no} 
+   * @param {Object} {openId, out_tarde_no}
    * @return {*}
    */
   async allOrderList(query) {

@@ -3,7 +3,7 @@
  * @Date: 2021-05-10 10:00:43
  * @Author: yinwb
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-13 15:45:37
+ * @LastEditTime: 2021-05-24 17:54:52
  * @FilePath: \basketball-service\app\service\coupon.js
  */
 'use strict';
@@ -25,7 +25,7 @@ class CouponService extends Service {
 
   // 更新用户新人券
   async updateCouponToNewplayer(out_trade_no) {
-    const { app, ctx } = this;
+    const { app } = this;
     const trade_no_user = await app.model.Player.find({ out_trade_no });
     let users = [];
     if (trade_no_user && trade_no_user.length) {
