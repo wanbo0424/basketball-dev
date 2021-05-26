@@ -2,7 +2,7 @@
  * @Description: 
  * @Date: 2021-01-08 17:59:51
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-25 09:31:10
+ * @LastEditTime: 2021-05-26 17:10:29
  * @FilePath: \vue-admin-beautiful\src\views\player\apply\index.vue
 -->
 <template>
@@ -227,13 +227,17 @@
       const pushApplets = (row) => {
         pushSms({
           touser: row.openId,
-          template_id: 'T4Bq3RFYlZ4f7GWSwuOAvONC9kVYZrBpPwtQ5NwxGZM',
+          template_id: 'mDUqqi39M19ErfQifsPqYRUEdDgOqqqttzhHNTbuT18',
           data: {
-            time1: {
+            thing14: {
+              value: row.nickName,
+            },
+            time15: {
               value: moment(row.gameDate).format('YYYY年MM月DD日 HH:mm:ss'),
             },
-            thing2: { value: '456' },
-            thing3: { value: '789' },
+            thing16: { value: row.gameAddress || '' },
+            thing17: { value: row.team || '' },
+            number18: { value: row.jerseyNumber || 0 },
           },
         }).then((res) => {
           console.log(res)

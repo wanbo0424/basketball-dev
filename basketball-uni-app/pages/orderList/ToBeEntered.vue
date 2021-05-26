@@ -16,7 +16,8 @@
 				<span>比赛地点：{{order.gameAddress}}</span>
 				<span style="float:right">></span>
 			</view>
-			<image style="position: absolute;right: 0;top: 0;height: 200rpx;width: 180rpx;" src="../../static/imgs/participate.png" mode=""></image>
+			<image v-if="order.team" style="position: absolute;right: 0;top: 0;height: 200rpx;width: 180rpx;" src="../../static/imgs/participate.png" mode=""></image>
+			<image v-if="!order.team" style="position: absolute;right: 0;top: 0;height: 200rpx;width: 180rpx;" src="../../static/imgs/matching.png" mode=""></image>
 			<!-- <view class="btn">
 				<button @click="$refs.contact.show = true">退款</button>
 			</view> -->
@@ -63,6 +64,7 @@
 				})
 			},
 			getTicket(order) {
+				if(!order.team) return
 				if(this.swiperCurrent === 0) {
 					let month = (new Date(order.gameDate).getMonth() + 1).toString().padStart(2, '0')
 					let date = new Date(order.gameDate).getDate()

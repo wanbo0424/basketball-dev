@@ -26,7 +26,7 @@ export default {
 	// custom share data when user share.
 	onShareAppMessage: function(res) {
 		return {
-		  title: '快来一起组队吧',
+		  title: '一起组队打全场',
 		  imageUrl: '/static/imgs/share_cover.png',
 		  path: `/pages/index/index?nickName=${this.userInfo.nickName}&share=true`
 		}

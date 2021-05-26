@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:39:52
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-24 17:23:37
+ * @LastEditTime: 2021-05-26 14:57:17
  * @FilePath: \basketball-service\app\service\player.js
  */
 'use strict';
@@ -250,7 +250,7 @@ class PlayerService extends Service {
   // 待参赛（小程序）
   async toEnteredList(query) {
     const { app } = this;
-    let docs = await app.model.Player.aggregate([
+    const docs = await app.model.Player.aggregate([
       {
         $lookup:
         {
@@ -268,7 +268,7 @@ class PlayerService extends Service {
       { $project: { gamesInfo: 0 } },
       { $match: { openId: query.openId, gameStatus: 0, payStatus: 2 } },
     ]);
-    docs = docs.filter(item => !!item.team);
+    // docs = docs.filter(item => !!item.team);
     return docs;
   }
 
