@@ -3,7 +3,7 @@
  * @Date: 2021-04-06 10:18:37
  * @Author: yinwb
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-29 16:52:57
+ * @LastEditTime: 2021-05-25 15:09:43
  * @FilePath: \vue-admin-beautiful\src\views\game\gameSetting\index.vue
 -->
 <template>
@@ -15,8 +15,8 @@
       class="components-table-demo-nested"
       :pagination="false"
     >
-      <template #operation>
-        <a>Publish</a>
+      <template #operation="{ record }">
+        <a @click="edit(record)">设置</a>
       </template>
       <template #expandedRowRender="{ record }">
         <a-table
@@ -58,18 +58,24 @@
       :show-total="(total) => `总共  ${total}  条数据`"
       show-less-items
     />
-    <!-- 修改 -->
+    <!-- 新增 -->
     <add-form ref="editCarousel" @refresh="loadData"></add-form>
-    <!-- 比赛球队设置 -->
+    <!-- 设置 -->
     <setting-team ref="settingTeamRef" @refresh="loadData"></setting-team>
+    <!-- 设置 -->
+    <edit-basic-game ref="editBasicRef"></edit-basic-game>
   </div>
 </template>
 <script>
   import { ref, onMounted, reactive } from 'vue'
   import AddForm from './add-form'
   import SettingTeam from './setting-team'
+  import EditBasicGame from './edit-basic-game'
   import { gameListByAddress } from '@/api/game'
-  const columns = [{ title: '比赛地点', dataIndex: '_id', key: '_id' }]
+  const columns = [
+    { title: '比赛地点', dataIndex: '_id', key: '_id' },
+    { title: '设置', slots: { customRender: 'operation' } },
+  ]
   const childColumns = [
     { title: '比赛Id', dataIndex: 'gameId', key: 'gameId' },
     { title: '比赛日期', dataIndex: 'gameDate', key: 'gameDate' },
@@ -85,12 +91,14 @@
     components: {
       AddForm,
       SettingTeam,
+      EditBasicGame,
     },
     setup() {
       const data = ref([])
       const childData = ref([])
       const editCarousel = ref(null)
       const settingTeamRef = ref(null)
+      const editBasicRef = ref(null)
       let pagination = reactive({
         pageSize: 10,
         current: 1,
@@ -125,6 +133,10 @@
       const editTeam = (row) => {
         settingTeamRef.value.init(row)
       }
+
+      const edit = (row) => {
+        editBasicRef.value.init(row)
+      }
       onMounted(() => {
         loadData()
       })
@@ -134,11 +146,13 @@
         childColumns,
         editCarousel,
         settingTeamRef,
+        editBasicRef,
         data,
         childData,
         add,
         currentChange,
         editTeam,
+        edit,
         loadData,
       }
     },

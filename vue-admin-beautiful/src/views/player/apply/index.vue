@@ -2,7 +2,7 @@
  * @Description: 
  * @Date: 2021-01-08 17:59:51
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-13 16:08:05
+ * @LastEditTime: 2021-05-25 09:31:10
  * @FilePath: \vue-admin-beautiful\src\views\player\apply\index.vue
 -->
 <template>
@@ -109,6 +109,10 @@
     {
       title: '联系方式',
       dataIndex: 'mobile',
+    },
+    {
+      title: '分享来源',
+      dataIndex: 'sharedNickName',
     },
     {
       title: '创建时间',

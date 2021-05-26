@@ -8,7 +8,7 @@
 			<view v-if="specificLocation !== ''" @click="mapTab">
 				<image src="../../static/imgs/Marker.png" mode="" 
 				style="display: inline-block;height: 32rpx;width: 32rpx;vertical-align: middle;"></image>
-				<span>{{ specificLocation }} {{distance}}km</span>
+				<span>{{ specificLocation }} （{{distance}}km）</span>
 			</view>
 			<u-form-item label="比赛日期" required="true" prop="gameDate">
 				<u-input v-model="form.gameDate" type="select" @click="showGameDateSelect = true" />
@@ -67,10 +67,8 @@
 	import http from '../../api/index.js'
 	import {getDistance} from '../../utils/index.js'
 	import { mapGetters } from 'vuex'
-	import shareMixin from '../../mixins/share.js'
 	import { generateOrderNumber } from '../../utils/payUtils.js'
 	export default {
-		mixins:[shareMixin],
 		data() {
 			return {
 				MapContext: null,
@@ -177,6 +175,7 @@
 		computed: {
 			...mapGetters([
 			  'userInfo',
+			  'shareInfo'
 			])
 		 },
 		methods: {
@@ -332,18 +331,18 @@
 						this.form.avatarUrl = this.userInfo.avatarUrl
 						this.form.out_trade_no = generateOrderNumber()
 						this.form.needInsurance = (this.form.needInsurance === '是')
-						if(this.shared.nickName) {
-							this.form.sharedNickName = this.shared.nickName
+						if(this.shareInfo.nickName) {
+							this.form.sharedNickName = this.shareInfo.nickName
 						}
-						let playerList = await this.getPlayerList()
-						if(playerList.length && playerList.length >= 16) {
-							this.$refs.uToast.show({
-								title: '报名人数已满',
-								type: 'default',
-								duration: '2000'
-							})
-							return
-						}
+						// let playerList = await this.getPlayerList()
+						// if(playerList.length && playerList.length >= 16) {
+						// 	this.$refs.uToast.show({
+						// 		title: '报名人数已满',
+						// 		type: 'default',
+						// 		duration: '2000'
+						// 	})
+						// 	return
+						// }
 						http.post('weapp/players/apply', this.form).then(res => {
 							if(res.data.code === 0) {
 								uni.navigateTo({
@@ -385,7 +384,7 @@
 				})
 			},
 			getPlayerList() {
-				return http.get('weapp/player/getPlayerList', { params: { gameId: this.form.gameId } }).then(res => {
+				return http.get('weapp/allOrderList', { params: { gameId: this.form.gameId } }).then(res => {
 					if(res.data.code === 0) {
 						return Promise.resolve(res.data.data)
 					}

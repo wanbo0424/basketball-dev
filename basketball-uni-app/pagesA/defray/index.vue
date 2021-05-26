@@ -121,7 +121,7 @@ import { mapGetters } from 'vuex'
 				paySuccess: false,
 				showPaid: false,
 				showCoupon: false,
-				showCouponList: true,
+				showCouponList: false,
 				selectedCoupon: '',
 				payContent: '支付成功，组队成功后会发送短信和微信通知比赛时间地点。请准时到达场地参赛！',
 				couponInfo: {

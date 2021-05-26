@@ -3,7 +3,7 @@
  * @Date: 2021-04-06 14:22:46
  * @Author: yinwb
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-19 15:30:48
+ * @LastEditTime: 2021-05-25 09:56:59
  * @FilePath: \vue-admin-beautiful\src\views\game\gameSetting\add-form.vue
 -->
 <template>
@@ -21,7 +21,7 @@
     </template>
 
     <a-form :model="form" labelAlign="left">
-      <a-form-item label="比赛地点">
+      <a-form-item label="球馆名称">
         <a-input placeholder="比赛地点" v-model:value="form.gameAddress" />
       </a-form-item>
       <a-form-item label="纬度">
@@ -29,6 +29,9 @@
       </a-form-item>
       <a-form-item label="经度">
         <a-input placeholder="经度" v-model:value="form.longitude" />
+      </a-form-item>
+      <a-form-item label="具体位置">
+        <a-input placeholder="具体位置" v-model:value="form.specificLocation" />
       </a-form-item>
       <a-form-item label="比赛日期">
         <!-- <a-date-picker
@@ -68,6 +71,7 @@
         gameAddress: '',
         latitude: '',
         longitude: '',
+        specificLocation: '',
         gameDates: [],
         gameTimeRanges: [],
       })

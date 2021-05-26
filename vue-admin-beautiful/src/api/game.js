@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-11 17:42:14
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-08 17:54:48
+ * @LastEditTime: 2021-05-25 16:19:10
  * @FilePath: \vue-admin-beautiful\src\api\game.js
  */
 import request from '@/utils/request'
@@ -22,7 +22,13 @@ export const update = (data) => {
     data,
   })
 }
-
+export const batchUpdateGame = (data) => {
+  return request({
+    url: '/admin/batchUpdateGame',
+    method: 'post',
+    data,
+  })
+}
 export const list = (params) =>
   request({
     url: '/admin/gameList',

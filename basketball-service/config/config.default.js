@@ -69,7 +69,7 @@ module.exports = appInfo => {
   //   appid: '87570',
   //   secret: '88f179ab0c43dd547446a90f159b5a7be90efdfa',
   // };
-  
+
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',

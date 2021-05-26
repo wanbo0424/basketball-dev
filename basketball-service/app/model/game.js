@@ -44,6 +44,7 @@ module.exports = app => {
     longitude: {
       type: Number,
     },
+    // 具体位置
     specificLocation: {
       type: String,
     },

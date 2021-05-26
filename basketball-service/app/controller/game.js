@@ -18,6 +18,13 @@ class GameController extends Controller {
     this.success(_id);
   }
 
+  async batchUpdateGame() {
+    const { ctx } = this;
+    const requestBody = ctx.request.body;
+    await ctx.service.game.batchUpdateGame(requestBody);
+    this.success();
+  }
+
   async List() {
     const { ctx } = this;
     const data = await ctx.service.game.query(ctx.query);

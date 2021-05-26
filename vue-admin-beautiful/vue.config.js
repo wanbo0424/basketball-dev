@@ -63,7 +63,7 @@ module.exports = {
     proxy: {
       ['/']: {
         target: `http://127.0.0.1:7001/api`,
-        // target: `https://109.244.212.120`,
+        // target: `https://www.apusport.cn/api`,
         ws: true,
         changeOrigin: true,
         pathRewrite: {

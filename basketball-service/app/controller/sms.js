@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-22 14:20:15
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-10 09:27:07
+ * @LastEditTime: 2021-05-25 17:47:30
  * @FilePath: \basketball-service\app\controller\sms.js
  */
 'use strict';
@@ -53,6 +53,27 @@ class SmsController extends Controller {
     // } else {
     //   ctx.service.player.updatePlayer({ _id: ctx.request.body._id, smsStatus: 2 });
     // }
+    this.success(result);
+  }
+
+  async addWxMessageTemplate() {
+    const { ctx } = this;
+    const { data: { access_token } } = await ctx.curl('https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx3bd5737539be2537&secret=8eae0891e063bca56590224254363fcc', {
+      method: 'GET',
+      dataType: 'json',
+    });
+    const body = ctx.request.body;
+    delete body.userId;
+    delete body.userName;
+    const result = await ctx.curl(
+      `https://api.weixin.qq.com/wxaapi/newtmpl/addtemplate?access_token=${access_token}`,
+      {
+        method: 'POST',
+        // 通过 contentType 告诉 HttpClient 以 JSON 格式发送
+        contentType: 'json',
+        dataType: 'json',
+        data: ctx.request.body,
+      }) || {};
     this.success(result);
   }
 

@@ -1,8 +1,9 @@
+
 /*
  * @Description:
  * @Date: 2021-01-11 17:21:53
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-12 10:17:42
+ * @LastEditTime: 2021-05-25 15:05:24
  * @FilePath: \basketball-service\app\service\game.js
  */
 'use strict';
@@ -45,6 +46,22 @@ class GameService extends Service {
     return _id;
   }
 
+  /**
+   * @description:
+   * @param {*} data
+   * @return {*}
+   */
+  async batchUpdateGame(data = {}) {
+    const { app } = this;
+    const { gameIds, gameAddress, specificLocation } = data;
+    if (gameIds && gameIds.length) {
+      for (const e of gameIds) {
+        await app.model.Game.updateOne({ _id: e }, {
+          $set: { gameAddress, specificLocation },
+        });
+      }
+    }
+  }
   // 查询比赛列表
   async query(params) {
     const { app } = this;
@@ -102,7 +119,7 @@ class GameService extends Service {
               gameTimeRange: '$gameTimeRange',
               gameStatus: '$gameStatus',
               latitude: '$latitude',
-              longitude: '$latitude',
+              longitude: '$longitude',
               specificLocation: '$specificLocation',
             },
           },

@@ -10,13 +10,28 @@
 			" 
 			:current="swiperCurrent" @transition="transition" @animationfinish="animationfinish">
 			<swiper-item class="swiper-item" v-for="(item, index) in swiperList" :key="index">
-				<scroll-view scroll-y v-if="item.status === 0" style="height: 100%;width: 100%;" >
+				<scroll-view 
+					refresher-enabled scroll-y enable-back-to-top :refresher-triggered="refresher"
+					 v-if="item.status === 0" 
+					 style="height: 100%;width: 100%;" 
+					 @refresherrefresh="refresherrefresh(item.status)" 
+					 @refresherrestore="onRestore">
 					<to-be-entered :swiperCurrent="swiperCurrent" :data="toEnteredList"></to-be-entered>
 				</scroll-view>
-				<scroll-view scroll-y v-if="item.status === 1" style="height: 100%;width: 100%;" >
+				<scroll-view 
+					refresher-enabled scroll-y enable-back-to-top :refresher-triggered="refresher"
+					 v-if="item.status === 1" 
+					 style="height: 100%;width: 100%;" 
+					 @refresherrefresh="refresherrefresh(item.status)" 
+					 @refresherrestore="onRestore">
 					<to-be-entered :swiperCurrent="swiperCurrent" :data="enteredList"></to-be-entered>
 				</scroll-view>
-				<scroll-view scroll-y v-if="item.status === 2" style="height: 100%;width: 100%;" >
+				<scroll-view 
+					refresher-enabled scroll-y enable-back-to-top :refresher-triggered="refresher"
+					v-if="item.status === 2" 
+					@refresherrefresh="refresherrefresh(item.status)" 
+					@refresherrestore="onRestore"
+					style="height: 100%;width: 100%;" >
 					<to-be-entered :swiperCurrent="swiperCurrent" :data="allOrderList"></to-be-entered>
 				</scroll-view>
 				<scroll-view scroll-y v-if="item.status === 3" style="height: 100%;width: 100%;" >
@@ -79,7 +94,8 @@
 				allOrderList: [],
 				tabs: [
 					1,2,3,4
-				]
+				],
+				refresher: false
 			}
 		},
 		computed: {
@@ -116,28 +132,47 @@
 				this.current = current;
 			},
 			getToEnteredList() {
-				http.get('weapp/toEnteredList', { params: { openId: this.userInfo.openId } }).then(res => {
+				return http.get('weapp/toEnteredList', { params: { openId: this.userInfo.openId } }).then(res => {
 					if(res.data.code === 0) {
 						this.toEnteredList = res.data.data
 						if(this.toEnteredList.length) {
 							this.$set(this.list[1], 'count', res.data.data.length )
 						}
+						return Promise.resolve(true)
 					}
 				})
 			},
 			getEnteredList() {
-				http.get('weapp/enteredList', { params: { openId: this.userInfo.openId } }).then(res => {
+				return http.get('weapp/enteredList', { params: { openId: this.userInfo.openId } }).then(res => {
 					if(res.data.code === 0) {
 						this.enteredList = res.data.data
+						return Promise.resolve(true)
 					}
 				})
 			},
 			getAllOrderList() {
-				http.get('weapp/allOrderList', { params: { openId: this.userInfo.openId } }).then(res => {
+				return http.get('weapp/allOrderList', { params: { openId: this.userInfo.openId } }).then(res => {
 					if(res.data.code === 0) {
 						this.allOrderList = res.data.data
+						return Promise.resolve(true)
 					}
 				})
+			},
+			async refresherrefresh(status) {
+				let result
+				this.refresher = true
+				let refreshFun = {
+					0: this.getToEnteredList,
+					1: this.getEnteredList,
+					2: this.getAllOrderList,
+				}
+				result = await refreshFun[status]()
+				if(result) {
+					this.refresher = false
+				}
+			},
+			onRestore() {
+				this.refresher = false;
 			}
 		}
 	}

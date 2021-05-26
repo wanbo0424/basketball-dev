@@ -89,8 +89,8 @@
 	background-color: #FFFFFF;
 	opacity: 0.9;
 	border-radius: 26rpx;
-	height: 280rpx;
-	padding: 28rpx 24rpx;
+	// height: 280rpx;
+	padding: 28rpx 24rpx 0 24rpx;
 	margin-bottom: 16rpx;
 	.btn{
 		display: flex;
@@ -108,9 +108,9 @@
 	}
 	.address-item{ 
 		border-top: 2rpx solid #878787;
-		height: 40rpx;
-		line-height: 40rpx;
-		// padding-top: 6rpx ;
+		// height: 40rpx;
+		// line-height: 40rpx;
+		padding: 8rpx 0;
 		margin-top: 10rpx;
 	}
 }

@@ -1,4 +1,4 @@
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
 	data() {
 		return {
@@ -20,6 +20,7 @@ export default {
 	onLoad: function(params) {
 		if(params.share) {
 			this.shared.nickName = params.nickName
+			this.getShareInfo(this.shared)
 		}
 	},
 	// custom share data when user share.
@@ -27,7 +28,12 @@ export default {
 		return {
 		  title: '快来一起组队吧',
 		  imageUrl: '/static/imgs/share_cover.png',
-		  path: `/pages/messageForm/index?nickName=${this.userInfo.nickName}&share=true`
+		  path: `/pages/index/index?nickName=${this.userInfo.nickName}&share=true`
 		}
 	},
+	methods: {
+		...mapActions([
+		  'getShareInfo', 
+		]),
+	}
 }

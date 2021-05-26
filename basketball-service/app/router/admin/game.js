@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-20 16:31:17
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-11 10:32:58
+ * @LastEditTime: 2021-05-25 15:18:54
  * @FilePath: \basketball-service\app\router\admin\game.js
  */
 'use strict';
@@ -14,6 +14,7 @@ module.exports = app => {
   router.get('/api/admin/gameListByAddress', controller.game.gameListByAddress);
   router.post('/api/admin/gameAdd', controller.game.add);
   router.post('/api/admin/gameUpdate', controller.game.update);
+  router.post('/api/admin/batchUpdateGame', controller.game.batchUpdateGame);
   // 比赛分数设置
   router.post('/api/admin/gameScoreSet', controller.game.scoreSetting);
   // 球员建队

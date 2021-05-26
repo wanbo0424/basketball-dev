@@ -9,16 +9,27 @@ const store = new Vuex.Store({
 			avatarUrl: '',
 			nickName: ''
 		},
+		shareInfo: {
+			nickName: ''
+		}
     },  
 	getters: {
 		userInfo: state => {
 			return state.userInfo
+		},
+		shareInfo: state => {
+			return state.shareInfo
 		},
 	},
     mutations: {  
 		SET_USER_INFO(state, info) {
 			for(let key in info) {
 				state.userInfo[key] = info[key]
+			}
+		},
+		SET_SHARE_INFO(state, info) {
+			for(let key in info) {
+				state.shareInfo[key] = info[key]
 			}
 		}
     },
@@ -88,6 +99,9 @@ const store = new Vuex.Store({
 					},
 				 });
 			})
+		},
+		getShareInfo({commit, state}, shareInfo) {
+			commit('SET_SHARE_INFO', shareInfo)
 		}
 	}
 })
