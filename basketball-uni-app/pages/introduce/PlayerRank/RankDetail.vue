@@ -23,7 +23,7 @@
 							{{item.rank}}
 						</view>
 						<view class="avatar" :style="{width: '13%'}">
-							{{item.avatarUrl}}
+							<image :src="item.avatarUrl" style="height: 60rpx;width: 60rpx;" mode=""></image>
 						</view>
 						<view class="list-item-text" :style="{width: '37%'}">
 							{{item.nickName}}
@@ -75,6 +75,7 @@
 		methods: {
 			init(datas) {
 				this.show = true
+				
 				this.datas = datas
 			}
 		}
@@ -128,6 +129,8 @@
 				border-bottom: 3rpx solid #FFFFFF;
 				.avatar{
 					text-align: center;
+					display: flex;
+					align-items: center;
 				}
 				.list-item-text{
 					text-align: center;

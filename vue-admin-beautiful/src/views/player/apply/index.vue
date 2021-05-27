@@ -2,7 +2,7 @@
  * @Description: 
  * @Date: 2021-01-08 17:59:51
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-26 17:10:29
+ * @LastEditTime: 2021-05-27 14:53:51
  * @FilePath: \vue-admin-beautiful\src\views\player\apply\index.vue
 -->
 <template>
@@ -13,6 +13,7 @@
       :data-source="data"
       :pagination="false"
       :loading="loading"
+      :scroll="{ x: 'calc(700px + 50%)' }"
       @change="handleTableChange"
     >
       <template #createTime="{ text: createTime }">

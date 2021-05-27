@@ -31,3 +31,22 @@ export function updatePlayer(data) {
     data,
   })
 }
+export function syncPlayer() {
+  return request({
+    url: '/admin/syncPlayer',
+    method: 'get',
+  })
+}
+export function updatePlaySuggest(data) {
+  return request({
+    url: '/admin/updatePlaySuggest',
+    method: 'post',
+    data,
+  })
+}
+export function getPlayerSuggests() {
+  return request({
+    url: '/admin/getPlayerSuggests',
+    method: 'get',
+  })
+}

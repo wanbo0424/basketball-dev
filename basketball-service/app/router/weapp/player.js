@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-20 16:31:42
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-24 17:40:41
+ * @LastEditTime: 2021-05-27 16:54:25
  * @FilePath: \basketball-service\app\router\weapp\player.js
  */
 'use strict';
@@ -29,5 +29,7 @@ module.exports = app => {
   router.get('/weapp/player/getCouponList', controller.player.getCouponList);
   // 获取剩余名额
   router.get('/weapp/player/getRemainPlaces', controller.player.getRemainPlaces);
+  // 根据条件查询建议
+  router.get('/weapp/player/getSuggestQuery', controller.playerSuggest.getSuggestQuery);
 }
 ;

@@ -12,7 +12,7 @@
 			<canvas canvas-id="canvasRadar" id="canvasRadar" class="charts"></canvas>
 		</view>
 		<view class="sugesstion">
-			技能建议：您身体素质较好，建议您多加强基本功和投篮练习
+			技能建议：{{sugesstion}}
 		</view>
 	</view>
 </template>
@@ -26,15 +26,17 @@
 	export default {
 		data() {
 			return {
-				cWidth:'',
-				cHeight:'',
-				pixelRatio:1,
+				cWidth: '',
+				cHeight: '',
+				pixelRatio: 1,
+				sugesstion: ''
 			}
 		},
 		mounted() {
 			_self = this;
 			this.cWidth=uni.upx2px(600);
 			this.cHeight=uni.upx2px(540);
+			this.getSuggest()
 		},
 		computed: {
 			...mapGetters([
@@ -99,6 +101,13 @@
 					// colors: ['#1890ff', '#2fc25b', '#facc14', '#f04864', '#8543e0', '#90ed7d']
 					
 				});
+			},
+			getSuggest() {
+				http.get('weapp/player/getSuggestQuery', {params:{openId: this.userInfo.openId}}).then(res => {
+					if(res.data.code === 0) {
+						this.sugesstion = res.data.data[0].sugesstion
+					}
+				})
 			}
 		}
 	}

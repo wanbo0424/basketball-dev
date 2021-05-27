@@ -3,7 +3,7 @@
  * @Date: 2021-04-06 10:18:37
  * @Author: yinwb
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-25 15:09:43
+ * @LastEditTime: 2021-05-27 14:57:55
  * @FilePath: \vue-admin-beautiful\src\views\game\gameSetting\index.vue
 -->
 <template>
@@ -22,6 +22,7 @@
         <a-table
           :columns="childColumns"
           :data-source="record.gameDates"
+          :scroll="{ x: 'calc(700px + 50%)' }"
           :pagination="false"
         >
           <template #gameStatus="{ record }">

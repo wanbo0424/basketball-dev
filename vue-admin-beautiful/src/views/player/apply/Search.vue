@@ -3,7 +3,7 @@
  * @Date: 2021-04-19 16:12:41
  * @Author: yinwb
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-20 16:10:30
+ * @LastEditTime: 2021-05-27 15:14:57
  * @FilePath: \vue-admin-beautiful\src\views\player\apply\Search.vue
 -->
 <template>
@@ -15,6 +15,13 @@
   >
     <a-form-item label="比赛id">
       <a-input v-model:value="form.gameId" placeholder="比赛id">
+        <template #prefix>
+          <UserOutlined style="color: rgba(0, 0, 0, 0.25)" />
+        </template>
+      </a-input>
+    </a-form-item>
+    <a-form-item label="OpenId">
+      <a-input v-model:value="form.openId" placeholder="OpenId">
         <template #prefix>
           <UserOutlined style="color: rgba(0, 0, 0, 0.25)" />
         </template>
@@ -39,6 +46,7 @@
     setup(props, { emit }) {
       let form = reactive({
         gameId: '',
+        openId: '',
       })
       let showGroup = ref(false)
       const search = () => {

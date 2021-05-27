@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-20 16:31:09
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-06 10:40:31
+ * @LastEditTime: 2021-05-27 16:32:50
  * @FilePath: \basketball-service\app\router\admin\player.js
  */
 'use strict';
@@ -15,5 +15,11 @@ module.exports = app => {
   router.post('/api/admin/groupPlayer', controller.player.groupPlayer);
   // 设置球员个人统计
   router.post('/api/admin/updatePlayer', controller.player.updatePlayer);
+  // 同步球员（根据openId）
+  router.get('/api/admin/syncPlayer', controller.playerSuggest.syncPlayer);
+  // 更新建议
+  router.post('/api/admin/updatePlaySuggest', controller.playerSuggest.updatePlaySuggest);
+  // 查询建议列表
+  router.get('/api/admin/getPlayerSuggests', controller.playerSuggest.getPlayerSuggests);
 }
 ;

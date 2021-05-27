@@ -62,6 +62,15 @@ export const asyncRoutes = [
         },
       },
       {
+        path: 'suggest',
+        name: 'Suggest',
+        component: () => import('@/views/player/suggest'),
+        meta: {
+          title: '球员建议',
+          icon: 'unordered-list',
+        },
+      },
+      {
         path: 'career',
         name: 'Career',
         component: () => import('@/views/player/career'),
