@@ -155,6 +155,7 @@
 					}
 				],
 				statisticsInfo: {},
+				couponList: []
 			}
 		},
 		mixins:[shareMixin],
@@ -215,10 +216,18 @@
 			},
 			async getUserProfile() {
 				await this.getUserInfo()
-			}
+			},
+			getCouponList() {
+				http.get('weapp/player/getCouponList', { params: { openId: this.userInfo.openId } }).then(res => {
+					if(res.data.code === 0) {
+						this.couponList = res.data.data
+					}
+				})
+			},
 		},
 		mounted() {
 			this.getStatisticsInfo()
+			this.getCouponList()
 		}
 	}
 </script>
