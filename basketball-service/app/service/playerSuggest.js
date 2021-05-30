@@ -35,6 +35,12 @@ class PlayerSuggestService extends Service {
     return await app.model.PlayerSuggest.find();
   }
 
+  async addPlaySuggest(data) {
+    const { app } = this;
+    const _id = await app.model.PlayerSuggest.create(data);
+    return _id;
+  }
+
   async updatePlaySuggest(data) {
     const { app } = this;
     const _id = await app.model.PlayerSuggest.updateOne({ _id: data._id }, {
@@ -51,7 +57,7 @@ class PlayerSuggestService extends Service {
 
   async getSuggestQuery(query) {
     const { app } = this;
-    const result = await app.model.PlayerSuggest.find({ openId: query.openId });
+    const result = await app.model.PlayerSuggest.find({ openId: query.type });
     return result;
   }
 }

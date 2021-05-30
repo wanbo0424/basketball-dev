@@ -31,6 +31,7 @@ export function updatePlayer(data) {
     data,
   })
 }
+
 export function syncPlayer() {
   return request({
     url: '/admin/syncPlayer',
@@ -40,6 +41,13 @@ export function syncPlayer() {
 export function updatePlaySuggest(data) {
   return request({
     url: '/admin/updatePlaySuggest',
+    method: 'post',
+    data,
+  })
+}
+export function addPlaySuggest(data) {
+  return request({
+    url: '/admin/addPlaySuggest',
     method: 'post',
     data,
   })

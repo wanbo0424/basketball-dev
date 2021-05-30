@@ -180,6 +180,24 @@
 					if(res.data.code === 0) {
 						this.statisticsInfo = res.data.data
 						this.$refs.map.getServerData(this.statisticsInfo)
+						let sortArr =[
+							{value: this.statisticsInfo.scoreAbility, field: 'scoreAbility'}
+							,{value: this.statisticsInfo.hitRateScore, field: 'hitRateScore'}
+							,{value: this.statisticsInfo.physicalScore, field: 'physicalScore'}
+							,{value: this.statisticsInfo.stableScore, field: 'stableScore'}
+							,{value: this.statisticsInfo.defensiveScorevalue, field: 'defensiveScorevalue'}
+						].sort(function(a, b){
+							return a.value - b.value;
+						})
+						const typeMap = {
+						    'scoreAbility': 0,
+						    'hitRateScore': 1,
+						    'physicalScore': 2,
+						    'stableScore': 3,
+						    'defensiveScorevalue': 4,
+						  }
+						let minStatis = typeMap[sortArr[0].field]
+						this.$refs.map.getSuggest({type: minStatis})
 					}
 				})
 			},

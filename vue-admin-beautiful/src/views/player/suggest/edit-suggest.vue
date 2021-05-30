@@ -27,29 +27,58 @@
           :rows="4"
         />
       </a-form-item>
+      <a-form-item label="类型" prop="type">
+        <a-select :size="size" v-model:value="form.type" style="width: 200px">
+          <a-select-option v-for="(item, index) in options" :key="index">
+            {{ item.label }}
+          </a-select-option>
+        </a-select>
+      </a-form-item>
     </a-form>
   </a-modal>
 </template>
 <script>
   import { ref, reactive } from 'vue'
-  import { updatePlaySuggest } from '@/api/player'
+  import { updatePlaySuggest, addPlaySuggest } from '@/api/player'
+  const options = [
+    { label: '得分', value: 0 },
+    { label: '稳定', value: 1 },
+    { label: '体能', value: 2 },
+    { label: '命中率', value: 3 },
+    { label: '防守', value: 4 },
+  ]
   export default {
     setup() {
       let loading = ref(false)
       let visible = ref(false)
+      let type = ref('')
       let form = reactive({
         sugesstion: '',
+        type: '',
       })
       const handleOk = () => {
-        updatePlaySuggest(form).then((res) => {
-          if (res.code === 0) {
-            visible.value = false
-          }
-        })
+        if (type.value === 'add') {
+          addPlaySuggest(form).then((res) => {
+            if (res.code === 0) {
+              visible.value = false
+            }
+          })
+        } else {
+          updatePlaySuggest(form).then((res) => {
+            if (res.code === 0) {
+              visible.value = false
+            }
+          })
+        }
       }
-      const init = (row) => {
+      const init = (row = {}) => {
         visible.value = true
-        form._id = row._id
+        if (row._id) {
+          type.value = 'edit'
+          form._id = row._id
+        } else {
+          type.value = 'add'
+        }
       }
       return {
         loading,
@@ -57,6 +86,7 @@
         visible,
         init,
         form,
+        options,
       }
     },
   }

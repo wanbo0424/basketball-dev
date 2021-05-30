@@ -17,6 +17,8 @@ module.exports = app => {
   router.post('/api/admin/updatePlayer', controller.player.updatePlayer);
   // 同步球员（根据openId）
   router.get('/api/admin/syncPlayer', controller.playerSuggest.syncPlayer);
+  // 新增建议
+  router.post('/api/admin/addPlaySuggest', controller.playerSuggest.addPlaySuggest);
   // 更新建议
   router.post('/api/admin/updatePlaySuggest', controller.playerSuggest.updatePlaySuggest);
   // 查询建议列表

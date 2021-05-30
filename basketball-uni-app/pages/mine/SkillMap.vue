@@ -36,7 +36,7 @@
 			_self = this;
 			this.cWidth=uni.upx2px(600);
 			this.cHeight=uni.upx2px(540);
-			this.getSuggest()
+			// this.getSuggest()
 		},
 		computed: {
 			...mapGetters([
@@ -102,8 +102,8 @@
 					
 				});
 			},
-			getSuggest() {
-				http.get('weapp/player/getSuggestQuery', {params:{openId: this.userInfo.openId}}).then(res => {
+			getSuggest(params) {
+				http.get('weapp/player/getSuggestQuery', {params}).then(res => {
 					if(res.data.code === 0) {
 						this.sugesstion = res.data.data[0].sugesstion
 					}

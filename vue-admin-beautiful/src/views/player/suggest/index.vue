@@ -8,8 +8,11 @@
 -->
 <template>
   <div>
-    <a-button type="primary" style="margin-left: 20px" @click="pullPlayer">
+    <!-- <a-button type="primary" style="margin-left: 20px" @click="pullPlayer">
       同步球员
+    </a-button> -->
+    <a-button type="primary" style="margin-left: 20px" @click="add">
+      新增
     </a-button>
     <a-table
       :columns="columns"
@@ -17,6 +20,9 @@
       :data-source="data"
       :pagination="false"
     >
+      <template #type="{ text }">
+        <span>{{ typeMap[text.type] }}</span>
+      </template>
       <template #action="{ text }">
         <a @click="suggest(text)">建议</a>
       </template>
@@ -29,10 +35,22 @@
   import { syncPlayer, getPlayerSuggests } from '@/api/player.js'
   import { ref, onMounted } from 'vue'
   import EditSuggest from './edit-suggest'
+  const typeMap = {
+    0: '得分',
+    1: '稳定',
+    2: '体能',
+    3: '命中率',
+    4: '防守',
+  }
   const columns = [
+    // {
+    //   title: 'openId',
+    //   dataIndex: 'openId',
+    // },
     {
-      title: 'openId',
-      dataIndex: 'openId',
+      title: '类别',
+      // dataIndex: 'type',
+      slots: { customRender: 'type' },
     },
     {
       title: '建议',
@@ -61,6 +79,9 @@
           }
         })
       }
+      const add = () => {
+        editSuggestRef.value.init()
+      }
       const loadData = () => {
         getPlayerSuggests().then((res) => {
           if (res.code === 0) {
@@ -78,7 +99,9 @@
         data,
         loading,
         loadData,
+        add,
         editSuggestRef,
+        typeMap,
       }
     },
   }

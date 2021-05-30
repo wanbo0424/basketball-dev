@@ -12,10 +12,9 @@ module.exports = app => {
   const mongoose = app.mongoose;
   const Schema = mongoose.Schema;
   const PlayerSuggestSchema = new Schema({
-    // 用户唯一标识
-    openId: {
-      type: String,
-      unique: true,
+    // 建议类型
+    type: {
+      type: Number,
     },
     sugesstion: {
       type: String,

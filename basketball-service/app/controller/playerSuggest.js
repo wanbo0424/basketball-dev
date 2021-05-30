@@ -17,6 +17,12 @@ class PlayerSuggestController extends Controller {
     this.success(docs);
   }
 
+  async addPlaySuggest() {
+    const { ctx } = this;
+    const _id = await ctx.service.playerSuggest.addPlaySuggest(ctx.request.body);
+    this.success(_id);
+  }
+
   async updatePlaySuggest() {
     const { ctx } = this;
     const _id = await ctx.service.playerSuggest.updatePlaySuggest(ctx.request.body);
