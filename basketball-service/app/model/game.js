@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-11 14:32:16
  * @LastEditors: yinwb
- * @LastEditTime: 2021-04-19 16:01:48
+ * @LastEditTime: 2021-05-31 10:27:43
  * @FilePath: \basketball-service\app\model\game.js
  */
 'use strict';
@@ -80,6 +80,10 @@ module.exports = app => {
     // 球衣颜色
     AjerseyColor: {
       type: String,
+    },
+    // 价格
+    price: {
+      type: Number,
     },
   }, {
     versionKey: false,

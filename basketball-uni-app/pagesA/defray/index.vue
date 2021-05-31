@@ -50,7 +50,7 @@
 			</template>
 		</u-modal>
 		
-		<u-popup v-model="showCouponList" mode="bottom" :height="600">
+		<u-popup v-model="showCouponList" mode="bottom" 	>
 			<view class="" style="font-size: 36rpx; text-align: center;padding-top: 12rpx;">
 				优惠券
 			</view>

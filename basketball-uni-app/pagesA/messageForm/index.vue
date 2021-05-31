@@ -2,14 +2,22 @@
 	<view class="form-content">
 		<u-form :model="form" ref="uForm" label-width="140">
 			<u-form-item label="比赛场地" required="true" prop="gameName">
-				<u-input v-model="form.gameAddress" type="select" @click="showGameSelect = true" />
-				<u-select v-model="showGameSelect" :list="gameAddressList" @confirm="gamAddressSelected"></u-select>
+				<game-popup 
+					:list="gameAddressList" 
+					:gameList="gameList" 
+					ref="game-popup"
+					v-model="form.gameAddress"
+					@confirm="gamAddressSelected"
+				></game-popup>
+				<u-input v-model="form.gameAddress" type="select" @click="$refs['game-popup'].init(gameAddressList)" />
+				<!-- <u-input v-model="form.gameAddress" type="select" @click="showGameSelect = true" /> -->
+				<!-- <u-select v-model="showGameSelect" :list="gameAddressList" @confirm="gamAddressSelected"></u-select> -->
 			</u-form-item>
-			<view v-if="specificLocation !== ''" @click="mapTab">
+			<!-- <view v-if="specificLocation !== ''" @click="mapTab">
 				<image src="../../static/imgs/Marker.png" mode="" 
 				style="display: inline-block;height: 32rpx;width: 32rpx;vertical-align: middle;"></image>
 				<span>{{ specificLocation }} （{{distance}}km）</span>
-			</view>
+			</view> -->
 			<u-form-item label="比赛日期" required="true" prop="gameDate">
 				<u-input v-model="form.gameDate" type="select" @click="showGameDateSelect = true" />
 				<u-select v-model="showGameDateSelect" :list="gameDateList" @confirm="gameDateSelected"></u-select>
@@ -68,7 +76,9 @@
 	import {getDistance} from '../../utils/index.js'
 	import { mapGetters } from 'vuex'
 	import { generateOrderNumber } from '../../utils/payUtils.js'
+	import GamePopup from './game-popup.vue'
 	export default {
+		components:{ GamePopup },
 		data() {
 			return {
 				MapContext: null,
@@ -222,12 +232,12 @@
 					this.gameDateList = findItem.gameDates
 						.filter(item => new Date(item.gameDate).getTime() > new Date().getTime() )
 						.map(item => item.gameDate)
-					if(findItem.gameDates.filter(item => item.specificLocation).length) {
-						this.currentLatitude = findItem.gameDates.filter(item => item.specificLocation)[0].latitude
-						this.currentLongitude = findItem.gameDates.filter(item => item.specificLocation)[0].longitude
-						this.specificLocation = findItem.gameDates.filter(item => item.specificLocation)[0].specificLocation
-						this.computDistance()
-					}
+					// if(findItem.gameDates.filter(item => item.specificLocation).length) {
+					// 	this.currentLatitude = findItem.gameDates.filter(item => item.specificLocation)[0].latitude
+					// 	this.currentLongitude = findItem.gameDates.filter(item => item.specificLocation)[0].longitude
+					// 	this.specificLocation = findItem.gameDates.filter(item => item.specificLocation)[0].specificLocation
+					// 	this.computDistance()
+					// }
 					this.gameDateList = Array.from(new Set(this.gameDateList))
 					this.gameDateList = this.gameDateList.map(item => ({
 						value: item,
@@ -312,7 +322,8 @@
 						this.gameAddressList = res.data.data.map(item => ({
 							value: item._id,
 							label: item._id,
-							disabled: (item.gameDates && item.gameDates.every(ele => ele.gameStatus === 3))
+							disabled: (item.gameDates && item.gameDates.every(ele => ele.gameStatus === 3)),
+							price: item.price
 						}))
 						this.gameAddressList.forEach(item => {
 							if(item.disabled) {

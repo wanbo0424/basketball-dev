@@ -16,6 +16,7 @@
       <!-- <a-form-item label="比赛地点">
         <a-input placeholder="比赛地点" v-model:value="form.gameAddress" />
       </a-form-item> -->
+
       <a-form-item label="纬度">
         <a-input placeholder="纬度" v-model:value="form.latitude" />
       </a-form-item>
@@ -24,6 +25,14 @@
       </a-form-item>
       <a-form-item label="具体位置">
         <a-input placeholder="具体位置" v-model:value="form.specificLocation" />
+      </a-form-item>
+      <a-form-item label="价格">
+        <a-input
+          placeholder="价格"
+          prefix="￥"
+          suffix="RMB"
+          v-model:value.number="form.price"
+        />
       </a-form-item>
       <a-form-item label="A队名">
         <a-input placeholder="A队名" v-model:value="form.ATeamName" />
@@ -100,6 +109,7 @@
         latitude: '',
         longitude: '',
         specificLocation: '',
+        price: 0,
       })
       function init(row) {
         for (let key in form) {

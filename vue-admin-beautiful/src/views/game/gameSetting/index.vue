@@ -3,12 +3,13 @@
  * @Date: 2021-04-06 10:18:37
  * @Author: yinwb
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-27 14:57:55
+ * @LastEditTime: 2021-05-31 18:19:58
  * @FilePath: \vue-admin-beautiful\src\views\game\gameSetting\index.vue
 -->
 <template>
   <div>
     <a-button type="primary" @click="add">添加比赛信息</a-button>
+    <a-button type="primary" @click="setPrice">设置球馆价格</a-button>
     <a-table
       :columns="columns"
       :data-source="data"
@@ -63,8 +64,10 @@
     <add-form ref="editCarousel" @refresh="loadData"></add-form>
     <!-- 设置 -->
     <setting-team ref="settingTeamRef" @refresh="loadData"></setting-team>
-    <!-- 设置 -->
+    <!-- 基础设置 -->
     <edit-basic-game ref="editBasicRef"></edit-basic-game>
+    <!-- 价格设置 -->
+    <edit-price-address></edit-price-address>
   </div>
 </template>
 <script>
@@ -72,6 +75,7 @@
   import AddForm from './add-form'
   import SettingTeam from './setting-team'
   import EditBasicGame from './edit-basic-game'
+  import EditPriceAddress from './edit-price-address'
   import { gameListByAddress } from '@/api/game'
   const columns = [
     { title: '比赛地点', dataIndex: '_id', key: '_id' },
@@ -93,6 +97,7 @@
       AddForm,
       SettingTeam,
       EditBasicGame,
+      EditPriceAddress,
     },
     setup() {
       const data = ref([])

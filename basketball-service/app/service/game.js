@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2021-01-11 17:21:53
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-25 15:05:24
+ * @LastEditTime: 2021-05-31 17:11:51
  * @FilePath: \basketball-service\app\service\game.js
  */
 'use strict';
@@ -120,6 +120,7 @@ class GameService extends Service {
               gameStatus: '$gameStatus',
               latitude: '$latitude',
               longitude: '$longitude',
+              price: '$price',
               specificLocation: '$specificLocation',
             },
           },
@@ -196,6 +197,7 @@ class GameService extends Service {
               gameStatus: '$gameStatus',
               latitude: '$latitude',
               longitude: '$longitude',
+              price: '$price',
               specificLocation: '$specificLocation',
             },
           },

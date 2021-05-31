@@ -3,7 +3,7 @@
  * @Date: 2021-05-27 16:20:21
  * @Author: yinwb
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-27 17:00:02
+ * @LastEditTime: 2021-05-31 10:11:55
  * @FilePath: \vue-admin-beautiful\src\views\player\suggest\edit-suggest.vue
 -->
 <template>
@@ -19,7 +19,12 @@
         确定
       </a-button>
     </template>
-    <a-form :model="form" labelAlign="left">
+    <a-form
+      :model="form"
+      labelAlign="left"
+      :label-col="{ span: 4 }"
+      :wrapperCol="{ span: 14 }"
+    >
       <a-form-item label="内容" prop="sugesstion">
         <a-textarea
           placeholder="内容"
@@ -75,6 +80,9 @@
         visible.value = true
         if (row._id) {
           type.value = 'edit'
+          for (let key in row) {
+            form[key] = row[key]
+          }
           form._id = row._id
         } else {
           type.value = 'add'

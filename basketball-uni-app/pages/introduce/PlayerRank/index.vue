@@ -16,7 +16,7 @@
 							transform: rotate(28deg);" src="../../../static/imgs/rank/crown.png" mode="">
 						</image>
 					</view>
-					<span style="display: inline-block;margin-top: 10rpx;">{{tableData[0].nickName}}</span>
+					<span style="display: inline-block;margin-top: 10rpx;">{{tableData[0].nickName || '？？'}}</span>
 					<span style="display: inline-block;margin-top: 10rpx;">积分:{{tableData[0].evaluationScoreTotal || 0}}</span>
 					<!-- <image style="width: 70rpx;height: 70rpx;" src="../../../static/imgs/rank/top2.png" mode=""></image> -->
 				</view>
@@ -27,7 +27,7 @@
 								<image style="width: 50rpx;height: 50rpx;transform: scale(1);margin-top: 9rpx;" :src="item.medalUrl" mode=""></image>
 								<image style="width: 60rpx;height: 60rpx;margin-left: 10rpx;" :src="item.avatarUrl" mode=""></image>
 								<view class="" style="display: flex;flex-direction: column;">
-									<span style="font-size: 22rpx;margin-left: 20rpx;">{{item.nickName}}</span>
+									<span style="font-size: 22rpx;margin-left: 20rpx;">{{ item.nickName || '？？' }}</span>
 									<view class="">
 										<span style="font-size: 22rpx;margin-left: 20rpx;">积分: {{item.evaluationScoreTotal}}</span>
 										<span style="font-size: 22rpx;margin-left: 20rpx;">胜率: {{item.winRate}} %</span>
