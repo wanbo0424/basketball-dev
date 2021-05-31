@@ -172,7 +172,6 @@ class GameService extends Service {
     return _id;
   }
 
-
   // 按照比赛地点分组查询
   async gameListByAddress(params) {
     const { app } = this;
@@ -216,6 +215,58 @@ class GameService extends Service {
       docs,
       pageInfo,
     };
+  }
+
+  // 同步球馆列表
+  async syncAddressList() {
+    const { app } = this;
+    const addresses = await app.model.Game.aggregate([
+      {
+        $group: {
+          _id: '$gameAddress',
+          gameDate: { $first: '$gameDate' },
+          gameDates: {
+            $push: {
+              gameDate: '$gameDate',
+              gameId: '$_id',
+              gameTimeRange: '$gameTimeRange',
+              ATeamName: '$ATeamName',
+              BTeamName: '$BTeamName',
+              ATeamScore: '$ATeamScore',
+              BTeamScore: '$BTeamScore',
+              gameStatus: '$gameStatus',
+              latitude: '$latitude',
+              longitude: '$longitude',
+              price: '$price',
+              specificLocation: '$specificLocation',
+            },
+          },
+        },
+      },
+    ]);
+    const oldAddresses = await app.model.AddressPrice.find();
+    const addAddresses = [];
+    for (const e of addresses) {
+      if (oldAddresses.findIndex(ele => ele.address === e._id) < 0) {
+        addAddresses.push({ address: e._id, fullPrice: '', halfPrice: '' });
+      }
+    }
+    if (addAddresses.length) {
+      await app.model.AddressPrice.insertMany(addAddresses);
+    }
+    return await app.model.AddressPrice.find();
+  }
+  async getAddressPriceList() {
+    const { app } = this;
+    const docs = app.model.AddressPrice.find();
+    return docs;
+  }
+  async setAddressPrice(data) {
+    const { app } = this;
+    const docs = app.model.AddressPrice.updateOne({ _id: data._id }, {
+      $set: { fullPrice: data.fullPrice, halfPrice: data.halfPrice },
+    });
+    return docs;
   }
 }
 

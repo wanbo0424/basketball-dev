@@ -5,17 +5,31 @@
 			<!-- <view class="" style="display: flex"> -->
 				<view style="width: 25%;font-weight: 600;font-size: 30rpx;">比赛阶段：</view>
 				<view style="width: 75%;color: #615d5d;">
-					一、队内1v1车轮赛逐首发；
-					<span style="text-decoration: underline;color: red;" @click="viewRule1">比赛规则</span></br>
-					二、5v5全场正赛；
-					<span style="text-decoration: underline;color: red" @click="viewRule2">比赛规则</span>
+					<view class="">
+						● 全场比赛
+						<view class="" style="padding-left: 18rpx;">
+							一、队内1v1车轮赛逐首发；
+							<span style="text-decoration: underline;color: red;" @click="viewRule1">比赛规则</span></br>
+						</view>
+						<view class="" style="padding-left: 18rpx;">
+							二、5v5全场正赛；
+							<span style="text-decoration: underline;color: red" @click="viewRule2">比赛规则</span>
+						</view>
+					</view>
+					<view class="">
+						● 半场比赛
+						<view class="" style="padding-left: 18rpx;">
+							一、3v3半场正赛；
+							<span style="text-decoration: underline;color: red;" @click="viewRule1">比赛规则</span></br>
+						</view>
+					</view>
 				</view>
 			<!-- </view> -->
 		</view>
 		<view class="process-item" style="background-image: linear-gradient(-45deg, #06bfb7, #d3f18c);">
 			<view style="width: 25%;font-weight: 600;font-size: 30rpx;">积分原则：</view>
 			<view class="" style="width: 75%;color: #615d5d;">
-				每场5v5正赛结束后，获胜的队伍中每位球员加200积分；落败的队伍中每位球员加100积分；本场最佳球员（MVP）额外获得100积分；
+				每场正赛结束后，获胜的队伍中每位球员加200积分；落败的队伍中每位球员加100积分；本场最佳球员（MVP）额外获得100积分；
 				积分会累加，按累计积分进行赛季排名
 			</view>
 		</view>

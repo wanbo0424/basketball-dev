@@ -12,9 +12,18 @@ module.exports = app => {
   const { router, controller } = app;
   router.get('/api/admin/gameList', controller.game.List);
   router.get('/api/admin/gameListByAddress', controller.game.gameListByAddress);
+  // 同步球馆
+  router.get('/api/admin/syncAddressList', controller.game.syncAddressList);
+  // 获取球馆-价格列表
+  router.get('/api/admin/getAddressPriceList', controller.game.getAddressPriceList);
+  // 设置价格
+  router.post('/api/admin/setAddressPrice', controller.game.setAddressPrice);
+
   router.post('/api/admin/gameAdd', controller.game.add);
   router.post('/api/admin/gameUpdate', controller.game.update);
   router.post('/api/admin/batchUpdateGame', controller.game.batchUpdateGame);
+
+
   // 比赛分数设置
   router.post('/api/admin/gameScoreSet', controller.game.scoreSetting);
   // 球员建队

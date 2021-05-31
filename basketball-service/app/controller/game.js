@@ -72,5 +72,21 @@ class GameController extends Controller {
     this.success(data);
   }
 
+  // 获取球馆价格列表
+  async syncAddressList() {
+    const { ctx } = this;
+    const data = await ctx.service.game.syncAddressList(ctx.query);
+    this.success(data);
+  }
+  async getAddressPriceList() {
+    const { ctx } = this;
+    const data = await ctx.service.game.getAddressPriceList(ctx.query);
+    this.success(data);
+  }
+  async setAddressPrice() {
+    const { ctx } = this;
+    const data = await ctx.service.game.setAddressPrice(ctx.request.body);
+    this.success(data);
+  }
 }
 module.exports = GameController;

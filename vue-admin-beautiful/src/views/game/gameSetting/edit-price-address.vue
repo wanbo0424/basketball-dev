@@ -9,6 +9,7 @@ import { ref } from 'vue';
 -->
 <template>
   <a-modal v-model:visible="visible" title="价格" :width="800">
+    <a-button type="primary" @click="syncAddress">同步球馆</a-button>
     <a-table :columns="columns" :data-source="tableData" bordered>
       <template
         v-for="col in ['address', 'fullPrice', 'harfPrice']"
@@ -51,6 +52,7 @@ import { ref } from 'vue';
 </template>
 <script>
   import { ref } from 'vue'
+  import { syncAddressList } from '@/api/game.js'
   const columns = [
     {
       title: '球馆',
@@ -62,16 +64,33 @@ import { ref } from 'vue';
     },
     {
       title: '半场价格',
-      dataIndex: 'harfPrice',
-      slots: { customRender: 'harfPrice' },
+      dataIndex: 'halfPrice',
+      slots: { customRender: 'halfPrice' },
+    },
+    {
+      title: '操作',
+      dataIndex: 'operation',
+      width: 80,
+      slots: { customRender: 'operation' },
     },
   ]
   export default {
     setup() {
+      let visible = ref(false)
       let tableData = ref([])
       let editingKey = ref('')
       let cacheData = ref([])
 
+      const init = () => {
+        visible.value = true
+      }
+      const syncAddress = () => {
+        syncAddressList().then((res) => {
+          if (res.code === 0) {
+            tableData.value = res.data
+          }
+        })
+      }
       function edit(key) {
         const newData = [...tableData.value]
         const target = newData.filter((item) => key === item._id)[0]
@@ -105,6 +124,9 @@ import { ref } from 'vue';
         edit,
         cancel,
         handleChange,
+        syncAddress,
+        init,
+        visible,
       }
     },
   }

@@ -38,6 +38,8 @@ export const list = (params) =>
 export const gameListByAddress = (params) =>
   request.get('/admin/gameListByAddress', { params })
 
+export const syncAddressList = () => request.get('/admin/syncAddressList')
+
 export const gameScoreSet = (data) =>
   request({
     url: '/admin/gameScoreSet',

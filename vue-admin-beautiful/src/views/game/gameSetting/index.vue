@@ -9,7 +9,9 @@
 <template>
   <div>
     <a-button type="primary" @click="add">添加比赛信息</a-button>
-    <a-button type="primary" @click="setPrice">设置球馆价格</a-button>
+    <a-button type="primary" style="margin-left: 10px" @click="setPrice">
+      设置球馆价格
+    </a-button>
     <a-table
       :columns="columns"
       :data-source="data"
@@ -67,7 +69,7 @@
     <!-- 基础设置 -->
     <edit-basic-game ref="editBasicRef"></edit-basic-game>
     <!-- 价格设置 -->
-    <edit-price-address></edit-price-address>
+    <edit-price-address ref="editPriceRef"></edit-price-address>
   </div>
 </template>
 <script>
@@ -105,6 +107,7 @@
       const editCarousel = ref(null)
       const settingTeamRef = ref(null)
       const editBasicRef = ref(null)
+      const editPriceRef = ref(null)
       let pagination = reactive({
         pageSize: 10,
         current: 1,
@@ -143,6 +146,11 @@
       const edit = (row) => {
         editBasicRef.value.init(row)
       }
+
+      const setPrice = () => {
+        console.log(editPriceRef.value)
+        editPriceRef.value.init()
+      }
       onMounted(() => {
         loadData()
       })
@@ -153,6 +161,7 @@
         editCarousel,
         settingTeamRef,
         editBasicRef,
+        editPriceRef,
         data,
         childData,
         add,
@@ -160,6 +169,7 @@
         editTeam,
         edit,
         loadData,
+        setPrice,
       }
     },
   }

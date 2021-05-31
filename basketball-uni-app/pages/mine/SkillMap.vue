@@ -12,7 +12,7 @@
 			<canvas canvas-id="canvasRadar" id="canvasRadar" class="charts"></canvas>
 		</view>
 		<view class="sugesstion">
-			技能建议：{{ sugesstion }}
+			技能建议：{{ sugesstion }}	
 		</view>
 	</view>
 </template>

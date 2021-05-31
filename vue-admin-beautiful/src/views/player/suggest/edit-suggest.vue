@@ -29,6 +29,8 @@
         <a-textarea
           placeholder="内容"
           v-model:value="form.sugesstion"
+          showCount
+          :maxlength="24"
           :rows="4"
         />
       </a-form-item>
