@@ -12,6 +12,9 @@
 					<view class="score-item">
 						个人得分：<span style="font-size: 30rpx;color: #A71D5D;">{{item.personScore}}</span>
 					</view>
+					<view class="">
+						比赛类型：{{ order.gameType || '' }}
+					</view>
 				</view>
 			</u-card>
 		</template>
