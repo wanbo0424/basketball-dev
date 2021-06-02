@@ -47,6 +47,7 @@
 						{{ item.name }}
 					</u-radio>
 				</u-radio-group>
+				<u-icon name="question-circle" size="36" @click="viewInsurance"></u-icon>
 			</u-form-item>
 			<u-form-item v-show="showInsurance" label="姓名" :required="showInsurance" prop="role">
 				<u-input v-model="form.actualName" />
@@ -68,6 +69,8 @@
 			@tap="mapTab"> -->
 		</map>
 		<u-toast ref="uToast" />
+		
+		<insurance-detail ref="insurance"></insurance-detail>
 	</view>
 </template>
 
@@ -77,8 +80,9 @@
 	import { mapGetters } from 'vuex'
 	import { generateOrderNumber } from '../../utils/payUtils.js'
 	import GamePopup from './game-popup.vue'
+	import InsuranceDetail from './insurance-detail.vue'
 	export default {
-		components:{ GamePopup },
+		components:{ GamePopup, InsuranceDetail },
 		data() {
 			return {
 				MapContext: null,
@@ -419,6 +423,9 @@
 						this.distance = getDistance(34.24276, 108.892258, this.currentLatitude, this.currentLongitude)
 					}
 				})
+			},
+			viewInsurance() {
+				this.$refs.insurance.init()
 			}
 		},
 		onReady() {
