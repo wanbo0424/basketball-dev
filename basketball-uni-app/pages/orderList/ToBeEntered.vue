@@ -5,6 +5,7 @@
 				<view>比赛时间：{{order.gameDate}} {{order.gameTimeRange}}</view>
 				<!-- <view>比赛地点：{{order.gameAddress}}</view> -->
 				<view>所在队伍：{{order.team || ''}}</view>
+				<view>比赛类型：{{order.gameType || ''}}</view>
 				<view>球衣颜色：{{order.jerseyColor || ''}}</view>
 				<view>球衣号码：{{order.jerseyNumber || ''}}</view>
 				<view>所在赛段：{{order.stage || ''}}</view>
