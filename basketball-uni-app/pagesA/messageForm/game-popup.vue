@@ -1,24 +1,9 @@
 <template>
 	<u-popup v-model="show" mode="bottom" :height="680">
 		<view class="game-pupop">
-			<view class="game-header">
-				<view class="img-area">
-					<!-- <image src="" mode=""></image> -->
-				</view>
-				<view class="game-detail" @click="mapTab" >
-					<view class="" v-if="specificLocation">
-						<image src="../../static/imgs/Marker.png" mode=""
-						style="display: inline-block;height: 32rpx;width: 32rpx;vertical-align: middle;"></image>
-						<span >{{ specificLocation }} （{{distance}}km）</span>
-					</view>
-					<view >
-						<span>价格：<span v-if="selectItem.price">¥{{ selectItem.price }}元</span></span>
-					</view>
-				</view>
-			</view>
 			<view class="game-content">
 				<view class="title1">
-					场地列表
+					场地
 				</view>
 				<view 
 					v-for="(item, index) in gameAddressList" 
@@ -33,15 +18,42 @@
 				>
 					{{ item.label }}
 				</view>
+				<view class="" style="display: flex;" v-if="specificLocation">
+					<image src="../../static/imgs/Marker.png" mode=""
+					style="display: inline-block;height: 36rpx;width: 36rpx;vertical-align: middle;"></image>
+					<p style="font-size: 24rpx;color: #9d9999;line-height: 1.5;width: calc(100% - 36rpx);">{{ specificLocation }} （{{distance}}km）</p>
+				</view>
+				<view class="" v-if="gameTypeArr.length">
+					<view class="title1">
+						比赛类型
+					</view>
+					<view
+						v-for="(item, index) in gameTypeArr"
+						:key="index" 
+						class="game-item" 
+						:style="{
+							'backgroundColor': selectTypeIndex === index ? '#ffd3d6' : '#eeece7', 
+							'color': selectTypeIndex === index ? '#ff4346' : '', 
+							'border': selectTypeIndex === index ? '2rpx solid #ff4346' : ''
+						}"
+						@click="selectType(item, index)"
+					>
+						{{ item === 0 ? '全场' : '半场' }}
+					</view>
+				</view>
+			</view>
+			<view>
+				<span>价格：<span v-if="price" style="font-weight: bold;">¥{{ price }}元</span></span>
 			</view>
 			<view class="game-footer">
-				<u-button type="primary" @click="handleOk">选择该场</u-button>
+				<u-button type="primary" size="medium" @click="handleOk">选择该场</u-button>
 			</view>
 		</view>
 	</u-popup>
 </template>
 
 <script>
+	import http from '../../api/index.js'
 	import { getDistance } from '../../utils/index.js'
 	export default {
 		props: {
@@ -60,13 +72,14 @@
 				gameAddressList: [],
 				gameDateList: [],
 				selectIndex: null,
+				selectTypeIndex: null,
 				currentLatitude: 34.343119,
 				currentLongitude: 108.93963,
 				specificLocation: '',
 				distance: '',
-				selectItem: {
-					price: ''
-				}
+				selectItem: {},
+				price: null,
+				gameTypeArr: []
 			}
 		},
 		methods: {
@@ -79,22 +92,12 @@
 					this.selectIndex = null
 					this.specificLocation = ''
 					this.distance = ''
-					this.selectItem = {
-						price: ''
-					}
+					this.selectItem = {}
 				}
 			},
 			selectGame(e, index) {
 				this.selectIndex = index
 				this.selectItem = e
-				if(e.label.indexOf('（待开放）') !== -1) {
-					this.$refs.uToast.show({
-						title: '该场次待开放',
-						type: 'default',
-						duration: '2000'
-					})
-					return
-				}
 				let findItem = this.gameList.find(item => item._id === e.label)
 				if(findItem){
 					this.gameDateList = findItem.gameDates
@@ -106,22 +109,18 @@
 						this.specificLocation = findItem.gameDates.filter(item => item.specificLocation)[0].specificLocation
 						this.computDistance()
 					}
-					this.gameDateList = Array.from(new Set(this.gameDateList))
-					this.gameDateList = this.gameDateList.map(item => ({
-						value: item,
-						label: item,
-					}))
-					this.gameDateList.forEach(item => {
-						let dateItems = findItem.gameDates.filter(ele => ele.gameDate === item.value).length
-						let closeItems = findItem.gameDates.filter(ele => ele.gameDate === item.value && ele.gameStatus === 3).length
-						if(dateItems === closeItems) {
-							item.disabled = true
-							item.value = item.label = `${item.label} （待开放）`
-						}
-					})
-				}else{
-					this.gameDateList = []
+					this.gameTypeArr = [...new Set(findItem.gameDates.map(item => item.gameType))].filter(ele => ele || ele === 0)
 				}
+			},
+			selectType(e, index) {
+				this.selectTypeIndex = index
+				http.get('weapp/game/queryAddressPrice', {params: {address: this.selectItem.label}}).then(res => {
+					if(res.data.code === 0) {
+						this.price = e === 0 ? res.data.data.fullPrice : res.data.data.halfPrice
+						this.selectItem.gameType = e
+					}
+				})
+				
 			},
 			handleOk() {
 				this.$emit('confirm', [this.selectItem])
@@ -148,18 +147,16 @@
 	.game-pupop{
 		padding: 16rpx 28rpx;
 		height: 100%;
-		.game-header{
-			height: 210rpx;
-		}
 		.game-content{
 			// display: flex;
 			.title1{
-				font-weight: 600;
+				font-weight: bold;
+				font-size: 28rpx;
 			}
 			.game-item{
 				display: inline-block;
 				border: 2rpx solid #FFFFFF;
-				// color: #FFFFFF;
+				margin-left: 12rpx;
 				border-radius: 26rpx;
 				height: 56rpx;
 				line-height: 56rpx;
@@ -172,7 +169,7 @@
 			width: 100%;
 			height: 40rpx;
 			position: fixed;
-			bottom: 18rpx;
+			bottom: 88rpx;
 		}
 	}
 </style>

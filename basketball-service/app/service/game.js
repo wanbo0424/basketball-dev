@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2021-01-11 17:21:53
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-31 17:11:51
+ * @LastEditTime: 2021-06-01 11:40:07
  * @FilePath: \basketball-service\app\service\game.js
  */
 'use strict';
@@ -121,6 +121,7 @@ class GameService extends Service {
               latitude: '$latitude',
               longitude: '$longitude',
               price: '$price',
+              gameType: '$gameType',
               specificLocation: '$specificLocation',
             },
           },
@@ -197,6 +198,7 @@ class GameService extends Service {
               latitude: '$latitude',
               longitude: '$longitude',
               price: '$price',
+              gameType: '$gameType',
               specificLocation: '$specificLocation',
             },
           },
@@ -248,7 +250,7 @@ class GameService extends Service {
     const addAddresses = [];
     for (const e of addresses) {
       if (oldAddresses.findIndex(ele => ele.address === e._id) < 0) {
-        addAddresses.push({ address: e._id, fullPrice: '', halfPrice: '' });
+        addAddresses.push({ address: e._id, fullPrice: '', halfPrice: '', gameDate: '$gameDate' });
       }
     }
     if (addAddresses.length) {
@@ -256,9 +258,15 @@ class GameService extends Service {
     }
     return await app.model.AddressPrice.find();
   }
+  // 获取球馆价格列表
   async getAddressPriceList() {
     const { app } = this;
-    const docs = app.model.AddressPrice.find();
+    const docs = app.model.AddressPrice.find().sort({ gameDate: -1 });
+    return docs;
+  }
+  async queryAddressPrice(query) {
+    const { app } = this;
+    const docs = app.model.AddressPrice.find(query);
     return docs;
   }
   async setAddressPrice(data) {

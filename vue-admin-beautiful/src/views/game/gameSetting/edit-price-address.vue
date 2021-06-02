@@ -4,7 +4,7 @@ import { ref } from 'vue';
  * @Date: 2021-05-31 18:19:28
  * @Author: yinwb
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-31 18:30:58
+ * @LastEditTime: 2021-06-01 14:47:57
  * @FilePath: \vue-admin-beautiful\src\views\game\gameSetting\edit-price-address.vue
 -->
 <template>
@@ -12,7 +12,7 @@ import { ref } from 'vue';
     <a-button type="primary" @click="syncAddress">同步球馆</a-button>
     <a-table :columns="columns" :data-source="tableData" bordered>
       <template
-        v-for="col in ['address', 'fullPrice', 'harfPrice']"
+        v-for="col in ['fullPrice', 'halfPrice']"
         :key="col"
         #[col]="{ text, record }"
       >
@@ -52,7 +52,12 @@ import { ref } from 'vue';
 </template>
 <script>
   import { ref } from 'vue'
-  import { syncAddressList } from '@/api/game.js'
+  import {
+    syncAddressList,
+    setAddressPrice,
+    getAddressPriceList,
+  } from '@/api/game.js'
+  import { message } from 'ant-design-vue'
   const columns = [
     {
       title: '球馆',
@@ -61,6 +66,7 @@ import { ref } from 'vue';
     {
       title: '全场价格',
       dataIndex: 'fullPrice',
+      slots: { customRender: 'fullPrice' },
     },
     {
       title: '半场价格',
@@ -81,13 +87,35 @@ import { ref } from 'vue';
       let editingKey = ref('')
       let cacheData = ref([])
 
-      const init = () => {
+      const init = async () => {
         visible.value = true
+        await loadData()
+        tableData.value.forEach((item) => {
+          item.editable = false
+        })
+        cacheData.value = JSON.parse(JSON.stringify(tableData.value))
+      }
+      const loadData = () => {
+        return getAddressPriceList().then((res) => {
+          if (res.code === 0) {
+            tableData.value = res.data
+          }
+        })
       }
       const syncAddress = () => {
         syncAddressList().then((res) => {
           if (res.code === 0) {
             tableData.value = res.data
+          }
+        })
+      }
+
+      const save = (record) => {
+        setAddressPrice(record).then((res) => {
+          if (res.code === 0) {
+            record.editable = false
+            editingKey.value = ''
+            message.success('保存成功')
           }
         })
       }
@@ -114,7 +142,7 @@ import { ref } from 'vue';
         const newData = [...tableData.value]
         const target = newData.filter((item) => key === item._id)[0]
         if (target) {
-          target[column] = Number(value)
+          target[column] = value
           tableData.value = newData
         }
       }
@@ -127,6 +155,9 @@ import { ref } from 'vue';
         syncAddress,
         init,
         visible,
+        save,
+        editingKey,
+        loadData,
       }
     },
   }

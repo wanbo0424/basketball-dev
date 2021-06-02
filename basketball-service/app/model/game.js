@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-11 14:32:16
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-31 10:27:43
+ * @LastEditTime: 2021-06-01 10:53:04
  * @FilePath: \basketball-service\app\model\game.js
  */
 'use strict';
@@ -83,6 +83,10 @@ module.exports = app => {
     },
     // 价格
     price: {
+      type: Number,
+    },
+    // 比赛类型 0：全场 1：半场
+    gameType: {
       type: Number,
     },
   }, {

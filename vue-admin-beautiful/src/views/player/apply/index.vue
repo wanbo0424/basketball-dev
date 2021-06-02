@@ -2,7 +2,7 @@
  * @Description: 
  * @Date: 2021-01-08 17:59:51
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-27 14:53:51
+ * @LastEditTime: 2021-06-01 16:18:40
  * @FilePath: \vue-admin-beautiful\src\views\player\apply\index.vue
 -->
 <template>
@@ -16,6 +16,9 @@
       :scroll="{ x: 'calc(700px + 50%)' }"
       @change="handleTableChange"
     >
+      <template #gameType="{ text: gameType }">
+        {{ gameType === 0 ? '全场' : '半场' }}
+      </template>
       <template #createTime="{ text: createTime }">
         <span>
           {{
@@ -31,6 +34,8 @@
         >
           <a-radio value="A">A</a-radio>
           <a-radio value="B">B</a-radio>
+          <a-radio v-if="row.gameType === 0" value="C">C</a-radio>
+          <a-radio v-if="row.gameType === 0" value="D">D</a-radio>
         </a-radio-group>
       </template>
       <template #sms="{ record }">
@@ -114,6 +119,11 @@
     {
       title: '分享来源',
       dataIndex: 'sharedNickName',
+    },
+    {
+      title: '比赛类型',
+      dataIndex: 'gameType',
+      slots: { customRender: 'gameType' },
     },
     {
       title: '创建时间',

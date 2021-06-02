@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:39:52
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-26 14:57:17
+ * @LastEditTime: 2021-06-01 16:06:57
  * @FilePath: \basketball-service\app\service\player.js
  */
 'use strict';
@@ -325,12 +325,11 @@ class PlayerService extends Service {
   }
 
   // 剩余名额
-  async getRemainPlaces(query) {
+  async getCompleteQuota(query) {
     const { app } = this;
-    let places = 0;
     const docs = await app.model.Player.find({ gameId: query.gameId, payStatus: 2 });
-    places = 16 - docs.length;
-    return places;
+    // places = 16 - docs.length;
+    return docs.length;
   }
 
   async getCouponList(query) {

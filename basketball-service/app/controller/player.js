@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:34:06
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-24 17:55:56
+ * @LastEditTime: 2021-06-01 16:07:31
  * @FilePath: \basketball-service\app\controller\player.js
  */
 'use strict';
@@ -63,9 +63,9 @@ class PlayerController extends Controller {
     this.success(data);
   }
 
-  async getRemainPlaces() {
+  async getCompleteQuota() {
     const { ctx } = this;
-    const data = await ctx.service.player.getRemainPlaces(ctx.query);
+    const data = await ctx.service.player.getCompleteQuota(ctx.query);
     this.success(data);
   }
 

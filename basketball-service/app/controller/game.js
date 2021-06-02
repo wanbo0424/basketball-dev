@@ -88,5 +88,10 @@ class GameController extends Controller {
     const data = await ctx.service.game.setAddressPrice(ctx.request.body);
     this.success(data);
   }
+  async queryAddressPrice() {
+    const { ctx } = this;
+    const data = await ctx.service.game.queryAddressPrice(ctx.query);
+    this.success(data[0]);
+  }
 }
 module.exports = GameController;

@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-11 17:42:14
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-25 16:19:10
+ * @LastEditTime: 2021-06-01 10:20:35
  * @FilePath: \vue-admin-beautiful\src\api\game.js
  */
 import request from '@/utils/request'
@@ -39,6 +39,11 @@ export const gameListByAddress = (params) =>
   request.get('/admin/gameListByAddress', { params })
 
 export const syncAddressList = () => request.get('/admin/syncAddressList')
+export const getAddressPriceList = () =>
+  request.get('/admin/getAddressPriceList')
+
+export const setAddressPrice = (data) =>
+  request.post('/admin/setAddressPrice', data)
 
 export const gameScoreSet = (data) =>
   request({

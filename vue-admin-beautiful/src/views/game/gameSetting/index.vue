@@ -3,7 +3,7 @@
  * @Date: 2021-04-06 10:18:37
  * @Author: yinwb
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-31 18:19:58
+ * @LastEditTime: 2021-06-01 11:04:54
  * @FilePath: \vue-admin-beautiful\src\views\game\gameSetting\index.vue
 -->
 <template>
@@ -28,6 +28,9 @@
           :scroll="{ x: 'calc(700px + 50%)' }"
           :pagination="false"
         >
+          <template #gameType="{ record }">
+            <span>{{ record.gameType === 0 ? '全场' : '半场' }}</span>
+          </template>
           <template #gameStatus="{ record }">
             <a-badge v-if="!record.gameStatus" color="#f50" text="未举行" />
             <a-badge
@@ -87,6 +90,12 @@
     { title: '比赛Id', dataIndex: 'gameId', key: 'gameId' },
     { title: '比赛日期', dataIndex: 'gameDate', key: 'gameDate' },
     { title: '比赛时间段', dataIndex: 'gameTimeRange', key: 'gameTimeRange' },
+    {
+      title: '类型',
+      dataIndex: 'gameType',
+      key: 'gameType',
+      slots: { customRender: 'gameType' },
+    },
     { title: 'A队名称', dataIndex: 'ATeamName', key: 'ATeamName' },
     { title: 'B队名称', dataIndex: 'BTeamName', key: 'BTeamName' },
     { title: 'A队得分', dataIndex: 'ATeamScore', key: 'ATeamScore' },

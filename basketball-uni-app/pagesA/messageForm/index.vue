@@ -133,8 +133,9 @@
 				plarerData: {},
 				currentLatitude: 34.343119,
 				currentLongitude: 108.93963,
-				specificLocation: '',
-				distance: ''
+				// specificLocation: '',
+				// distance: '',
+				gameType: null,  //比赛类型
 			}
 		},
 		watch:{
@@ -218,6 +219,9 @@
 				// })
 			},
 			gamAddressSelected(e) {
+				this.gameType = e[0].gameType
+				this.form.gameDate = ''
+				this.form.gameTimeRange = ''
 				if(e[0].label.indexOf('（待开放）') !== -1) {
 					this.$refs.uToast.show({
 						title: '该场次待开放',
@@ -230,7 +234,7 @@
 				let findItem = this.gameList.find(item => item._id === e[0].label)
 				if(findItem){
 					this.gameDateList = findItem.gameDates
-						.filter(item => new Date(item.gameDate).getTime() > new Date().getTime() )
+						.filter(item => new Date(item.gameDate).getTime() > new Date().getTime() && item.gameType === e[0].gameType)
 						.map(item => item.gameDate)
 					// if(findItem.gameDates.filter(item => item.specificLocation).length) {
 					// 	this.currentLatitude = findItem.gameDates.filter(item => item.specificLocation)[0].latitude
@@ -268,7 +272,7 @@
 				if(this.gameList && this.gameList.length) {
 					let findItem = this.gameList.find(item => item._id === this.form.gameAddress)
 					if(findItem){
-						this.gameTimeList = findItem.gameDates.filter(item => item.gameDate === this.form.gameDate)
+						this.gameTimeList = findItem.gameDates.filter(item => item.gameDate === this.form.gameDate && item.gameType === this.gameType)
 						this.gameTimeList = this.gameTimeList.map(item => {
 							let label = item.gameStatus === 3 ? `${item.gameTimeRange}（待开放）` : item.gameTimeRange
 							return {
@@ -298,9 +302,9 @@
 				}
 				this.form.gameTimeRange = e[0].label
 				this.form.gameId= e[0].value
-				http.get('weapp/player/getRemainPlaces', { params: {gameId:  this.form.gameId } }).then(res => {
+				http.get('weapp/player/getCompleteQuota', { params: {gameId:  this.form.gameId } }).then(res => {
 					if(res.data.code === 0) {
-						this.places = res.data.data
+						this.places = this.gameType === 0 ? 16 - res.data.data : 12 - res.data.data
 					}
 				})
 			},
