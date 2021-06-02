@@ -132,10 +132,10 @@ class GameService extends Service {
     let newDocs = [];
     if (docs && docs.length) {
       newDocs = docs.filter(item => {
-        if (item.gameDate) {
-          return new Date(item.gameDate).getTime() > new Date().getTime();
-        }
-        return false;
+        const hasGame = item.gameDates.some(ele => {
+          return new Date(ele.gameDate).getTime() > new Date().getTime();
+        });
+        return hasGame;
       });
     }
     return newDocs;
