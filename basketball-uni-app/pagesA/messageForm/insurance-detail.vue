@@ -9,12 +9,13 @@
 					保障权益
 				</view>
 				<u-row gutter="16" class="row-item">
-					<u-col span="9">
-						意外身故/伤残
-					</u-col>
-					<u-col span="3">
-						15万元
-					</u-col>
+					<u-col span="9">意外身故/伤残</u-col><u-col span="3">15万元</u-col>
+					<u-col span="9">猝死保障</u-col><u-col span="3">20000元</u-col>
+					<u-col span="9">意外医疗</u-col><u-col span="3">15000元</u-col>
+					<u-col span="9">突发性疾病医疗保障</u-col><u-col span="3">200元</u-col>
+					<u-col span="9">救护车费用</u-col><u-col span="3">300元</u-col>
+					<u-col span="9">紧急医疗运送</u-col><u-col span="3">2万元</u-col>
+					<u-col span="9"></u-col><u-col span="3">2000元</u-col>
 				</u-row>
 			</view>
 		</view>
