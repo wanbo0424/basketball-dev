@@ -193,6 +193,7 @@
 			  'shareInfo'
 			])
 		 },
+		 
 		methods: {
 			createMap(order) {
 				this.showMap = true

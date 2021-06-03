@@ -13,7 +13,7 @@
 						个人得分：<span style="font-size: 30rpx;color: #A71D5D;">{{item.personScore}}</span>
 					</view>
 					<view class="">
-						比赛类型：{{ order.gameType || '' }}
+						比赛类型：{{ gameType(order) }}
 					</view>
 				</view>
 			</u-card>
@@ -38,7 +38,18 @@
 		computed: {
 			...mapGetters([
 			  'userInfo',
-			])
+			]),
+			gameType() {
+				return (order) => {
+					if(order.gameType === 0) {
+						return '全场'
+					}else if(order.gameType === 1) {
+						return '半场'
+					}else{
+						return ''
+					}
+				}
+			}
 		 },
 		mounted() {
 			http.get('weapp/enteredList', { params: { openId: this.userInfo.openId } }).then(res => {

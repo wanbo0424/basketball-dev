@@ -48,6 +48,11 @@
 					恭喜您获得新人折扣券，请在优惠券中查看。组队成功后会发送短信和微信通知比赛时间地点。请准时到达场地参赛！
 				</div>
 			</template>
+			<template v-else>
+				<div style="padding: 0 24rpx;">
+					支付成功，组队成功后会发送短信和微信通知比赛时间地点。请准时到达场地参赛！
+				</div>
+			</template>
 		</u-modal>
 		
 		<u-popup v-model="showCouponList" mode="bottom" 	>
@@ -128,26 +133,7 @@ import { mapGetters } from 'vuex'
 					couponType: ''
 				},
 				discountPrice: 0,
-				couponList: [
-					// {
-					// 	allowance: 9,
-					// 	couponType: 0,
-					// 	createTime: "2021-05-12T09:20:48.970Z",
-					// 	name: "新人折扣券",
-					// 	updateTime: "2021-05-12T09:20:48.970Z",
-					// 	validPeriod: 60,
-					// 	_id: "609b9df067b47b4cb25c6fca",
-					// },
-					// {
-					// 	allowance: 9,
-					// 	couponType: 0,
-					// 	createTime: "2021-05-12T09:20:48.970Z",
-					// 	name: "新人折扣券",
-					// 	updateTime: "2021-05-12T09:20:48.970Z",
-					// 	validPeriod: 60,
-					// 	_id: "609b9df067b47b4cb25c6fcc",
-					// }
-				]
+				couponList: []
 			}
 		},
 		computed: {
@@ -202,8 +188,8 @@ import { mapGetters } from 'vuex'
 							if(res.data.code === 0) {
 								if(res.data.data.length === 1) {
 									this.showCoupon = true
-									this.showPaid = true
 								}
+								this.showPaid = true
 							}
 						})
 					}

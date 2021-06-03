@@ -5,7 +5,7 @@
 				<view>比赛时间：{{order.gameDate}} {{order.gameTimeRange}}</view>
 				<!-- <view>比赛地点：{{order.gameAddress}}</view> -->
 				<view>所在队伍：{{order.team || ''}}</view>
-				<view>比赛类型：{{order.gameType || ''}}</view>
+				<view>比赛类型：{{gameType(order)}}</view>
 				<view>球衣颜色：{{order.jerseyColor || ''}}</view>
 				<view>球衣号码：{{order.jerseyNumber || ''}}</view>
 				<view>所在赛段：{{order.stage || ''}}</view>
@@ -42,6 +42,19 @@
 		watch: {
 			'data'(val) {
 				this.orders = val
+			}
+		},
+		computed:{
+			gameType() {
+				return (order) => {
+					if(order.gameType === 0) {
+						return '全场'
+					}else if(order.gameType === 1) {
+						return '半场'
+					}else{
+						return ''
+					}
+				}
 			}
 		},
 		data() {

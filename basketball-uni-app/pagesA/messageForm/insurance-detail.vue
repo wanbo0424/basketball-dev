@@ -6,6 +6,10 @@
 			</h3>
 			<view class="content">
 				<view class="" style="font-weight: bold;font-size: 26rpx;">
+					保障期限
+				</view>
+				<u-row gutter="16" class="row-item">1天</u-row>
+				<view class="" style="font-weight: bold;font-size: 26rpx;">
 					保障权益
 				</view>
 				<u-row gutter="16" class="row-item">
@@ -15,7 +19,9 @@
 					<u-col span="9">突发性疾病医疗保障</u-col><u-col span="3">200元</u-col>
 					<u-col span="9">救护车费用</u-col><u-col span="3">300元</u-col>
 					<u-col span="9">紧急医疗运送</u-col><u-col span="3">2万元</u-col>
-					<u-col span="9"></u-col><u-col span="3">2000元</u-col>
+					<u-col span="9">身故遗体运返</u-col><u-col span="3">2000元</u-col>
+					<u-col span="9">亲属慰问探访费用</u-col><u-col span="3">3000元</u-col>
+					<u-col span="9">个人责任保障</u-col><u-col span="3">5000元</u-col>
 				</u-row>
 			</view>
 		</view>

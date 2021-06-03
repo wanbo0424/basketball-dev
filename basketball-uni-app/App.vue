@@ -14,7 +14,10 @@
 		},
 		created() {
 		},
-		
+		onShow: function() {
+			// 隐藏首页按钮
+			uni.hideHomeButton()
+		},
 		
 		onLaunch: function() {
 		},
