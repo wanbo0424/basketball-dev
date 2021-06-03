@@ -40,14 +40,22 @@
 				<u-input v-model="form.role" type="select" @click="showRoleSelect = true" />
 				<u-select v-model="showRoleSelect" :list="roleList" @confirm="roleSelected"></u-select>
 			</u-form-item>
-			<u-form-item label="需要赛事保险" prop="needInsurance">
+			<u-form-item label="需要保险" prop="needInsurance" class="insurance-form">
 				<u-radio-group v-model="form.needInsurance">
 					<u-radio v-for="(item, index) in [{name: '是'}, {name: '否'}]" 
 					:key="index" :name="item.name" :disabled="item.disabled" >
 						{{ item.name }}
 					</u-radio>
 				</u-radio-group>
-				<u-icon name="question-circle" size="36" @click="viewInsurance"></u-icon>
+				<a
+					href="#"
+					style="
+					text-align: right;
+					position: absolute;
+					right: 20rpx;top: 20rpx;font-size: 28rpx;width: 100%;
+					color: #fd6060;text-decoration: underline;" 
+					@click="viewInsurance">保障权益？
+				</a>
 			</u-form-item>
 			<u-form-item v-show="showInsurance" label="姓名" :required="showInsurance" prop="role">
 				<u-input v-model="form.actualName" />
@@ -59,7 +67,7 @@
 				<u-input v-model="form.mobile" />
 			</u-form-item>
 		</u-form>
-		<u-button class="submt-button" @click="submit">提交</u-button>
+		<u-button type="primary" class="submt-button" @click="submit">提交</u-button>
 		<!-- <map id="map1" v-show="showMap" 
 			:latitude="centerlatitude" 
 			:longitude="centerlongitude" 
@@ -449,6 +457,9 @@
 			color: #2979ff;
 		}
 	}
+}
+.insurance-form{
+	position: relative;
 }
 .form-content:after{
 	z-index: -10;

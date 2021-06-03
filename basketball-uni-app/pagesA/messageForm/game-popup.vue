@@ -10,12 +10,12 @@
 					:key="index" 
 					class="game-item" 
 					:style="{
-						'backgroundColor': selectIndex === index ? '#ffd3d6' : '#eeece7', 
-						'color': selectIndex === index ? '#ff4346' : '', 
-						'border': selectIndex === index ? '2rpx solid #ff4346' : ''
+						'backgroundColor': selectIndex === index ? '#f7e404eb' : '#eeece7', 
 					}"
 					@click="selectGame(item, index)"
 				>
+					<!-- 	'color': selectIndex === index ? '#ff4346' : '',
+						'border': selectIndex === index ? '2rpx solid #ff4346' : '' -->
 					{{ item.label }}
 				</view>
 				<view class="" style="display: flex;" v-if="specificLocation">
@@ -32,9 +32,7 @@
 						:key="index" 
 						class="game-item" 
 						:style="{
-							'backgroundColor': selectTypeIndex === index ? '#ffd3d6' : '#eeece7', 
-							'color': selectTypeIndex === index ? '#ff4346' : '', 
-							'border': selectTypeIndex === index ? '2rpx solid #ff4346' : ''
+							'backgroundColor': selectTypeIndex === index ? '#f7e404eb' : '#eeece7',
 						}"
 						@click="selectType(item, index)"
 					>
@@ -43,7 +41,7 @@
 				</view>
 			</view>
 			<view>
-				<span>价格：<span v-if="price" style="font-weight: bold;">¥{{ price }}元</span></span>
+				<span>组队入场券：<span v-if="price" style="font-weight: bold;">¥{{ price }}元</span></span>
 			</view>
 			<view class="game-footer">
 				<u-button type="primary" size="medium" @click="handleOk">选择该场</u-button>
@@ -90,6 +88,7 @@
 					this.selectIndex = this.gameAddressList.findIndex(item => item.label === this.value)
 				}else{
 					this.selectIndex = null
+					this.selectTypeIndex = null
 					this.specificLocation = ''
 					this.distance = ''
 					this.selectItem = {}

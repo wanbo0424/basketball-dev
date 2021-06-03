@@ -6,7 +6,9 @@
 				<view style="width: 25%;font-weight: 600;font-size: 30rpx;">比赛阶段：</view>
 				<view style="width: 75%;color: #615d5d;">
 					<view class="">
-						● 全场比赛
+						<view class="" style="font-weight: 600;color:#48433bd9;">
+							● 全场比赛
+						</view>
 						<view class="" style="padding-left: 18rpx;">
 							一、队内1v1车轮赛逐首发；
 							<span style="text-decoration: underline;color: red;" @click="viewRule1">比赛规则</span></br>
@@ -17,7 +19,9 @@
 						</view>
 					</view>
 					<view class="">
-						● 半场比赛
+						<view class="" style="font-weight: 600;color:#48433bd9;">
+							● 半场比赛
+						</view>
 						<view class="" style="padding-left: 18rpx;">
 							一、3v3半场正赛；
 							<span style="text-decoration: underline;color: red;" @click="viewRule1">比赛规则</span></br>

@@ -46,6 +46,11 @@
 <style lang="scss" scoped>
 	.container{
 		padding: 30rpx 26rpx;
+		.title{
+			text-align: center;
+			font-weight: bold;
+			font-size: 30rpx;
+		}
 		.content{
 			padding: 0 24rpx;
 			.row-item{

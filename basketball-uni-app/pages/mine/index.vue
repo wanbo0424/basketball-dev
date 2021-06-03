@@ -87,7 +87,7 @@
 				<u-grid-item @click="toCoupon">
 					<u-icon name="youhuiquan" custom-prefix="custom-icon" color="#f57463" :size="54"></u-icon>
 					<view class="grid-text" >优惠券</view>
-					<u-badge type="error" :count="couponList.length" show-zero></u-badge>
+					<u-badge type="error" :count="couponList.length"></u-badge>
 				</u-grid-item>
 				<u-grid-item @click="recharge">
 					<u-icon name="chongzhi" custom-prefix="custom-icon" color="#f57463" :size="54"></u-icon>

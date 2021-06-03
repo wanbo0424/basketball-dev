@@ -13,7 +13,7 @@
 						个人得分：<span style="font-size: 30rpx;color: #A71D5D;">{{item.personScore}}</span>
 					</view>
 					<view class="">
-						比赛类型：{{ gameType(order) }}
+						比赛类型：{{ gameType(item) }}
 					</view>
 				</view>
 			</u-card>
