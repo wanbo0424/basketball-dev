@@ -50,9 +50,10 @@
 				<a
 					href="#"
 					style="
+					display: inline-block;
 					text-align: right;
 					position: absolute;
-					right: 20rpx;top: 20rpx;font-size: 28rpx;width: 100%;
+					right: 20rpx;top: 20rpx;font-size: 28rpx;
 					color: #fd6060;text-decoration: underline;" 
 					@click="viewInsurance">保障权益？
 				</a>
@@ -247,7 +248,7 @@
 				let findItem = this.gameList.find(item => item._id === e[0].label)
 				if(findItem){
 					this.gameDateList = findItem.gameDates
-						.filter(item => new Date(item.gameDate).getTime() > new Date().getTime() && item.gameType === e[0].gameType)
+						.filter(item => new Date(item.gameDate).getTime() > new Date().getTime())
 						.map(item => item.gameDate)
 					// if(findItem.gameDates.filter(item => item.specificLocation).length) {
 					// 	this.currentLatitude = findItem.gameDates.filter(item => item.specificLocation)[0].latitude
@@ -285,7 +286,7 @@
 				if(this.gameList && this.gameList.length) {
 					let findItem = this.gameList.find(item => item._id === this.form.gameAddress)
 					if(findItem){
-						this.gameTimeList = findItem.gameDates.filter(item => item.gameDate === this.form.gameDate && item.gameType === this.gameType)
+						this.gameTimeList = findItem.gameDates.filter(item => item.gameDate === this.form.gameDate)
 						this.gameTimeList = this.gameTimeList.map(item => {
 							let label = item.gameStatus === 3 ? `${item.gameTimeRange}（待开放）` : item.gameTimeRange
 							return {

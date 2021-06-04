@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2021-01-11 17:21:53
  * @LastEditors: yinwb
- * @LastEditTime: 2021-06-01 11:40:07
+ * @LastEditTime: 2021-06-04 14:23:57
  * @FilePath: \basketball-service\app\service\game.js
  */
 'use strict';
@@ -25,6 +25,9 @@ class GameService extends Service {
             gameAddress,
             ATeamName,
             BTeamName,
+            latitude: '',
+            longitude: '',
+            specificLocation: '',
           });
         });
       });

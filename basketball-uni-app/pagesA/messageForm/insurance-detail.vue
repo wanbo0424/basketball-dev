@@ -2,7 +2,7 @@
 	<u-popup v-model="show" mode="bottom" :height="680">
 		<view class="container">
 			<h3 class="title">
-				众行天下-球类运动保险
+				保障权益如下：
 			</h3>
 			<view class="content">
 				<view class="" style="font-weight: bold;font-size: 26rpx;">
@@ -47,9 +47,8 @@
 	.container{
 		padding: 30rpx 26rpx;
 		.title{
-			text-align: center;
 			font-weight: bold;
-			font-size: 30rpx;
+			font-size: 28rpx;
 		}
 		.content{
 			padding: 0 24rpx;

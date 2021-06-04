@@ -1,5 +1,5 @@
 <template>
-	<u-popup v-model="show" mode="bottom" :height="680">
+	<u-popup v-model="show" mode="bottom" :height="680" >
 		<view class="game-pupop">
 			<view class="game-content">
 				<view class="title1">
@@ -10,7 +10,8 @@
 					:key="index" 
 					class="game-item" 
 					:style="{
-						'backgroundColor': selectIndex === index ? '#f7e404eb' : '#eeece7', 
+						'backgroundColor': item.disabled ? '#f3f2ef' : selectIndex === index ? '#f7e404eb' : '#eeece7', 
+						'color': item.disabled ? '#d3d2ce' : ''
 					}"
 					@click="selectGame(item, index)"
 				>
@@ -41,10 +42,10 @@
 				</view>
 			</view>
 			<view>
-				<span>组队入场券：<span v-if="price" style="font-weight: bold;">¥{{ price }}元</span></span>
+				<span class="title1">组队入场券：<span v-if="price" style="font-weight: bold;">¥{{ price }}元</span></span>
 			</view>
 			<view class="game-footer">
-				<u-button type="primary" size="medium" @click="handleOk">选择该场</u-button>
+				<u-button type="primary" style="width: 100%;" size="medium" @click="handleOk">选择该场</u-button>
 			</view>
 		</view>
 	</u-popup>
@@ -95,6 +96,7 @@
 				}
 			},
 			selectGame(e, index) {
+				if(e.disabled) return
 				this.selectIndex = index
 				this.selectItem = e
 				let findItem = this.gameList.find(item => item._id === e.label)
@@ -163,12 +165,18 @@
 			}
 		}
 		.game-footer{
+			::v-deep{
+				.u-btn{
+					width: 100%!important;
+				}
+			}
 			display: flex;
 			justify-content: center;
 			width: 100%;
 			height: 40rpx;
 			position: fixed;
-			bottom: 88rpx;
+			bottom: 0;
+			// bottom: 88rpx;
 		}
 	}
 </style>

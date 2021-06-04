@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-13 18:36:21
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-07 11:27:10
+ * @LastEditTime: 2021-06-04 14:58:59
  * @FilePath: \basketball-service\app\service\playerCareer.js
  */
 'use strict';

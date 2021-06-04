@@ -12,25 +12,27 @@
 			<view class="gameInfo">
 				<view class="" style="display: flex;">
 					<view class="" style="width: 50%;">
-						积分:{{statisticsInfo.totalEvaluationScore || 0}}
+						积分：{{statisticsInfo.totalEvaluationScore || 0}}
 					</view>
 					<view class="" style="width: 50%;">
-						得分:{{statisticsInfo.totalPersonScore || 0}}
+						得分：{{statisticsInfo.totalPersonScore || 0}}
 					</view>
 				</view>
 				<view class="" style="display: flex;padding-top: 20rpx;">
 					<view class="" style="width: 50%;">
-						排位:{{statisticsInfo.rank + 1 || 0}}
+						排位：{{statisticsInfo.rank + 1 || 0}}
 					</view>
 					<view class="" style="width: 50%;">
-						胜率:{{winRate}}%
+						胜率：{{winRate}}%
 					</view>
 				</view>
 				<view class="" style="display: flex;padding-top: 20rpx;">
 					<view class="" style="width: 50%;">
-						mvp次数:{{statisticsInfo.mvpCount || 0}}
+						mvp次数：{{statisticsInfo.mvpCount || 0}}
 					</view>
-					
+					<view class="" style="width: 50%;">
+						场均得分：{{ (statisticsInfo.totalPersonScore / statisticsInfo.allCount).toFixed(2) }}
+					</view>
 				</view>
 				<view class="" style="display: flex;padding-top: 20rpx;">
 					<view class="" style="width: 50%;">

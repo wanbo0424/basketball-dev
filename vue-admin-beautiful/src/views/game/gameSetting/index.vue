@@ -3,7 +3,7 @@
  * @Date: 2021-04-06 10:18:37
  * @Author: yinwb
  * @LastEditors: yinwb
- * @LastEditTime: 2021-06-01 11:04:54
+ * @LastEditTime: 2021-06-04 14:26:29
  * @FilePath: \vue-admin-beautiful\src\views\game\gameSetting\index.vue
 -->
 <template>
@@ -29,7 +29,8 @@
           :pagination="false"
         >
           <template #gameType="{ record }">
-            <span>{{ record.gameType === 0 ? '全场' : '半场' }}</span>
+            <span v-if="record.gameType === 0">全场</span>
+            <span v-if="record.gameType === 1">半场</span>
           </template>
           <template #gameStatus="{ record }">
             <a-badge v-if="!record.gameStatus" color="#f50" text="未举行" />
