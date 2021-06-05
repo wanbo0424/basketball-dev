@@ -146,7 +146,7 @@
 				"path" : "match/index",
 				"style" :                                                                                    
 				{
-					"navigationBarTitleText": "比赛列表",
+					"navigationBarTitleText": "比赛记录",
 					"enablePullDownRefresh": false
 				}
 			},
@@ -247,7 +247,7 @@
 	    "current": 0, //当前激活的模式（list 的索引项）
 	    "list": [{
 			"name": "mine", //模式名称
-			"path": "pagesA/messageForm/index" //启动页面，必选
+			"path": "pages/mine/index" //启动页面，必选
 		}]
 	},
 	"globalStyle": {
