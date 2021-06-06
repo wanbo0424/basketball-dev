@@ -37,7 +37,7 @@
 						}"
 						@click="selectType(item, index)"
 					>
-						{{ item === 0 ? '全场' : '半场' }}
+						{{ item === 0 ? '【全场】专业裁判+平台技术统计+优秀的你' : '【半场】12人报场，巨爽' }}
 					</view>
 				</view>
 			</view>
@@ -45,7 +45,7 @@
 				<span class="title1">组队入场券：<span v-if="price" style="font-weight: bold;">¥{{ price }}元</span></span>
 			</view>
 			<view class="game-footer">
-				<u-button type="primary" style="width: 100%;" size="medium" @click="handleOk">选择该场</u-button>
+				<u-button type="primary" size="medium" @click="handleOk">选择该场</u-button>
 			</view>
 		</view>
 	</u-popup>
@@ -175,8 +175,8 @@
 			width: 100%;
 			height: 40rpx;
 			position: fixed;
-			bottom: 0;
-			// bottom: 88rpx;
+			// bottom: 0;
+			bottom: 88rpx;
 		}
 	}
 </style>

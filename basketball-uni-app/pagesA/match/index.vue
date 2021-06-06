@@ -19,11 +19,11 @@
 			</u-card> -->
 			<view class="match-item">	
 				<u-row gutter="16" >
-					<u-col span="3">
+					<u-col span="3" >
 						<view>
 							{{moment(item.gameDate).format('HH:mm')}}
 						</view>
-						<view>
+						<view style="color: #999999; font-size: 24rpx;">
 							{{moment(item.gameDate).format('YYYY-MM-DD')}}
 						</view>
 					</u-col>
@@ -31,10 +31,10 @@
 						<view>
 							A：{{item.ATeamScore || 0}} <span style="font-weight: 600;padding: 0 20rpx;">vs</span>  B：{{item.BTeamScore || 0}}
 						</view>
-						<view class="team-item">
+						<view class="team-item" style="font-size: 25rpx;">
 							所在球队：{{item.team}}
 						</view>
-						<view class="score-item">
+						<view class="score-item" style="font-size: 25rpx;">
 							个人得分：<span style="font-size: 30rpx;color: #A71D5D;">{{item.personScore}}</span>
 						</view>
 						
@@ -43,7 +43,7 @@
 						<view>
 							{{item.gameAddress}}
 						</view>
-						<view class="">
+						<view class="" style="color: #999999; font-size: 26rpx;">
 							{{ gameType(item) }}
 						</view>
 					</u-col>

@@ -19,12 +19,12 @@
 						</view>
 					</view>
 					<view class="">
-						<view class="" style="font-weight: 600;color:#48433bd9;">
+						<!-- <view class="" style="font-weight: 600;color:#48433bd9;">
 							● 半场比赛
-						</view>
+						</view> -->
 						<view class="" style="padding-left: 18rpx;">
-							一、3v3半场正赛；
-							<span style="text-decoration: underline;color: red;" @click="viewRule1">比赛规则</span></br>
+							一、半场组队；
+							<span style="text-decoration: underline;color: red;" @click="viewRule3">参加规则</span></br>
 						</view>
 					</view>
 				</view>
@@ -69,6 +69,11 @@
 			viewRule2() {
 				uni.navigateTo({
 					url: '/pagesA/rule/rule2'
+				})
+			},
+			viewRule3() {
+				uni.navigateTo({
+					url: '/pagesA/rule/rule4'
 				})
 			}
 		}

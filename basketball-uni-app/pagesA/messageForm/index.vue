@@ -375,7 +375,7 @@
 						http.post('weapp/players/apply', this.form).then(res => {
 							if(res.data.code === 0) {
 								uni.navigateTo({
-									url:`/pagesA/defray/index?gameAddress=${this.form.gameAddress}&out_trade_no=${this.form.out_trade_no}&gameDate=${this.form.gameDate}&gameTimeRange=${this.form.gameTimeRange}`
+									url:`/pagesA/defray/index?gameAddress=${this.form.gameAddress}&out_trade_no=${this.form.out_trade_no}&gameDate=${this.form.gameDate}&gameTimeRange=${this.form.gameTimeRange}&gameType=${this.gameType}`
 								})
 							}
 						})

@@ -31,7 +31,7 @@
 						mvp次数：{{statisticsInfo.mvpCount || 0}}
 					</view>
 					<view class="" style="width: 50%;">
-						场均得分：{{ (statisticsInfo.totalPersonScore / statisticsInfo.allCount).toFixed(2) }}
+						场均得分：{{ avgScore }}
 					</view>
 				</view>
 				<view class="" style="display: flex;padding-top: 20rpx;">
@@ -163,6 +163,13 @@
 		},
 		mixins:[shareMixin],
 		computed: {
+			avgScore() {
+				if(this.statisticsInfo.totalPersonScore && this.statisticsInfo.allCount) {
+					return (this.statisticsInfo.totalPersonScore / this.statisticsInfo.allCount).toFixed(2)
+				}else{
+					return 0
+				}
+			},
 			...mapGetters([
 			  'userInfo',
 			]),
