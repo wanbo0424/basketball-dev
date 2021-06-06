@@ -19,7 +19,7 @@
 						'border': selectIndex === index ? '2rpx solid #ff4346' : '' -->
 					{{ item.label }}
 				</view>
-				<view class="" style="display: flex;" v-if="specificLocation">
+				<view class="" style="display: flex;" v-if="specificLocation" @click="mapTab">
 					<image src="../../static/imgs/Marker.png" mode=""
 					style="display: inline-block;height: 36rpx;width: 36rpx;vertical-align: middle;"></image>
 					<p style="font-size: 24rpx;color: #9d9999;line-height: 1.5;width: calc(100% - 36rpx);">{{ specificLocation }} （{{distance}}km）</p>
