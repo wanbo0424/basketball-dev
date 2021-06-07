@@ -19,11 +19,11 @@
 						</view>
 					</view>
 					<view class="">
-						<!-- <view class="" style="font-weight: 600;color:#48433bd9;">
+						<view class="" style="font-weight: 600;color:#48433bd9;">
 							● 半场比赛
-						</view> -->
+						</view>
 						<view class="" style="padding-left: 18rpx;">
-							一、半场组队；
+							一、12人包半场；
 							<span style="text-decoration: underline;color: red;" @click="viewRule3">参加规则</span></br>
 						</view>
 					</view>
@@ -34,7 +34,7 @@
 			<view style="width: 25%;font-weight: 600;font-size: 30rpx;">积分原则：</view>
 			<view class="" style="width: 75%;color: #615d5d;">
 				每场正赛结束后，获胜的队伍中每位球员加200积分；落败的队伍中每位球员加100积分；本场最佳球员（MVP）额外获得100积分；
-				积分会累加，按累计积分进行赛季排名
+				积分会累加，按累计积分进行赛季排名；半场比赛不计入积分
 			</view>
 		</view>
 		<view class="process-item" style="background-image: linear-gradient(-45deg, #ea2f05, #f18ca3);">
