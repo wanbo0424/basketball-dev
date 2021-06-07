@@ -40,7 +40,7 @@
 				<u-input v-model="form.role" type="select" @click="showRoleSelect = true" />
 				<u-select v-model="showRoleSelect" :list="roleList" @confirm="roleSelected"></u-select>
 			</u-form-item>
-			<tamplate v-if="gameType === 1">
+			<template v-if="gameType === 0">
 				<u-form-item label="需要保险" prop="needInsurance" class="insurance-form">
 					<u-radio-group v-model="form.needInsurance">
 						<u-radio v-for="(item, index) in [{name: '是'}, {name: '否'}]" 
@@ -65,7 +65,7 @@
 				<u-form-item v-show="showInsurance" label="身份证号" :required="showInsurance" prop="role">
 					<u-input v-model="form.identity" />
 				</u-form-item>
-			</tamplate>
+			</template>
 			<u-form-item label="联系电话" prop="mobile" required="true">
 				<u-input v-model="form.mobile" />
 			</u-form-item>
