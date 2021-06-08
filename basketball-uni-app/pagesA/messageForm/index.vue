@@ -92,6 +92,7 @@
 	import { generateOrderNumber } from '../../utils/payUtils.js'
 	import GamePopup from './game-popup.vue'
 	import InsuranceDetail from './insurance-detail.vue'
+	import moment from 'moment'
 	export default {
 		components:{ GamePopup, InsuranceDetail },
 		data() {
@@ -259,10 +260,21 @@
 					// 	this.computDistance()
 					// }
 					this.gameDateList = Array.from(new Set(this.gameDateList))
-					this.gameDateList = this.gameDateList.map(item => ({
-						value: item,
-						label: item,
-					}))
+					this.gameDateList = this.gameDateList.map(item => {
+						if(new Date(item).getDay() === 0 || new Date(item).getDay() === 6) {
+							return {
+								value: item,
+								label: `${item}(代开放)`,
+							}
+						}else{
+							let reserveDate = new Date(new Date('2021-11-30').getTime() - 12 * 24 * 3600 * 1000)
+							return {
+								value: item,
+								label: `${item}(${moment(reserveDate).format('YYYY-MM-DD')}可预约)`,
+							}
+						}
+						
+					})
 					this.gameDateList.forEach(item => {
 						let dateItems = findItem.gameDates.filter(ele => ele.gameDate === item.value).length
 						let closeItems = findItem.gameDates.filter(ele => ele.gameDate === item.value && ele.gameStatus === 3).length
