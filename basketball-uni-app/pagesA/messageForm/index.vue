@@ -270,7 +270,7 @@
 							let reserveDate = new Date(new Date('2021-11-30').getTime() - 12 * 24 * 3600 * 1000)
 							return {
 								value: item,
-								label: `${item}(${moment(reserveDate).format('YYYY-MM-DD')}可预约)`,
+								label: `${item} (${moment(reserveDate).format('YYYY-MM-DD')}可预约)`,
 							}
 						}
 						
