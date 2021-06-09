@@ -9,10 +9,10 @@
       <a-time-picker
         ref="startRef"
         v-model:value="startTime"
-        valueFormat="HH:mm:ss"
+        valueFormat="HH:mm"
       ></a-time-picker>
       ---
-      <a-time-picker v-model:value="endTime" valueFormat="HH:mm:ss">
+      <a-time-picker v-model:value="endTime" valueFormat="HH:mm">
         <template #addon>
           <a-button size="small" type="primary" @click="handleEndTime">
             Ok

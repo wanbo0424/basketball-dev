@@ -9,7 +9,7 @@
 'use strict';
 module.exports = {
   schedule: {
-    cron: '0 0 0 * * ? *',
+    cron: '0 0 0 * * ? ',
     type: 'worker',
   },
   async task(ctx) {
