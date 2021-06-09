@@ -3,7 +3,7 @@
  * @Description:
  * @Date: 2021-01-11 17:21:53
  * @LastEditors: yinwb
- * @LastEditTime: 2021-06-09 16:12:17
+ * @LastEditTime: 2021-06-09 18:26:14
  * @FilePath: \basketball-service\app\service\game.js
  */
 'use strict';
@@ -283,7 +283,7 @@ class GameService extends Service {
   // 定时添加比赛场任务
   async addGameTask() {
     const { app } = this;
-    const nextDate = moment(new Date(new Date().getTime() + 24 * 3600 * 1000)).format('YYYY-MM-DD');
+    const nextDate = moment(new Date(new Date().getTime() + 12 * 24 * 3600 * 1000)).format('YYYY-MM-DD');
     const times = [ '09:00--11:00', '14:00--16:00' ];
     const games = [];
     times.forEach(item => {
