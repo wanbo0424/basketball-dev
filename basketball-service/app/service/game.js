@@ -3,13 +3,13 @@
  * @Description:
  * @Date: 2021-01-11 17:21:53
  * @LastEditors: yinwb
- * @LastEditTime: 2021-06-04 14:23:57
+ * @LastEditTime: 2021-06-09 16:12:17
  * @FilePath: \basketball-service\app\service\game.js
  */
 'use strict';
 
 const Service = require('egg').Service;
-
+const moment = require('moment');
 class GameService extends Service {
   // 添加比赛
   async addGame(data = {}) {
@@ -278,6 +278,27 @@ class GameService extends Service {
       $set: { fullPrice: data.fullPrice, halfPrice: data.halfPrice },
     });
     return docs;
+  }
+
+  // 定时添加比赛场任务
+  async addGameTask() {
+    const { app } = this;
+    const nextDate = moment(new Date(new Date().getTime() + 24 * 3600 * 1000)).format('YYYY-MM-DD');
+    const times = [ '09:00--11:00', '14:00--16:00' ];
+    const games = [];
+    times.forEach(item => {
+      games.push({
+        gameDate: nextDate,
+        gameTimeRange: item,
+        gameAddress: '春田篮球公园',
+        ATeamName: 'A',
+        BTeamName: 'B',
+        latitude: 34.212833,
+        longitude: 108.911597,
+        specificLocation: '陕西省西安市雁塔区电子二路荣禾·城市理想东门北50米',
+      });
+    });
+    await app.model.Game.insertMany(games);
   }
 }
 

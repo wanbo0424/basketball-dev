@@ -261,13 +261,19 @@
 					// }
 					this.gameDateList = Array.from(new Set(this.gameDateList))
 					this.gameDateList = this.gameDateList.map(item => {
-						if(new Date(item).getDay() === 0 || new Date(item).getDay() === 6) {
+						if(new Date(item).getDay() !== 0 && new Date(item).getDay() !== 6) {
 							return {
 								value: item,
-								label: `${item}(代开放)`,
+								label: `${item} (待开放)`,
 							}
-						}else{
-							let reserveDate = new Date(new Date('2021-11-30').getTime() - 12 * 24 * 3600 * 1000)
+						}else if(new Date(item).getDay() === 6) {
+							let reserveDate = new Date(new Date(item).getTime() - 12 * 24 * 3600 * 1000)
+							return {
+								value: item,
+								label: `${item} (${moment(reserveDate).format('YYYY-MM-DD')}可预约)`,
+							}
+						}else if(new Date(item).getDay() === 0) {
+							let reserveDate = new Date(new Date(item).getTime() - 11 * 24 * 3600 * 1000)
 							return {
 								value: item,
 								label: `${item} (${moment(reserveDate).format('YYYY-MM-DD')}可预约)`,
@@ -295,6 +301,22 @@
 						duration: '2000'
 					})
 					return
+				}
+				if(new Date(e[0].value).getDay() === 0 && new Date(new Date(e[0].value).getTime() - 11 * 24 * 3600 * 1000) > new Date().getTime()) {
+					this.$refs.uToast.show({
+						title: '该场次尚未开始预约',
+						type: 'default',
+						duration: '2000'
+					})
+					return 
+				}
+				if(new Date(e[0].value).getDay() === 6 && new Date(new Date(e[0].value).getTime() - 12 * 24 * 3600 * 1000) > new Date().getTime()) {
+					this.$refs.uToast.show({
+						title: '该场次尚未开始预约',
+						type: 'default',
+						duration: '2000'
+					})
+					return 
 				}
 				this.form.gameDate = e[0].label
 				if(this.gameList && this.gameList.length) {
