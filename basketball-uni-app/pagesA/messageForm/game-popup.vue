@@ -1,5 +1,5 @@
 <template>
-	<u-popup v-model="show" mode="bottom" :height="680" >
+	<u-popup v-model="show" mode="bottom">
 		<view class="game-pupop">
 			<view class="game-content">
 				<view class="title1">
@@ -37,7 +37,7 @@
 						}"
 						@click="selectType(item, index)"
 					>
-						{{ item === 0 ? '【全场】专业裁判+平台技术统计+优秀的你' : '【半场】12人报场，巨爽' }}
+						{{ item === 0 ? '【全场】专业裁判+平台技术统计+优秀的你' : '【半场】12人包场，巨爽' }}
 					</view>
 				</view>
 			</view>
@@ -147,6 +147,7 @@
 <style lang="scss" scoped>
 	.game-pupop{
 		padding: 16rpx 28rpx;
+		min-height: 720rpx;
 		height: 100%;
 		.game-content{
 			// display: flex;

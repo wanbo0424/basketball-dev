@@ -322,7 +322,7 @@
 				if(this.gameList && this.gameList.length) {
 					let findItem = this.gameList.find(item => item._id === this.form.gameAddress)
 					if(findItem){
-						this.gameTimeList = findItem.gameDates.filter(item => item.gameDate === this.form.gameDate)
+						this.gameTimeList = findItem.gameDates.filter(item => item.gameDate === e[0].value)
 						this.gameTimeList = this.gameTimeList.map(item => {
 							let label = item.gameStatus === 3 ? `${item.gameTimeRange}（待开放）` : item.gameTimeRange
 							return {
@@ -381,8 +381,12 @@
 						}))
 						this.gameAddressList.forEach(item => {
 							if(item.disabled) {
-								item.value = item.label = `${item.label} （待开放）`
+								item.value = item.label = `${item.label}`
 							}
+						})
+						this.gameAddressList.push({
+							label: '更多球场即将开放，敬请期待',
+							disabled: true,
 						})
 					}
 				})

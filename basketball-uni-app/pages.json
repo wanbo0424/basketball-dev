@@ -224,6 +224,14 @@
                 }
             }
 			,{
+				"path" : "rule/rule4",
+				"style" :                                                                                    
+                {
+                    "navigationBarTitleText": "半场规则",
+                    "enablePullDownRefresh": false
+                }
+            }
+			,{
 				"path" : "recharge/index",
 				"style" :                                                                                    
 			    {

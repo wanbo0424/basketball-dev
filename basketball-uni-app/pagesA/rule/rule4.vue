@@ -10,7 +10,7 @@
 <script>
 </script>
 
-<style>
+<style lang="scss" scoped>
 	.content{
 		padding: 10rpx 24rpx;
 		.rule-text{
