@@ -385,7 +385,7 @@
 							}
 						})
 						this.gameAddressList.push({
-							label: '更多球场即将开放，敬请期待',
+							label: '更多球场即将开放，敬请期待...',
 							disabled: true,
 						})
 					}
