@@ -13,12 +13,10 @@
 				<span>总金额</span>
 				<span>¥{{orderInfo.totalAmount}}</span>
 			</view>
-			<!-- <view class="pay_item">
-				<span>预交金</span>
-				<span>¥{{orderInfo.defray}}</span>
-			</view> -->
+			<!-- v-if="couponList.length" -->
+			<!-- v-if="couponInfo.couponType === 0" -->
 			<view class="pay_item coupon" v-if="couponList.length" @click="showCouponList = true">
-				<template v-if="couponInfo.couponType === 0" >
+				<template v-if="couponInfo.couponType === 0">
 					<span>折扣券</span>
 					<span>
 						<u-icon name="youhuiquan1" custom-prefix="custom-icon" color="red" style="padding-right: 12rpx;"></u-icon>
@@ -65,7 +63,7 @@
 			<view class="" style="font-size: 36rpx; text-align: center;padding-top: 12rpx;">
 				优惠券
 			</view>
-			<view style="padding: 24rpx 18rpx;">
+			<view style="padding: 24rpx 18rpx;margin-bottom: 50px;">
 				<u-radio-group v-model="selectedCoupon">
 					<view class="coupon-item" v-for="(coupon, index) in couponList">
 						<view class="coupon-price">
@@ -98,8 +96,6 @@
 			</view>
 			<view class="" style="height: 80rpx;position: fixed;width: 100%; bottom: 0;">
 				<button style="
-					position: absolute;
-					right: 20rpx;
 					background: #f96d0a;
 					color: #fff;
 					height: 50rpx;
@@ -136,10 +132,13 @@ import { mapGetters } from 'vuex'
 				selectedCoupon: '',
 				payContent: '支付成功，组队成功后会发送短信和微信通知比赛时间地点。请准时到达场地参赛！',
 				couponInfo: {
-					couponType: ''
+					couponType: 0
 				},
 				discountPrice: 0,
-				couponList: [],
+				couponList: [{
+					couponType: 0,
+					allowance: 9
+				}],
 				gameType: null
 			}
 		},
@@ -157,8 +156,8 @@ import { mapGetters } from 'vuex'
 			couponInfo: {
 				handler(val) {
 					if(val && val.couponType === 0) {
-						this.orderInfo.totalAmount = (this.couponInfo.allowance / 10) * 100
-						this.discountPrice = 100 - this.orderInfo.totalAmount - (this.couponInfo.allowance / 10) * 100
+						this.orderInfo.totalAmount = (this.couponInfo.allowance / 10) * this.gamePrice
+						this.discountPrice = this.gamePrice - this.orderInfo.totalAmount - (this.couponInfo.allowance / 10) * this.gamePrice
 					}
 				},
 				deep: true,
@@ -166,18 +165,14 @@ import { mapGetters } from 'vuex'
 			}
 		},
 		
-		onLoad: async function({gameDate, gameAddress, out_trade_no, gameTimeRange, couponListm, gameType}){
+		onLoad: async function({gameDate, gameAddress, out_trade_no, gameTimeRange, couponListm, gameType, gamePrice}){
 			await this.getCoupons()
 			this.orderInfo.out_trade_no = out_trade_no
 			this.orderInfo.gameDate = gameDate
 			this.orderInfo.gameAddress = gameAddress
 			this.orderInfo.gameTimeRange = gameTimeRange
 			this.gameType = gameType
-			// this.couponList = couponList
-			// console.log(couponList, 'couponList2')
-			// if(this.couponList.length) {
-			// 	this.couponInfo = this.couponList[0]
-			// }
+			this.gamePrice = gamePrice
 		},
 		mounted() {
 			wx.onAppShow(appOptions => {

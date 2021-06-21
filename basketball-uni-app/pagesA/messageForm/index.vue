@@ -152,6 +152,7 @@
 				// specificLocation: '',
 				// distance: '',
 				gameType: null,  //比赛类型
+				gamePrice: 0
 			}
 		},
 		watch:{
@@ -237,6 +238,7 @@
 			},
 			gamAddressSelected(e) {
 				this.gameType = e[0].gameType
+				this.gamePrice= e[0].price
 				this.form.gameDate = ''
 				this.form.gameTimeRange = ''
 				if(e[0].label.indexOf('（待开放）') !== -1) {
@@ -415,7 +417,7 @@
 						http.post('weapp/players/apply', this.form).then(res => {
 							if(res.data.code === 0) {
 								uni.navigateTo({
-									url:`/pagesA/defray/index?gameAddress=${this.form.gameAddress}&out_trade_no=${this.form.out_trade_no}&gameDate=${this.form.gameDate}&gameTimeRange=${this.form.gameTimeRange}&gameType=${this.gameType}`
+									url:`/pagesA/defray/index?gameAddress=${this.form.gameAddress}&out_trade_no=${this.form.out_trade_no}&gameDate=${this.form.gameDate}&gameTimeRange=${this.form.gameTimeRange}&gameType=${this.gameType}&price=${this.gamePrice}`
 								})
 							}
 						})
