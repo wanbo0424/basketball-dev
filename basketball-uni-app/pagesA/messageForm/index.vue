@@ -253,7 +253,7 @@
 				let findItem = this.gameList.find(item => item._id === e[0].label)
 				if(findItem){
 					this.gameDateList = findItem.gameDates
-						.filter(item => new Date(item.gameDate).getTime() > new Date().getTime())
+						.filter(item => new Date(item.gameDate).getTime() > new Date().getTime() && item.gameType === this.gameType)
 						.map(item => item.gameDate)
 					// if(findItem.gameDates.filter(item => item.specificLocation).length) {
 					// 	this.currentLatitude = findItem.gameDates.filter(item => item.specificLocation)[0].latitude

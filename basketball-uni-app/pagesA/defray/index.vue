@@ -45,7 +45,7 @@
 				<div style="padding: 0 24rpx;" v-if="gameType === 0">
 					恭喜您获得新人折扣券，请在优惠券中查看。组队成功后会发送短信和微信通知比赛时间地点以及所属队伍和球衣号码颜色（球衣由组织方提供）。请带好球鞋及防护装备准时到达场地参赛！
 				</div>
-				<div v-else>
+				<div style="padding: 0 24rpx;" v-if="gameType === 1">
 					支付成功，组队成功后会发送短信和微信通知，请准时到场，祝您有个好的体验！
 				</div>
 			</template>
@@ -53,7 +53,7 @@
 				<div style="padding: 0 24rpx;" v-if="gameType === 0">
 					支付成功，组队成功后会发送短信和微信通知比赛时间地点以及所属队伍和球衣号码颜色（球衣由组织方提供）。请带好球鞋及防护装备准时到达场地参赛！
 				</div>
-				<div v-else>
+				<div v-if="gameType === 1" style="padding: 0 24rpx;" >
 					支付成功，组队成功后会发送短信和微信通知，请准时到场，祝您有个好的体验！
 				</div>
 			</template>
