@@ -124,7 +124,7 @@
 				
 			},
 			handleOk() {
-				this.$emit('confirm', [this.selectItem])
+				this.$emit('confirm', [{...this.selectItem, price: this.price}])
 				this.show = false
 			},
 			mapTab() {

@@ -3,6 +3,7 @@
 		<view class="order_info cell_info">
 			<h2>比赛地点：{{orderInfo.gameAddress}}</h2>
 			<h2>比赛时间：{{orderInfo.gameDate}} {{orderInfo.gameTimeRange}}</h2>
+			<h2>比赛类型：{{orderInfo.gameType === 0 ? '全场' : '半场'}}</h2>
 			<!-- <view>
 				{{orderInfo.gameDate}}
 			</view> -->
@@ -121,6 +122,7 @@ import { mapGetters } from 'vuex'
 				orderInfo: {
 					gameDate: '',
 					gameAddress: '',
+					gameType: null,
 					totalAmount: 100 ,//订单总金额
 					// defray: 50 //预交金
 				},
@@ -165,14 +167,16 @@ import { mapGetters } from 'vuex'
 			}
 		},
 		
-		onLoad: async function({gameDate, gameAddress, out_trade_no, gameTimeRange, couponListm, gameType, gamePrice}){
+		onLoad: async function({gameDate, gameAddress, out_trade_no, gameTimeRange, couponListm, gameType, price}){
 			await this.getCoupons()
 			this.orderInfo.out_trade_no = out_trade_no
 			this.orderInfo.gameDate = gameDate
 			this.orderInfo.gameAddress = gameAddress
 			this.orderInfo.gameTimeRange = gameTimeRange
-			this.gameType = gameType
-			this.gamePrice = gamePrice
+			this.orderInfo.totalAmount = price
+			this.$set(this.orderInfo, 'gameType', +gameType)
+			this.gameType = +gameType
+			this.gamePrice = price
 		},
 		mounted() {
 			wx.onAppShow(appOptions => {
@@ -186,6 +190,7 @@ import { mapGetters } from 'vuex'
 				  if (extraData.paySuccess) {
 					this.paySuccess = true
 					if(appOptions.query.out_trade_no) {
+						this.gameType = +appOptions.query.gameType
 						// 如果是第一次参加通知发放新人优惠券
 						http.get('weapp/allOrderList', {openId: this.userInfo.openId}).then(res => {
 							if(res.data.code === 0) {

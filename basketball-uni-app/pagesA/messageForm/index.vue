@@ -255,6 +255,7 @@
 					this.gameDateList = findItem.gameDates
 						.filter(item => new Date(item.gameDate).getTime() > new Date().getTime() && item.gameType === this.gameType)
 						.map(item => item.gameDate)
+						.sort((a, b) => new Date(a).getTime() - new Date(b).getTime())
 					// if(findItem.gameDates.filter(item => item.specificLocation).length) {
 					// 	this.currentLatitude = findItem.gameDates.filter(item => item.specificLocation)[0].latitude
 					// 	this.currentLongitude = findItem.gameDates.filter(item => item.specificLocation)[0].longitude
@@ -324,7 +325,7 @@
 				if(this.gameList && this.gameList.length) {
 					let findItem = this.gameList.find(item => item._id === this.form.gameAddress)
 					if(findItem){
-						this.gameTimeList = findItem.gameDates.filter(item => item.gameDate === e[0].value)
+						this.gameTimeList = findItem.gameDates.filter(item => item.gameDate === e[0].value && item.gameType === this.gameType)
 						this.gameTimeList = this.gameTimeList.map(item => {
 							let label = item.gameStatus === 3 ? `${item.gameTimeRange}（待开放）` : item.gameTimeRange
 							return {
@@ -379,7 +380,7 @@
 							value: item._id,
 							label: item._id,
 							disabled: (item.gameDates && item.gameDates.every(ele => ele.gameStatus === 3)),
-							price: item.price
+							// price: item.price
 						}))
 						this.gameAddressList.forEach(item => {
 							if(item.disabled) {
