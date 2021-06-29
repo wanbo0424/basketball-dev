@@ -7,6 +7,7 @@
  */
 'use strict';
 
+const ObjectId = require('mongodb').ObjectId;
 const Service = require('egg').Service;
 
 class PlayerService extends Service {
@@ -63,8 +64,17 @@ class PlayerService extends Service {
     const { pageSize, current } = query;
     delete query.pageSize;
     delete query.current;
+    for (const key in query) {
+      if (!query[key]) {
+        delete query[key];
+      }
+    }
+    if (query.gameId) {
+      query.gameId = ObjectId(query.gameId);
+    }
     // const docs = await app.model.Player.find(query).skip(pageSize * (current - 1)).limit(Number(pageSize));
     const docs = await app.model.Player.aggregate([
+      { $match: query },
       {
         $lookup:
         {
@@ -82,6 +92,7 @@ class PlayerService extends Service {
       { $project: { gamesInfo: 0 } },
       { $skip: pageSize * (current - 1) },
       { $limit: Number(pageSize) },
+
     ]);
 
     // 分页信息
