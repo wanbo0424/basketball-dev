@@ -19,6 +19,9 @@
       <template #gameType="{ text: gameType }">
         {{ gameType === 0 ? '全场' : '半场' }}
       </template>
+      <template #needInsurance="{ text: needInsurance }">
+        {{ needInsurance ? '是' : '否' }}
+      </template>
       <template #createTime="{ text: createTime }">
         <span>
           {{
@@ -119,6 +122,11 @@
     {
       title: '分享来源',
       dataIndex: 'sharedNickName',
+    },
+    {
+      title: '保险',
+      dataIndex: 'needInsurance',
+      slots: { customRender: 'needInsurance' },
     },
     {
       title: '比赛类型',
