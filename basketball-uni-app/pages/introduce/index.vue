@@ -2,7 +2,7 @@
 	<view style="height: 100%;padding: 0 22rpx;position: relative;">
 		<col-toast></col-toast>
 		<view class="wrap">
-			<u-swiper height="400" :list="swiperList" ></u-swiper>
+			<u-swiper height="400" :list="swiperList" @click="clickSwiper"></u-swiper>
 		</view>
 		
 		<!-- 排名 -->
@@ -119,9 +119,15 @@
 					if(res.data.code === 0) {
 						this.swiperList = res.data.data.map(item => ({
 							image: item.banner_url,
-							title: item.title
+							title: item.title,
+							toUrl: item.toUrl
 						}))
 					}
+				})
+			},
+			clickSwiper(index) {
+				uni.navigateTo({
+					url: this.swiperList[index].toUrl
 				})
 			}
 		},

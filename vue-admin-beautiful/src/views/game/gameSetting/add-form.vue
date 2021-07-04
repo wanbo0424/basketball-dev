@@ -52,6 +52,24 @@
       <a-form-item label="B队名称">
         <a-input v-model:value="form.BTeamName" />
       </a-form-item>
+      <a-form-item label="比赛类型">
+        <a-select
+          :size="size"
+          v-model:value="form.gameType"
+          style="width: 200px"
+        >
+          <a-select-option
+            v-for="(i, index) in [
+              { value: 0, label: '全场' },
+              { value: 1, label: '半场' },
+            ]"
+            :value="i.value"
+            :key="index"
+          >
+            {{ i.label }}
+          </a-select-option>
+        </a-select>
+      </a-form-item>
     </a-form>
   </a-modal>
 </template>
@@ -72,6 +90,7 @@
         latitude: '',
         longitude: '',
         specificLocation: '',
+        gameType: null,
         gameDates: [],
         gameTimeRanges: [],
       })

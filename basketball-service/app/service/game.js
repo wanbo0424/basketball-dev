@@ -14,7 +14,7 @@ class GameService extends Service {
   // 添加比赛
   async addGame(data = {}) {
     const { app } = this;
-    const { gameDates, gameTimeRanges, gameAddress, ATeamName, BTeamName } = data;
+    const { gameDates, gameTimeRanges, gameAddress, ATeamName, BTeamName, latitude, longitude, specificLocation, gameType } = data;
     const games = [];
     if (gameDates && gameTimeRanges) {
       gameDates.forEach(item => {
@@ -25,9 +25,10 @@ class GameService extends Service {
             gameAddress,
             ATeamName,
             BTeamName,
-            latitude: '',
-            longitude: '',
-            specificLocation: '',
+            latitude,
+            longitude,
+            specificLocation,
+            gameType,
           });
         });
       });

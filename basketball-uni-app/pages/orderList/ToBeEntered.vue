@@ -19,7 +19,6 @@
 			</view>
 			<image v-if="order.team && order.gameStatus === 0" style="position: absolute;right: 32rpx;top: 110rpx;height: 140rpx;width: 140rpx;opacity: 0.7;" src="../../static/imgs/participate.png" mode=""></image>
 			<image v-if="!order.team && order.gameStatus === 0" style="position: absolute;right: 32rpx;top: 110rpx;height: 140rpx;width: 140rpx;opacity: 0.7;" src="../../static/imgs/matching.png" mode=""></image>
-			<!-- <image v-if="order.team && order.gameStatus === 2 " style="position: absolute;right: 32rpx;top: 110rpx;height: 140rpx;width: 140rpx;opacity: 0.7;" src="../../static/imgs/participated.png" mode=""></image> -->
 			<image v-if="order.team && order.gameStatus === 2" style="position: absolute;right: 32rpx;top: 110rpx;height: 140rpx;width: 140rpx;opacity: 0.7;" src="../../static/imgs/participated.png" mode=""></image>
 			<!-- <view class="btn">
 				<button @click="$refs.contact.show = true">退款</button>
