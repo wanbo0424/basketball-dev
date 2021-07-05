@@ -21,12 +21,13 @@ class ExpendController extends Controller {
       });
       const rootPath = '/home/www_wanbo_com';
       const codePath = '/images/code.jpeg';
-      console.log(result.data, 'code图片');
+
       // if (!fs.readFileSync(rootPath + codePath)) {
       fs.writeFileSync(rootPath + codePath, result.data, function(err) {
         if (err) { console.log(err); }
       });
       // }
+      console.log(codePath, 'codePath');
       this.success(codePath);
     }
 
