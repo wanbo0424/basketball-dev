@@ -70,6 +70,7 @@
 					mask: true
 				})
 				let codePath = await this.getCodeImage()
+				console.log(codePath)
 				this.ctx.setFillStyle('#FFFFFF')
 				this.ctx.fillRect(0, 0, 320 * 2, 440 * 2)
 
@@ -99,13 +100,14 @@
 				})
 			},
 			getCodeImage() {
-				
 				return http.post('weapp/expend/getWxacode', {
 				 "path": "page/index/index",
 				 "width": 430
 				}).then(res => {
 					if(res.data.code === 0) {
 						return res.data.data
+					}else{
+						return res
 					}
 				})
 			},
