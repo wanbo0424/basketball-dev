@@ -82,6 +82,10 @@
 		<u-toast ref="uToast" />
 		
 		<insurance-detail ref="insurance"></insurance-detail>
+		
+		<u-modal v-model="showVerifyId" @confirm="submit(true)">
+			<rich-text :nodes="verifyContent"></rich-text>
+		</u-modal>
 	</view>
 </template>
 
@@ -104,6 +108,8 @@
 				showGameDateSelect: false,
 				showGameTimeSelect: false,
 				showInsurance: true,
+				showVerifyId: false,
+				verifyContent: '',
 				places: 16,
 				form: {
 					age: '',
@@ -140,6 +146,13 @@
 							trigger: ['change','blur']
 						}
 					],
+					identity: [
+						{
+							pattern: '/^(\d{18,18}|\d{15,15}|\d{17,17}X)$/',
+							message: '请输入正确的身份证号',
+							trigger: 'blur'
+						},
+					]
 				},
 				gameAddressList: [],
 				gameDateList: [],
@@ -395,7 +408,14 @@
 				})
 			},
 			// 提交报名信息
-			submit() {
+			submit(secondConfirm = false) {
+				if(this.showInsurance && !secondConfirm) {
+					this.showVerifyId = true
+					this.verifyContent = `<p>身份证：${this.form.identity}</p></br>
+					<p>真实姓名：${this.form.actualName}</p></br>
+					<p style="text-align:center">请您再次确认！</p>`
+					return
+				}
 				this.$refs.uForm.validate(async valid => {
 					if (valid) {
 						this.form.openId = this.userInfo.openId
