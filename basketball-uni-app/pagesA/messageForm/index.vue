@@ -36,7 +36,7 @@
 			<u-form-item label="年龄" prop="age">
 				<u-input v-model="form.age" />
 			</u-form-item>
-			<u-form-item label="擅长位置" required="true" prop="role">
+			<u-form-item label="擅长位置" required="<tr></tr>ue" prop="role">
 				<u-input v-model="form.role" type="select" @click="showRoleSelect = true" />
 				<u-select v-model="showRoleSelect" :list="roleList" @confirm="roleSelected"></u-select>
 			</u-form-item>
@@ -59,10 +59,10 @@
 						@click="viewInsurance">保障权益？
 					</a>
 				</u-form-item>
-				<u-form-item v-show="showInsurance" label="真实姓名" :required="showInsurance" prop="role">
+				<u-form-item v-show="showInsurance" label="真实姓名" :required="showInsurance" prop="actualName">
 					<u-input v-model="form.actualName" />
 				</u-form-item>
-				<u-form-item v-show="showInsurance" label="身份证号" :required="showInsurance" prop="role">
+				<u-form-item v-show="showInsurance" label="身份证号" :required="showInsurance" prop="identity">
 					<u-input v-model="form.identity" />
 				</u-form-item>
 			</template>
@@ -70,7 +70,7 @@
 				<u-input v-model="form.mobile" />
 			</u-form-item>
 		</u-form>
-		<u-button type="primary" class="submt-button" @click="submit">提交</u-button>
+		<u-button type="primary" class="submt-button" @click="submit(false)">提交</u-button>
 		<!-- <map id="map1" v-show="showMap" 
 			:latitude="centerlatitude" 
 			:longitude="centerlongitude" 
@@ -148,10 +148,20 @@
 					],
 					identity: [
 						{
-							pattern: '/^(\d{18,18}|\d{15,15}|\d{17,17}X)$/',
-							message: '请输入正确的身份证号',
-							trigger: 'blur'
+							validator: (rule, value, callback) => {
+								if(!/^(\d{18,18}|\d{15,15}|\d{17,17}X)$/.test(value)) {
+									callback(new Error('请输入正确的身份证号'));
+								}else{
+									callback()
+								}
+							},
+							trigger: ['change','blur']
 						},
+						// {
+						// 	pattern: /^(\d{18,18}|\d{15,15}|\d{17,17}X)$/,
+						// 	message: '请输入正确的身份证号',
+						// 	trigger: ['change','blur']
+						// },
 					]
 				},
 				gameAddressList: [],
@@ -414,6 +424,7 @@
 					this.verifyContent = `<p>身份证：${this.form.identity}</p></br>
 					<p>真实姓名：${this.form.actualName}</p></br>
 					<p style="text-align:center">请您再次确认！</p>`
+					console.log('aaa')
 					return
 				}
 				this.$refs.uForm.validate(async valid => {
