@@ -16,7 +16,7 @@
 							transform: rotate(28deg);" src="../../../static/imgs/rank/crown.png" mode="">
 						</image>
 					</view>
-					<span style="display: inline-block;margin-top: 10rpx;">{{tableData[0].nickName || '？？'}}</span>
+					<span style="display: inline-block;margin-top: 10rpx;">{{tableData[0].nickName || userInfo.nickName || '？？'}}</span>
 					<span style="display: inline-block;margin-top: 10rpx;">积分:{{tableData[0].evaluationScoreTotal || 0}}</span>
 					<!-- <image style="width: 70rpx;height: 70rpx;" src="../../../static/imgs/rank/top2.png" mode=""></image> -->
 				</view>

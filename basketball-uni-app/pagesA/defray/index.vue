@@ -44,7 +44,8 @@
 					<image style="height: 240rpx;width: 424rpx;" src="../static/coupon.png" mode=""></image>
 				</div>
 				<div style="padding: 0 24rpx;" v-if="gameType === 0">
-					恭喜您获得新人折扣券，请在优惠券中查看。组队成功后会发送短信和微信通知比赛时间地点以及所属队伍和球衣号码颜色（球衣由组织方提供）。请带好球鞋及防护装备准时到达场地参赛！
+					<!-- 恭喜您获得新人折扣券，请在优惠券中查看。(弹出优惠券图片) -->
+					组队成功后会发送短信和微信通知比赛时间地点以及所属队伍和球衣号码颜色（球衣由组织方提供）。请带好球鞋及防护装备准时到达场地参赛！
 				</div>
 				<div style="padding: 0 24rpx;" v-if="gameType === 1">
 					支付成功，组队成功后会发送短信和微信通知，请准时到场，祝您有个好的体验！
@@ -110,13 +111,17 @@
 				</button>
 			</view>
 		</u-popup>
+		
+		<coupon-model v-model="showCouponIcon"></coupon-model>
 	</view>
 </template>
 <script>
 import {generateOrderNumber, getRandomNumber, getSign} from '../../utils/payUtils.js'
 import http from '../../api/index.js'
 import { mapGetters } from 'vuex'
+import CouponModel from './CouponModel.vue'
 	export default {
+		components:{ CouponModel },
 		data() {
 			return {
 				orderInfo: {
@@ -131,6 +136,7 @@ import { mapGetters } from 'vuex'
 				showPaid: false,
 				showCoupon: false,
 				showCouponList: false,
+				showCouponIcon: false,  //显示优惠券画像
 				selectedCoupon: '',
 				payContent: '支付成功，组队成功后会发送短信和微信通知比赛时间地点。请准时到达场地参赛！',
 				couponInfo: {
@@ -212,6 +218,10 @@ import { mapGetters } from 'vuex'
 		methods: {
 			backToIntroduce() {
 				if(!this.paySuccess) return
+				if(this.showCouponIcon && this.gameType === 0) {
+					//弹出优惠券画像，用户自主领取
+					this.showCouponIcon = true
+				}
 				uni.navigateBack({
 					delta: 2
 				})

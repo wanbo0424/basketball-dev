@@ -83,9 +83,16 @@
 		
 		<insurance-detail ref="insurance"></insurance-detail>
 		
-		<u-modal v-model="showVerifyId" @confirm="submit(true)">
+		<u-modal 
+			title="请您再次确认！"
+			v-model="showVerifyId" 
+			show-cancel-button 
+			:content-style="{padding: '10rpx 28rpx', fontSize: '24rpx'}"
+			@confirm="submit(true)">
 			<rich-text :nodes="verifyContent"></rich-text>
 		</u-modal>
+		
+		<coupon-model></coupon-model>
 	</view>
 </template>
 
@@ -96,9 +103,10 @@
 	import { generateOrderNumber } from '../../utils/payUtils.js'
 	import GamePopup from './game-popup.vue'
 	import InsuranceDetail from './insurance-detail.vue'
+	import CouponModel from '../defray/CouponModel.vue'
 	import moment from 'moment'
 	export default {
-		components:{ GamePopup, InsuranceDetail },
+		components:{ GamePopup, InsuranceDetail, CouponModel },
 		data() {
 			return {
 				MapContext: null,
@@ -118,7 +126,9 @@
 					mobile: '',
 					gameId: '',
 					gameName: '',
-					needInsurance: '是'
+					needInsurance: '是',
+					actualName: '',
+					identity: ''
 				},
 				sexList: [{value: 0, label: '男'}, {value: 1, label: '女'}],
 				roleList: [
@@ -148,20 +158,10 @@
 					],
 					identity: [
 						{
-							validator: (rule, value, callback) => {
-								if(!/^(\d{18,18}|\d{15,15}|\d{17,17}X)$/.test(value)) {
-									callback(new Error('请输入正确的身份证号'));
-								}else{
-									callback()
-								}
-							},
+							pattern: /^(\d{18,18}|\d{15,15}|\d{17,17}X)$/,
+							message: '请输入正确的身份证号',
 							trigger: ['change','blur']
 						},
-						// {
-						// 	pattern: /^(\d{18,18}|\d{15,15}|\d{17,17}X)$/,
-						// 	message: '请输入正确的身份证号',
-						// 	trigger: ['change','blur']
-						// },
 					]
 				},
 				gameAddressList: [],
@@ -421,10 +421,10 @@
 			submit(secondConfirm = false) {
 				if(this.showInsurance && !secondConfirm) {
 					this.showVerifyId = true
-					this.verifyContent = `<p>身份证：${this.form.identity}</p></br>
-					<p>真实姓名：${this.form.actualName}</p></br>
-					<p style="text-align:center">请您再次确认！</p>`
-					console.log('aaa')
+					this.verifyContent = `<p style="margin-bottom:24rpx;font-size: 24rpx">身份证：${this.form.identity}</p></br>
+					<p style="margin-bottom:24rpx;font-size: 24rpx">真实姓名：${this.form.actualName}</p></br>`
+					// console.log('aaa')
+					// <p style="text-align:center">请您再次确认！</p>
 					return
 				}
 				this.$refs.uForm.validate(async valid => {

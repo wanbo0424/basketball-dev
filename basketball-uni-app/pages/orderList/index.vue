@@ -153,7 +153,7 @@
 			getAllOrderList() {
 				return http.get('weapp/allOrderList', { params: { openId: this.userInfo.openId } }).then(res => {
 					if(res.data.code === 0) {
-						this.allOrderList = res.data.data
+						this.allOrderList = res.data.data.filter(item => item.payStatus !== 0)
 						return Promise.resolve(true)
 					}
 				})

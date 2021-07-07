@@ -2,7 +2,7 @@
 	<view style="height: 100%;padding: 0 22rpx;position: relative;">
 		<col-toast></col-toast>
 		<view class="wrap">
-			<u-swiper height="400" :list="swiperList" @click="clickSwiper"></u-swiper>
+			<u-swiper height="360" :list="swiperList" @click="clickSwiper"></u-swiper>
 		</view>
 		
 		<!-- 排名 -->

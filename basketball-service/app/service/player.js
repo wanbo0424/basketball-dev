@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:39:52
  * @LastEditors: yinwb
- * @LastEditTime: 2021-06-01 16:06:57
+ * @LastEditTime: 2021-07-07 10:49:34
  * @FilePath: \basketball-service\app\service\player.js
  */
 'use strict';
@@ -212,7 +212,9 @@ class PlayerService extends Service {
       // { $out: 'playerCareers' },
       { $limit: 50 },
     ]);
-    docs = docs.map(item => (
+    docs = docs.filter(ele => {
+      return ele.payStatus !== 0;
+    }).map(item => (
       {
         _id: item._id,
         evaluationScoreTotal: item.evaluationScoreTotal,
@@ -308,7 +310,7 @@ class PlayerService extends Service {
   }
 
   /**
-   * @description: 所有订单列表
+   * @description: 所有订单列表（小程序）
    * @param {Object} {openId, out_tarde_no}
    * @return {*}
    */

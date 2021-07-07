@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-13 18:36:21
  * @LastEditors: yinwb
- * @LastEditTime: 2021-06-04 14:58:59
+ * @LastEditTime: 2021-07-07 14:26:30
  * @FilePath: \basketball-service\app\service\playerCareer.js
  */
 'use strict';
@@ -95,6 +95,7 @@ class PlayerCareerService extends Service {
       ]);
       // 所有比赛文档
       allDocs = await ctx.service.player.allOrderList({ openId: query.openId });
+      allDocs = allDocs.filter(item => item.payStatus !== 0);
       // 胜利比赛文档
       victoryDocs = allDocs.filter(item => {
         return ((item.team === 'A' && item.ATeamScore > item.BTeamScore) || (item.team === 'B' && item.BTeamScore > item.ATeamScore));
@@ -115,7 +116,7 @@ class PlayerCareerService extends Service {
   async getAllCareerList() {
     const { app } = this;
     // 获取所有球员生涯数据
-    const docs = await app.model.Player.aggregate([
+    let docs = await app.model.Player.aggregate([
       {
         $lookup:
         {
@@ -146,7 +147,11 @@ class PlayerCareerService extends Service {
           },
         },
       },
+      { $limit: 50 },
     ]);
+    docs = docs.sort((a, b) => {
+      return b.careerGames.map(item => item.evaluationScore).reduce((total, num) => total + num) - a.careerGames.map(item => item.evaluationScore).reduce((total, num) => total + num);
+    });
     return docs;
   }
 

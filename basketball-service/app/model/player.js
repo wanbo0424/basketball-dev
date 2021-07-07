@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:29:19
  * @LastEditors: yinwb
- * @LastEditTime: 2021-05-24 17:21:10
+ * @LastEditTime: 2021-07-07 10:49:04
  * @FilePath: \basketball-service\app\model\player.js
  */
 'use strict';
@@ -95,6 +95,7 @@ module.exports = app => {
     // 评估积分
     evaluationScore: {
       type: Number,
+      default: 0,
     },
     // 得分
     scoreAbility: {
