@@ -92,7 +92,6 @@
 			<rich-text :nodes="verifyContent"></rich-text>
 		</u-modal>
 		
-		<coupon-model></coupon-model>
 	</view>
 </template>
 
@@ -103,10 +102,10 @@
 	import { generateOrderNumber } from '../../utils/payUtils.js'
 	import GamePopup from './game-popup.vue'
 	import InsuranceDetail from './insurance-detail.vue'
-	import CouponModel from '../defray/CouponModel.vue'
+	// import CouponModel from '../defray/CouponModel.vue'
 	import moment from 'moment'
 	export default {
-		components:{ GamePopup, InsuranceDetail, CouponModel },
+		components:{ GamePopup, InsuranceDetail },
 		data() {
 			return {
 				MapContext: null,

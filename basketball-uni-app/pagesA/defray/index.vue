@@ -112,7 +112,7 @@
 			</view>
 		</u-popup>
 		
-		<coupon-model v-model="showCouponIcon"></coupon-model>
+		<coupon-model v-model="showCouponIcon" :quota="quota" @confirm="confirmReceive"></coupon-model>
 	</view>
 </template>
 <script>
@@ -147,7 +147,8 @@ import CouponModel from './CouponModel.vue'
 					couponType: 0,
 					allowance: 9
 				}],
-				gameType: null
+				gameType: null,
+				quota: null
 			}
 		},
 		computed: {
@@ -216,11 +217,22 @@ import CouponModel from './CouponModel.vue'
 			})
 		},
 		methods: {
+			confirmReceive() {
+				this.$refs.uToast.show({
+					type: 'success'
+					title: '领取成功，请在个人中心-优惠券中查看',
+				}, () => {
+					this.backToIntroduce()
+				})
+			},
 			backToIntroduce() {
 				if(!this.paySuccess) return
-				if(this.showCouponIcon && this.gameType === 0) {
+				if(this.showCoupon && this.gameType === 0) {
 					//弹出优惠券画像，用户自主领取
 					this.showCouponIcon = true
+					this.showCoupon = false
+					this.quota = this.this.couponInfo.allowance
+					return 
 				}
 				uni.navigateBack({
 					delta: 2
