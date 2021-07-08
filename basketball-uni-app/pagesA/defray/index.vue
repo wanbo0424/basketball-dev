@@ -219,7 +219,7 @@ import CouponModel from './CouponModel.vue'
 		methods: {
 			confirmReceive() {
 				this.$refs.uToast.show({
-					type: 'success'
+					type: 'success',
 					title: '领取成功，请在个人中心-优惠券中查看',
 				}, () => {
 					this.backToIntroduce()
