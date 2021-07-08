@@ -6,14 +6,14 @@
  * @FilePath: \basketball-service\app\service\player.js
  */
 'use strict';
-
+const moment = require('moment');
 const ObjectId = require('mongodb').ObjectId;
 const Service = require('egg').Service;
 
 class PlayerService extends Service {
   // 添加报名球员
   async addPlayer(data = {}) {
-    const { app } = this;
+    const { app, ctx } = this;
 
     // const findPalyer = await app.model.Player.find({ openId: data.openId });
     // if (findPalyer && findPalyer.length) {
@@ -39,9 +39,48 @@ class PlayerService extends Service {
       time_end: '',
     };
     if (result._id) {
-      await app.model.Order.create(orderData);
+      const orderId = await app.model.Order.create(orderData);
+
+      // todo 设置未付款提醒
+      ctx.service.Player.timeOrder(orderId, data);
     }
     return result._id;
+  }
+
+  async timeOrder(orderId, data) {
+    const { app, ctx } = this;
+    const time = setTimeout(async () => {
+      const order = await app.model.Order.find({ _id: orderId });
+      if (order.status === 0) {
+        // 设置提醒
+        const result = await ctx.curl(
+          'https://www.apusport.cn/api/admin/pushSms',
+          {
+            method: 'POST',
+            // 通过 contentType 告诉 HttpClient 以 JSON 格式发送
+            contentType: 'json',
+            dataType: 'json',
+            data: {
+              touser: data.openId,
+              template_id: 'mDUqqi39M19ErfQifsPqYRUEdDgOqqqttzhHNTbuT18',
+              data: {
+                thing14: {
+                  value: data.nickName,
+                },
+                time15: {
+                  value: moment(data.gameDate).format('YYYY年MM月DD日 HH:mm:ss'),
+                },
+                thing16: { value: data.gameAddress || '' },
+                thing17: { value: data.team || '' },
+                number18: { value: data.jerseyNumber || 0 },
+              },
+            },
+          }) || {};
+        console.log(result);
+      } else {
+        clearTimeout(time);
+      }
+    }, 5 * 1000);
   }
 
   async updatePlayer(data = {}) {
