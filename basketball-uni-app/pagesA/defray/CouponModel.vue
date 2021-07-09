@@ -46,7 +46,7 @@
 		},
 		data() {
 			return{
-				show: true
+				show: false
 			}
 		},
 		watch:{

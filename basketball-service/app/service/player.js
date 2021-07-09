@@ -2,7 +2,7 @@
  * @Description:
  * @Date: 2021-01-07 15:39:52
  * @LastEditors: yinwb
- * @LastEditTime: 2021-07-07 10:49:34
+ * @LastEditTime: 2021-07-09 18:13:32
  * @FilePath: \basketball-service\app\service\player.js
  */
 'use strict';
@@ -39,19 +39,22 @@ class PlayerService extends Service {
       time_end: '',
     };
     if (result._id) {
-      const orderId = await app.model.Order.create(orderData);
+      const outTradeNo = await app.model.Order.create(orderData);
 
       // todo 设置未付款提醒
-      ctx.service.Player.timeOrder(orderId, data);
+      ctx.service.player.timeOrder(outTradeNo, data);
     }
     return result._id;
   }
 
-  async timeOrder(orderId, data) {
+  async timeOrder(outTradeNo, data) {
+    console.log('执行timeorder');
     const { app, ctx } = this;
     const time = setTimeout(async () => {
-      const order = await app.model.Order.find({ _id: orderId });
+      console.log('五秒后执行');
+      const order = await app.model.Order.find({ out_trade_no: outTradeNo });
       if (order.status === 0) {
+        console.log('5秒后看到order', order);
         // 设置提醒
         const result = await ctx.curl(
           'https://www.apusport.cn/api/admin/pushSms',

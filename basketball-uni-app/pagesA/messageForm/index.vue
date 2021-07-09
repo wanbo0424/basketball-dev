@@ -418,7 +418,7 @@
 			},
 			// 提交报名信息
 			submit(secondConfirm = false) {
-				if(this.showInsurance && !secondConfirm) {
+				if(this.gameType === 0 && this.showInsurance && !secondConfirm) {
 					this.showVerifyId = true
 					this.verifyContent = `<p style="margin-bottom:24rpx;font-size: 24rpx">身份证：${this.form.identity}</p></br>
 					<p style="margin-bottom:24rpx;font-size: 24rpx">真实姓名：${this.form.actualName}</p></br>`
