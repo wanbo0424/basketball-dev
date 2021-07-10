@@ -234,7 +234,7 @@
 			},
 			subscribe() {
 				wx.requestSubscribeMessage({
-				  tmplIds: ['T4Bq3RFYlZ4f7GWSwuOAvONC9kVYZrBpPwtQ5NwxGZM'],
+				  tmplIds: ['mDUqqi39M19ErfQifsPqYRUEdDgOqqqttzhHNTbuT18', '8ZsOx4PKdRoVNOLhaSBG4HaIvEposPlHpc1c_BtNkDw'],
 				  success: (res) => { 
 					  console.log(res)
 				  },

@@ -134,7 +134,7 @@
 					return
 				}
 				wx.requestSubscribeMessage({
-				  tmplIds: ['mDUqqi39M19ErfQifsPqYRUEdDgOqqqttzhHNTbuT18'],
+				  tmplIds: ['mDUqqi39M19ErfQifsPqYRUEdDgOqqqttzhHNTbuT18', '8ZsOx4PKdRoVNOLhaSBG4HaIvEposPlHpc1c_BtNkDw'],
 				  success: (res) => { 
 					  console.log(res)
 				  },

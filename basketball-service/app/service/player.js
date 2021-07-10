@@ -39,25 +39,28 @@ class PlayerService extends Service {
       time_end: '',
     };
     if (result._id) {
-      const outTradeNo = await app.model.Order.create(orderData);
+      const { out_trade_no } = await app.model.Order.create(orderData);
 
       // todo 设置未付款提醒
-      ctx.service.player.timeOrder(outTradeNo, data);
+      ctx.service.player.timeOrder(out_trade_no, data);
     }
     return result._id;
   }
 
   async timeOrder(outTradeNo, data) {
-    console.log('执行timeorder');
     const { app, ctx } = this;
     const time = setTimeout(async () => {
-      console.log('五秒后执行');
-      const order = await app.model.Order.find({ out_trade_no: outTradeNo });
+      const order = await app.model.Order.findOne({ out_trade_no: outTradeNo });
       if (order.status === 0) {
-        console.log('5秒后看到order', order);
+        const game = await app.model.Game.findOne({ _id: data.gameId });
+        console.log(game, 'game');
         // 设置提醒
+        const { data: { access_token } } = await ctx.curl('https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx3bd5737539be2537&secret=8eae0891e063bca56590224254363fcc', {
+          method: 'GET',
+          dataType: 'json',
+        });
         const result = await ctx.curl(
-          'https://www.apusport.cn/api/admin/pushSms',
+          `https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=${access_token}`,
           {
             method: 'POST',
             // 通过 contentType 告诉 HttpClient 以 JSON 格式发送
@@ -65,25 +68,26 @@ class PlayerService extends Service {
             dataType: 'json',
             data: {
               touser: data.openId,
-              template_id: 'mDUqqi39M19ErfQifsPqYRUEdDgOqqqttzhHNTbuT18',
+              template_id: '8ZsOx4PKdRoVNOLhaSBG4HaIvEposPlHpc1c_BtNkDw',
+              page: `/pagesA/defray/index?gameDate=${game.gameDate}&gameAddress=${game.gameAddress}&out_trade_no=${outTradeNo}&gameTimeRange=${game.gameTimeRange}&gameType=${game.gameType}&price=${game.price}`,
               data: {
-                thing14: {
-                  value: data.nickName,
+                character_string6: {
+                  value: outTradeNo,
                 },
-                time15: {
-                  value: moment(data.gameDate).format('YYYY年MM月DD日 HH:mm:ss'),
+                thing3: {
+                  value: game.gameType === 0 ? '全场5v5比赛' : '包半场活动',
                 },
-                thing16: { value: data.gameAddress || '' },
-                thing17: { value: data.team || '' },
-                number18: { value: data.jerseyNumber || 0 },
+                amount1: { value: game.price },
+                time12: { value: moment(game.gameDate).format('YYYY年MM月DD日') },
+                thing7: { value: '待支付' },
               },
             },
           }) || {};
-        console.log(result);
+        console.log(result, '待支付微信推送result');
       } else {
         clearTimeout(time);
       }
-    }, 5 * 1000);
+    }, 20 * 60 * 1000);
   }
 
   async updatePlayer(data = {}) {
