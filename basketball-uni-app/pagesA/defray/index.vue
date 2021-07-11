@@ -16,7 +16,7 @@
 			</view>
 			<!-- v-if="couponList.length" -->
 			<!-- v-if="couponInfo.couponType === 0" -->
-			<view class="pay_item coupon" v-if="couponList.length" @click="showCouponList = true">
+			<view class="pay_item coupon" v-if="couponList.length && !isPaying" @click="showCouponList = true">
 				<template v-if="couponInfo.couponType === 0">
 					<span>折扣券</span>
 					<span>
@@ -113,6 +113,8 @@
 		</u-popup>
 		
 		<coupon-model v-model="showCouponIcon" :quota="quota" @confirm="confirmReceive"></coupon-model>
+		
+		<u-toast ref="uToast" />
 	</view>
 </template>
 <script>
@@ -139,14 +141,9 @@ import CouponModel from './CouponModel.vue'
 				showCouponIcon: false,  //显示优惠券画像
 				selectedCoupon: '',
 				payContent: '支付成功，组队成功后会发送短信和微信通知比赛时间地点。请准时到达场地参赛！',
-				couponInfo: {
-					couponType: 0
-				},
+				couponInfo: {},
 				discountPrice: 0,
-				couponList: [{
-					couponType: 0,
-					allowance: 9
-				}],
+				couponList: [],
 				gameType: null,
 				quota: null
 			}
@@ -164,6 +161,7 @@ import CouponModel from './CouponModel.vue'
 			// },
 			couponInfo: {
 				handler(val) {
+					console.log('执行watch')
 					if(val && val.couponType === 0) {
 						this.orderInfo.totalAmount = (this.couponInfo.allowance / 10) * this.gamePrice
 						this.discountPrice = this.gamePrice - this.orderInfo.totalAmount - (this.couponInfo.allowance / 10) * this.gamePrice
@@ -175,7 +173,6 @@ import CouponModel from './CouponModel.vue'
 		},
 		
 		onLoad: async function({gameDate, gameAddress, out_trade_no, gameTimeRange, couponListm, gameType, price}){
-			await this.getCoupons()
 			this.orderInfo.out_trade_no = out_trade_no
 			this.orderInfo.gameDate = gameDate
 			this.orderInfo.gameAddress = gameAddress
@@ -184,6 +181,7 @@ import CouponModel from './CouponModel.vue'
 			this.$set(this.orderInfo, 'gameType', +gameType)
 			this.gameType = +gameType
 			this.gamePrice = price
+			await this.getCoupons()
 		},
 		mounted() {
 			wx.onAppShow(appOptions => {
@@ -199,10 +197,11 @@ import CouponModel from './CouponModel.vue'
 					if(appOptions.query.out_trade_no) {
 						this.gameType = +appOptions.query.gameType
 						// 如果是第一次参加通知发放新人优惠券
-						http.get('weapp/allOrderList', {openId: this.userInfo.openId}).then(res => {
+						http.get('weapp/allOrderList', {openId: this.userInfo.openId}).then(async (res) => {
 							if(res.data.code === 0) {
 								if(res.data.data.length === 1) {
 									this.showCoupon = true
+									await this.getCoupons()
 								}
 								this.showPaid = true
 							}
@@ -221,17 +220,16 @@ import CouponModel from './CouponModel.vue'
 				this.$refs.uToast.show({
 					type: 'success',
 					title: '领取成功，请在个人中心-优惠券中查看',
-				}, () => {
-					this.backToIntroduce()
+					url: '/pages/introduce/index',
 				})
 			},
 			backToIntroduce() {
 				if(!this.paySuccess) return
-				if(this.showCoupon && this.gameType === 0) {
+				if(this.showCoupon) {
 					//弹出优惠券画像，用户自主领取
 					this.showCouponIcon = true
 					this.showCoupon = false
-					this.quota = this.this.couponInfo.allowance
+					this.quota = this.couponInfo.allowance
 					return 
 				}
 				uni.navigateBack({
