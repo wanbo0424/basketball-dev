@@ -136,7 +136,7 @@
 			computDistance() {
 				wx.getLocation({
 					success: (res) => {
-						this.distance = getDistance(34.24276, 108.892258, this.currentLatitude, this.currentLongitude)
+						this.distance = getDistance(res.latitude, res.latitude, this.currentLatitude, this.currentLongitude)
 					}
 				})
 			}
